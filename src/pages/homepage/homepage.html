@@ -10,32 +10,32 @@
 <ion-content class="homeBackground">
   <ion-grid class="home-tabs bullitinBoard" scrollY="true" scrollX="false">
     <ion-row>
-      <ion-col class="greenCard" (click)="openSuggestion()" width-33>
-        <div class="pinYellow"></div> 
+      <ion-col class="greenCard" (click)="openComplaint()" width-33>
+        <div class="pinYellow"></div>
           <ion-icon name="bulb"></ion-icon>
-          <p text-center>Suggestions</p>
+          <p text-center>Complaints</p>
       </ion-col>
-      <ion-col width-33 class="blueCard" (click)="openSurvey()" >
+      <ion-col width-33  class="blueCard" (click)="openSuggestion()">
+        <div class="pinGreen"></div>
+          <ion-icon class="my-icon" name="ios-sad-outline"></ion-icon>
+          <p>Suggestions</p>
+      </ion-col>
+      <ion-col width-33  class="peachCard" (click)="openPlanner()">
+        <div class="pinYellow"></div>
+          <ion-icon class="my-icon" name="ios-stats-outline"></ion-icon>
+          <p text-center>Planner</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-33 class="peachCard" (click)="openSurvey()" >
         <div class="pinGreen"></div>
           <ion-icon class="my-icon" name="ios-analytics-outline"></ion-icon>
           <p>Survey</p>
       </ion-col>
-      <ion-col width-33  class="peachCard" (click)="openPoll()">
-        <div class="pinYellow"></div>
-          <ion-icon class="my-icon" name="ios-stats-outline"></ion-icon>
-          <p text-center>Poll</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col width-33  class="peachCard" (click)="openComplaint()">
-        <div class="pinGreen"></div>
-          <ion-icon class="my-icon" name="ios-sad-outline"></ion-icon>
-          <p>Complaints</p>    
-      </ion-col>
       <ion-col width-33  class="greenCard" (click)="openAppreciation()">
         <div class="pinYellow"></div>
           <ion-icon class="my-icon" name="ios-thumbs-up-outline"></ion-icon>
-          <p>Appreciations</p> 
+          <p>Appreciations</p>
       </ion-col>
       <ion-col width-33  class="blueCard" (click)="openReportIssue()">
         <div class="pinGreen"></div>

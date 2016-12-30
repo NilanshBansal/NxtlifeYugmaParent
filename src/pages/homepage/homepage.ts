@@ -11,6 +11,7 @@ import { ComplaintPage} from '../complaint/complaint';
 import { MenuController } from 'ionic-angular';
 
 import { Configuration } from '../../service/app.constants';
+import { PlannerComponent } from '../planner/planner.component';
 
 @Component({
   selector: 'page-dashboard',
@@ -28,6 +29,10 @@ export class Dashboard {
   openComplaint() {
     this.configuration.setUrl("complaint");
     this.navCtrl.setRoot(ComplaintPage);
+  }
+
+  openPlanner() {
+    this.navCtrl.setRoot(PlannerComponent);
   }
 
   openPoll() {

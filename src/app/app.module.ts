@@ -106,6 +106,6 @@ import { EventService } from '../service/planner.service';
     EventModalPage,
     CalendarTimelinePage
   ],
-  providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp,EventService,CalendarEventTitle, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
+  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })
 export class AppModule {}

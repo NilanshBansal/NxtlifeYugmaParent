@@ -28,15 +28,6 @@ export class SuggestionPage extends ComplaintPage {
   // used in event
   public master: string = "suggestion";
 
-  // current page
-  public currentPage: number = 1;
-
-  // for no suggestion
-  EmptySuggestion: boolean = false;
-
-  // all Suggestions
-  suggestions = [];
-
   constructor(public nl: CustomService,
               public events: Events,
               public alertCtrl: AlertController,
@@ -46,15 +37,7 @@ export class SuggestionPage extends ComplaintPage {
     super(modalCtrl, alertCtrl, events, nl, c, actionSheetCtrl);
   }
 
-  ngOnInit() {
-
-  }
-
   ionViewWillEnter() {
-    this.getSuggestions();
-  }
-
-  getSuggestions() {
     this.getComplaints();
   }
 
@@ -73,25 +56,6 @@ export class SuggestionPage extends ComplaintPage {
     this.events.subscribe('suggestion:satisfied', (data) => {
       this.openSatisfiedModal(data[0]);
     });
-  }
-
-  newSuggestion() {
-    let suggestionModal = this.modalCtrl.create(newSuggestionModal);
-    suggestionModal.onDidDismiss((newSuggestion) => {
-      if (!newSuggestion) { return; }
-      if (this.suggestions.length != 0) {
-        this.EmptySuggestion = false;
-        this.complaints.unshift(newSuggestion);
-      } else {
-        this.EmptySuggestion = false;
-        this.complaints.unshift(newSuggestion);
-      }
-    });
-    suggestionModal.present();
-  }
-
-  viewSuggestion(suggestion) {
-    this.viewComplaint(suggestion);
   }
 
 }

@@ -23,7 +23,6 @@ import { CustomDateFormatter } from '../pages/planner/customDateFormatter';
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
 import { viewComplaintModal } from '../pages/complaint/view/viewComplaintModal';
 import { CommentComplaintModal } from '../pages/complaint/comment/comment.modal';
-import { newSuggestionModal } from '../pages/suggestion/new/newSuggestionModal';
 
 // import custom component
 import { ListView } from '../customComponent/list/listview.component';
@@ -66,7 +65,6 @@ import { EventService } from '../service/planner.service';
     ListViewCommentButton,
     ListViewReopenButton,
     ListViewSatisfiedButton,
-    newSuggestionModal,
     ModalNavbarComponent,
     CommentModal,
     PlannerComponent,
@@ -99,7 +97,6 @@ import { EventService } from '../service/planner.service';
     ListViewCommentButton,
     ListViewReopenButton,
     ListViewSatisfiedButton,
-    newSuggestionModal,
     ModalNavbarComponent,
     CommentModal,
     PlannerComponent,

@@ -50,8 +50,13 @@ Date:    21/12/2016
 }
 
 .csCardHeader{
-  background-color:#818181;
+  // background-color:#818181;
+  background: csBackgroundSvg('dashStrip.svg');
   color:#fff;
+}
+
+.csCardBorder{
+  border-image: csBackgroundSvg('dashStrip.svg') 8px solid;
 }
 
 ion-toolbar{

@@ -1,4 +1,4 @@
-# NxtLifeYugma
+# Yugma For Parent
 
 >Yugma is a school quality management App  for schools and  provides a better interface between parent and teachers.
 

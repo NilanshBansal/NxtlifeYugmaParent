@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons start>
       <button ion-button class="navBtnRight" (click)="dismiss()">
-        <span color="primary" showWhen="ios">Cancel</span>
+        <span color="light" showWhen="ios">Cancel</span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
@@ -14,50 +14,65 @@
 
 <ion-content>
   <form name="newcomplaint" [formGroup]="newComplaint" (ngSubmit)="saveComplaint()" novalidate>
-    <ion-list>
+<ion-card class="new-complaint">
       <ion-item>
+        <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
         <ion-label>Select Child</ion-label>
         <ion-select [(ngModel)]="child" formControlName="student" (ngModelChange)="selectChild($event)">
           <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
         </ion-select>
       </ion-item>
+
       <ion-item *ngIf="standardId">
-        <ion-label>Complaint Against</ion-label>
+        <ion-icon name="ios-hammer" item-left large  color="primary"></ion-icon>
+        <ion-label>Against</ion-label>
         <ion-select [(ngModel)]="category" formControlName="category" (ngModelChange)="setCategory(category)">
           <ion-option *ngFor="let category of categories" [value]="category">{{category.name}}</ion-option>
         </ion-select>
       </ion-item>
+      
       <ion-item *ngIf="teachers">
-        <ion-label>Select Teacher</ion-label>
+        <ion-icon name="ios-person-outline" item-left large  color="primary"></ion-icon>
+        <ion-label>Teacher</ion-label>
         <ion-select [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId" (ngModelChange)="setTeacher($event)">
           <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}}</ion-option>
         </ion-select>
       </ion-item>
+      
       <ion-item *ngIf="childCategories">
-        <ion-label>Select SubCategory</ion-label>
+        <ion-icon name="ios-options-outline" item-left large  color="primary"></ion-icon>
+        <ion-label>SubCategory</ion-label>
         <ion-select [(ngModel)]="childCategory" formControlName="childCategory">
           <ion-option *ngFor="let childCategory of childCategories" [value]="childCategory.id">
             {{childCategory.name}}
           </ion-option>
         </ion-select>
       </ion-item>
-    </ion-list>
-    <ion-list>
-      <ion-list-header>
-        Complaint Details
-      </ion-list-header>
-      <ion-item>
-        <ion-input type="text" formControlName="title" placeholder="Complaint Title (max.50)" maxlength="50"> </ion-input>
+      
+      <ion-item style="margin-top: 10px;">
+        <div class="complaint-item">
+          <hr><span>Title</span>
+        </div>
+        <input class="text-input" type="text" formControlName="title" placeholder="Enter Title (max.50)" maxlength="50">
+        <ion-badge><span>{{50}}</span></ion-badge>
       </ion-item>
-      <ion-item>
-        <ion-textarea rows="8" [(ngModel)]="description" formControlName="description" placeholder="Complaint Description" maxlength="200"></ion-textarea>
+      
+      <ion-item style="margin-top: 10px;">
+        <div class="complaint-item">
+          <hr><span>Description</span>
+        </div>
+        <textarea class="text-input" rows="8" [(ngModel)]="description" formControlName="description" placeholder="Enter Description" maxlength="200"></textarea> 
+        <ion-badge><span>{{200 - description.length}}</span></ion-badge>
       </ion-item>
-      <div style="top: -18px;
-    position: relative;
-    text-align: right;">( {{200 - description.length}} )</div>
-    </ion-list>
-    <ion-list padding>
-      <button ion-button block type="submit" [disabled]="newComplaint.invalid">Submit</button>
-    </ion-list>
+      
+      <!--<ion-item-divider no-padding>
+        <span><ion-icon name="ios-calendar-outline"></ion-icon> 10/12/2016</span>
+      </ion-item-divider>-->
+      
+      <ion-buttons padding>
+        <button ion-button block type="submit" [disabled]="newComplaint.invalid">Submit</button>
+      </ion-buttons>
+
+    </ion-card>
   </form>
 </ion-content>

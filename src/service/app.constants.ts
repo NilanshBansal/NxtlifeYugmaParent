@@ -4,10 +4,18 @@ import { Headers } from '@angular/http';
 @Injectable()
 export class Configuration {
 
-  public headers = new Headers({
-    'Content-Type' : 'application/json',
-    'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
-  });
+  constructor() {
+
+  }
+
+  headers;
+
+  getHeader() {
+    this.headers = new Headers({
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
+    });
+  }
 
   header() {
     return this.headers;

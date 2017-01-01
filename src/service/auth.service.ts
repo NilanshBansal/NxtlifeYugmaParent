@@ -28,6 +28,7 @@ export class AuthService {
 
   isLoggedIn() {
     if (localStorage.getItem("access_token")) {
+      this._configuration.getHeader();
       return !this.hasLogin;
     } else {
       return this.hasLogin;
@@ -57,7 +58,8 @@ export class AuthService {
       .then(response => {
         console.log("otp verify response", response)
         this.access_token = response.json().access_token;
-        localStorage.setItem('access_token', response.json().access_token);
+        localStorage.setItem('access_token', this.access_token);
+        this._configuration.getHeader();
         return Promise.resolve(response)
       })
       .catch(err => {

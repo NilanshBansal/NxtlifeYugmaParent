@@ -93,6 +93,7 @@ export class CommentModal implements OnInit {
       if (response.status === 204) {
         this.hasData = true;
         this.emptyComments = true;
+        this.comments = [];
       } else {
         this.hasData = true;
         this.emptyComments = false;

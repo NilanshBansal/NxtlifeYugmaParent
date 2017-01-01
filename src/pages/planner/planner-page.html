@@ -1,72 +1,39 @@
-
-<ion-header>
-  <ion-navbar>
+<ion-header class="planner">
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Calendar</ion-title>
-    <ion-buttons end> <button ion-button clear end (click)="CalendarTimeline()"><ion-icon name="md-clock"></ion-icon></button></ion-buttons>
-   
-</ion-navbar>
-
-
+    <ion-title icon-left item-right>
+      <ion-icon name="calendar"> </ion-icon>Calendar</ion-title>
+    <ion-buttons end>
+      <button ion-button clear end (click)="CalendarTimeline()">
+        <ion-icon name="md-clock" class="csPlannerIcon"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
-
-
-<ion-content>
-
-
-
-
-
-<br>
-      
-       <div class="col-md-4 title text-center">
-       <div class="PrevBtn">
-        <ion-icon name="md-arrow-dropleft-circle" (click)="decrement()"></ion-icon>
-       </div>
-
-          <span>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
-      <div class="nextBtn">
-        <ion-icon name="md-arrow-dropright-circle" (click)="increment()"></ion-icon>
-      </div>
-       </div>  
-<br>
-
-
-
-<div [ngSwitch]="view">
-
-  <mwl-calendar-month-view
-          *ngSwitchCase="'month'"
-          [viewDate]="viewDate"
-          [events]="events2"
-          [refresh]="refresh"
-           [activeDayIsOpen]="activeDayIsOpen"
-          (dayClicked)= "dayClicked($event.day)">
-  </mwl-calendar-month-view>
-  
-<!--  <mwl-calendar-week-view
-          *ngSwitchCase="'week'"
-          [viewDate]="viewDate"
-          [events]="events2"
-          [refresh]="refresh"
-          (eventTimesChanged)="eventTimesChanged($event)">
-  </mwl-calendar-week-view>
-
-  <mwl-calendar-day-view
-          *ngSwitchCase="'day'"
-          [viewDate]="viewDate"
-          [events]="events2"
-          [refresh]="refresh"
-          (eventTimesChanged)="eventTimesChanged($event)">
-  </mwl-calendar-day-view> -->
-
-</div>
-
-<div class="row text-center">
-</div>
-      
-
+<ion-content class="planner">
+  <ion-grid class="csCalMonth">
+    <ion-row>
+      <ion-col width-20 class="leftArrow" (click)="decrement()">
+        <!--<img src="../assets/svg/leftArrow.svg"  />-->
+      </ion-col>
+      <ion-col>
+        <span text-center class="csMonth csChalkText">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
+      </ion-col>
+      <ion-col width-20 class="rightArrow" (click)="increment()">
+        <!--<img src="../assets/svg/rightArrow.svg"  />-->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div [ngSwitch]="view" text-center>
+    <div class="csCalBoard">
+      <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events2" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)">
+      </mwl-calendar-month-view>
+    </div>
+  </div>
+  <div class="row text-center">
+  </div>
 </ion-content>

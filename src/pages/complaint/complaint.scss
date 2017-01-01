@@ -9,33 +9,37 @@ ion-note{
   font-size: $font-sm;
   align-self: flex-start;
 }
-.complaint-list{
+.complaint-list {
   ion-item-sliding {
-    h3{
+    h3 {
       line-height: 20px;
       text-overflow: ellipsis;
       overflow: hidden;
     }
-    a{
+    a {
       .item-inner{
         border-left-color:$inherit;
         .input-wrapper{
           border-left-color:$inherit;
           ion-label{
-            border-left: 3px groove; 
+            border-left: 3px groove;
             border-left-color:$inherit;
             padding: 0px 5px 0px 10px;
           }
         }
       }
     }
+    nl-edit-button,
+    nl-comment-button,
+    nl-close-button {
+      height: 100%;
+    }
   }
 }
-.view-complaint{
-  ion-card{
-    ion-item{
-      
-      h2{
+.view-complaint {
+  ion-card {
+    ion-item {
+      h2 {
         padding: 6px 0px 0px 20px;
         white-space: normal;
         line-height: 20px;
@@ -48,7 +52,7 @@ ion-note{
         }
       }
     }
-  }  
+  }
 }
 
 .complaint-item{

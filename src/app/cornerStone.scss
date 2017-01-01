@@ -144,6 +144,13 @@ ion-toolbar{
 .csHeader{
     background: $color1 !important;
     color: #fff !important;
+    .toolbar-title-ios, .toolbar-title-md, .toolbar-title-wp,
+    .bar-button-default-wp, .bar-button-clear-wp-default, .bar-button-wp-default,
+    .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default,
+    .bar-button-default-ios, .bar-button-clear-ios-default, .bar-button-ios-default
+    {
+      color:white;
+    }
 }
 
 .toolbar-background-md{
@@ -157,4 +164,9 @@ ion-toolbar{
   .action-sheet-button{
     color: $color1;
   } 
+}
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+    color: white;
+    background-color: transparent;
 }

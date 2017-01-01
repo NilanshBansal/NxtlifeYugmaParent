@@ -44,11 +44,11 @@ const colors: any = {
     secondary: '#FAE3E3'
   },
   blue: {
-    primary: '#1e90ff',
+    primary: '#a2d1ff',
     secondary: '#D1E8FF'
   },
   yellow: {
-    primary: '#e3bc08',
+    primary: '#fefe7a',
     secondary: '#FDF1BA'
   },
   orange:{
@@ -56,7 +56,7 @@ const colors: any = {
   	secondary: '#FD2A3E'
   },
   green:{
-    primary: '#008000',
+    primary: 'lime',
     secondary: '#228B22  '
   },
   purple:{
@@ -164,7 +164,6 @@ public title : string = "planner";
       //  console.log('Edit event', event.id);
       }
     }];
-
 
 
 

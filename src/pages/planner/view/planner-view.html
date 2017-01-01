@@ -1,35 +1,37 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="csHeader">
     <ion-buttons start>
       <button ion-button class="navBtnRight" (click)="dismiss()">
-        <span color="primary" showWhen="ios">Cancel</span>
+        <span showWhen="ios"><ion-icon class="close-button" name="close-circle"></ion-icon></span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>
+    <ion-title text-center>
       Event
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="planner" padding>
 
-<ion-card> 
-  <ion-card-header >
-	<h1>title: {{ResponseData.title}}</h1>
-	<h5>startdate: {{ResponseData.startDate}}</h5>
-	<h5>enddate: {{ResponseData.endDate}}</h5>
-  <h5>startTime: {{ResponseData.startTime}}</h5>
-  <h5>endTime: {{ResponseData.endTime}}</h5>
-  <h5>plannerType: {{ResponseData.plannerTypeName}}</h5>
-  <h5 *ngIf="ResponseData.plannerTypeId == 2">standards : {{ResponseData.standards}}</h5>
-	</ion-card-header>
-
-  <ion-card-content>
-	Description: {{ ResponseData.description}}
-   
-  </ion-card-content>
-</ion-card>
+  <ion-card class="csCalEvent">
+    <ion-card-header>
+      <h2 text-center>{{ResponseData.plannerTypeName}}</h2>
+      <!-- Planner Type -->
+      <h1 text-center class="calTitle2">Title: {{ResponseData.title}}</h1>
+      <h5>
+        <span class="calTitle2"> Start on</span>
+        <span class="calTitle2 calRight">End at </span>
+      </h5>
+      <h5>{{ResponseData.startDate}} <span class="calRight">{{ResponseData.endDate}}</span></h5>
+      <h5>{{ResponseData.startTime}}<span class="calRight">{{ResponseData.endTime}}</span></h5>
+      <!--Start and ENdtime-->
+      <h5 *ngIf="ResponseData.plannerTypeId == 2">Standards : {{ResponseData.standards}}</h5>
+    </ion-card-header>
+    <ion-card-content>
+      Description: {{ ResponseData.description}}
+    </ion-card-content>
+  </ion-card>
 
 
 

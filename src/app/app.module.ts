@@ -9,7 +9,6 @@ import { LoginPage } from '../pages/login/login';
 import { Dashboard } from '../pages/homepage/homepage';
 import { PollPage } from '../pages/poll/poll';
 import { AccountPage } from '../pages/account/account';
-import { SuggestionPage } from '../pages/suggestion/suggestion';
 import { AppreciationPage } from '../pages/appreciation/appreciation';
 import { ComplaintPage } from '../pages/complaint/complaint';
 import { ReportIssuePage} from '../pages/reportIssue/reportIssue';
@@ -18,6 +17,9 @@ import { PlannerComponent } from '../pages/planner/planner.component';
 import { EventModalPage } from '../pages/planner/view/planner-view';
 import { CalendarTimelinePage } from '../pages/planner/timeline/planner-timeline';
 import { CustomDateFormatter } from '../pages/planner/customDateFormatter';
+import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
+import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestion';
+import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -51,7 +53,9 @@ import { EventService } from '../service/planner.service';
     LoginPage,
     PollPage,
     AccountPage,
-    SuggestionPage,
+    SuggestionTabs,
+    YourSuggestion,
+    SuggestionForYou,
     AppreciationPage,
     ComplaintPage,
     ReportIssuePage,
@@ -83,7 +87,9 @@ import { EventService } from '../service/planner.service';
     LoginPage,
     PollPage,
     AccountPage,
-    SuggestionPage,
+    SuggestionTabs,
+    YourSuggestion,
+    SuggestionForYou,
     AppreciationPage,
     ComplaintPage,
     ReportIssuePage,

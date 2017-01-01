@@ -6,30 +6,29 @@ import { ModalController,
          Events } from 'ionic-angular';
 
 // import service
-import { CustomService } from '../../service/customService';
-import { ComplaintSuggestion } from '../../service/cs.service';
-
-// import modal
-import { newSuggestionModal } from './new/newSuggestionModal';
+import { CustomService } from '../../../service/customService';
+import { ComplaintSuggestion } from '../../../service/cs.service';
+import { Configuration } from '../../../service/app.constants';
 
 // import Component
-import { ComplaintPage } from '../complaint/complaint';
+import { ComplaintPage } from '../../complaint/complaint';
 
 @Component({
-  selector: 'page-map',
+  selector: 'your-suggestion',
   templateUrl: 'suggestion.html'
 })
 
-export class SuggestionPage extends ComplaintPage {
+export class YourSuggestion extends ComplaintPage {
 
   // set header title
-  title: string = "Suggestions";
+  title: string = "Your Suggestions";
 
   // used in event
   public master: string = "suggestion";
 
   constructor(public nl: CustomService,
               public events: Events,
+              public con: Configuration,
               public alertCtrl: AlertController,
               public actionSheetCtrl: ActionSheetController,
               public modalCtrl: ModalController,
@@ -38,6 +37,7 @@ export class SuggestionPage extends ComplaintPage {
   }
 
   ionViewWillEnter() {
+    this.con.setUrlForSuggestion();
     this.getComplaints();
   }
 

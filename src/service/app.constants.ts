@@ -43,4 +43,12 @@ export class Configuration {
     this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/" + url;
   }
 
+  setUrlForStudentSuggestions(url) {
+    this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/suggestion/" + url;
+  }
+
+  setUrlForSuggestion() {
+    this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/suggestion";
+  }
+
 }

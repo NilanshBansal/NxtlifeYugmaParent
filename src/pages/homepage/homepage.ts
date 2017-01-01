@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { PollPage } from '../poll/poll';
-import { SuggestionPage } from '../suggestion/suggestion';
+import { SuggestionTabs } from '../suggestion/suggestionTabs';
 import { AppreciationPage } from '../appreciation/appreciation';
 import { ReportIssuePage} from '../reportIssue/reportIssue';
 import { SurveyPage} from '../survey/survey';
@@ -41,7 +41,7 @@ export class Dashboard {
 
   openSuggestion() {
     this.configuration.setUrl("suggestion");
-    this.navCtrl.setRoot(SuggestionPage);
+    this.navCtrl.setRoot(SuggestionTabs);
   }
 
   openAppreciation() {

@@ -34,11 +34,11 @@ export class YourSuggestion extends ComplaintPage {
               public modalCtrl: ModalController,
               public c: ComplaintSuggestion) {
     super(modalCtrl, alertCtrl, events, nl, c, actionSheetCtrl);
+    this.getComplaints();
   }
 
   ionViewWillEnter() {
     this.con.setUrlForSuggestion();
-    this.getComplaints();
   }
 
   // Respond after Angular projects external content into the component's view.

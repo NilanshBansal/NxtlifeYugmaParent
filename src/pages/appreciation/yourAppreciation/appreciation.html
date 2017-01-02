@@ -10,17 +10,13 @@
     <button ion-fab (click)="newAppreciation()" color="fab"> <ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item-sliding *ngFor="let appreciation of appreciations" #slidingItem >
-      <a ion-item detail-push detail-none href="#" (click)="viewComplaint(appreciation)" [style.border-left-color]="appreciation.statusColor">
-        <nl-list-view [complaint]="appreciation"></nl-list-view>
-      </a>
-      <ion-item-options side="right">
-        <nl-comment-button [master]="master" [complaint]="appreciation"></nl-comment-button>
-        <nl-close-button [master]="master" [complaint]="appreciation"></nl-close-button>
-        <nl-reopen-button [master]="master" [complaint]="appreciation"></nl-reopen-button>
-        <nl-satisfied-button [master]="master" [complaint]="appreciation"></nl-satisfied-button>
-      </ion-item-options>
-    </ion-item-sliding>
+    <ion-item *ngFor="let appreciation of appreciations">
+      <p>title: {{appreciation.title}}</p>
+      <p>description: {{appreciation.description}}</p>
+      <p>studentName: {{appreciation.studentName}}</p>
+      <p>appreciation for: {{appreciation.teacherName}}</p>
+      <p>createdAt: {{appreciation.createdAt | date:'mediumDate'}}</p>
+    </ion-item>
   </ion-list>
   <ion-list>
     <ion-item *ngIf="EmptyAppreciations">

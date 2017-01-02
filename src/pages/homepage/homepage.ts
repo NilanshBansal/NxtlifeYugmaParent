@@ -45,6 +45,7 @@ export class Dashboard {
   }
 
   openAppreciation() {
+    this.configuration.setUrl("appreciation");
     this.navCtrl.setRoot(AppreciationTabs);
   }
 

@@ -15,23 +15,26 @@ import { CustomService } from '../service/customService';
         <h3>No Comments</h3>
       </ion-list>
       <ion-spinner *ngIf="!hasData"></ion-spinner>
-      <div class="messages">
-        <div class="message" *ngFor="let m of comments" [ngClass]="{'me': m.parentId != null}">
-          {{ m.comment }}
-          <span class="date">{{ m.createdAt | amCalendar }}</span>
-        </div>
-        <ion-spinner style="position: absolute;bottom: -28px;right: 10px;" name="dots" *ngIf="!notPost"></ion-spinner>
-      </div>
+      <ion-card class="message-box" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>
+        <ion-item no-padding>
+          <ion-avatar class="user" item-left text-center *ngIf="!m.parentId" >
+            <img src="assets/images/avatar-ts-woody.png">
+            <span>Pankaj</span>
+          </ion-avatar>
+          <h3>{{ m.comment }}</h3>
+          <ion-note><span>{{ m.createdAt | amCalendar }}</span></ion-note>
+        </ion-item>
+      </ion-card>
     </ion-content>
 
     <ion-footer keyboard-attach class="bar-stable" #commentBtn>
-      <form [formGroup]="commentForm" (ngSubmit)="postComment()" novalidate>
-        <label class="item-input-wrapper">
-          <ion-input type="text" formControlName="comment" placeholder="write comment..."></ion-input>
-        </label>
-        <div class="footer-button-wrap">
-          <button button-clear ion-button type="submit" [disabled]="commentForm.invalid">Send</button>
-        </div>
+      <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postComment()" novalidate>
+        <ion-item >
+          <ion-textarea rows="1" type="text" formControlName="comment" placeholder=" Write comment..."></ion-textarea>
+          <button clear color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid">
+            <ion-icon name="md-send" role="img"></ion-icon>
+          </button>
+        </ion-item>
       </form>
     </ion-footer>
   `

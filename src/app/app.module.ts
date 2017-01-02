@@ -9,7 +9,9 @@ import { LoginPage } from '../pages/login/login';
 import { Dashboard } from '../pages/homepage/homepage';
 import { PollPage } from '../pages/poll/poll';
 import { AccountPage } from '../pages/account/account';
-import { AppreciationPage } from '../pages/appreciation/appreciation';
+import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';
+import { AppreciationForYou } from '../pages/appreciation/appreciationForYou/appreciation';
+import { YourAppreciation } from '../pages/appreciation/yourAppreciation/appreciation';
 import { ComplaintPage } from '../pages/complaint/complaint';
 import { ReportIssuePage} from '../pages/reportIssue/reportIssue';
 import { SurveyPage} from '../pages/survey/survey';
@@ -25,6 +27,7 @@ import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
 import { viewComplaintModal } from '../pages/complaint/view/viewComplaintModal';
 import { CommentComplaintModal } from '../pages/complaint/comment/comment.modal';
+import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 
 // import custom component
 import { ListView } from '../customComponent/list/listview.component';
@@ -56,7 +59,9 @@ import { EventService } from '../service/planner.service';
     SuggestionTabs,
     YourSuggestion,
     SuggestionForYou,
-    AppreciationPage,
+    AppreciationTabs,
+    AppreciationForYou,
+    YourAppreciation,
     ComplaintPage,
     ReportIssuePage,
     SurveyPage,
@@ -73,7 +78,8 @@ import { EventService } from '../service/planner.service';
     CommentModal,
     PlannerComponent,
     EventModalPage,
-    CalendarTimelinePage
+    CalendarTimelinePage,
+    NewAppreciationModal
   ],
   imports: [
     MomentModule,
@@ -90,7 +96,9 @@ import { EventService } from '../service/planner.service';
     SuggestionTabs,
     YourSuggestion,
     SuggestionForYou,
-    AppreciationPage,
+    AppreciationTabs,
+    AppreciationForYou,
+    YourAppreciation,
     ComplaintPage,
     ReportIssuePage,
     SurveyPage,
@@ -107,7 +115,8 @@ import { EventService } from '../service/planner.service';
     CommentModal,
     PlannerComponent,
     EventModalPage,
-    CalendarTimelinePage
+    CalendarTimelinePage,
+    NewAppreciationModal
   ],
   providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })

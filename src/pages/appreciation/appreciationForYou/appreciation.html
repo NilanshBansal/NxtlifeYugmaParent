@@ -1,0 +1,21 @@
+<ion-header>
+  <nl-navbar [title]="title"></nl-navbar>
+</ion-header>
+
+<ion-content class="complaint-list watermark">
+  <ion-refresher (ionRefresh)="loadNewComplaints($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item *ngFor="let suggestion of complaints" #slidingItem >
+      <a ion-item detail-push detail-none href="#" (click)="viewComplaint(suggestion)" [style.border-left-color]="suggestion.statusColor">
+        <nl-list-view [complaint]="suggestion"></nl-list-view>
+      </a>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngIf="EmptyComplaints">
+      <h3> NO SUGGESTIONS </h3>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <nl-navbar [title]="title"></nl-navbar>
+</ion-header>
+
+<ion-content class="complaint-list watermark">
+  <ion-refresher (ionRefresh)="loadNewAppreciations($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-fab top right edge>
+    <button ion-fab (click)="newAppreciation()" color="fab"> <ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+  <ion-list>
+    <ion-item-sliding *ngFor="let appreciation of appreciations" #slidingItem >
+      <a ion-item detail-push detail-none href="#" (click)="viewComplaint(appreciation)" [style.border-left-color]="appreciation.statusColor">
+        <nl-list-view [complaint]="appreciation"></nl-list-view>
+      </a>
+      <ion-item-options side="right">
+        <nl-comment-button [master]="master" [complaint]="appreciation"></nl-comment-button>
+        <nl-close-button [master]="master" [complaint]="appreciation"></nl-close-button>
+        <nl-reopen-button [master]="master" [complaint]="appreciation"></nl-reopen-button>
+        <nl-satisfied-button [master]="master" [complaint]="appreciation"></nl-satisfied-button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngIf="EmptyAppreciations">
+      <h3> NO SUGGESTIONS </h3>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMoreComplaints($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

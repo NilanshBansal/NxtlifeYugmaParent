@@ -51,4 +51,8 @@ export class Configuration {
     this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/suggestion";
   }
 
+  setUrlForStudentAppreciations(url) {
+    this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/appreciation/" + url;
+  }
+
 }

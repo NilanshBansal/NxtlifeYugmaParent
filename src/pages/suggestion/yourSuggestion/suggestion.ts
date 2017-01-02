@@ -6,39 +6,29 @@ import { ModalController,
          Events } from 'ionic-angular';
 
 // import service
-import { CustomService } from '../../service/customService';
-import { ComplaintSuggestion } from '../../service/cs.service';
-
-// import modal
-import { newSuggestionModal } from './new/newSuggestionModal';
+import { CustomService } from '../../../service/customService';
+import { ComplaintSuggestion } from '../../../service/cs.service';
+import { Configuration } from '../../../service/app.constants';
 
 // import Component
-import { ComplaintPage } from '../complaint/complaint';
+import { ComplaintPage } from '../../complaint/complaint';
 
 @Component({
-  selector: 'page-map',
+  selector: 'your-suggestion',
   templateUrl: 'suggestion.html'
 })
 
-export class SuggestionPage extends ComplaintPage {
+export class YourSuggestion extends ComplaintPage {
 
   // set header title
-  title: string = "Suggestions";
+  title: string = "Your Suggestions";
 
   // used in event
   public master: string = "suggestion";
 
-  // current page
-  public currentPage: number = 1;
-
-  // for no suggestion
-  EmptySuggestion: boolean = false;
-
-  // all Suggestions
-  suggestions = [];
-
   constructor(public nl: CustomService,
               public events: Events,
+              public con: Configuration,
               public alertCtrl: AlertController,
               public actionSheetCtrl: ActionSheetController,
               public modalCtrl: ModalController,
@@ -46,15 +36,8 @@ export class SuggestionPage extends ComplaintPage {
     super(modalCtrl, alertCtrl, events, nl, c, actionSheetCtrl);
   }
 
-  ngOnInit() {
-
-  }
-
   ionViewWillEnter() {
-    this.getSuggestions();
-  }
-
-  getSuggestions() {
+    this.con.setUrlForSuggestion();
     this.getComplaints();
   }
 
@@ -73,25 +56,6 @@ export class SuggestionPage extends ComplaintPage {
     this.events.subscribe('suggestion:satisfied', (data) => {
       this.openSatisfiedModal(data[0]);
     });
-  }
-
-  newSuggestion() {
-    let suggestionModal = this.modalCtrl.create(newSuggestionModal);
-    suggestionModal.onDidDismiss((newSuggestion) => {
-      if (!newSuggestion) { return; }
-      if (this.suggestions.length != 0) {
-        this.EmptySuggestion = false;
-        this.complaints.unshift(newSuggestion);
-      } else {
-        this.EmptySuggestion = false;
-        this.complaints.unshift(newSuggestion);
-      }
-    });
-    suggestionModal.present();
-  }
-
-  viewSuggestion(suggestion) {
-    this.viewComplaint(suggestion);
   }
 
 }

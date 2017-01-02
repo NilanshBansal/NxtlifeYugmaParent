@@ -4,10 +4,18 @@ import { Headers } from '@angular/http';
 @Injectable()
 export class Configuration {
 
-  public headers = new Headers({
-    'Content-Type' : 'application/json',
-    'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
-  });
+  constructor() {
+
+  }
+
+  headers;
+
+  getHeader() {
+    this.headers = new Headers({
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
+    });
+  }
 
   header() {
     return this.headers;
@@ -33,6 +41,14 @@ export class Configuration {
 
   setUrl(url) {
     this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/" + url;
+  }
+
+  setUrlForStudentSuggestions(url) {
+    this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/suggestion/" + url;
+  }
+
+  setUrlForSuggestion() {
+    this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/suggestion";
   }
 
 }

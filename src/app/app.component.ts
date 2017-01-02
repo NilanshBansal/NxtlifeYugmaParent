@@ -7,7 +7,7 @@ import { LoginPage } from '../pages/login/login';
 import { Dashboard } from '../pages/homepage/homepage';
 import { SurveyPage} from '../pages/survey/survey';
 import { PollPage } from '../pages/poll/poll';
-import { SuggestionPage } from '../pages/suggestion/suggestion';
+import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { AppreciationPage } from '../pages/appreciation/appreciation';
 import { ComplaintPage } from '../pages/complaint/complaint';
 import { PlannerComponent } from '../pages/planner/planner.component';
@@ -45,7 +45,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: Dashboard, icon: 'ios-home-outline', url: 'dashboard' },
       { title: 'Complaints', component: ComplaintPage, icon: 'ios-sad-outline', url: 'complaint' },
-      { title: 'Suggestions', component: SuggestionPage, icon: 'md-bulb', url: 'suggestion' },
+      { title: 'Suggestions', component: SuggestionTabs, icon: 'md-bulb', url: 'suggestion' },
       { title: 'Appreciations', component: AppreciationPage, icon: 'ios-thumbs-up-outline', url: 'appreciation' },
       { title: 'Planner',component: PlannerComponent , icon: 'md-calendar', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },

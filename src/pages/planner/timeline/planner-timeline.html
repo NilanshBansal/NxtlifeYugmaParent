@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-navbar>
+<ion-header >
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -8,59 +8,20 @@
 </ion-header>
 
 
-<ion-content padding>
-	<!-- <ion-view view-title="Pictures"> -->
-     <!--  <ion-content class="padding"> -->
-
+<ion-content class="timeline" padding>
         <section id="cd-timeline" class="cd-container">
-
           <div *ngFor="let activity of timeline">
-<!--          <div *ngFor="let eve of activity.events">  -->
-           <!--  <div *ngIf="0 < activity.events")> -->
- 
-         <!-- <div *ngIf="(activity.events < 2)"> -->
             <div class="cd-timeline-block">
-           <!--  class="cd-timeline-picture dark" -->
               <div class="cd-timeline-picture dark">
 					    <span>{{activity.date}} {{activity.month}}</span>
 					     <p class="daytimeline"> {{activity.day}}</p>
 			       </div>
              </div>
-<!-- </div> -->
-
-<!--  </div> -->
-              <!-- cd-timeline-img -->
               <div *ngFor="let tre of activity.events">
               <div class="cd-timeline-content dark">
                 <h6 class="timeline-title">{{tre.title}}</h6>
-
-              
               </div>
             </div>
-            
           </div>
         </section>
-        
-    <!--   </ion-content> -->
- <!--    </ion-view> -->
-
-
-  <!-- <ion-fab right bottom>
-    <button ion-fab (click)="AddEvent(event,item)"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>   -->
-
-
 </ion-content>
-
-
-
-<!-- #cd-timeline::before {
-  /* this is the vertical line */
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 18px;
-  height: 100%;
-  width: 4px;
-  background: gray;
-} -->

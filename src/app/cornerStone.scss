@@ -50,8 +50,13 @@ Date:    21/12/2016
 }
 
 .csCardHeader{
-  background-color:#818181;
+  // background-color:#818181;
+  background: csBackgroundSvg('dashStrip.svg');
   color:#fff;
+}
+
+.csCardBorder{
+  border-image: csBackgroundSvg('dashStrip.svg') 8px solid;
 }
 
 ion-toolbar{
@@ -144,6 +149,13 @@ ion-toolbar{
 .csHeader{
     background: $color1 !important;
     color: #fff !important;
+    .toolbar-title-ios, .toolbar-title-md, .toolbar-title-wp,
+    .bar-button-default-wp, .bar-button-clear-wp-default, .bar-button-wp-default,
+    .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default,
+    .bar-button-default-ios, .bar-button-clear-ios-default, .bar-button-ios-default
+    {
+      color:white;
+    }
 }
 
 .toolbar-background-md{
@@ -157,4 +169,9 @@ ion-toolbar{
   .action-sheet-button{
     color: $color1;
   } 
+}
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+    color: white;
+    background-color: transparent;
 }

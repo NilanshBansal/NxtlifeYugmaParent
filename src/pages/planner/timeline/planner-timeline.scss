@@ -88,11 +88,11 @@ Main components
   left: 34px;
   height: 100%;
   width: 4px;
-  background: #f38e8e;
+  background: #ffd180;
 }
 
 .daytimeline{
-  color : darkorange;
+  color : #ffd180;
 }
 
 .cd-timeline-block {
@@ -135,11 +135,12 @@ Main components
 
 .cd-timeline-picture {
   position: absolute;
+  font-weight: bold;
+  color: white;
   top: 0;
   left: 0;
   width: 33px;
   height: 40px;
-  background: white;
 }
 
 .cd-timeline-picture img {
@@ -153,11 +154,10 @@ Main components
 .cd-timeline-content {
   position: relative;
   margin-left: 50px;
-  background: rgba(234, 81, 17, 0.77);
+  background-image: csBackgroundSvg('calBoardBackground.svg');
+  background-size:cover;
   border-radius: 0.25em;
-  border-color: #BDDFB3;
-  border-style: solid;
-  border-width: 2px;
+  border: #ffd180 solid 3px;
   margin-bottom: 20px;
   padding: 10px;
 }
@@ -251,11 +251,11 @@ Main components
 /*ASSERTIVE*/
 
 .assertive {
-  border-color: #ef4e3a;
+  border-color: #ffd180;
 }
 
 .assertive i {
-  color: #ef4e3a;
+  color: #ffd180;
 }
 
 
@@ -272,9 +272,9 @@ Main components
 
 /*DARK*/
 
-.dark {
-  border-color: #f38e8e;
-}
+// .dark {
+//   border-color: #f38e8e;
+// }
 
 .dark i {
   color: #444;
@@ -295,3 +295,11 @@ Main components
     font-size: 0.875rem;
   }
 } 
+
+
+
+/*Corner Stone SCSS*/
+
+.timeline{
+  background:csBackgroundSvg('gBoard.svg');
+}

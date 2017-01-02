@@ -1,0 +1,58 @@
+.csZeroPad{
+  @extend .csFillBackground;
+  margin: 0px;
+  background: {
+    size:100%;
+    image: url('https://assets.entrepreneur.com/slideshow/1414505637-10-single-mom-entrepreneurs-share-their-best-business-advice-lisa-stone.jpg');
+  }
+  filter: blur(5px);
+}
+
+.csAvatar{
+  @extend .csCenter;
+  @extend .csCircle;
+  @extend .csBoxShadow;
+  position: absolute;
+  top:0;
+  left: 35%;
+  width:100px;
+  height: 100px;
+  margin: 10px auto auto 0;
+  z-index: $csZindex+1;
+}
+
+.csProfileCard{
+  margin-top: 40px;
+}
+
+.csGrayText{
+    color: gray !important;
+    font-size: 80% !important;
+}
+
+.csEditButton{
+  font-size: 25px;
+  color: $csGreen;
+}
+
+.csKeyBackground{
+  @extend .setBottom;
+  background-repeat: no-repeat;
+  bottom:0px;
+  background-image: csBackgroundSvg('key.svg');
+}
+
+.toolbar-title-ios , .toolbar-title-md , .toolbar-title-wp, .bar-button-default-wp, .bar-button-default-md, .bar-button-default-ios{
+  color: white;
+}
+
+.csProfileCard{
+  button{
+    margin-top: 35px;
+  }
+}
+
+.student-header{
+      margin-top: -4%;
+    margin-bottom: -8%;
+}

@@ -1,66 +1,51 @@
-.footer-button-wrap {
-  float: right;
-}
-
-.item-input-wrapper {
-  ion-input {
-    position: absolute;
+.message-box{
+  width: calc(90% - 24px);
+  background-color: white;
+  box-shadow: none;
+  .user{
+    margin: 8px !important;
+    font-size: x-small;
   }
-}
-.commentList {
-  .item-inner {
-    border-bottom: transparent !important;
-  }
-  .from-me {
-      position: relative;
-      padding: 10px 20px;
-      color: white;
-      background: #0B93F6;
-      border-radius: 25px;
-      float: right;
-      max-width: 255px;
-      word-wrap: break-word;
-      margin-bottom: 20px;
-      line-height: 24px;
-  }
-  .from-me:before {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      right: -7px;
-      height: 20px;
-      border-right: 20px solid #0B93F6;
-      border-bottom-left-radius: 16px 14px;
-      -webkit-transform: translate(0, -2px);
-  }
-}
-
-.messages {
-    width: 100%;
-    position: absolute;
-    .message {
-      font-size: 16px;
-      width: 70%;
-      padding: 8px 10px;
-      background: #387ef5;
-      color: #fff;
-      border-radius: 5px;
-      margin: 5px;
-      float: left;
-      .date {
-        display: block;
-        font-size: 10px;
-        color: goldenrod;
-      }
-    }
-    .message.me {
-      float: right;
-      background: #fff;
-      border: 1px solid #387ef5;
-      color: #222;
-      text-align: right;
-      .date {
-        color: grey;
-      }
+  ion-item{
+    padding-left: 0px;
+    ion-label{
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      padding: 5px;
+      border-left: 1px solid rgba(0, 0, 0, 0.3);
+      border-bottom-left-radius: 10px;
+      border-top-right-radius: 10px;
+      background-color: #fff;
     }
   }
+  ion-note {
+    font-size: 10px;
+  }
+  }
+.message-box.mine{
+  margin-left: 20%;  
+    ion-item{
+      ion-label{
+          border-left: 1px solid rgba(0, 0, 0, 0.3);
+          border-top-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+          border-bottom-left-radius: 0px;
+          border-top-right-radius: 0px;
+          background-color: #e5e5e5;
+          text-align: right;
+          h3{
+            white-space: normal;
+          }
+        }
+      }
+}
+.comment-box{
+  ion-item{
+    .item-inner {
+      border-bottom: none !important;
+      box-shadow: none !important;
+    }
+    button{
+      // height: 50px !important;
+    } 
+  }
+}

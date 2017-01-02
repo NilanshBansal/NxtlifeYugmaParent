@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { PollPage } from '../poll/poll';
 import { SuggestionTabs } from '../suggestion/suggestionTabs';
-import { AppreciationPage } from '../appreciation/appreciation';
+import { AppreciationTabs } from '../appreciation/appreciationTabs';
 import { ReportIssuePage} from '../reportIssue/reportIssue';
 import { SurveyPage} from '../survey/survey';
 import { ComplaintPage} from '../complaint/complaint';
@@ -45,7 +45,7 @@ export class Dashboard {
   }
 
   openAppreciation() {
-    this.navCtrl.setRoot(AppreciationPage);
+    this.navCtrl.setRoot(AppreciationTabs);
   }
 
   openSurvey() {

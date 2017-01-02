@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Renderer, ElementRef, ViewChild } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
-import { ViewController, ToastController, NavParams } from 'ionic-angular';
-import { Content } from 'ionic-angular';
+import { ViewController, ToastController, NavParams, Content } from 'ionic-angular';
 
 // import service
 import { ComplaintSuggestion } from '../service/cs.service';
@@ -88,6 +87,11 @@ export class CommentModal implements OnInit {
     toast.present();
   }
 
+  scrollToBottom() {
+    let dimensions = this.content.getContentDimensions();
+    this.content.scrollTo(0, dimensions.scrollBottom, 0);
+  }
+
   loadComments() {
     this.c.getComments(this.complaintId).subscribe((response) => {
       if (response.status === 204) {
@@ -98,6 +102,7 @@ export class CommentModal implements OnInit {
         this.hasData = true;
         this.emptyComments = false;
         this.comments = response.json().reverse();
+        this.scrollToBottom();
       }
     });
   }

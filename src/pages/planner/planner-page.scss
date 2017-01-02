@@ -19,7 +19,8 @@
  .cal-past {
      padding:0px;
      margin:0px;
-     background-image: csBackgroundSvg('plannerPast.svg');
+     opacity:0.2;
+     box-shadow: inset 0px 0px 20px #000000;
 }
  .nextBtn{
      float: right;
@@ -34,11 +35,14 @@
 }
 
  .cal-month-view .cal-header .cal-cell {
-     padding: 5px 0;
+          padding-top: 5px;
+     padding-bottom:5px ;
      overflow: hidden;
      text-overflow: ellipsis;
      display: block;
      white-space: nowrap;
+     font-size: 16px;
+;
 }
 
  .cal-month-view .cal-days {
@@ -80,10 +84,11 @@
  .cal-month-view .cal-day-cell {
      border-bottom: 3px solid rgba(225, 225, 225, 0.16);
      min-height: 50px;
+     transition: box-shadow 0.4s ease-in-out;
 }
- .cal-month-view .cal-day-cell:not(:last-child) {
-     border-right: 3px solid rgba(225, 225, 225, 0.16);
-}
+//  .cal-month-view .cal-day-cell:not(:last-child) {
+//      border-right: 3px solid rgba(225, 225, 225, 0.16);
+// }
  .cal-month-view .cal-days .cal-cell-row {
      border-right: 3px solid rgba(225, 225, 225, 0.16);
 }
@@ -145,9 +150,8 @@
      color: darkred;
 }
  .cal-month-view .cal-day-cell.cal-today {
-     background-image: csBackgroundSvg('caltodayBack.svg');
-     background-size: 100%;
-     background-repeat: no-repeat;
+    box-shadow: 0px 0px 11px black;
+    border-bottom: #00bcd4 solid 3px;   
 }
  .cal-month-view .cal-day-cell.cal-today .cal-day-number {
      font-size: 1.3em;
@@ -157,6 +161,8 @@
      padding: 15px;
      color: white;
      box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.5);
+    -webkit-transition-property: top, bottom;
+    -webkit-transition-duration: 0.5s;
 }
  .cal-month-view .cal-open-day-events .cal-event {
      position: relative;
@@ -290,11 +296,16 @@ $csChalkGreen:  rgb(158, 255, 158);
          background-repeat: no-repeat;
          margin-top: 5%;
          background-image: csBackgroundSvg('dashStrip.svg');
+
+         ion-icon{
+             font-size:2.5em;
+                 color: #794c10;
+         }
     }
      .csChalkText{
-         font-family: dk crayon crumble;
          letter-spacing: 3px;
          color: #794c10;
+         margin-top: 10px;
     }
      .csCalBoard{
          background-image: csBackgroundSvg('calBoardBackground.svg');
@@ -360,4 +371,15 @@ $csChalkGreen:  rgb(158, 255, 158);
 
   .close-button{
         font-size: 25px;
+  }
+
+
+  .cal-month-view .cal-cell-row .cal-cell:hover,
+.cal-month-view .cal-cell.cal-has-events.cal-open {
+    border-bottom: solid #fae904;
+    box-shadow: 0px 0px 20px black;
+  }
+
+  .details{
+    width:7%;
   }

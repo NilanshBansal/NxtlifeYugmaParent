@@ -296,10 +296,7 @@ Main components
   }
 } 
 
-
-
 /*Corner Stone SCSS*/
-
 .timeline{
-  background:csBackgroundSvg('gBoard.svg');
+  @extend .csBackground;
 }

@@ -16,14 +16,14 @@
 <ion-content class="planner">
   <ion-grid class="csCalMonth">
     <ion-row>
-      <ion-col width-20 class="leftArrow" (click)="decrement()">
-        <!--<img src="../assets/svg/leftArrow.svg"  />-->
+      <ion-col width-20 class="csCalNavigation">
+        <button ion-button color="dark" (click)="decrement()" clear><ion-icon name="arrow-dropleft-circle"></ion-icon></button>
       </ion-col>
       <ion-col>
         <span text-center class="csMonth csChalkText">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
       </ion-col>
-      <ion-col width-20 class="rightArrow" (click)="increment()">
-        <!--<img src="../assets/svg/rightArrow.svg"  />-->
+      <ion-col width-20 class="csCalNavigation">
+        <button ion-button color="dark" (click)="increment()" clear><ion-icon name="arrow-dropright-circle"></ion-icon></button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -157,7 +157,7 @@ public title : string = "planner";
     actions2: CalendarEventAction[] = [{
       
 
-      label: '<i>view</i>',
+      label: '<i><img class="details" src="../assets/images/glas.png"> </img></i>',
       onClick: ({event}:{event}): void => {
          let modal = this.modalCtrl.create(EventModalPage,{eventId:event.id});
          modal.present();
@@ -172,7 +172,7 @@ public title : string = "planner";
     actions: CalendarEventAction[] = [{
       
 
-      label: '<i>view</i>',
+      label: '<i><img class="details" src="../assets/images/glas.png"> </img></i>',
       onClick: ({event}:{event}): void => {
          let modal = this.modalCtrl.create(EventModalPage,{eventId:event.id});
          modal.present();

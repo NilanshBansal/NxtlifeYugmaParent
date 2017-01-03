@@ -3,10 +3,9 @@ Title:   Corner Stone Theme
 Website: http://cornerstone.pk
 Date:    21/12/2016
 =================================> */
-
-/* ===============================
-    Colors:
-================================== */
+.csBackground{
+  background:csBackgroundSvg('gBoard.svg');
+}
 
 .setBottom{
   position: absolute;
@@ -30,14 +29,14 @@ Date:    21/12/2016
   box-shadow: 0px 0px 8px #000000;
 }
 
-.csFillBackground{
-  width: 100%;
-  height: 100%;
-  background-size:cover;
-}
-
 .csFull{
     width:100% !important;
+}
+
+.csFillBackground{
+  @extend .csFull;
+  height: 100%;
+  background-size:cover;
 }
 
 .csCircle{
@@ -50,13 +49,8 @@ Date:    21/12/2016
 }
 
 .csCardHeader{
-  // background-color:#818181;
   background: csBackgroundSvg('dashStrip.svg');
   color:#fff;
-}
-
-.csCardBorder{
-  border-image: csBackgroundSvg('dashStrip.svg') 8px solid;
 }
 
 ion-toolbar{

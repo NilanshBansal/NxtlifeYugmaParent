@@ -24,12 +24,23 @@ export class StudentRating implements OnInit  {
   public standardId;
   public studentId;
   public child;
+  public studentInfo;
+
+  fillStarts = [];
 
   constructor(private r: RatingService,
               public parentInfo: ParentInfo,
               public modalCtrl: ModalController,
               private nl: CustomService) {
 
+  }
+
+  ngOnInit() {
+    this.students = this.parentInfo.getStudents();
+    if (this.students.length === 1) {
+      this.child = this.students[0];  // Auto select for one child
+      this.getRatingInfo();
+    }
   }
 
   selectChild(student) {
@@ -42,22 +53,26 @@ export class StudentRating implements OnInit  {
 
   public getRatingInfo() {
     this.nl.showLoader();
-    console.log("qqqqqq", this.standardId)
-    this.r.getRatingInfo(this.standardId).subscribe((categories) => {
-      this.nl.hideLoader();
-      console.log("DSADASD", categories.json())
+    this.r.getRatingInfo(this.standardId).subscribe((res) => {
+      this.onSuccess(res.json())
     }, (err) => {
-      this.nl.hideLoader();
-      this.nl.errMessage();
+      this.onError();
     });
   }
 
-  ngOnInit() {
-    this.students = this.parentInfo.getStudents();
-    if (this.students.length === 1) {
-      this.child = this.students[0];  // Auto select for one child
-      this.getRatingInfo();
+  onSuccess(info) {
+    this.nl.hideLoader();
+    this.studentInfo = info.profile;
+    console.log("DSADSAD", info);
+    if (info.isEmpty) {
+      this.nl.showToast("student rating not filled by class teacher");
+      this.fillStarts= [];
     }
+  }
+
+  onError() {
+    this.nl.hideLoader();
+    this.nl.errMessage();
   }
 
 }

@@ -3,6 +3,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { MyApp } from './app.component';
 import { CalendarDateFormatter, CalendarEventTitle, CalendarModule } from 'angular-calendar';
+import { Ionic2RatingModule } from 'ionic2-rating';
 
 // import component
 import { LoginPage } from '../pages/login/login';
@@ -86,6 +87,7 @@ import { RatingService } from '../service/rating.service';
   ],
   imports: [
     MomentModule,
+    Ionic2RatingModule,
     IonicModule.forRoot(MyApp),
     CalendarModule
   ],

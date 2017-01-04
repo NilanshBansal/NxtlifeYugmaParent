@@ -1,7 +1,6 @@
 <ion-header>
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
-
 <ion-content>
   <ion-list>
     <ion-item>
@@ -11,9 +10,11 @@
         <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
       </ion-select>
     </ion-item>
-    <!-- <ion-item *ngFor="let sp of stu_profile">
-      <p>{{sp.responsibility}}</p>
-      <rating [(ngModel)]="fillStarts[i]" max="5"></rating>
-    </ion-item> -->
+    <div *ngIf="studentInfo">
+      <ion-item *ngFor="let sp of studentInfo">
+        <p>{{sp.responsibility}}</p>
+        <rating [(ngModel)]="fillStarts[i]" max="5" readOnly="true"></rating>
+      </ion-item>
+    </div>
   </ion-list>
-</ion-content>`
+</ion-content>

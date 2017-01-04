@@ -1,0 +1,19 @@
+<ion-header>
+  <nl-navbar [title]="title"></nl-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
+      <ion-label>Select Child</ion-label>
+      <ion-select [(ngModel)]="child" (ngModelChange)="selectChild($event)">
+        <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <!-- <ion-item *ngFor="let sp of stu_profile">
+      <p>{{sp.responsibility}}</p>
+      <rating [(ngModel)]="fillStarts[i]" max="5"></rating>
+    </ion-item> -->
+  </ion-list>
+</ion-content>`

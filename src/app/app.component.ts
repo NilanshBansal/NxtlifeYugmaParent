@@ -11,7 +11,7 @@ import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';
 import { ComplaintPage } from '../pages/complaint/complaint';
 import { PlannerComponent } from '../pages/planner/planner.component';
-import { ReportIssuePage } from '../pages/reportIssue/reportIssue';
+import { StudentRating } from '../pages/rating/rating';
 import { AccountPage } from '../pages/account/account';
 
 // import service
@@ -50,7 +50,7 @@ export class MyApp {
       { title: 'Planner',component: PlannerComponent , icon: 'md-calendar', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },
       { title: 'Survey', component: SurveyPage, icon: 'ios-analytics-outline', url: 'survey' },
-      { title: 'ReportIssue', component: ReportIssuePage, icon: 'ios-bug-outline', url: 'reportissue' },
+      { title: 'Student Rating', component: StudentRating, icon: 'ios-pulse-outline', url: 'student-profile' },
     ];
 
     this.account = [

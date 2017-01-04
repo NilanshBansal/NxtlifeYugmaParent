@@ -41,14 +41,15 @@ export class StudentRating implements OnInit  {
   }
 
   public getRatingInfo() {
-    // this.nl.showLoader();
+    this.nl.showLoader();
     console.log("qqqqqq", this.standardId)
-    // this.r.getRatingInfo().subscribe((categories) => {
-    //   this.nl.hideLoader();
-    // }, (err) => {
-    //   this.nl.hideLoader();
-    //   this.nl.errMessage();
-    // });
+    this.r.getRatingInfo(this.standardId).subscribe((categories) => {
+      this.nl.hideLoader();
+      console.log("DSADASD", categories.json())
+    }, (err) => {
+      this.nl.hideLoader();
+      this.nl.errMessage();
+    });
   }
 
   ngOnInit() {

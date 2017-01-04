@@ -39,6 +39,16 @@ Date:    21/12/2016
   background-size:cover;
 }
 
+.csWhiteText{
+  color:white;
+}
+
+ .csMainBackground{
+     @extend .csFillBackground;
+     @extend .csWhiteText;
+     background-image: csBackgroundSvg('gBoard.svg');
+}
+
 .csCircle{
   border-radius: 100%;
   border: 3px solid #fff;
@@ -137,6 +147,19 @@ ion-toolbar{
 
 .csButtonSet{
   margin-top: $csTop+20;
+}
+
+ .csGreenBoard{
+     border: #ffd180 solid 8px;
+     background-image: csBackgroundSvg('calBoardBackground.svg');
+     background-size:cover;
+     color:$color1;
+}
+
+ .csTransparentForm{
+     @extend .csTransparent;
+     color:white;
+     padding-right: 15px;
 }
 
 /*-----------*/

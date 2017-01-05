@@ -7,10 +7,12 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item *ngFor="let suggestion of complaints" #slidingItem >
-      <a ion-item detail-push detail-none href="#" (click)="viewComplaint(suggestion)" [style.border-left-color]="suggestion.statusColor">
-        <nl-list-view [complaint]="suggestion"></nl-list-view>
-      </a>
+    <ion-item *ngFor="let suggestion of complaints">
+      <p>title: {{suggestion.title}}</p>
+      <p>description: {{suggestion.description}}</p>
+      <p>studentName: {{suggestion.studentName}}</p>
+      <p *ngIf="suggestion.teacherName">suggestion for: {{suggestion.teacherName}}</p>
+      <p>createdAt: {{suggestion.createdAt | date:'mediumDate'}}</p>
     </ion-item>
   </ion-list>
   <ion-list>

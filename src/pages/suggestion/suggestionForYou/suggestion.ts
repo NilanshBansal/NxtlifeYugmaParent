@@ -21,7 +21,7 @@ import { ComplaintPage } from '../../complaint/complaint';
 export class SuggestionForYou extends ComplaintPage {
 
   // set header title
-  title: string = "Suggestions For You";
+  title: string = "Suggestions";
 
   // used in event
   public master: string = "suggestion";

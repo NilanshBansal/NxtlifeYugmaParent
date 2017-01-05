@@ -26,6 +26,7 @@ export class newComplaintModal implements OnInit {
   public againstEmployeeId;
   public childCategory;
   public child;
+  public title = [];
   public description = [];
 
   newComplaint: FormGroup;

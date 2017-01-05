@@ -53,8 +53,8 @@
         <div class="complaint-item">
           <hr><span>Title</span>
         </div>
-        <input class="text-input" type="text" formControlName="title" placeholder="Enter Title (max.50)" maxlength="50">
-        <ion-badge><span>{{50}}</span></ion-badge>
+        <input class="text-input" type="text" [(ngModel)]="title" formControlName="title" placeholder="Enter Title (max.50)" maxlength="50">
+        <ion-badge><span>{{50 - title.length}}</span></ion-badge>
       </ion-item>
 
       <ion-item style="margin-top: 10px;">

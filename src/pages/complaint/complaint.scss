@@ -10,9 +10,10 @@ ion-note{
   align-self: flex-start;
 }
 .complaint-list {
+  @extend .csMainBackground;
   ion-item-sliding {
     h3 {
-      line-height: 20px;
+      // line-height: 20px;
       text-overflow: ellipsis;
       overflow: hidden;
     }
@@ -87,7 +88,8 @@ ion-note{
     }
     ion-badge{
       float: right;
-      color: #c8c7cc;background-color: whitesmoke;
+      color: #c8c7cc;
+      // background-color: whitesmoke;
     }
   }
   ion-item-divider{
@@ -98,4 +100,47 @@ ion-note{
       float: right;
     }
   }
+}
+.fixed-content{
+  @extend .csMainBackground;
+  padding-bottom:20% !important;
+}
+.csBordering{
+    border-top: solid 3px $csBorder;
+  border-bottom: solid 3px $csBorder;
+}
+
+.csListBoard{
+  @extend .csFillBackground;
+  @extend .csBordering;
+  background-size: cover !important;
+  background: csBackgroundSvg('calBoardBackground.svg');
+  h3{
+    color:white;
+  }
+  .no-padding-l{
+    color:white;
+  }
+}
+  .list-ios ion-item-sliding {
+    background:$csBorder;
+      margin-top: 5px;
+  margin-bottom:10px;
+  }
+
+  .list-ios ion-item-options{
+    @extend .csBordering;
+  }
+
+.item-ios,.item-wp, .item-md{
+  h2 {
+    margin: 0 0 2px;
+    font-size: 1.6rem;
+    font-weight: normal;
+    color:white;
+}
+} 
+.new-complaint ion-item ion-badge {
+    float: right;
+    color: white;
 }

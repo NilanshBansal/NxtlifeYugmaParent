@@ -12,35 +12,35 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="csMainBackground">
   <form name="newcomplaint" [formGroup]="newComplaint" (ngSubmit)="saveComplaint()" novalidate>
-    <ion-card class="new-complaint">
-      <ion-item>
+    <ion-card class="new-complaint csGreenBoard csMargin">
+      <ion-item class="csTransparentForm">
         <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
-        <ion-label>Select Child</ion-label>
+        <ion-label color="primary">Select Child</ion-label>
         <ion-select [(ngModel)]="child" formControlName="student" (ngModelChange)="selectChild($event)">
           <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
         </ion-select>
       </ion-item>
 
-      <ion-item *ngIf="standardId">
-        <ion-icon name="ios-hammer" item-left large  color="primary"></ion-icon>
+      <ion-item *ngIf="standardId" class="csTransparentForm">
+        <ion-icon name="ios-hammer" item-left large color="primary"></ion-icon>
         <ion-label>Against</ion-label>
         <ion-select [(ngModel)]="category" formControlName="category" (ngModelChange)="setCategory(category)">
           <ion-option *ngFor="let category of categories" [value]="category">{{category.name}}</ion-option>
         </ion-select>
       </ion-item>
 
-      <ion-item *ngIf="teachers">
-        <ion-icon name="ios-person-outline" item-left large  color="primary"></ion-icon>
+      <ion-item *ngIf="teachers" class="csTransparentForm">
+        <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
         <ion-label>Teacher</ion-label>
         <ion-select [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId" (ngModelChange)="setTeacher($event)">
           <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}}</ion-option>
         </ion-select>
       </ion-item>
 
-      <ion-item *ngIf="childCategories">
-        <ion-icon name="ios-options-outline" item-left large  color="primary"></ion-icon>
+      <ion-item *ngIf="childCategories" class="csTransparentForm">
+        <ion-icon name="ios-options-outline" item-left large color="primary"></ion-icon>
         <ion-label>SubCategory</ion-label>
         <ion-select [(ngModel)]="childCategory" formControlName="childCategory">
           <ion-option *ngFor="let childCategory of childCategories" [value]="childCategory.id">
@@ -49,18 +49,12 @@
         </ion-select>
       </ion-item>
 
-      <ion-item style="margin-top: 10px;">
-        <div class="complaint-item">
-          <hr><span>Title</span>
-        </div>
+      <ion-item style="margin-top: 10px;" class="csTransparentForm">
         <input class="text-input" type="text" [(ngModel)]="title" formControlName="title" placeholder="Enter Title (max.50)" maxlength="50">
         <ion-badge><span>{{50 - title.length}}</span></ion-badge>
       </ion-item>
 
-      <ion-item style="margin-top: 10px;">
-        <div class="complaint-item">
-          <hr><span>Description</span>
-        </div>
+      <ion-item style="margin-top: 10px;" class="csTransparentForm">
         <textarea class="text-input" rows="8" [(ngModel)]="description" formControlName="description" placeholder="Enter Description" maxlength="200"></textarea>
         <ion-badge><span>{{200 - description.length}}</span></ion-badge>
       </ion-item>
@@ -72,7 +66,6 @@
       <ion-buttons padding>
         <button ion-button block type="submit" [disabled]="newComplaint.invalid">Submit</button>
       </ion-buttons>
-
     </ion-card>
   </form>
 </ion-content>

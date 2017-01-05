@@ -2,7 +2,7 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 
-<ion-content class="complaint-list watermark">
+<ion-content class="complaint-list csMainBackground csMargin">
   <ion-refresher (ionRefresh)="loadNewComplaints($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -10,8 +10,8 @@
     <button ion-fab (click)="newComplaint()" color="fab"> <ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item-sliding *ngFor="let complaint of complaints" #slidingItem >
-      <a ion-item detail-push detail-none href="#" (click)="viewComplaint(complaint)" [style.border-left-color]="complaint.statusColor">
+    <ion-item-sliding class="csSlideBackground" class="new-list" *ngFor="let complaint of complaints" #slidingItem >
+      <a class="csListBoard" ion-item detail-push detail-none href="#" (click)="viewComplaint(complaint)" [style.border-left-color]="complaint.statusColor">
         <nl-list-view [complaint]="complaint"></nl-list-view>
       </a>
       <ion-item-options side="right">

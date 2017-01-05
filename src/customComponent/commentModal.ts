@@ -9,21 +9,17 @@ import { CustomService } from '../service/customService';
 @Component({
   selector: 'comment',
   template: `
-    <ion-content id="chat" class="chat" style="margin-top:56px">
+    <ion-content class="csChatBox" id="chat" class="chat" >
       <ion-list *ngIf="emptyComments">
         <h3>No Comments</h3>
       </ion-list>
       <ion-spinner *ngIf="!hasData"></ion-spinner>
-      <ion-card class="message-box" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>
-        <ion-item no-padding>
-          <ion-avatar class="user" item-left text-center *ngIf="!m.parentId" >
-            <img src="assets/images/avatar-ts-woody.png">
-            <span>Pankaj</span>
-          </ion-avatar>
+      <div  class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>
+        <div no-padding class="csMyComment">
           <h3>{{ m.comment }}</h3>
-          <ion-note><span>{{ m.createdAt | amCalendar }}</span></ion-note>
-        </ion-item>
-      </ion-card>
+        </div>
+        <div class="csCommentTime">{{m.employeeNickName}}{{m.parentName}}:{{ m.createdAt | amCalendar }}</div>
+      </div>
     </ion-content>
 
     <ion-footer keyboard-attach class="bar-stable" #commentBtn>

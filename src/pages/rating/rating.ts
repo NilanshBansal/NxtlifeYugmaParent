@@ -5,7 +5,7 @@ import { ModalController } from 'ionic-angular';
 import { RatingModal } from './ratingModal';
 
 // import service
-import { RatingService } from '../../service/rating.service';
+import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/customService';
 import { ParentInfo } from '../../service/parentInfo';
 import * as _ from 'underscore';
@@ -27,7 +27,7 @@ export class StudentRating implements OnInit  {
   public child;
   public studentInfo;
 
-  constructor(private r: RatingService,
+  constructor(private r: ComplaintSuggestion,
               public parentInfo: ParentInfo,
               public modalCtrl: ModalController,
               private nl: CustomService) {

@@ -50,7 +50,6 @@ import { ParentInfo } from '../service/parentInfo';
 import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/customService';
 import { EventService } from '../service/planner.service';
-import { RatingService } from '../service/rating.service';
 
 @NgModule({
   declarations: [
@@ -124,6 +123,6 @@ import { RatingService } from '../service/rating.service';
     NewAppreciationModal,
     StudentRating
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle, CustomService, RatingService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
+  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })
 export class AppModule {}

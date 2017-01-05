@@ -81,4 +81,11 @@ export class ComplaintSuggestion {
     }).catch((error: any) => Observable.throw(error || 'server error'));
   }
 
+  public getRatingInfo(studentId): any {
+    this.serverUrl = this.configuration.Server;
+    return this.http.get(this.serverUrl + "/" + studentId, this.options).map((res: Response) => {
+      return res;
+    }).catch((error: any) => Observable.throw(error || 'server error'));
+  }
+
 }

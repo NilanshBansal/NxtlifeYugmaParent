@@ -13,7 +13,7 @@
     <div *ngIf="studentInfo">
       <ion-item *ngFor="let sp of studentInfo">
         <p>{{sp.responsibility}}</p>
-        <rating [(ngModel)]="fillStarts[i]" max="5" readOnly="true"></rating>
+        <rating [(ngModel)]="sp.ratingIndex" max="5" readOnly="true"></rating>
       </ion-item>
     </div>
   </ion-list>

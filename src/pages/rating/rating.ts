@@ -8,6 +8,7 @@ import { RatingModal } from './ratingModal';
 import { RatingService } from '../../service/rating.service';
 import { CustomService } from '../../service/customService';
 import { ParentInfo } from '../../service/parentInfo';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'student-rating',
@@ -26,8 +27,6 @@ export class StudentRating implements OnInit  {
   public child;
   public studentInfo;
 
-  fillStarts = [];
-
   constructor(private r: RatingService,
               public parentInfo: ParentInfo,
               public modalCtrl: ModalController,
@@ -39,7 +38,8 @@ export class StudentRating implements OnInit  {
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child
-      this.getRatingInfo();
+      console.log("DADASd", this.child)
+      // this.getRatingInfo();
     }
   }
 
@@ -53,7 +53,7 @@ export class StudentRating implements OnInit  {
 
   public getRatingInfo() {
     this.nl.showLoader();
-    this.r.getRatingInfo(this.standardId).subscribe((res) => {
+    this.r.getRatingInfo(this.studentId).subscribe((res) => {
       this.onSuccess(res.json())
     }, (err) => {
       this.onError();
@@ -63,10 +63,8 @@ export class StudentRating implements OnInit  {
   onSuccess(info) {
     this.nl.hideLoader();
     this.studentInfo = info.profile;
-    console.log("DSADSAD", info);
     if (info.isEmpty) {
       this.nl.showToast("student rating not filled by class teacher");
-      this.fillStarts= [];
     }
   }
 

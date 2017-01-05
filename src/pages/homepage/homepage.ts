@@ -4,7 +4,7 @@ import { NavController } from 'ionic-angular';
 import { PollPage } from '../poll/poll';
 import { SuggestionTabs } from '../suggestion/suggestionTabs';
 import { AppreciationTabs } from '../appreciation/appreciationTabs';
-import { ReportIssuePage} from '../reportIssue/reportIssue';
+import { StudentRating} from '../rating/rating';
 import { SurveyPage} from '../survey/survey';
 import { ComplaintPage} from '../complaint/complaint';
 
@@ -53,8 +53,9 @@ export class Dashboard {
     this.navCtrl.setRoot(SurveyPage);
   }
 
-  openReportIssue() {
-    this.navCtrl.setRoot(ReportIssuePage);
+  openRating() {
+    this.configuration.setUrl("student-profile");
+    this.navCtrl.setRoot(StudentRating);
   }
 
 }

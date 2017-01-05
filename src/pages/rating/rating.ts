@@ -36,19 +36,14 @@ export class StudentRating implements OnInit  {
 
   ngOnInit() {
     this.students = this.parentInfo.getStudents();
-    if (this.students.length === 1) {
-      this.child = this.students[0];  // Auto select for one child
-      this.studentId = this.child.id;
-      this.getRatingInfo();
-    }
+    this.child = this.students[0];
+    this.studentId = this.child.id;
+    this.getRatingInfo();
   }
 
   selectChild(student) {
-    if (student) {
-      this.studentId = student.id;
-      this.standardId = student.standardId;
-      this.getRatingInfo();
-    }
+    this.studentId = student.id;
+    this.getRatingInfo();
   }
 
   public getRatingInfo() {

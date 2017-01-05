@@ -38,8 +38,8 @@ export class StudentRating implements OnInit  {
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child
-      console.log("DADASd", this.child)
-      // this.getRatingInfo();
+      this.studentId = this.child.id;
+      this.getRatingInfo();
     }
   }
 

@@ -12,56 +12,72 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="csMainBackground">
+<ion-content class="newComplaint csGrayBackground">
   <form name="newcomplaint" [formGroup]="newComplaint" (ngSubmit)="saveComplaint()" novalidate>
-    <ion-card class="new-complaint csGreenBoard csMargin">
-      <ion-item class="csTransparentForm">
-        <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
+    <ion-card>
+      <ion-item>
+        <ion-icon name="ios-body-outline"  item-left large color="primary"></ion-icon>
         <ion-label color="primary">Select Child</ion-label>
         <ion-select [(ngModel)]="child" formControlName="student" (ngModelChange)="selectChild($event)">
           <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
         </ion-select>
       </ion-item>
+    </ion-card>
 
-      <ion-item *ngIf="standardId" class="csTransparentForm">
-        <ion-icon name="ios-hammer" item-left large color="primary"></ion-icon>
-        <ion-label>Against</ion-label>
+<ion-card>
+      <ion-item padding *ngIf="standardId" >
+        <ion-icon name="sad" item-left large color="primary"></ion-icon>
+        <ion-label color="primary">Against</ion-label>
         <ion-select [(ngModel)]="category" formControlName="category" (ngModelChange)="setCategory(category)">
           <ion-option *ngFor="let category of categories" [value]="category">{{category.name}}</ion-option>
         </ion-select>
       </ion-item>
+</ion-card>
 
-      <ion-item *ngIf="teachers" class="csTransparentForm">
+<ion-card>
+      <ion-item padding *ngIf="teachers" >
         <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
-        <ion-label>Teacher</ion-label>
+        <ion-label color="primary">Teacher</ion-label>
         <ion-select [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId" (ngModelChange)="setTeacher($event)">
           <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}}</ion-option>
         </ion-select>
       </ion-item>
+</ion-card>
 
-      <ion-item *ngIf="childCategories" class="csTransparentForm">
+<ion-card>
+      <ion-item  padding *ngIf="childCategories" >
         <ion-icon name="ios-options-outline" item-left large color="primary"></ion-icon>
-        <ion-label>SubCategory</ion-label>
+        <ion-label color="primary">SubCategory</ion-label>
         <ion-select [(ngModel)]="childCategory" formControlName="childCategory">
           <ion-option *ngFor="let childCategory of childCategories" [value]="childCategory.id">
             {{childCategory.name}}
           </ion-option>
         </ion-select>
       </ion-item>
+</ion-card>
 
-      <ion-item style="margin-top: 10px;" class="csTransparentForm">
-        <input class="text-input" type="text" formControlName="title" placeholder="Enter Title (max.50)" maxlength="50">
-        <ion-badge><span>{{50}}</span></ion-badge>
-      </ion-item>
+<ion-card>
+  <ion-item class="csTransparent">
+    <ion-label  stacked>Title (max. 50)</ion-label>
+    <ion-textarea  rows="2" class="csInput-title" formControlName="title" maxlength="50"> </ion-textarea>
+  </ion-item>
+  <ion-badge class="csFiftyLimit"><span>{{50}}</span></ion-badge>
+</ion-card>
 
-      <ion-item style="margin-top: 10px;" class="csTransparentForm">
-        <textarea class="text-input" rows="8" [(ngModel)]="description" formControlName="description" placeholder="Enter Description"
-          maxlength="200"></textarea>
-        <ion-badge><span>{{200 - description.length}}</span></ion-badge>
-      </ion-item>
-    </ion-card>
-    <ion-buttons padding>
-      <button ion-button block type="submit" [disabled]="newComplaint.invalid">Submit</button>
-    </ion-buttons>
+<ion-card>
+  <ion-item class="csTransparent">
+    <ion-label stacked>Description</ion-label>
+    <ion-textarea class="csInput-title" rows="8" [(ngModel)]="description" formControlName="description"
+          maxlength="200"></ion-textarea>
+  </ion-item>
+  <ion-badge class="csFiftyLimit"><span>{{200 - description.length}}</span></ion-badge>
+</ion-card>
+
+      
+
+      <button ion-button full type="submit" [disabled]="newComplaint.invalid">Submit</button>
+   
+ 
+  
   </form>
 </ion-content>

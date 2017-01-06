@@ -48,13 +48,14 @@
         </ion-item>
         <ion-item-divider>
           Students
-        </ion-item-divider> 
+        </ion-item-divider>
         <ion-item>
           <ion-grid class="student-header">
             <ion-row>
               <ion-col width-20></ion-col>
-              <ion-col width-60 item-left><h2 color="primary">Name</h2></ion-col>
+              <ion-col width-20 item-left><h2 color="primary">Name</h2></ion-col>
               <ion-col width-20 item-right><h2 color="primary">Class</h2></ion-col>
+              <ion-col width-20 item-right><h2 color="primary">Class Teacher</h2></ion-col>
             </ion-row>
           </ion-grid>
         </ion-item>
@@ -62,11 +63,12 @@
           <ion-icon name="school" color="primary" item-left></ion-icon>
           <ion-grid>
             <ion-row>
-              <ion-col width-80><b>{{a.name}}</b></ion-col>
-              <ion-col><b>{{a.standardId}}</b></ion-col>
+              <ion-col width-40><b>{{a.name}}</b></ion-col>
+              <ion-col width-30><b>{{a.standardName}}</b></ion-col>
+              <ion-col><b>{{a.classTeacher}}</b></ion-col>
             </ion-row>
-          </ion-grid>          
-        </ion-item>       
+          </ion-grid>
+        </ion-item>
       </ion-list>
     </ion-card>
     <button ion-button icon-left color="color1" full type="button" (click)="logoutActionSheet()">

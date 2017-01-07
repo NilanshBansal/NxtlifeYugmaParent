@@ -26,21 +26,27 @@ export class PollPage implements OnInit {
 
 
   RemoveItem(theItem) {
+    console.log('theItem',theItem);
     let index = this.resdata.indexOf(theItem);
+    console.log('index',index);
     this.resdata.splice(index,1);
 }
 
 
+  // CheckIndex(res){
+  //    this.RemoveItem(res);
+  // }
+
   public PollResult;
   public OptionId;
 
-   PollVoting(resid){
+   PollVoting(resid,res){
      this.PollResult = {
        "pollId" : resid,
        "optionIds" : [this.OptionId]
      };
      this.pollServ.PollVote(this.PollResult).subscribe(
-       data => { this.responseData = data ; this.RemoveItem(resid)},
+       data => { this.responseData = data ; this.RemoveItem(res); },
        () => console.log(this.responseData),
        )
    } 

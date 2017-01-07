@@ -31,15 +31,15 @@ export class PollPage implements OnInit {
 }
 
 
-  public dks;
+  public PollResult;
   public OptionId;
 
    PollVoting(resid){
-     this.dks = {
+     this.PollResult = {
        "pollId" : resid,
        "optionIds" : [this.OptionId]
      };
-     this.pollServ.PollVote(this.dks).subscribe(
+     this.pollServ.PollVote(this.PollResult).subscribe(
        data => { this.responseData = data ; this.RemoveItem(resid)},
        () => console.log(this.responseData),
        )

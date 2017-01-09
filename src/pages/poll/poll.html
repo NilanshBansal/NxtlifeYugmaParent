@@ -26,19 +26,56 @@
         
        <div class="pollChoices" *ngFor="let d of res.subOptions" >
           
-         <ion-list radio-group [(ngModel)]="relationship">
+         <ion-list   radio-group [(ngModel)]="relationship">
             <ion-item >
-               <ion-radio ngmodel="choice1" checked (click)="PollChoiceClicked(d.id)"></ion-radio>
+               <ion-radio *ngIf="res.optionTypeId == 1" ngmodel="choice1" checked (click)="PollChoiceClicked(d.id)"></ion-radio>
                <ion-label class="PollOptions" >{{d.name}}</ion-label>
+              <ion-checkbox *ngIf="res.optionTypeId == 2" [(ngModel)]="checkItems[d.id]"></ion-checkbox>
+
            </ion-item>
         </ion-list>
  
        </div>
        
-       
+       <span>{{res.optionTypeName}}</span>
   <!--<button ion-button color="primary" (click)="CheckIndex(res)">Don't!</button>       -->
-  <button class="PollButton" ion-button color="secondary" (click)="PollVoting(res.id,res)">Vote!</button>
- 
+  <button *ngIf="res.optionTypeId == 1" class="PollButton" ion-button color="secondary" (click)="PollVoting(res.id,res)">Vote!</button>
+  <button *ngIf="res.optionTypeId == 2" class="PollButton" ion-button color="secondary" (click)="PollMulVoting(res.id,res)">Vote!</button>
      </ion-card-content>
     </ion-card>
+
+
+<!--<ion-card >
+  <ion-card-header>
+    <span>Random Question 102?? </span>
+    </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+       <ion-item>
+         <ion-label>Daenerys Targaryen</ion-label>
+         <ion-checkbox></ion-checkbox>
+      </ion-item>
+
+    <ion-item>
+      <ion-label>Arya Stark</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+
+     <ion-item>
+      <ion-label>ben afflek</ion-label>
+      <ion-checkbox ></ion-checkbox>
+    </ion-item>
+
+  </ion-list>
+
+<button class="PollButton" ion-button color="secondary">Vote!</button>
+
+</ion-card-content>
+ </ion-card>-->
+
+
+
+
+
+
 </ion-content>

@@ -196,3 +196,8 @@ ion-toolbar{
 .csGrayBackground{
   background:$csBackgroundColor;
 }
+
+
+.list-md .item-block .item-inner {
+    border-bottom:none;
+}

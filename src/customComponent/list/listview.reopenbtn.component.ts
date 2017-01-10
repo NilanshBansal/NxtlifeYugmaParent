@@ -5,12 +5,12 @@ import { Events } from 'ionic-angular';
 @Component({
   selector: 'nl-reopen-button',
   template: `
-  <div style="height:100%;">
-    <button ion-button color="danger" (click)="openReopenModal(complaint)" *ngIf="complaint.statusId === 4">
-      <ion-icon name="ios-thumbs-down"></ion-icon>
-      Reopen
-    </button>
-  </div>
+    <div style="height:100%;">
+      <button ion-button color="danger" (click)="openReopenModal(complaint)" *ngIf="complaint.statusId === 4">
+        <ion-icon name="ios-thumbs-down"></ion-icon>
+        Reopen
+      </button>
+    </div>
   `
 })
 

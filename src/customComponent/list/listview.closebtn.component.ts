@@ -6,8 +6,9 @@ import { Events } from 'ionic-angular';
   selector: 'nl-close-button',
   template: `
   <div style="height:100%;">
-    <button style="font-size:30px;" class="csSlideClose" ion-button (click)="openCloseModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4">
-      <ion-icon name="ios-close-circle"></ion-icon>
+    <button ion-button color="secondary" (click)="openCloseModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4">
+      <ion-icon name="md-close"></ion-icon>
+      Close
     </button>
   </div>
   `

@@ -15,7 +15,7 @@
 <ion-content class="view-complaint" >
   <ion-card>
     <ion-item>
-      <ion-note item-right ><span><ion-icon name="at" [style.color] = "complaint.statusColor"></ion-icon> {{complaint.statusName}}</span></ion-note>
+      <ion-note item-right><span [style.color]="complaint.statusColor"><ion-icon name="at" ></ion-icon> {{complaint.statusName}}</span></ion-note>
     </ion-item>
     <ion-item>
       <div class="complaint-item">
@@ -45,19 +45,25 @@
       </div>
       <h2>{{complaint.rca}}</h2>
     </ion-item>
-    <ion-item *ngIf="complaint.closedOn">
-      <div class="complaint-item">
-        <hr [style.border-top]="'1px' + ' groove ' + complaint.statusColor">
-        <span [style.color] = "complaint.statusColor">Closed On</span>
-      </div>
-      <h2>{{complaint.closedOn}}</h2>
-    </ion-item>
-    <ion-item>
-      <ion-note item-right><ion-icon name="clock" [style.color] = "complaint.statusColor"></ion-icon><span> {{complaint.createdAt| amTimeAgo}}</span>      
-      </ion-note>
-      <ion-note item-left>
-        <ion-icon name="person" [style.color] = "complaint.statusColor"></ion-icon><span> Anonymous</span>
-      </ion-note>
-    </ion-item>
+  <ion-item>
+    <ion-note item-left>
+      <span [style.color]="complaint.statusColor">
+            <b>Created at</b>
+          </span>
+      <br>
+      <span style="color:black">
+            {{complaint.createdAt | date}}
+          </span>
+    </ion-note>
+    <ion-note item-right *ngIf="complaint.closedOn">
+      <span [style.color]="complaint.statusColor">
+          <b>Closed on</b>
+          </span>
+      <br>
+      <span style="color:black">
+          {{complaint.closedOn | date}}
+          </span>
+    </ion-note>
+  </ion-item>
   </ion-card>
 </ion-content>

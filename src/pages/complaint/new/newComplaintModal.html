@@ -24,8 +24,8 @@
       </ion-item>
     </ion-card>
 
-<ion-card>
-      <ion-item padding *ngIf="standardId" >
+<ion-card *ngIf="standardId" >
+      <ion-item padding>
         <ion-icon name="sad" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Against</ion-label>
         <ion-select [(ngModel)]="category" formControlName="category" (ngModelChange)="setCategory(category)">
@@ -34,8 +34,8 @@
       </ion-item>
 </ion-card>
 
-<ion-card>
-      <ion-item padding *ngIf="teachers" >
+<ion-card *ngIf="teachers">
+      <ion-item padding>
         <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Teacher</ion-label>
         <ion-select [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId" (ngModelChange)="setTeacher($event)">
@@ -44,8 +44,8 @@
       </ion-item>
 </ion-card>
 
-<ion-card>
-      <ion-item  padding *ngIf="childCategories" >
+<ion-card *ngIf="childCategories">
+      <ion-item  padding>
         <ion-icon name="ios-options-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary">SubCategory</ion-label>
         <ion-select [(ngModel)]="childCategory" formControlName="childCategory">
@@ -59,7 +59,7 @@
 <ion-card>
   <ion-item class="csTransparent">
     <ion-label  stacked>Title (max. 50)</ion-label>
-    <ion-textarea  rows="2" class="csInput-title" formControlName="title" maxlength="50"> </ion-textarea>
+    <ion-textarea  rows="2" class="csInput-title" formControlName="title" maxlength="50" placeholder="Enter title"> </ion-textarea>
   </ion-item>
   <ion-badge class="csFiftyLimit"><span>{{50}}</span></ion-badge>
 </ion-card>
@@ -67,7 +67,7 @@
 <ion-card>
   <ion-item class="csTransparent">
     <ion-label stacked>Description</ion-label>
-    <ion-textarea class="csInput-title" rows="8" [(ngModel)]="description" formControlName="description"
+    <ion-textarea class="csInput-title" rows="8" [(ngModel)]="description" placeholder="Enter description" formControlName="description"
           maxlength="200"></ion-textarea>
   </ion-item>
   <ion-badge class="csFiftyLimit"><span>{{200 - description.length}}</span></ion-badge>

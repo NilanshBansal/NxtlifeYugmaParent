@@ -97,6 +97,9 @@ ion-note{
 .csInput-title{
   width:95%;
 }
+.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input {
+    letter-spacing: 0.5px !important;
+}
 
 .csFiftyLimit{
   float:right;

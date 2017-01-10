@@ -10,6 +10,12 @@
 <ion-content padding>
 
 
+  <ion-list>
+    <ion-item *ngIf="EmptyPolls">
+      <h3> CURRENTLY NO POLLS </h3>
+    </ion-item>
+  </ion-list>
+
 
   <ion-card *ngFor="let res of resdata">
      <ion-card-header> 

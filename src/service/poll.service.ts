@@ -26,7 +26,8 @@ export class PollService {
     public GetPolls(){
         this.serverUrl = this.configuration.Server;
 		return this.http.get(this.serverUrl,this.options)
-		.map((res:Response) => res.json())
+		.map((res:Response) => res)
+        .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
 	}
 
     public PollVote(body){

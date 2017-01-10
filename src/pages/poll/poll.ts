@@ -11,6 +11,7 @@ import { CustomService } from '../../service/customService';
 
 export class PollPage implements OnInit {
 
+  public datas;
   public resdata = [];
   public responseData;
   public theItem;
@@ -19,11 +20,19 @@ export class PollPage implements OnInit {
 
    }
 
+public EmptyPolls = false;
 
   PollFunc(){
     this.nl.showLoader();
-    this.pollServ.GetPolls().subscribe(
-      data => { this.resdata = data ; this.nl.hideLoader()},
+    this.pollServ.GetPolls().subscribe((datas) => 
+      {  console.log('emptyPolls',datas);
+        if (datas.status === 204) {
+        this.EmptyPolls = true;
+    //    this.nl.hideLoader();
+        console.log('emptyPolls',this.EmptyPolls);
+      } else{
+      this.resdata = datas.json() ; console.log('data') } this.nl.hideLoader()},
+      //(err) => {console.log('err'); this.nl.hideLoader()},
       () => console.log('Polls',this.resdata)
     )};
 

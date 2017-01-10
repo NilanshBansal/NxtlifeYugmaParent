@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { PollService } from '../../service/poll.service';
 import * as _ from 'underscore';
-
+import { CustomService } from '../../service/customService';
 
 @Component({
   selector: 'page-about',
@@ -14,14 +14,16 @@ export class PollPage implements OnInit {
   public resdata = [];
   public responseData;
   public theItem;
-  constructor(private pollServ : PollService) {
+  constructor(private pollServ : PollService,
+              private nl : CustomService) {
 
    }
 
 
   PollFunc(){
+    this.nl.showLoader();
     this.pollServ.GetPolls().subscribe(
-      data => { this.resdata = data ;},
+      data => { this.resdata = data ; this.nl.hideLoader()},
       () => console.log('Polls',this.resdata)
     )};
 

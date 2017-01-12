@@ -10,7 +10,7 @@
 
   <ion-content class="csBlueColor">
     <ion-list>
-      <button class="csStrip dashButtonMargin" color="transparent" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <button class="csStrip" color="$csStripColor" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         <ion-icon item-left [name]="p.icon"></ion-icon>
         {{p.title}}
       </button>

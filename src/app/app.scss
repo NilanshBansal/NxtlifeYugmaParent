@@ -63,20 +63,20 @@ $inherit : inherit;
 
 .csStrip{
     @extend .csFillBackground;
-    color: #794c10;
-    font-weight: bold !important;
-  background: csBackgroundSvg('dashStrip.svg');
+    color: black;
+    box-shadow: 0px 0px 5px grey;
+    background:$csStripColor;
+  // background: csBackgroundSvg('dashStrip.svg');
 }
 
 .csBlueColor{
-  @extend .csFillBackground;
-  color:#fff;
-  background: csBackgroundSvg('dashBoard.svg');
+  background:$csDarkStrip;
+  // background: csBackgroundSvg('dashBoard.svg');
   .item-ios[detail-push] .item-inner, button.item-ios:not([detail-none]) .item-inner, a.item-ios:not([detail-none]) .item-inner{
     background-image: url(''); //To remove arrow from dashboard buttons
   }
 }
 
-.dashButtonMargin{
-      margin-top: 6px;
-}
+// .dashButtonMargin{
+//       margin-top: 6px;
+// }

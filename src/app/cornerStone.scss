@@ -198,6 +198,12 @@ ion-toolbar{
 }
 
 
-.list-md .item-block .item-inner {
-    border-bottom:none;
+// .list-md .item-block .item-inner {
+//     border-bottom:none;
+// }
+
+.csParagraph{
+  margin-top:10px !important;
+  font-size:13px;
+  white-space: pre-line;
 }

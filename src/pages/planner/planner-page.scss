@@ -29,7 +29,6 @@
      float: left;
 }
  .cal-month-view .cal-header {
-     color:white;
      text-align: center;
      font-weight: bold;
 }
@@ -109,9 +108,7 @@
      border-radius: 10px;
      font-family: dk crayon crumble;
 }
- .cal-month-view .cal-day-number {
-     color:white !important ;
-}
+
  .cal-month-view .cal-events {
      -webkit-box-flex: 1;
      -webkit-flex: 1;
@@ -150,7 +147,7 @@
      color: darkred;
 }
  .cal-month-view .cal-day-cell.cal-today {
-    box-shadow: 0px 0px 11px black;
+    box-shadow: 0px 1px 1px grey;
     border-bottom: #00bcd4 solid 3px;   
 }
  .cal-month-view .cal-day-cell.cal-today .cal-day-number {
@@ -168,9 +165,7 @@
      position: relative;
      top: 2px;
 }
- .cal-month-view .cal-event-title {
-     color: white;
-}
+
  .cal-month-view .cal-out-month .cal-day-badge, .cal-month-view .cal-out-month .cal-event {
      opacity: 0.3;
 }
@@ -187,12 +182,12 @@
      margin-right: 2px;
 }
  .cal-week-view .cal-day-headers .cal-header {
+         padding: 10px 0px 10px 0px;
      -webkit-box-flex: 1;
      -webkit-flex: 1;
      -ms-flex: 1;
      flex: 1;
      text-align: center;
-     padding: 5px;
 }
  .cal-week-view .cal-day-headers .cal-header:not(:last-child) {
      border-right: 3px solid rgba(225, 225, 225, 0.16);
@@ -281,38 +276,38 @@ $csBorderColor: #ffd180;
 $csChalkGreen:  rgb(158, 255, 158);
 
  .planner{
+     @extend .csGrayBackground;
+     padding:0px;
      .csPlannerIcon{
          font-size: 30px !important;
     }
      .csMonth{
          @extend .csCenter;
+        padding: 15px;
          font:{
              weight:bold;
              size:20px;
         }
     }
      .csCalMonth{
-         background-size: cover;
+         ion-row{
+             padding:0px;
+         }
+         ion-col{
+             padding:0px;
+         }
+         padding: 0px;
+        background-size: cover;
          background-repeat: no-repeat;
-         margin-top: 5%;
-         background-image: csBackgroundSvg('dashStrip.svg');
-
+         background:$color1;
+         color:white;
+        //   background-image: csBackgroundSvg('dashStrip.svg');
          ion-icon{
-             font-size:2.5em;
-                 color: #794c10;
+             font-size:2.0em;
+                 color:white;
          }
     }
-     .csChalkText{
-         letter-spacing: 3px;
-         color: #794c10;
-         margin-top: 10px;
-    }
-     .csCalBoard{
-         background-image: csBackgroundSvg('calBoardBackground.svg');
-         background-size:cover;
-         background-repeat:no-repeat;
-         background-position: center center;
-    }
+
      .leftArrow{
          background-repeat: no-repeat;
          background-image: csBackgroundSvg('leftArrow.svg');
@@ -322,18 +317,8 @@ $csChalkGreen:  rgb(158, 255, 158);
          background-image: csBackgroundSvg('rightArrow.svg');
     }
     ion-card{
-         border: #ffd180 solid 8px;
-         background-image: csBackgroundSvg('calBoardBackground.svg');
-         background-size:cover;
-         color:white;
          h1{
            color:$color0;
-         }
-         h5{
-           color:$csChalkGreen;
-         }
-        h2{
-           color:white;
          }
          .calRight{
            float:right !important;
@@ -343,28 +328,23 @@ $csChalkGreen:  rgb(158, 255, 158);
            font-weight: bold;
          }
     }
-     background-image: csBackgroundSvg('gBoard.svg');
-}
-
-
- @font-face{
-     font-family: dk crayon crumble;
-     src: url('../assets/fonts/chalk.ttf') format('ttf');
-}
- @font-face{
-     font-family: kg happy;
-     src: url('../assets/fonts/kghappy.ttf') format('ttf');
-}
- @font-face{
-     font-family: colored crayons;
-     src: url('../assets/fonts/cc.ttf') format('ttf');
+    .csCalDays{
+        background:white;
+    }
+    ion-list{
+        ion-item{
+                border-bottom: 1px solid #e3e3e3;
+                font-size:15px;
+        }
+        ion-item [item-left]{
+           font-weight: bold;
+        }
+    }
 }
 
  .cal-month-view .cal-days {
      border: 3px solid rgba(225, 225, 225, 0.16);
-    ;
      border-bottom: 0;
-     color: white;
      font-weight: bold !important;
      font-size: 17px;
 }
@@ -377,7 +357,7 @@ $csChalkGreen:  rgb(158, 255, 158);
   .cal-month-view .cal-cell-row .cal-cell:hover,
 .cal-month-view .cal-cell.cal-has-events.cal-open {
     border-bottom: solid #fae904;
-    box-shadow: 0px 0px 20px black;
+    box-shadow: 0px 1px 1px grey;
   }
 
   .details{

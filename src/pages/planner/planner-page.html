@@ -1,10 +1,9 @@
-<ion-header class="planner">
+<ion-header>
   <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title icon-left item-right>
-      <ion-icon name="calendar"> </ion-icon>Calendar</ion-title>
+    <ion-title icon-left item-right>Calendar</ion-title>
     <ion-buttons end>
       <button ion-button clear end (click)="CalendarTimeline()">
         <ion-icon name="md-clock" class="csPlannerIcon"></ion-icon>
@@ -12,8 +11,8 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-<ion-content class="planner">
+<ion-content class="csGrayBackground">
+<ion-card class="planner" padding>
   <ion-grid class="csCalMonth">
     <ion-row>
       <ion-col width-20 class="csCalNavigation">
@@ -27,8 +26,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div [ngSwitch]="view" text-center>
-    <div class="csCalBoard">
+  <div [ngSwitch]="view" text-center class="csCalDays">
+    <div>
       <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events2" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
         (dayClicked)="dayClicked($event.day)">
       </mwl-calendar-month-view>
@@ -36,4 +35,5 @@
   </div>
   <div class="row text-center">
   </div>
+</ion-card>
 </ion-content>

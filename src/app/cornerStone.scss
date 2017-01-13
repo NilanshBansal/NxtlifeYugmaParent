@@ -59,8 +59,8 @@ Date:    21/12/2016
 }
 
 .csCardHeader{
-  background: csBackgroundSvg('dashStrip.svg');
-  color:#fff;
+  background: $csStripColor;
+  color:#000;
 }
 
 ion-toolbar{

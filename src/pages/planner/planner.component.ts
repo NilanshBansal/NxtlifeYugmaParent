@@ -40,27 +40,27 @@ import {Events} from 'ionic-angular';
 
 const colors: any = {
   red: {
-    primary: '#ad2121',
+    primary: '#F44336',
     secondary: '#FAE3E3'
   },
   blue: {
-    primary: '#a2d1ff',
+    primary: '#2196F3',
     secondary: '#D1E8FF'
   },
   yellow: {
-    primary: '#fefe7a',
+    primary: '#FFEB3B',
     secondary: '#FDF1BA'
   },
   orange:{
-  	primary: '#e34ddd',
+  	primary: '#FF9800',
   	secondary: '#FD2A3E'
   },
   green:{
-    primary: 'lime',
+    primary: '#4CAF50',
     secondary: '#228B22  '
   },
   purple:{
-    primary: '#e34dde',
+    primary: '#9C27B0',
     secondary: '#F454e3'
   }
 };

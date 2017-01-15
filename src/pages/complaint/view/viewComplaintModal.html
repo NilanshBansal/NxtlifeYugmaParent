@@ -42,7 +42,7 @@
           </span>
         <br>
         <span style="color:black">
-            {{complaint.createdAt | date}}
+            {{complaint.createdAt  | amDateFormat: 'LL'}}
           </span>
       </ion-note>
       <ion-note item-right *ngIf="complaint.closedOn">
@@ -51,7 +51,7 @@
           </span>
         <br>
         <span style="color:black">
-          {{complaint.closedOn | date}}
+          {{complaint.closedOn  | amDateFormat: 'LL'}}
           </span>
       </ion-note>
     </ion-item>
@@ -62,7 +62,7 @@
         <ion-icon name="body" [style.color]="complaint.statusColor"></ion-icon>
         <span [style.color]="complaint.statusColor" class="csBoldFont">Created at</span>
         <span item-right icon-left>
-          <h5>{{complaint.createdAt | date}}</h5>
+          <h5>{{complaint.createdAt  | amDateFormat: 'LL'}}</h5>
         </span>
       </ion-item>
       <ion-item *ngIf="complaint.anonymous" class="csTransparent csBottom-card">

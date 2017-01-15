@@ -33,6 +33,7 @@ import { CommentComplaintModal } from '../pages/complaint/comment/comment.modal'
 import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 
 // import custom component
+import { ViewComponent } from '../customComponent/view/view.component';
 import { ListView } from '../customComponent/list/listview.component';
 import { ListViewCloseButton } from '../customComponent/list/listview.closebtn.component.ts';
 import { ListViewCommentButton } from '../customComponent/list/listview.commentbtn.component.ts';
@@ -84,7 +85,8 @@ import { PollService } from '../service/poll.service';
     EventModalPage,
     CalendarTimelinePage,
     NewAppreciationModal,
-    StudentRating
+    StudentRating,
+    ViewComponent
   ],
   imports: [
     MomentModule,
@@ -123,7 +125,8 @@ import { PollService } from '../service/poll.service';
     EventModalPage,
     CalendarTimelinePage,
     NewAppreciationModal,
-    StudentRating
+    StudentRating,
+    ViewComponent
   ],
   providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })

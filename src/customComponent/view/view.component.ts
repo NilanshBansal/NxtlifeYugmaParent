@@ -1,4 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { ListViewCloseButton } from '../list/listview.closebtn.component';
+
+import { ModalController, AlertController, ActionSheetController } from 'ionic-angular';
+
+// import service
+import { CustomService } from '../../service/customService';
+import { ComplaintSuggestion } from '../../service/cs.service';
 
 @Component({
   selector: 'nl-view',
@@ -116,17 +123,47 @@ import { Component, Input } from '@angular/core';
             <h5>{{complaint.priorityName}}</h5>
           </span>
         </ion-item>
+        <ion-row>
+          <ion-col>
+            <button (click)="openReopenModal(complaint)" *ngIf="complaint.statusId === 4" ion-button icon-left clear small>
+              <ion-icon name="ios-thumbs-down"></ion-icon>
+              <div>Reopen</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button (click)="openSatisfiedModal(complaint)" *ngIf="complaint.statusId === 4" ion-button icon-left clear small>
+              <ion-icon name="ios-thumbs-up"></ion-icon>
+              <div>Satisfied</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button (click)="openCommentModal(complaint)" ion-button icon-left clear small>
+              <ion-icon name="md-chatbubbles"></ion-icon>
+              <div>Comments</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button (click)="openCloseModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button icon-left clear small>
+            <ion-icon name="md-close"></ion-icon>
+            <div>Close</div>
+          </button>
+          </ion-col>
+        </ion-row>
       </ion-card>
     </ion-list>
   `
 })
 
-export class ViewComponent {
+export class ViewComponent extends ListViewCloseButton {
 
   @Input() complaint: string;
 
-  constructor() {
-
+  constructor(public modalCtrl: ModalController,
+              public nl: CustomService,
+              public c: ComplaintSuggestion,
+              public actionSheetCtrl: ActionSheetController,
+              public alertCtrl: AlertController) {
+    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
   }
 
 }

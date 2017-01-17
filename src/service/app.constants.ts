@@ -33,7 +33,7 @@ export class Configuration {
     }
   }
 
-  public Server: string = "https://yugmasrgstesting.appspot.com";
+  public Server: string = "https://yugmasrgstesting.appspot.com/";
 
   public ComplaintUrl(): string {
     return this.Server + "/parent/" + this.getParentId() + "/";

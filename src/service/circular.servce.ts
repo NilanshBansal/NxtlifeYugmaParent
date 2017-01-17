@@ -24,5 +24,10 @@ export class CircularService {
                 }
 
 
+    getAllCirculars(){
+       return this.http.get('https://yugmasrgstesting.appspot.com/parent/3752234690/circular/',this.options)
+       .map((res:Response) => res.json())
+
+    }
 
 }

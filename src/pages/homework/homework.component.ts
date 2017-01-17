@@ -23,7 +23,7 @@ export class HomeworkComponent implements OnInit{
 
 
     ngOnInit():void{
-
+        this.getAllHomework();
     }
 
 }

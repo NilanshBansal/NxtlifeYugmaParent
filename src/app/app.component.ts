@@ -52,8 +52,8 @@ export class MyApp {
       { title: 'Planner',component: PlannerComponent , icon: 'md-calendar', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },
       { title: 'Survey', component: SurveyPage, icon: 'ios-analytics-outline', url: 'survey' },
-      { title : 'Homework' , component : HomeworkComponent , icon : 'ios-analytics-outline' , url : 'homework'},
-      { title: 'Circular',component : CircularComponent , icon : 'ios-analytics-outline' , url : 'circular'},
+      { title : 'Homework' , component : HomeworkComponent , icon : 'md-book' , url : 'homework'},
+      { title: 'Circular',component : CircularComponent , icon : 'md-disc' , url : 'circular'},
       { title: 'Student Rating', component: StudentRating, icon: 'ios-pulse-outline', url: 'student-profile' },
     ];
 

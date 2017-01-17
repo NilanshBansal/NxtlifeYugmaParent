@@ -25,6 +25,7 @@ import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestio
 import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 import { StudentRating } from '../pages/rating/rating';
 import { HomeworkComponent } from '../pages/homework/homework.component';
+import { CircularComponent } from '../pages/circular/circular.component';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -53,6 +54,7 @@ import { CustomService } from '../service/customService';
 import { EventService } from '../service/planner.service';
 import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';
+import { CircularService } from '../service/circular.servce';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { HomeworkService } from '../service/homework.service';
     NewAppreciationModal,
     StudentRating,
     HomeworkComponent,
+    CircularComponent
     
   ],
   imports: [
@@ -127,8 +130,9 @@ import { HomeworkService } from '../service/homework.service';
     CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
-    HomeworkComponent
+    HomeworkComponent,
+    CircularComponent
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
+  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })
 export class AppModule {}

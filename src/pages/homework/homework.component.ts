@@ -18,7 +18,7 @@ export class HomeworkComponent implements OnInit{
         this.homeserv.getHomeworks()
         .subscribe( response => { this.homeworks =  response},
                                 () => console.log('homeworks',this.homeworks)
-                                )
+                    )
     }
 
 

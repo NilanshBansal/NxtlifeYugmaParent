@@ -14,6 +14,7 @@ import { PlannerComponent } from '../pages/planner/planner.component';
 import { StudentRating } from '../pages/rating/rating';
 import { AccountPage } from '../pages/account/account';
 import { HomeworkComponent } from '../pages/homework/homework.component';
+import { CircularComponent } from '../pages/circular/circular.component';
 
 // import service
 import { AuthService } from '../service/auth.service';
@@ -52,6 +53,7 @@ export class MyApp {
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },
       { title: 'Survey', component: SurveyPage, icon: 'ios-analytics-outline', url: 'survey' },
       { title : 'Homework' , component : HomeworkComponent , icon : 'ios-analytics-outline' , url : 'homework'},
+      { title: 'Circular',component : CircularComponent , icon : 'ios-analytics-outline' , url : 'circular'},
       { title: 'Student Rating', component: StudentRating, icon: 'ios-pulse-outline', url: 'student-profile' },
     ];
 

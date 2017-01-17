@@ -52,6 +52,7 @@ import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/customService';
 import { EventService } from '../service/planner.service';
 import { PollService } from '../service/poll.service';
+import { HomeworkService } from '../service/homework.service';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { PollService } from '../service/poll.service';
     CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
-    HomeworkComponent
+    HomeworkComponent,
+    
   ],
   imports: [
     MomentModule,
@@ -127,6 +129,6 @@ import { PollService } from '../service/poll.service';
     StudentRating,
     HomeworkComponent
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
+  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })
 export class AppModule {}

@@ -24,7 +24,7 @@ import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestion';
 import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 import { StudentRating } from '../pages/rating/rating';
-
+import { HomeworkComponent } from '../pages/homework/homework.component';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -84,7 +84,8 @@ import { PollService } from '../service/poll.service';
     EventModalPage,
     CalendarTimelinePage,
     NewAppreciationModal,
-    StudentRating
+    StudentRating,
+    HomeworkComponent
   ],
   imports: [
     MomentModule,
@@ -123,7 +124,8 @@ import { PollService } from '../service/poll.service';
     EventModalPage,
     CalendarTimelinePage,
     NewAppreciationModal,
-    StudentRating
+    StudentRating,
+    HomeworkComponent
   ],
   providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })

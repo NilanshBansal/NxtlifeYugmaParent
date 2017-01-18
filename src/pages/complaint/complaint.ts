@@ -50,6 +50,7 @@ export class ComplaintPage implements OnInit {
     this.c.getComplaints(this.currentPage).subscribe((complaints) => {
       if (complaints.status === 204) {
         this.EmptyComplaints = true;
+        console.log('204',complaints)
       } else {
         this.EmptyComplaints = false;
         console.log("DSADSADSA", complaints)

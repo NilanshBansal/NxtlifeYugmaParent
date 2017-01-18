@@ -25,6 +25,7 @@ import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestio
 import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 import { StudentRating } from '../pages/rating/rating';
 
+
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
 import { viewComplaintModal } from '../pages/complaint/view/viewComplaintModal';
@@ -50,6 +51,7 @@ import { ParentInfo } from '../service/parentInfo';
 import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/customService';
 import { EventService } from '../service/planner.service';
+import { PollService } from '../service/poll.service';
 
 @NgModule({
   declarations: [
@@ -123,6 +125,6 @@ import { EventService } from '../service/planner.service';
     NewAppreciationModal,
     StudentRating
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
+  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })
 export class AppModule {}

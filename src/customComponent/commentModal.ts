@@ -9,7 +9,7 @@ import { CustomService } from '../service/customService';
 @Component({
   selector: 'comment',
   template: `
-    <ion-content class="csChatBox" id="chat" class="chat" >
+    <ion-content id="chat" class="csChatBox" >
       <ion-list *ngIf="emptyComments">
         <h3>No Comments</h3>
       </ion-list>
@@ -23,14 +23,20 @@ import { CustomService } from '../service/customService';
     </ion-content>
 
     <ion-footer keyboard-attach class="bar-stable" #commentBtn>
-      <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postComment()" novalidate>
-        <ion-item >
-          <ion-textarea rows="1" type="text" formControlName="comment" placeholder=" Write comment..."></ion-textarea>
-          <button clear color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid">
+    <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postComment()" novalidate>
+<ion-grid>
+  <ion-row>
+    <ion-col width-80>
+      <ion-textarea rows="2" class="csCommentInput" type="text" formControlName="comment" placeholder=" Write comment..."></ion-textarea>
+    </ion-col>
+    <ion-col>
+         <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid">
             <ion-icon name="md-send" role="img"></ion-icon>
-          </button>
-        </ion-item>
-      </form>
+          </button>      
+    </ion-col>    
+  </ion-row>
+</ion-grid>
+ </form>
     </ion-footer>
   `
 })

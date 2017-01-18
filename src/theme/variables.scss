@@ -30,7 +30,8 @@ $colors: (
   header:     #387ef5,
   color1:     #00bcd4,
   colorLight: #80deea,
-  transparent: rgba(0, 0, 0, 0)
+  transparent: rgba(0, 0, 0, 0),
+  csStripColor:#797d80
 );
 
 $color0 :       #fd4544;
@@ -42,6 +43,9 @@ $csGreen:       #47c947;
 $csGray:        #818181;
 $csDark:          #000; 
 $csBorder:        #ffd180;
+$csBackgroundColor: #f0f0f0;
+$csStripColor:#f8f8f8;
+$csDarkStrip:#dedede;
 
 $csTransparentWhite: rgba(255, 255, 255, 0.66);
 

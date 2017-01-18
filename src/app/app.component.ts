@@ -29,7 +29,8 @@ export class MyApp {
 
   public rootPage: any;
   name: string;
-
+  selectedPage:string; 
+  
   pages: Array<{title: string, component: any, icon: any, url: string}>;
   account: Array<{title: string, component: any, icon: any}>;
 
@@ -86,10 +87,11 @@ export class MyApp {
   loadUser() {
     this.name = localStorage.getItem("name");
   }
-
+  
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
+    this.selectedPage = page.title;
     this.configuration.setUrl(page.url);
     this.nav.setRoot(page.component);
   }

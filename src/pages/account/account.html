@@ -16,7 +16,7 @@
   <div class="csProfileCard">
     <ion-card>
       <ion-card-header class="csCardHeader">
-        Profile
+        
       </ion-card-header>
       <ion-list class="csCardBorder">
         <ion-item>
@@ -49,26 +49,25 @@
         <ion-item-divider>
           Students
         </ion-item-divider>
-        <ion-item>
-          <ion-grid class="student-header">
-            <ion-row>
-              <ion-col width-20></ion-col>
-              <ion-col width-20 item-left><h2 color="primary">Name</h2></ion-col>
-              <ion-col width-20 item-right><h2 color="primary">Class</h2></ion-col>
-              <ion-col width-20 item-right><h2 color="primary">Class Teacher</h2></ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-        <ion-item  *ngFor="let a of students" icon-left item-right>
-          <ion-icon name="school" color="primary" item-left></ion-icon>
-          <ion-grid>
-            <ion-row>
-              <ion-col width-40><b>{{a.name}}</b></ion-col>
-              <ion-col width-30><b>{{a.standardName}}</b></ion-col>
-              <ion-col><b>{{a.classTeacher}}</b></ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
+        <ion-list padding>
+          <ion-item padding>
+            <span item-left class="csFontColor1" >
+              Name
+            </span>
+            <span item-right class="csFontColor1" >
+              Class
+            </span>
+          </ion-item>
+          <ion-item *ngFor="let a of students" padding>
+            
+            <span item-left>
+              {{a.name}}
+            </span>
+            <span item-right>
+              {{a.standardId}}
+            </span>
+          </ion-item>          
+        </ion-list>
       </ion-list>
     </ion-card>
     <button ion-button icon-left color="color1" full type="button" (click)="logoutActionSheet()">

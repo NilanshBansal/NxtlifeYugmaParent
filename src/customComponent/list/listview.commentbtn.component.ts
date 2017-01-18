@@ -7,7 +7,7 @@ import { Events } from 'ionic-angular';
   template: `
     <div style="height:100%;">
       <button ion-button color="cool" (click)="openCommentModal(complaint)">
-        <ion-icon name="ios-chatbubbles-outline"></ion-icon>
+        <ion-icon name="ios-chatbubbles"></ion-icon>
         Comments
       </button>
     </div>

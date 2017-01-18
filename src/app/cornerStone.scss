@@ -59,8 +59,8 @@ Date:    21/12/2016
 }
 
 .csCardHeader{
-  background: csBackgroundSvg('dashStrip.svg');
-  color:#fff;
+  background: $csStripColor;
+  color:#000;
 }
 
 ion-toolbar{
@@ -191,4 +191,19 @@ ion-toolbar{
 .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
     color: white;
     background-color: transparent;
+}
+
+.csGrayBackground{
+  background:$csBackgroundColor;
+}
+
+
+// .list-md .item-block .item-inner {
+//     border-bottom:none;
+// }
+
+.csParagraph{
+  margin-top:10px !important;
+  font-size:13px;
+  white-space: pre-line;
 }

@@ -1,11 +1,15 @@
+.csChatBox{
+  background:$csBackgroundColor;
+}
+
 .csMyCommentBox{
-  box-shadow:1px 5px 8px rgba(0, 0, 0, 0.39);
+  box-shadow: 0px 2px 2px rgba(71, 71, 71, 0.39);
   display: inline-block;
   margin-top: 13px;
   border-radius: 0px 10px 0px 10px;
   padding: 0px 10px 0px 10px;
   margin-bottom: 5px;
-  height: 35px;
+  // height: 35px;
   margin-right: 5px;
   h3{
     margin-top: 7px;
@@ -14,7 +18,7 @@
 }
 
 .message-box:first-child{
-  margin-top:10% !important;
+  margin-top:15% !important;
 }
 
 .message-box.mine{
@@ -26,7 +30,7 @@
     background: #beffbb;  
   }
   .csCommentTime{
-    color: white;
+    color: #676666;
     font-size: 10px;
     margin-top: 52px;
     right:6px;
@@ -44,7 +48,28 @@
 
 
 .csCommentTime{
-      color: lightgrey;
+      color: #676666;
     font-size: 10px;
-    margin-left: 5%;
+    margin-left: 2%;
+}
+
+.item-ios h3, .item-wp h3, .item-md h3{
+  font-size:1.2rem;
+}
+
+.csCommentInput{
+  padding-left: 15px;
+  background:white;
+  border-radius: 35px 0px 35px 35px;
+  display: -webkit-box;
+      box-shadow: 0px 0px 1px grey;
+}
+
+.csCommentSend{
+  border-radius:100%;
+      width: 70% !important;
+      margin-top:5px;
+      ion-icon{
+        margin-left: 8px;
+      }
 }

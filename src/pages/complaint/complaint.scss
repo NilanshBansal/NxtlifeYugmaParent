@@ -1,3 +1,5 @@
+$csBoardColor:#3f3f3f;
+
 ion-note{
   ion-icon {
     margin-right: 3px;
@@ -9,11 +11,11 @@ ion-note{
   font-size: $font-sm;
   align-self: flex-start;
 }
+
 .complaint-list {
-  @extend .csMainBackground;
+  background:$csBackgroundColor;
   ion-item-sliding {
     h3 {
-      // line-height: 20px;
       text-overflow: ellipsis;
       overflow: hidden;
     }
@@ -23,7 +25,7 @@ ion-note{
         .input-wrapper{
           border-left-color:$inherit;
           ion-label{
-            border-left: 3px groove;
+            border-left: 3px solid;
             border-left-color:$inherit;
             padding: 0px 5px 0px 10px;
           }
@@ -32,12 +34,14 @@ ion-note{
     }
     nl-edit-button,
     nl-comment-button,
-    nl-close-button {
+    nl-close-button, nl-reopen-button, nl-satisfied-button {
       height: 100%;
     }
   }
 }
+
 .view-complaint {
+  background:$csBackgroundColor;
   ion-card {
     ion-item {
       h2 {
@@ -72,75 +76,39 @@ ion-note{
   padding-bottom: 6px;
 }
 
-.new-complaint{
-  .complaint-item{
-    hr{
-      border-top: 1px solid #387ef5;
-    }
-    span{
-      color:#387ef5;
-    }
-  }
-
-  ion-item{
-    .item-inner{
-      border-bottom: 0.55px solid #c8c7cc !important;
-    }
-    ion-badge{
-      float: right;
-      color: #c8c7cc;
-      // background-color: whitesmoke;
-    }
-  }
-  ion-item-divider{
-    background-color:$inherit;
-    color: #387ef5;
-    font-weight: 700;
-    span{
-      float: right;
-    }
-  }
-}
-.fixed-content{
-  @extend .csMainBackground;
-  padding-bottom:20% !important;
-}
-.csBordering{
-    border-top: solid 3px $csBorder;
-  border-bottom: solid 3px $csBorder;
-}
-
-.csListBoard{
-  @extend .csFillBackground;
-  @extend .csBordering;
-  background-size: cover !important;
-  background: csBackgroundSvg('calBoardBackground.svg');
-  h3{
-    color:white;
-  }
-  .no-padding-l{
-    color:white;
-  }
-}
-  .list-ios ion-item-sliding {
-    background:$csBorder;
+  .list-ios ion-item-sliding, .list-md ion-item-sliding, .list-wp ion-item-sliding {
       margin-top: 5px;
-  margin-bottom:10px;
+      box-shadow: 0px 0px 1px #bbbbbb;
   }
 
-  .list-ios ion-item-options{
-    @extend .csBordering;
-  }
 
 .item-ios,.item-wp, .item-md{
   h2 {
     margin: 0 0 2px;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     font-weight: normal;
-    color:white;
-}
+    color:$csBoardColor;
+  }
 } 
 .new-complaint ion-item ion-badge {
     float: right;
-    color: white;
+}
+
+.csInput-title{
+  width:95%;
+}
+.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input {
+    letter-spacing: 0.5px !important;
+}
+
+.csFiftyLimit{
+  float:right;
+  margin-top:-22px;
+  margin-right:5px;
+}
+
+div{
+  .csSlideClose{
+    background-color:$color0;
+  }
 }

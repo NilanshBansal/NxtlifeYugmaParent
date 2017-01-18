@@ -80,9 +80,9 @@ export class LoginPage implements OnInit {
 
       loader.present();
       this.authService.verifyOtp(this.loginForm.value.mobileNo, this.loginVerifyForm.value.otp)
-      .then(user => { loader.dismiss(); })
       .then(user => {
         this.authService.getParentInfo().then(res => {
+          loader.dismiss();
           console.log("get parent Info", res)
           this.authService.storeParentData(res.json());
           this.navCtrl.setRoot(Dashboard);

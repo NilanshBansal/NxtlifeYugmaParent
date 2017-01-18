@@ -21,13 +21,23 @@ export class CircularService {
                   this.options = new RequestOptions({
                     headers : this.headers
                   });
-                }
+    }
 
 
     getAllCirculars(){
-       return this.http.get('https://yugmasrgstesting.appspot.com/parent/3752234690/circular/',this.options)
-       .map((res:Response) => res.json())
-
+       this.serverUrl = this.configuration.Server;
+       console.log('serverUrl',this.serverUrl);
+       return this.http.get(this.serverUrl ,this.options)
+       .map((res:Response) => res.json() )
     }
 
+
+    getParticularCirculars(id){
+      this.serverUrl = this.configuration.Server;
+      return this.http.get(this.serverUrl +'/'+ id , this.options)
+      .map((res : Response) => res.json())
+    }
 }
+
+// 'https://yugmasrgstesting.appspot.com/parent/864867303/circular/'
+// console.log('circulars',res.json()); }

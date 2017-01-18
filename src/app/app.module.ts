@@ -26,6 +26,7 @@ import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 import { StudentRating } from '../pages/rating/rating';
 import { HomeworkComponent } from '../pages/homework/homework.component';
 import { CircularComponent } from '../pages/circular/circular.component';
+import { CircularViewComponent } from '../pages/circular/view/circular-view';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -89,7 +90,8 @@ import { CircularService } from '../service/circular.servce';
     NewAppreciationModal,
     StudentRating,
     HomeworkComponent,
-    CircularComponent
+    CircularComponent,
+    CircularViewComponent
     
   ],
   imports: [
@@ -131,7 +133,8 @@ import { CircularService } from '../service/circular.servce';
     NewAppreciationModal,
     StudentRating,
     HomeworkComponent,
-    CircularComponent
+    CircularComponent,
+    CircularViewComponent
   ],
   providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })

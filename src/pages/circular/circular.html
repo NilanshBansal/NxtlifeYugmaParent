@@ -1,17 +1,20 @@
 <ion-header>
-    <nl-navbar [title]="title"></nl-navbar> 
+    <nl-navbar [title]="title"></nl-navbar>
+     
 </ion-header>
 
-<ion-content>
+<ion-content padding>
     
-
-    <ion-list *ngFor="let a of circulars" >
-        <ion-item >
-            <h3> {{ a.title }} </h3>
-            <h3> {{ a.description }} </h3>
-            <h3> {{ a.date }} </h3>
-            <h3> {{ a.standardIds}} </h3>
-            <h3> {{ a.circularTypeID }} </h3>
+    <ion-list *ngFor="let a of circulars">
+       
+        <ion-item *ngFor="let b of a.dayCirculars">
+            <h3> {{ b.title }} </h3>
+           
+            <h3> {{ a.fullDate }} </h3>
+            <h3> {{ b.circularTypeColor }} </h3>
+            <h3> {{ b.circularTypeName }} </h3>
+            <button ion-button (click)="ranFunc(b.id)">click!!</button>
         </ion-item>
+  
     </ion-list>
 </ion-content>

@@ -137,6 +137,10 @@ export class newComplaintModal implements OnInit {
             this.c.saveComplaint(newComplaint).subscribe((complaint) => {
               this.nl.hideLoader();
               this.viewCtrl.dismiss(complaint.json());
+            }, (err) => {
+              this.nl.hideLoader();
+              this.viewCtrl.dismiss();
+              this.nl.errMessage();
             });
           }
         },{

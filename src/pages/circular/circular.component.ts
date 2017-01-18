@@ -12,7 +12,8 @@ import { CircularService } from './../../service/circular.servce';
 export class CircularComponent implements OnInit{
 
     public circulars = [];
-
+    title : string = "Circular";
+     
     constructor(private circserv : CircularService ){}
 
 

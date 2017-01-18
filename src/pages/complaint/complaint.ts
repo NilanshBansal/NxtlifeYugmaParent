@@ -18,7 +18,7 @@ import { ComplaintSuggestion } from '../../service/cs.service';
 
 export class ComplaintPage implements OnInit {
 
-  complaints;
+  complaints = [];
   EmptyComplaints = false;
   currentPage: number = 1;
 
@@ -90,7 +90,7 @@ export class ComplaintPage implements OnInit {
     let complaintModal = this.modalCtrl.create(newComplaintModal);
     complaintModal.onDidDismiss(newComplaint => {
       if (!newComplaint) { return; }
-      if (this.complaints.length != 0) {
+      if (this.complaints && this.complaints.length != 0) {
         this.EmptyComplaints = false;
         this.complaints.unshift(newComplaint);
       } else {

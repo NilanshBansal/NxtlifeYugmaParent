@@ -77,7 +77,7 @@ export class ComplaintPage {
     viewComplaint.present();
   }
 
-  loadMoreComplaints(infiniteScroll) {
+  doInfinite(infiniteScroll) {
     this.currentPage += 1;
     setTimeout(() => {
       this.c.getComplaints(this.currentPage).subscribe(response => {
@@ -96,7 +96,7 @@ export class ComplaintPage {
     }, 1000);
   }
 
-  loadNewComplaints(refresher) {
+  doRefresh(refresher) {
     this.currentPage = 1;
     setTimeout(() => {
       this.c.getComplaints(this.currentPage).subscribe(response => {

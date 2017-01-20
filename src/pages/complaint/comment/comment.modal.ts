@@ -12,7 +12,7 @@ import { ComplaintSuggestion } from '../../../service/cs.service';
 
 export class CommentComplaintModal {
   complaint;
-  title = "comment";
+  title = "COMPLAINT COMMENTS";
 
   constructor(private navParams: NavParams) {
     this.complaint = this.navParams.get('complaint');

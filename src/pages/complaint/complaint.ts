@@ -23,7 +23,7 @@ export class ComplaintPage implements OnInit {
   currentPage: number = 1;
 
   // set header title
-  title: string = "Complaints";
+  title: string = "COMPLAINTS";
 
   // used in event
   public master: string = "complaint";

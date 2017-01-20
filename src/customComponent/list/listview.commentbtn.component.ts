@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-
-import { Events } from 'ionic-angular';
+import { CommentComplaintModal } from '../../pages/complaint/comment/comment.modal';
+import { ModalController } from 'ionic-angular';
 
 @Component({
   selector: 'nl-comment-button',
@@ -19,10 +19,10 @@ export class ListViewCommentButton {
   @Input() complaint;
   @Input('master') masterName: string;
 
-  constructor(public events: Events) { }
+  constructor(public modalCtrl: ModalController) { }
 
   openCommentModal(complaint) {
-    console.log("DSADASD", this.masterName);
-    this.events.publish(this.masterName + ':comment', complaint);
+    let Comment = this.modalCtrl.create(CommentComplaintModal, {complaint: complaint});
+    Comment.present();
   }
 }

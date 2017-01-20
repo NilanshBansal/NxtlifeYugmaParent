@@ -66,15 +66,15 @@ export class ComplaintPage implements OnInit {
   // Respond after Angular projects external content into the component's view.
   // Called once after the first NgDoCheck
   ngAfterContentInit() {
-    this.events.subscribe('complaint:comment', (data) => {
-      this.openCommentModal(data[0]);
-    });
-    this.events.subscribe('complaint:close', (data) => {
-      this.openCloseModal(data[0]);
-    });
-    this.events.subscribe('complaint:reopen', (data) => {
-      this.openReopenModal(data[0]);
-    });
+    // this.events.subscribe('complaint:comment', (data) => {
+    //   this.openCommentModal(data[0]);
+    // });
+    // this.events.subscribe('complaint:close', (data) => {
+    //   this.openCloseModal(data[0]);
+    // });
+    // this.events.subscribe('complaint:reopen', (data) => {
+    //   this.openReopenModal(data[0]);
+    // });
     this.events.subscribe('complaint:satisfied', (data) => {
       this.openSatisfiedModal(data[0]);
     });
@@ -112,53 +112,53 @@ export class ComplaintPage implements OnInit {
     Comment.present();
   }
 
-  openCloseModal(complaint) {
-    let prompt = this.alertCtrl.create({
-      title: 'Do you really want to close ?',
-      message: "",
-      inputs: [{
-        name: 'comment',
-        placeholder: 'Write short description'
-      }],
-      buttons: [{
-        text: 'Cancel',
-        handler: data => {}
-      }, {
-        text: 'Save',
-        handler: data => {
-          this.closeActionSheet(complaint, data);
-        }
-      }]
-    });
-    prompt.present();
-  }
-
-  closeActionSheet(complaint, closeComplaintReason) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Are you sure you want to submit ?',
-      buttons: [{
-        text: 'Submit',
-        icon: 'ios-paper-outline',
-        handler: () => {
-          this.nl.showLoader();
-          this.c.closeComplaint(complaint.id, closeComplaintReason).subscribe(res => {
-            if (res) {
-              this.nl.hideLoader();
-              this.updateArray(complaint, res.json());
-            }
-          });
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'md-close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    actionSheet.present();
-  }
+  // openCloseModal(complaint) {
+  //   let prompt = this.alertCtrl.create({
+  //     title: 'Do you really want to close ?',
+  //     message: "",
+  //     inputs: [{
+  //       name: 'comment',
+  //       placeholder: 'Write short description'
+  //     }],
+  //     buttons: [{
+  //       text: 'Cancel',
+  //       handler: data => {}
+  //     }, {
+  //       text: 'Save',
+  //       handler: data => {
+  //         this.closeActionSheet(complaint, data);
+  //       }
+  //     }]
+  //   });
+  //   prompt.present();
+  // }
+  //
+  // closeActionSheet(complaint, closeComplaintReason) {
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     title: 'Are you sure you want to submit ?',
+  //     buttons: [{
+  //       text: 'Submit',
+  //       icon: 'ios-paper-outline',
+  //       handler: () => {
+  //         this.nl.showLoader();
+  //         this.c.closeComplaint(complaint.id, closeComplaintReason).subscribe(res => {
+  //           if (res) {
+  //             this.nl.hideLoader();
+  //             this.updateArray(complaint, res.json());
+  //           }
+  //         });
+  //       }
+  //     }, {
+  //       text: 'Cancel',
+  //       icon: 'md-close',
+  //       role: 'cancel',
+  //       handler: () => {
+  //         console.log('Cancel clicked');
+  //       }
+  //     }]
+  //   });
+  //   actionSheet.present();
+  // }
 
   loadMoreComplaints(infiniteScroll) {
     this.currentPage += 1;
@@ -240,53 +240,53 @@ export class ComplaintPage implements OnInit {
     actionSheet.present();
   }
 
-  openReopenModal(complaint): void {
-    let prompt = this.alertCtrl.create({
-      title: 'If you are not happy with the complaint resolution then reopen complaint',
-      message: "",
-      inputs: [{
-        name: 'comment',
-        placeholder: 'Write short description'
-      }],
-      buttons: [{
-        text: 'Cancel',
-        handler: data => {
-        }
-      }, {
-        text: 'Reopen!!',
-        handler: data => {
-          this.reopenActionSheet(complaint, data);
-        }
-      }]
-    });
-    prompt.present();
-  }
-
-  reopenActionSheet(complaint, data) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Are you sure you want to submit ?',
-      buttons: [{
-        text: 'Submit',
-        icon: 'ios-paper-outline',
-        handler: () => {
-          this.nl.showLoader();
-          this.c.reopenComplaint(complaint.id, data).subscribe(res => {
-            if (res) {
-              this.nl.hideLoader();
-              this.updateArray(complaint, res.json());
-            }
-          });
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'md-close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    actionSheet.present();
-  }
+  // openReopenModal(complaint): void {
+  //   let prompt = this.alertCtrl.create({
+  //     title: 'If you are not happy with the complaint resolution then reopen complaint',
+  //     message: "",
+  //     inputs: [{
+  //       name: 'comment',
+  //       placeholder: 'Write short description'
+  //     }],
+  //     buttons: [{
+  //       text: 'Cancel',
+  //       handler: data => {
+  //       }
+  //     }, {
+  //       text: 'Reopen!!',
+  //       handler: data => {
+  //         this.reopenActionSheet(complaint, data);
+  //       }
+  //     }]
+  //   });
+  //   prompt.present();
+  // }
+  //
+  // reopenActionSheet(complaint, data) {
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     title: 'Are you sure you want to submit ?',
+  //     buttons: [{
+  //       text: 'Submit',
+  //       icon: 'ios-paper-outline',
+  //       handler: () => {
+  //         this.nl.showLoader();
+  //         this.c.reopenComplaint(complaint.id, data).subscribe(res => {
+  //           if (res) {
+  //             this.nl.hideLoader();
+  //             this.updateArray(complaint, res.json());
+  //           }
+  //         });
+  //       }
+  //     }, {
+  //       text: 'Cancel',
+  //       icon: 'md-close',
+  //       role: 'cancel',
+  //       handler: () => {
+  //         console.log('Cancel clicked');
+  //       }
+  //     }]
+  //   });
+  //   actionSheet.present();
+  // }
 
 }

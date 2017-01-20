@@ -125,29 +125,5 @@
         </span>
       </ion-item>
     </ion-card>
-    <ion-card>
-      <ion-row>
-        <ion-col width-33>
-          <button (click)="openEditModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button icon-left
-            clear small>
-          <ion-icon name="md-create"></ion-icon>
-        <div>Edit</div>
-      </button>
-        </ion-col>
-        <ion-col width-33>
-          <button (click)="openCommentModal(complaint)" ion-button icon-left clear small>
-        <ion-icon name="md-chatbubbles"></ion-icon>
-        <div>Comment</div>
-      </button>
-        </ion-col>
-        <ion-col width-33>
-          <button class="csRight" (click)="openCloseModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button
-            icon-left clear small>
-        <ion-icon name="close-circle"></ion-icon>
-        <div>Close</div>
-      </button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
   </ion-list>
 </ion-content>

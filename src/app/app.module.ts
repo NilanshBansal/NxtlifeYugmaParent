@@ -37,9 +37,9 @@ import { ListView } from '../customComponent/list/listview.component';
 import { ListViewCloseButton,
          ListViewReopenButton,
          ListViewSatisfiedButton,
+         ListViewCommentButton,
          ViewComponent } from '../customComponent/list/listview.btn.component.ts';
-import { ListViewCommentButton } from '../customComponent/list/listview.commentbtn.component.ts';
-  import { CustomNavbar } from '../customComponent/navbar.component.ts';
+import { CustomNavbar } from '../customComponent/navbar.component.ts';
 import { ModalNavbarComponent } from '../customComponent/modal.navbar.component.ts';
 import { CommentModal } from '../customComponent/commentModal.ts';
 

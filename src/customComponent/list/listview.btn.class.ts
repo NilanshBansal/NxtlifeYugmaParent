@@ -1,4 +1,5 @@
 import { ModalController, AlertController, ActionSheetController } from 'ionic-angular';
+import { CommentComplaintModal } from '../../pages/complaint/comment/comment.modal';
 
 // import service
 import { CustomService } from '../../service/customService';
@@ -168,6 +169,11 @@ export class EditComplaintStatusAndComment {
       }]
     });
     actionSheet.present();
+  }
+
+  openCommentModal(complaint) {
+    let Comment = this.modalCtrl.create(CommentComplaintModal, {complaint: complaint});
+    Comment.present();
   }
 
 }

@@ -55,7 +55,6 @@ export class ListViewReopenButton extends EditComplaintStatusAndComment  {
               public c: ComplaintSuggestion,
               public actionSheetCtrl: ActionSheetController,
               public alertCtrl: AlertController) {
-
     super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
   }
 
@@ -74,6 +73,33 @@ export class ListViewReopenButton extends EditComplaintStatusAndComment  {
 })
 
 export class ListViewSatisfiedButton extends EditComplaintStatusAndComment {
+
+  @Input() complaint;
+  @Input('master') masterName: string;
+
+  constructor(public modalCtrl: ModalController,
+              public nl: CustomService,
+              public c: ComplaintSuggestion,
+              public actionSheetCtrl: ActionSheetController,
+              public alertCtrl: AlertController) {
+    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
+  }
+
+}
+
+@Component({
+  selector: 'nl-comment-button',
+  template: `
+    <div style="height:100%;">
+      <button ion-button color="cool" (click)="openCommentModal(complaint)">
+        <ion-icon name="ios-chatbubbles"></ion-icon>
+        Comments
+      </button>
+    </div>
+  `
+})
+
+export class ListViewCommentButton extends EditComplaintStatusAndComment {
 
   @Input() complaint;
   @Input('master') masterName: string;

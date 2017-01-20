@@ -33,11 +33,11 @@ import { CommentComplaintModal } from '../pages/complaint/comment/comment.modal'
 import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 
 // import custom component
-import { ViewComponent } from '../customComponent/view/view.component';
 import { ListView } from '../customComponent/list/listview.component';
 import { ListViewCloseButton,
          ListViewReopenButton,
-         ListViewSatisfiedButton } from '../customComponent/list/listview.btn.component.ts';
+         ListViewSatisfiedButton,
+         ViewComponent } from '../customComponent/list/listview.btn.component.ts';
 import { ListViewCommentButton } from '../customComponent/list/listview.commentbtn.component.ts';
   import { CustomNavbar } from '../customComponent/navbar.component.ts';
 import { ModalNavbarComponent } from '../customComponent/modal.navbar.component.ts';

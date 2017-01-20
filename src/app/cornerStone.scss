@@ -3,207 +3,178 @@ Title:   Corner Stone Theme
 Website: http://cornerstone.pk
 Date:    21/12/2016
 =================================> */
-.csBackground{
-  background:csBackgroundSvg('gBoard.svg');
+
+.csBackground {
+    background: csBackgroundSvg('gBoard.svg');
 }
-
-.setBottom{
-  position: absolute;
-  bottom: 5px;
+.setBottom {
+    position: absolute;
+    bottom: 5px;
 }
-
-.csCenter{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.csCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-.csBackground{
-  background-size: cover;
-  position: fixed;
-  background-repeat: no-repeat;
+.csBackground {
+    background-size: cover;
+    position: fixed;
+    background-repeat: no-repeat;
 }
-
-.csBorderWhite{
-  border: solid 1px white;
-  box-shadow: 0px 0px 8px #000000;
+.csBorderWhite {
+    border: solid 1px white;
+    box-shadow: 0px 0px 8px #000000;
 }
-
-.csFull{
-    width:100% !important;
+.csFull {
+    width: 100% !important;
 }
-
-.csFillBackground{
-  @extend .csFull;
-  height: 100%;
-  background-size:cover;
+.csFillBackground {
+    @extend .csFull;
+    height: 100%;
+    background-size: cover;
 }
-
-.csWhiteText{
-  color:white;
-}
-
- .csMainBackground{
-     @extend .csFillBackground;
-     @extend .csWhiteText;
-     background-image: csBackgroundSvg('gBoard.svg');
-}
-
-.csCircle{
-  border-radius: 100%;
-  border: 3px solid #fff;
-}
-
-.csBoxShadow{
-    box-shadow: 4px 4px 9px black;
-}
-
-.csCardHeader{
-  background: $csStripColor;
-  color:#000;
-}
-
-ion-toolbar{
-  div {
-    background-color:$color1 !important;
-  } 
-}
-
-.csClearButton{
-  font-style:italic;
-  color:$color1;
-}
-
-.csFontColor1{
-    color: $color1;
-}
-
-.csTransclusentButton{
-  @extend .csClearButton;
-  background-color: $csTransparentWhite;
-}
-
-.csInput{
-  color: darken( $color1, 5% )!important;
-  font:{
-    size: 20px;
-    weight: bold;
-  }
-}
-
-.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input{
-  letter-spacing: 3px !important;
-}
-
-.csInputIcon{
-  font-size: $csInputIconSize !important;
-  margin-bottom: -5px !important;
-}
-
-
-.csLoginLogo{
-  @extend .csCenter;
-  width: 30%;
-}
-
-.csWidth{
-  width:90%;
-}
-
-.csLoginScreen{
-  @extend .csBackground;
-  background-image: csBackgroundSvg('parent.svg');
-}
-
-.csTransparent{
-    background-color: rgba(255, 255, 255, 0) !important;
-}
-
-.csLoginBox{
-    background-color: rgba(255, 255, 255, 0.75) !important;
-}
-
-.csOtpBox{
-  @extend .csCenter;
-  background-color: rgba(255, 255, 255, 0.75) !important;
-  width: 55%;
-}
-
-.csButtonList{
-  @extend .csCenter;
-}
-
-.csbuttonIcon{
-  font-size:30px;
-}
-
-.marginTop{
-    margin-top: $csTop;
-}
-
-.csButtonList{
-  margin-top: $csTop+5;
-}
-
-.csButtonSet{
-  margin-top: $csTop+20;
-}
-
- .csGreenBoard{
-     border: #ffd180 solid 8px;
-     background-image: csBackgroundSvg('calBoardBackground.svg');
-     background-size:cover;
-     color:$color1;
-}
-
- .csTransparentForm{
-     @extend .csTransparent;
-     color:white;
-     padding-right: 15px;
-}
-
-/*-----------*/
-.csHeader{
-    background: $color1 !important;
-    color: #fff !important;
-    .toolbar-title-ios, .toolbar-title-md, .toolbar-title-wp,
-    .bar-button-default-wp, .bar-button-clear-wp-default, .bar-button-wp-default,
-    .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default,
-    .bar-button-default-ios, .bar-button-clear-ios-default, .bar-button-ios-default
-    {
-      color:white;
-    }
-}
-
-.toolbar-background-md{
-    background-color:$color1;
+.csWhiteText {
     color: white;
 }
+.csMainBackground {
+    @extend .csFillBackground;
+    @extend .csWhiteText;
+    background-image: csBackgroundSvg('gBoard.svg');
+}
+.csCircle {
+    border-radius: 100%;
+    border: 3px solid #fff;
+}
+.csBoxShadow {
+    box-shadow: 4px 4px 9px black;
+}
+.csCardHeader {
+    background: $csStripColor;
+    color: #000;
+}
+ion-toolbar {
+    div {
+        background-color: $color1 !important;
+    }
+}
+.csClearButton {
+    font-style: italic;
+    color: $color1;
+}
+.csFontColor1 {
+    color: $color1;
+}
+.csTransclusentButton {
+    @extend .csClearButton;
+    background-color: $csTransparentWhite;
+}
+.csInput {
+    color: darken( $color1, 5%)!important;
+    font: {
+        size: 20px;
+        weight: bold;
+    }
+}
+.item-ios.item-label-stacked .text-input,
+.item-ios.item-label-floating .text-input {
+    letter-spacing: 3px !important;
+}
+.csInputIcon {
+    font-size: $csInputIconSize !important;
+    margin-bottom: -5px !important;
+}
+.csLoginLogo {
+    @extend .csCenter;
+    width: 30%;
+}
+.csWidth {
+    width: 90%;
+}
+.csLoginScreen {
+    @extend .csBackground;
+    background-image: csBackgroundSvg('parent.svg');
+}
+.csTransparent {
+    background-color: rgba(255, 255, 255, 0) !important;
+}
+.csLoginBox {
+    background-color: rgba(255, 255, 255, 0.75) !important;
+}
+.csOtpBox {
+    @extend .csCenter;
+    background-color: rgba(255, 255, 255, 0.75) !important;
+    width: 55%;
+}
+.csButtonList {
+    @extend .csCenter;
+}
+.csbuttonIcon {
+    font-size: 30px;
+}
+.marginTop {
+    margin-top: $csTop;
+}
+.csButtonList {
+    margin-top: $csTop+5;
+}
+.csButtonSet {
+    margin-top: $csTop+20;
+}
+.csGreenBoard {
+    border: #ffd180 solid 8px;
+    background-image: csBackgroundSvg('calBoardBackground.svg');
+    background-size: cover;
+    color: $color1;
+}
+.csTransparentForm {
+    @extend .csTransparent;
+    color: white;
+    padding-right: 15px;
+}
+/*-----------*/
 
-.action-sheet-ios, 
+.csHeader {
+    background: $color1 !important;
+    color: #fff !important;
+    .toolbar-title-ios, .toolbar-title-md, .toolbar-title-wp, .bar-button-default-wp, .bar-button-clear-wp-default, .bar-button-wp-default, .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default, .bar-button-default-ios, .bar-button-clear-ios-default, .bar-button-ios-default {
+        color: white;
+    }
+}
+.toolbar-background-md {
+    background-color: $color1;
+    color: white;
+}
+.action-sheet-ios,
 .action-sheet-md,
 .action-sheet-wp {
-  .action-sheet-button{
-    color: $color1;
-  } 
+    .action-sheet-button {
+        color: $color1;
+    }
 }
-
-.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+.bar-button-default-ios,
+.bar-button-default.bar-button-ios-default,
+.bar-button-clear-ios-default {
     color: white;
     background-color: transparent;
 }
-
-.csGrayBackground{
-  background:$csBackgroundColor;
+.csGrayBackground {
+    background: $csBackgroundColor;
 }
-
-
-// .list-md .item-block .item-inner {
-//     border-bottom:none;
-// }
-
-.csParagraph{
-  margin-top:10px !important;
-  font-size:13px;
-  white-space: pre-line;
+.csParagraph {
+    font-size: 13px;
+    white-space: pre-line;
+    margin-top: 5px;
+}
+.csListCardIcon {
+    margin-top: 32px !important;
+}
+.csFont {
+    font-size: 1.4rem;
+}
+.csBoldFont {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+.csRight {
+    float: right;
 }

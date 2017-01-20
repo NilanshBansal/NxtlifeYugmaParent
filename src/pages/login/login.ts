@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoadingController, NavController, ToastController, AlertController, MenuController } from 'ionic-angular';
+import { LoadingController, NavController, ToastController, AlertController, MenuController, Events } from 'ionic-angular';
 
 import { Configuration } from '../../service/app.constants';
 import { AuthService } from '../../service/auth.service';
@@ -32,6 +32,7 @@ export class LoginPage implements OnInit {
               private formBuilder: FormBuilder,
               public configuration: Configuration,
               public menuCtrl: MenuController,
+              public events: Events,
               public toastCtrl: ToastController,
               private alertCtrl: AlertController) { this.menuCtrl.enable(false); }
 
@@ -87,7 +88,6 @@ export class LoginPage implements OnInit {
       .then(user => {
         this.authService.getParentInfo().then(res => {
           loader.dismiss();
-          console.log("get parent Info", res)
           this.authService.storeParentData(res.json());
           this.navCtrl.setRoot(Dashboard);
           let toast1 = this.toastCtrl.create({
@@ -96,6 +96,8 @@ export class LoginPage implements OnInit {
             position: 'bottom'
           });
           toast1.present();
+          console.log("get parent Info", res);
+          this.events.publish("user:login");
           this.setNotificationToken();
         });
       })

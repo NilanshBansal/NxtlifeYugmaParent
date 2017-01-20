@@ -1,5 +1,19 @@
 .csChatBox{
   background:$csBackgroundColor;
+  .circle-spinner{
+    margin-left: auto !important;
+    display: block !important;
+    margin-top: 40vh;
+    margin-right: auto !important;
+  }
+  .no-comment{
+    margin-top:80px;
+  }
+}
+
+.loader{
+  width: 180vw;
+  height: 5vh;
 }
 
 .csMyCommentBox{
@@ -27,7 +41,7 @@
   .csMyComment{
     @extend .csMyCommentBox;
     float: right;
-    background: #beffbb;  
+    background: #beffbb;
   }
   .csCommentTime{
     color: #676666;
@@ -36,7 +50,7 @@
     right:6px;
     position:absolute;
   }
-  
+
 }
 
 .csMyComment{

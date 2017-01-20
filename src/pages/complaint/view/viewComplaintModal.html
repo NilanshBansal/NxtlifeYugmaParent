@@ -1,18 +1,8 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons start>
-      <button ion-button class="navBtnRight" (click)="dismiss()">
-        <span  showWhen="ios"><ion-icon color="light" name="close-circle"></ion-icon></span>
-        <ion-icon name="md-close" showWhen="android,windows" color="light"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title text-center>
-      View Complaint
-    </ion-title>
-  </ion-toolbar>
+  <nl-modal-navbar [title]="title"></nl-modal-navbar>
 </ion-header>
 
-<ion-content class="view-complaint" >
+<ion-content class="view-complaint">
   <ion-card>
     <ion-item>
       <ion-note item-right><span [style.color]="complaint.statusColor"><ion-icon name="at" ></ion-icon> {{complaint.statusName}}</span></ion-note>
@@ -20,50 +10,50 @@
     <ion-item>
       <div class="complaint-item">
         <hr [style.border-top]="'1px' + ' groove ' + complaint.statusColor">
-        <span  [style.color] = "complaint.statusColor">Title</span>
+        <span [style.color]="complaint.statusColor">Title</span>
       </div>
       <h2>{{complaint.title}}</h2>
-    </ion-item>    
+    </ion-item>
     <ion-item>
       <div class="complaint-item">
         <hr [style.border-top]="'1px' + ' groove ' + complaint.statusColor">
-        <span [style.color] = "complaint.statusColor">Description</span>
+        <span [style.color]="complaint.statusColor">Description</span>
       </div>
       <h2><pre>{{complaint.description}}</pre></h2>
-    </ion-item>    
+    </ion-item>
     <ion-item>
       <div class="complaint-item">
         <hr [style.border-top]="'1px' + ' groove ' + complaint.statusColor">
-        <span [style.color] = "complaint.statusColor">Against</span>
+        <span [style.color]="complaint.statusColor">Against</span>
       </div>
       <h2>{{complaint.againstCategoryName}}</h2>
     </ion-item>
     <ion-item *ngIf="complaint.rca">
       <div class="complaint-item">
         <hr [style.border-top]="'1px' + ' groove ' + complaint.statusColor">
-        <span [style.color] = "complaint.statusColor">Root Cause</span>
+        <span [style.color]="complaint.statusColor">Root Cause</span>
       </div>
       <h2>{{complaint.rca}}</h2>
     </ion-item>
-  <ion-item>
-    <ion-note item-left>
-      <span [style.color]="complaint.statusColor">
+    <ion-item>
+      <ion-note item-left>
+        <span [style.color]="complaint.statusColor">
             <b>Created at</b>
           </span>
-      <br>
-      <span style="color:black">
+        <br>
+        <span style="color:black">
             {{complaint.createdAt | date}}
           </span>
-    </ion-note>
-    <ion-note item-right *ngIf="complaint.closedOn">
-      <span [style.color]="complaint.statusColor">
+      </ion-note>
+      <ion-note item-right *ngIf="complaint.closedOn">
+        <span [style.color]="complaint.statusColor">
           <b>Closed on</b>
           </span>
-      <br>
-      <span style="color:black">
+        <br>
+        <span style="color:black">
           {{complaint.closedOn | date}}
           </span>
-    </ion-note>
-  </ion-item>
+      </ion-note>
+    </ion-item>
   </ion-card>
 </ion-content>

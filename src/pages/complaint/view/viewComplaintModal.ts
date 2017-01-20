@@ -12,6 +12,8 @@ export class viewComplaintModal {
 
   complaint;
 
+  title = "VIEW COMPLAINT";
+
   constructor(private navParams: NavParams,
               private viewCtrl: ViewController) {
 

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ListViewCloseButton } from '../list/listview.closebtn.component';
+import { EditComplaintStatusAndComment } from '../list/listview.btn.class';
 
 import { ModalController, AlertController, ActionSheetController } from 'ionic-angular';
 
@@ -154,7 +154,7 @@ import { ComplaintSuggestion } from '../../service/cs.service';
   `
 })
 
-export class ViewComponent extends ListViewCloseButton {
+export class ViewComponent extends EditComplaintStatusAndComment {
 
   @Input() complaint: string;
 

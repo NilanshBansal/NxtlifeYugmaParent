@@ -35,11 +35,11 @@ import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 // import custom component
 import { ViewComponent } from '../customComponent/view/view.component';
 import { ListView } from '../customComponent/list/listview.component';
-import { ListViewCloseButton } from '../customComponent/list/listview.closebtn.component.ts';
+import { ListViewCloseButton,
+         ListViewReopenButton,
+         ListViewSatisfiedButton } from '../customComponent/list/listview.btn.component.ts';
 import { ListViewCommentButton } from '../customComponent/list/listview.commentbtn.component.ts';
-import { ListViewReopenButton } from '../customComponent/list/listview.reopenbtn.component.ts';
-import { ListViewSatisfiedButton } from '../customComponent/list/listview.satisfiedbtn.component.ts';
-import { CustomNavbar } from '../customComponent/navbar.component.ts';
+  import { CustomNavbar } from '../customComponent/navbar.component.ts';
 import { ModalNavbarComponent } from '../customComponent/modal.navbar.component.ts';
 import { CommentModal } from '../customComponent/commentModal.ts';
 

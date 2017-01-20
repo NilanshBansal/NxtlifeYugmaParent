@@ -75,9 +75,9 @@ export class ComplaintPage implements OnInit {
     // this.events.subscribe('complaint:reopen', (data) => {
     //   this.openReopenModal(data[0]);
     // });
-    this.events.subscribe('complaint:satisfied', (data) => {
-      this.openSatisfiedModal(data[0]);
-    });
+    // this.events.subscribe('complaint:satisfied', (data) => {
+    //   this.openSatisfiedModal(data[0]);
+    // });
   }
 
   updateArray(removeComplaint, newComplaint) {
@@ -195,50 +195,50 @@ export class ComplaintPage implements OnInit {
     }, 1000);
   }
 
-  openSatisfiedModal(complaint): void {
-    let prompt = this.alertCtrl.create({
-      title: 'Complaint Satisfied ?',
-      message: "If you are happy with the complaint resolution then click on satisfied button",
-      buttons: [{
-        text: 'Cancel',
-        handler: data => {
-        }
-      }, {
-        text: 'Satisfied!!',
-        handler: data => {
-          this.satisfiedActionSheet(complaint);
-        }
-      }]
-    });
-    prompt.present();
-  }
-
-  satisfiedActionSheet(complaint) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Are you sure you want to submit ?',
-      buttons: [{
-        text: 'Submit',
-        icon: 'ios-paper-outline',
-        handler: () => {
-          this.nl.showLoader();
-          this.c.satisfiedComplaint(complaint.id).subscribe(res => {
-            if (res) {
-              this.nl.hideLoader();
-              this.updateArray(complaint, res.json());
-            }
-          });
-        }
-      },{
-        text: 'Cancel',
-        icon: 'md-close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    actionSheet.present();
-  }
+  // openSatisfiedModal(complaint): void {
+  //   let prompt = this.alertCtrl.create({
+  //     title: 'Complaint Satisfied ?',
+  //     message: "If you are happy with the complaint resolution then click on satisfied button",
+  //     buttons: [{
+  //       text: 'Cancel',
+  //       handler: data => {
+  //       }
+  //     }, {
+  //       text: 'Satisfied!!',
+  //       handler: data => {
+  //         this.satisfiedActionSheet(complaint);
+  //       }
+  //     }]
+  //   });
+  //   prompt.present();
+  // }
+  //
+  // satisfiedActionSheet(complaint) {
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     title: 'Are you sure you want to submit ?',
+  //     buttons: [{
+  //       text: 'Submit',
+  //       icon: 'ios-paper-outline',
+  //       handler: () => {
+  //         this.nl.showLoader();
+  //         this.c.satisfiedComplaint(complaint.id).subscribe(res => {
+  //           if (res) {
+  //             this.nl.hideLoader();
+  //             this.updateArray(complaint, res.json());
+  //           }
+  //         });
+  //       }
+  //     },{
+  //       text: 'Cancel',
+  //       icon: 'md-close',
+  //       role: 'cancel',
+  //       handler: () => {
+  //         console.log('Cancel clicked');
+  //       }
+  //     }]
+  //   });
+  //   actionSheet.present();
+  // }
 
   // openReopenModal(complaint): void {
   //   let prompt = this.alertCtrl.create({

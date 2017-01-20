@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModalController, AlertController, ActionSheetController } from 'ionic-angular';
-import { Reopen } from './reopen.component';
+import { EditComplaintStatusAndComment } from './reopen.component';
 import { CustomService } from '../../service/customService';
 import { ComplaintSuggestion } from '../../service/cs.service';
 
@@ -16,7 +16,7 @@ import { ComplaintSuggestion } from '../../service/cs.service';
   `
 })
 
-export class ListViewReopenButton extends Reopen  {
+export class ListViewReopenButton extends EditComplaintStatusAndComment  {
 
   @Input() complaint;
   @Input('master') masterName: string;

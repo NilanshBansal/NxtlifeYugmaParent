@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModalController, AlertController, ActionSheetController } from 'ionic-angular';
-import { Reopen } from './reopen.component';
+import { EditComplaintStatusAndComment } from './reopen.component';
 
 // import service
 import { CustomService } from '../../service/customService';
@@ -18,7 +18,7 @@ import { ComplaintSuggestion } from '../../service/cs.service';
   `
 })
 
-export class ListViewCloseButton extends Reopen {
+export class ListViewCloseButton extends EditComplaintStatusAndComment {
 
   @Input() complaint;
   @Input('master') masterName: string;
@@ -30,7 +30,5 @@ export class ListViewCloseButton extends Reopen {
               public alertCtrl: AlertController) {
     super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
   }
-
-
 
 }

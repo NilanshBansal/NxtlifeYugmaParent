@@ -4,7 +4,7 @@ import { ModalController, AlertController, ActionSheetController } from 'ionic-a
 import { CustomService } from '../../service/customService';
 import { ComplaintSuggestion } from '../../service/cs.service';
 
-export class Reopen {
+export class EditComplaintStatusAndComment {
 
   complaint;
 

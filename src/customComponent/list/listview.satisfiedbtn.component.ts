@@ -4,7 +4,7 @@ import { ModalController, AlertController, ActionSheetController } from 'ionic-a
 // import service
 import { CustomService } from '../../service/customService';
 import { ComplaintSuggestion } from '../../service/cs.service';
-import { Reopen } from './reopen.component';
+import { EditComplaintStatusAndComment } from './reopen.component';
 
 @Component({
   selector: 'nl-satisfied-button',
@@ -18,7 +18,7 @@ import { Reopen } from './reopen.component';
   `
 })
 
-export class ListViewSatisfiedButton extends Reopen {
+export class ListViewSatisfiedButton extends EditComplaintStatusAndComment {
 
   @Input() complaint;
   @Input('master') masterName: string;

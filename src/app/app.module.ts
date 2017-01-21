@@ -28,7 +28,7 @@ import { StudentRating } from '../pages/rating/rating';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
-import { viewComplaintModal } from '../pages/complaint/view/viewComplaintModal';
+import { ViewComponent } from '../pages/complaint/view/viewComplaintModal';
 import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 
 // import custom component
@@ -36,8 +36,7 @@ import { ListView } from '../customComponent/list/listview.component';
 import { ListViewCloseButton,
          ListViewReopenButton,
          ListViewSatisfiedButton,
-         ListViewCommentButton,
-         ViewComponent } from '../customComponent/list/edit-cs-status-and-comment.component';
+         ListViewCommentButton } from '../customComponent/list/edit-cs-status-and-comment.component';
 import { CustomNavbar } from '../customComponent/navbar.component.ts';
 import { ModalNavbarComponent } from '../customComponent/modal.navbar.component.ts';
 import { CommentModal } from '../customComponent/commentModal.ts';
@@ -70,7 +69,7 @@ import { PollService } from '../service/poll.service';
     ReportIssuePage,
     SurveyPage,
     newComplaintModal,
-    viewComplaintModal,
+    ViewComponent,
     ListView,
     CustomNavbar,
     ListViewCloseButton,
@@ -109,7 +108,7 @@ import { PollService } from '../service/poll.service';
     ReportIssuePage,
     SurveyPage,
     newComplaintModal,
-    viewComplaintModal,
+    ViewComponent,
     ListView,
     CustomNavbar,
     ListViewCloseButton,

@@ -113,22 +113,3 @@ export class ListViewCommentButton extends EditComplaintStatusAndComment {
   }
 
 }
-
-@Component({
-  selector: 'nl-view',
-  templateUrl: 'view.component.html'
-})
-
-export class ViewComponent extends EditComplaintStatusAndComment {
-
-  @Input() complaint: string;
-
-  constructor(public modalCtrl: ModalController,
-              public nl: CustomService,
-              public c: ComplaintSuggestion,
-              public actionSheetCtrl: ActionSheetController,
-              public alertCtrl: AlertController) {
-    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
-  }
-
-}

@@ -6,7 +6,7 @@ import { ModalController,
 
 // import modal
 import { newComplaintModal } from './new/newComplaintModal';
-import { viewComplaintModal } from './view/viewComplaintModal';
+import { ViewComponent } from './view/viewComplaintModal';
 
 // import service
 import { CustomService } from '../../service/customService';
@@ -74,7 +74,7 @@ export class ComplaintPage {
   }
 
   viewComplaint(complaint): void {
-    let viewComplaint = this.modalCtrl.create(viewComplaintModal, {complaint: complaint});
+    let viewComplaint = this.modalCtrl.create(ViewComponent, {complaint: complaint});
     viewComplaint.present();
   }
 

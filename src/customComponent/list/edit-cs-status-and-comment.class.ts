@@ -1,5 +1,4 @@
 import { ModalController, AlertController, ActionSheetController } from 'ionic-angular';
-// import { CommentComplaintModal } from '../../pages/complaint/comment/comment.modal';
 import { CommentModal } from '../commentModal';
 
 // import service
@@ -15,6 +14,54 @@ export class EditComplaintStatusAndComment {
               public c: ComplaintSuggestion,
               public actionSheetCtrl: ActionSheetController,
               public alertCtrl: AlertController) { }
+
+  onSuccess(res) {
+    this.nl.hideLoader();
+    let data = res.json();
+    this.updateData(data);
+  }
+
+  onError() {
+    this.nl.hideLoader();
+    this.nl.errMessage();
+  }
+
+  updateData(data) {
+    this.complaint.statusName = data.statusName;
+    this.complaint.statusId = data.statusId;
+    this.complaint.statusColor = data.statusColor;
+  }
+
+  complaintReopen(complaint, data) {
+    this.nl.showLoader();
+    this.c.reopenComplaint(complaint.id, data).subscribe((res) => {
+      this.onSuccess(res);
+    }, (err) => {
+      this.onError();
+    });
+  }
+
+  complaintClose(complaint, reason) {
+    this.nl.showLoader();
+    this.c.closeComplaint(complaint.id, reason).subscribe((res) => {
+      if (res) {
+        this.onSuccess(res);
+      }
+    }, (err) => {
+      this.onError();
+    });
+  }
+
+  complaintSatisfy(complaint) {
+    this.nl.showLoader();
+    this.c.satisfiedComplaint(complaint.id).subscribe((res) => {
+      if (res) {
+        this.onSuccess(res);
+      }
+    }, (err) => {
+      this.onError();
+    });
+  }
 
   openReopenModal(complaint): void {
     this.complaint = complaint;
@@ -45,19 +92,7 @@ export class EditComplaintStatusAndComment {
         text: 'Submit',
         icon: 'ios-paper-outline',
         handler: () => {
-          this.nl.showLoader();
-          this.c.reopenComplaint(complaint.id, data).subscribe((res) => {
-            if (res) {
-              this.nl.hideLoader();
-              let data = res.json();
-              this.complaint.statusName = data.statusName;
-              this.complaint.statusId = data.statusId;
-              this.complaint.statusColor = data.statusColor;
-            }
-          }, (err) => {
-            this.nl.hideLoader();
-            this.nl.errMessage();
-          });
+          this.complaintReopen(complaint, data);
         }
       }, {
         text: 'Cancel',
@@ -74,7 +109,7 @@ export class EditComplaintStatusAndComment {
   openCloseModal(complaint) {
     let prompt = this.alertCtrl.create({
       title: 'Do you really want to close ?',
-      message: "",
+      enableBackdropDismiss: false,
       inputs: [{
         name: 'comment',
         placeholder: 'Write short description'
@@ -85,6 +120,10 @@ export class EditComplaintStatusAndComment {
       }, {
         text: 'Save',
         handler: data => {
+          if (data.comment === "") {
+            this.nl.showToast("Please menation why you want to close complaint");
+            return;
+          }
           this.closeActionSheet(complaint, data);
         }
       }]
@@ -99,19 +138,7 @@ export class EditComplaintStatusAndComment {
         text: 'Submit',
         icon: 'ios-paper-outline',
         handler: () => {
-          this.nl.showLoader();
-          this.c.closeComplaint(complaint.id, closeComplaintReason).subscribe((res) => {
-            if (res) {
-              this.nl.hideLoader();
-              let data = res.json();
-              this.complaint.statusName = data.statusName;
-              this.complaint.statusId = data.statusId;
-              this.complaint.statusColor = data.statusColor;
-            }
-          }, (err) => {
-            this.nl.hideLoader();
-            this.nl.errMessage();
-          });
+          this.complaintClose(complaint, closeComplaintReason);
         }
       }, {
         text: 'Cancel',
@@ -148,21 +175,9 @@ export class EditComplaintStatusAndComment {
         text: 'Submit',
         icon: 'ios-paper-outline',
         handler: () => {
-          this.nl.showLoader();
-          this.c.satisfiedComplaint(complaint.id).subscribe((res) => {
-            if (res) {
-              this.nl.hideLoader();
-              let data = res.json();
-              this.complaint.statusName = data.statusName;
-              this.complaint.statusId = data.statusId;
-              this.complaint.statusColor = data.statusColor;
-            }
-          }, (err) => {
-            this.nl.hideLoader();
-            this.nl.errMessage();
-          });
+          this.complaintSatisfy(complaint);
         }
-      },{
+      }, {
         text: 'Cancel',
         icon: 'md-close',
         role: 'cancel',

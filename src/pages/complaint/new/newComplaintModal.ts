@@ -54,8 +54,14 @@ export class newComplaintModal implements OnInit {
   }
 
   public getTeachers() {
+    this.nl.showLoader();
     this.c.getTeachers(this.standardId).subscribe((teachers) => {
+      this.nl.hideLoader();
       this.teachers = teachers.json(); // Get teachers list
+    }, (err) => {
+      this.nl.hideLoader();
+      this.nl.errMessage();
+      this.dismiss();
     });
   }
 

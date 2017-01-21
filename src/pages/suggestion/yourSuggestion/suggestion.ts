@@ -34,29 +34,10 @@ export class YourSuggestion extends ComplaintPage {
               public c: ComplaintSuggestion) {
     super(modalCtrl, alertCtrl, nl, c, actionSheetCtrl);
     this.getComplaints();
-    console.log("1111111111");
   }
 
   ionViewWillEnter() {
-    console.log("DSADSADSADAS", this.con.setUrlForSuggestion());
     this.con.setUrlForSuggestion();
-  }
-
-  // Respond after Angular projects external content into the component's view.
-  // Called once after the first NgDoCheck
-  ngAfterContentInit() {
-    // this.events.subscribe('suggestion:comment', (data) => {
-    //   this.openCommentModal(data[0]);
-    // });
-    // this.events.subscribe('suggestion:close', (data) => {
-    //   this.openCloseModal(data[0]);
-    // });
-    // this.events.subscribe('suggestion:reopen', (data) => {
-    //   this.openReopenModal(data[0]);
-    // });
-    // this.events.subscribe('suggestion:satisfied', (data) => {
-    //   this.openSatisfiedModal(data[0]);
-    // });
   }
 
 }

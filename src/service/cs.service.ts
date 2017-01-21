@@ -40,6 +40,7 @@ export class ComplaintSuggestion {
   }
 
   public getCategories() {
+    this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/category", this.options).map((res: Response) => {
       return res;
     }).catch((error: any) => Observable.throw(error || 'server error'));

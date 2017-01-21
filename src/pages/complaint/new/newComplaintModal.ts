@@ -27,7 +27,7 @@ export class newComplaintModal implements OnInit {
   public childCategory;
   public child;
   public title = [];
-  public description = [];
+  public desc = [];
 
   newComplaint: FormGroup;
   myForm: FormGroup;
@@ -40,6 +40,10 @@ export class newComplaintModal implements OnInit {
               public c: ComplaintSuggestion,
               public actionSheetCtrl: ActionSheetController) {
 
+  }
+
+  complaint = {
+    anonymous: false
   }
 
   selectChild(student) {
@@ -71,7 +75,8 @@ export class newComplaintModal implements OnInit {
       childCategory: ['', Validators.required],
       againstEmployeeId: ['', Validators.required],
       title: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.maxLength(200)]]
+      description: ['', [Validators.required, Validators.maxLength(200)]],
+      anonymous: [false]
     });
   }
 

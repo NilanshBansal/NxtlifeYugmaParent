@@ -58,8 +58,9 @@ export class ComplaintPage {
   }
 
   newComplaint(): void {
-    let complaintModal = this.modalCtrl.create(newComplaintModal);
-    complaintModal.onDidDismiss(newComplaint => {
+    let newComplaint = this.modalCtrl.create(newComplaintModal);
+    newComplaint.onDidDismiss((newComplaint) => {
+      console.log("DSa", newComplaint)
       if (!newComplaint) { return; }
       if (this.complaints && this.complaints.length != 0) {
         this.EmptyComplaints = false;
@@ -69,7 +70,7 @@ export class ComplaintPage {
         this.complaints.unshift(newComplaint);
       }
     });
-    complaintModal.present();
+    newComplaint.present();
   }
 
   viewComplaint(complaint): void {

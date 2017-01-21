@@ -62,13 +62,9 @@ export class ComplaintPage {
     newComplaint.onDidDismiss((newComplaint) => {
       console.log("DSa", newComplaint)
       if (!newComplaint) { return; }
-      if (this.complaints && this.complaints.length != 0) {
-        this.EmptyComplaints = false;
-        this.complaints.unshift(newComplaint);
-      } else {
-        this.EmptyComplaints = false;
-        this.complaints.unshift(newComplaint);
-      }
+      if (!this.complaints) { this.complaints = []; }
+      this.EmptyComplaints = false;
+      this.complaints.unshift(newComplaint);
     });
     newComplaint.present();
   }

@@ -74,13 +74,6 @@
         <h5>{{complaint.studentName}}</h5>
       </span>
     </ion-item>
-    <ion-item *ngIf="!complaint.anonymous" class="csTransparent">
-      <ion-icon name="school" [style.color]="complaint.statusColor"></ion-icon>
-      <span [style.color]="complaint.statusColor" class="csBoldFont">Standard</span>
-      <span item-right icon-left>
-        <h5>{{complaint.studentStandardName}}</h5>
-      </span>
-    </ion-item>
   </ion-card>
   <ion-card>
     <ion-item *ngIf="complaint.assignedEmployeeName" class="csTransparent" class="csTransparent">

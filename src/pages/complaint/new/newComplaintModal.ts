@@ -162,7 +162,6 @@ export class newComplaintModal implements OnInit {
   }
 
   saveComplaint(){
-
     if (this.newComplaint.invalid) {
       console.log("Complaint invalid")
     } else {
@@ -171,11 +170,10 @@ export class newComplaintModal implements OnInit {
         againstCategoryId: this.newComplaint.value.category.id,
         studentId: this.newComplaint.value.student.id
       });
-
       newComplaint = _.pick(newComplaint, function(value, key, object) {
         return _.isNumber(value) || _.isString(value);
       });
-
+      newComplaint.anonymous = this.newComplaint.value.anonymous;
       if (newComplaint.childCategory) {
         newComplaint.againstCategoryId = newComplaint.childCategory;
         delete newComplaint.childCategory;

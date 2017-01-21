@@ -129,7 +129,7 @@ export class CommentModal implements OnInit {
     } else {
       this.notPost = false;
       this.emptyComments = false;
-      this.c.postComment(this.complaint.id, this.commentForm.value).subscribe((res) => {
+      this.c.postComment(this.complaintId, this.commentForm.value).subscribe((res) => {
         this.notPost = true;
         if (!this.comments) { this.comments = []; }
         this.comments.push({

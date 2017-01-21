@@ -17,7 +17,7 @@ import { ComplaintSuggestion } from '../../../service/cs.service';
 export class ViewComponent extends EditComplaintStatusAndComment implements OnInit {
 
   complaint;
-  title = "VIEW COMPLAINT";
+  title: string;
 
   constructor(public modalCtrl: ModalController,
               public nl: CustomService,
@@ -30,6 +30,7 @@ export class ViewComponent extends EditComplaintStatusAndComment implements OnIn
   }
 
   ngOnInit() {
+    this.title = "VIEW " + this.nl.getHeaderText();
     this.complaint = this.navParams.get('complaint');
   }
 

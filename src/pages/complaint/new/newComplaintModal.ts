@@ -32,6 +32,8 @@ export class newComplaintModal implements OnInit {
   newComplaint: FormGroup;
   myForm: FormGroup;
 
+  headerTitle: string;
+
   constructor(public viewCtrl: ViewController,
               public parentInfo: ParentInfo,
               public toastCtrl: ToastController,
@@ -67,6 +69,7 @@ export class newComplaintModal implements OnInit {
 
   ngOnInit() {
     this.loadForm();
+    this.headerTitle = this.nl.getHeaderText();
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child
@@ -94,6 +97,7 @@ export class newComplaintModal implements OnInit {
     }, (err) => {
       this.nl.hideLoader();
       this.nl.errMessage();
+      this.dismiss();
     });
   }
 

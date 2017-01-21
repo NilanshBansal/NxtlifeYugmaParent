@@ -21,7 +21,7 @@ import { ComplaintPage } from '../../complaint/complaint';
 export class YourSuggestion extends ComplaintPage {
 
   // set header title
-  title: string = "Suggestions";
+  title: string = "SUGGESTIONS";
 
   // used in event
   public master: string = "suggestion";
@@ -34,9 +34,11 @@ export class YourSuggestion extends ComplaintPage {
               public c: ComplaintSuggestion) {
     super(modalCtrl, alertCtrl, nl, c, actionSheetCtrl);
     this.getComplaints();
+    console.log("1111111111");
   }
 
   ionViewWillEnter() {
+    console.log("DSADSADSADAS", this.con.setUrlForSuggestion());
     this.con.setUrlForSuggestion();
   }
 

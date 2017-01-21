@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModalController, AlertController, ActionSheetController } from 'ionic-angular';
-import { EditComplaintStatusAndComment } from './listview.btn.class';
+import { EditComplaintStatusAndComment } from './edit-cs-status-and-comment.class';
 
 // import service
 import { CustomService } from '../../service/customService';

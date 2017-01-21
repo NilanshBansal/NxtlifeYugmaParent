@@ -9,6 +9,9 @@ import { CustomService } from '../service/customService';
 @Component({
   selector: 'comment',
   template: `
+    <ion-header>
+      <nl-modal-navbar [title]="title" [complaint]="complaint"></nl-modal-navbar>
+    </ion-header>
     <ion-content id="chat" class="csChatBox" >
       <ion-list class="no-comment" *ngIf="emptyComments">
         <h3>No Comments</h3>
@@ -38,7 +41,94 @@ import { CustomService } from '../service/customService';
         </ion-grid>
       </form>
     </ion-footer>
-  `
+  `,
+  styles: [`
+    .csChatBox{
+      background:$csBackgroundColor;
+      .circle-spinner{
+        margin-left: auto !important;
+        display: block !important;
+        margin-top: 40vh;
+        margin-right: auto !important;
+      }
+      .no-comment{
+        margin-top:80px;
+      }
+    }
+
+    .loader{
+      width: 180vw;
+      height: 5vh;
+    }
+
+    .csMyCommentBox{
+      box-shadow: 0px 2px 2px rgba(71, 71, 71, 0.39);
+      display: inline-block;
+      margin-top: 13px;
+      border-radius: 0px 10px 0px 10px;
+      padding: 0px 10px 0px 10px;
+      margin-bottom: 5px;
+      // height: 35px;
+      margin-right: 5px;
+      h3{
+        margin-top: 7px;
+        font-size: 15px;
+      }
+    }
+
+    .message-box.mine{
+      width:100% !important;
+      float:right;
+      .csMyComment{
+        @extend .csMyCommentBox;
+        float: right;
+        background: #beffbb;
+      }
+      .csCommentTime{
+        color: #676666;
+        font-size: 10px;
+        margin-top: 52px;
+        right:6px;
+        position:absolute;
+      }
+
+    }
+
+    .csMyComment{
+      @extend .csMyCommentBox;
+      // display:inline-block;
+      background: white;
+      margin-left:5px;
+    }
+
+
+    .csCommentTime{
+          color: #676666;
+        font-size: 10px;
+        margin-left: 2%;
+    }
+
+    .item-ios h3, .item-wp h3, .item-md h3{
+      font-size:1.2rem;
+    }
+
+    .csCommentInput{
+      padding-left: 15px;
+      background:white;
+      border-radius: 35px 0px 35px 35px;
+      display: -webkit-box;
+          box-shadow: 0px 0px 1px grey;
+    }
+
+    .csCommentSend{
+      border-radius:100%;
+          width: 70% !important;
+          margin-top:5px;
+          ion-icon{
+            margin-left: 8px;
+          }
+    }
+  `]
 })
 
 export class CommentModal implements OnInit {
@@ -52,6 +142,8 @@ export class CommentModal implements OnInit {
   complaintId: number;
   hasData = false;
   notPost = true;
+
+  title = "COMMENTS";
 
   @ViewChild(Content) content: Content;
   @ViewChild('commentBtn') el : ElementRef;
@@ -69,11 +161,12 @@ export class CommentModal implements OnInit {
   ngOnInit() {
     let complaint = this.navParams.get('complaint');
     this.complaintId = complaint.id;
+    console.log(complaint)
     this.loadComments();
     this.commentForm = new FormGroup({
       comment: new FormControl('', [Validators.required])
     });
-    if (this.complaint.statusId === 4 || this.complaint.statusId === 6) {
+    if (complaint.statusId === 4 || complaint.statusId === 6) {
       this.renderer.setElementStyle(this.el.nativeElement, "visibility", 'hidden');
       this.showToastMessage();
     }

@@ -158,7 +158,7 @@ ion-toolbar {
     background-color: transparent;
 }
 .csGrayBackground {
-    background: $csBackgroundColor;
+    background: $csBackgroundColor !important;
 }
 .csParagraph {
     font-size: 13px;
@@ -177,4 +177,10 @@ ion-toolbar {
 }
 .csRight {
     float: right;
+}
+ion-content{
+    @extend .csGrayBackground;
+}
+.item-ios{
+    font-size:1.4rem !important;
 }

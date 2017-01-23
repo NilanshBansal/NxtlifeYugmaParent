@@ -1,26 +1,3 @@
-.csZeroPad{
-  @extend .csFillBackground;
-  margin: 0px;
-  background: {
-    size:100%;
-    image: url('https://assets.entrepreneur.com/slideshow/1414505637-10-single-mom-entrepreneurs-share-their-best-business-advice-lisa-stone.jpg');
-  }
-  filter: blur(5px);
-}
-
-.csAvatar{
-  @extend .csCenter;
-  @extend .csCircle;
-  @extend .csBoxShadow;
-  position: absolute;
-  top:0;
-  left: 35%;
-  width:100px;
-  height: 100px;
-  margin: 10px auto auto 0;
-  z-index: $csZindex+1;
-}
-
 .csProfileCard{
   margin-top: 40px;
 }

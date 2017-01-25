@@ -11,7 +11,6 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="newComplaint csGrayBackground">
   <form name="newcomplaint" [formGroup]="newComplaint" (ngSubmit)="saveComplaint()" novalidate>
     <ion-card>
@@ -73,6 +72,8 @@
         </ion-checkbox>
       </ion-item>
     </ion-card>
-    <button ion-button full type="submit" [disabled]="newComplaint.invalid">Submit</button>
+    <div padding>
+      <button ion-button full type="submit" [disabled]="newComplaint.invalid">Submit</button>
+    </div>
   </form>
 </ion-content>

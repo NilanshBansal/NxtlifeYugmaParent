@@ -1,16 +1,18 @@
 <ion-header>
   <nl-modal-navbar [title]="title" [complaint]="appreciation"></nl-modal-navbar>
 </ion-header>
-<ion-content>
+<ion-content class="csGrayBackground">
   <form name="newcomplaint" [formGroup]="newSuggestion" (ngSubmit)="saveSuggestion()" novalidate>
-<ion-card class="new-complaint">
+    <ion-card>
       <ion-item>
         <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
         <ion-label>Select Child</ion-label>
         <ion-select [(ngModel)]="child" formControlName="studentId" (ngModelChange)="selectChild($event)">
-          <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
+        <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
         </ion-select>
       </ion-item>
+    </ion-card>
+    <ion-card>
       <ion-item *ngIf="teachers">
         <ion-icon name="ios-person-outline" item-left large  color="primary"></ion-icon>
         <ion-label>Teacher</ion-label>
@@ -18,23 +20,24 @@
           <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}}</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item style="margin-top: 10px;">
-        <div class="complaint-item">
-          <hr><span>Title</span>
-        </div>
-        <input class="text-input" type="text" formControlName="title" placeholder="Title (max.50)" maxlength="50">
-        <ion-badge><span>{{50}}</span></ion-badge>
-      </ion-item>
-      <ion-item style="margin-top: 10px;">
-        <div class="complaint-item">
-          <hr><span>Description</span>
-        </div>
-        <textarea class="text-input" rows="8" [(ngModel)]="description" formControlName="description" placeholder="Description" maxlength="200"></textarea>
-        <ion-badge><span>{{200 - description.length}}</span></ion-badge>
-      </ion-item>
-      <ion-buttons padding>
-        <button ion-button block type="submit" [disabled]="newSuggestion.invalid">Submit</button>
-      </ion-buttons>
     </ion-card>
+    <ion-card>
+      <ion-item class="csTransparent">
+        <ion-label stacked>Title (max. 50)</ion-label>
+        <ion-textarea rows="2" class="csInput-title" formControlName="title" maxlength="50" placeholder="Enter title"> </ion-textarea>
+      </ion-item>
+      <ion-badge class="csFiftyLimit"><span>{{50}}</span></ion-badge>
+    </ion-card>
+   <ion-card>
+      <ion-item class="csTransparent">
+        <ion-label stacked>Description</ion-label>
+        <ion-textarea class="csInput-title" rows="8" [(ngModel)]="description" placeholder="Enter description" formControlName="description"
+          maxlength="200"></ion-textarea>
+      </ion-item>
+      <ion-badge class="csFiftyLimit"><span>{{200 - description.length}}</span></ion-badge>
+    </ion-card>
+  <ion-buttons padding>
+    <button ion-button block type="submit" [disabled]="newSuggestion.invalid">Submit</button>
+  </ion-buttons>
   </form>
 </ion-content>

@@ -6,15 +6,20 @@
   <ion-refresher (ionRefresh)="loadNewComplaints($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
-    <ion-item *ngFor="let appreciation of complaints">
-      <p>title: {{appreciation.title}}</p>
-      <p>description: {{appreciation.description}}</p>
-      <p>studentName: {{appreciation.studentName}}</p>
-      <p>appreciation for: {{appreciation.teacherName}}</p>
-      <p>createdAt: {{appreciation.createdAt | date:'mediumDate'}}</p>
+  <ion-card *ngFor="let appreciation of complaints">
+    <ion-item>
+      <div class="csParagraph"><b>{{appreciation.title}}</b></div>
+      <div class="csParagraph">{{appreciation.description}}</div>
     </ion-item>
-  </ion-list>
+    <ion-item>
+      <div item-left>
+        <b> Student:</b><br> {{appreciation.studentName}}
+      </div>
+      <div item-right>
+        <b>Created at:</b><br> {{appreciation.createdAt | date:'mediumDate'}}
+      </div>
+    </ion-item>
+  </ion-card>
   <ion-list>
     <ion-item *ngIf="EmptyComplaints">
       <h3> No Appreciations </h3>

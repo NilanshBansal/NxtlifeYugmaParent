@@ -1,20 +1,24 @@
 <ion-header>
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
-
 <ion-content class="complaint-list watermark">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
-    <ion-item *ngFor="let suggestion of complaints">
-      <p>title: {{suggestion.title}}</p>
-      <p>description: {{suggestion.description}}</p>
-      <p>studentName: {{suggestion.studentName}}</p>
-      <p *ngIf="suggestion.teacherName">suggestion for: {{suggestion.teacherName}}</p>
-      <p>createdAt: {{suggestion.createdAt | date:'mediumDate'}}</p>
+  <ion-card *ngFor="let suggestion of complaints">
+    <ion-item >
+      <div class="csParagraph"><b>{{suggestion.title}}</b></div>
+      <div class="csParagraph">{{suggestion.description}}</div>
     </ion-item>
-  </ion-list>
+    <ion-item>
+      <div item-left >
+        <b> Student:</b><br> {{suggestion.studentName}}
+      </div>
+      <div item-right>
+        <b>Created at:</b><br> {{suggestion.createdAt | date:'mediumDate'}}
+      </div>
+    </ion-item>
+  </ion-card>
   <ion-list>
     <ion-item *ngIf="EmptyComplaints">
       <h3> NO SUGGESTIONS </h3>

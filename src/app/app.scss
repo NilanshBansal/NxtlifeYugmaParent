@@ -82,23 +82,3 @@ $inherit : inherit;
   @extend .csWhiteText;
   background:$color1;
 }
-
-/* CS Theme */
-.csLightText{
-  color:#fff;
-}
-
-.csStrip{
-    background:$csStripColor;
-}
-
-.csBlueColor{
-  background:$csDarkStrip;
-  .item-ios[detail-push] .item-inner, button.item-ios:not([detail-none]) .item-inner, a.item-ios:not([detail-none]) .item-inner{
-  }
-}
-
-.csSelected{
-  background:$color1;
-  color:white;
-}

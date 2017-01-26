@@ -25,51 +25,19 @@
             <ion-label>{{d.name}}</ion-label>
             <ion-radio *ngIf="res.optionTypeId == 1" ngmodel="choice1" checked (click)="PollChoiceClicked(d.id)"></ion-radio>
             <ion-checkbox *ngIf="res.optionTypeId == 2" [(ngModel)]="checkItems[d.id]" (click)="buttonEnable()"></ion-checkbox>
-            <!--(click)="PollChoiceMultiple()"-->
           </ion-item>
         </ion-list>
       </div>
-
-      <!--<button ion-button color="primary" (click)="CheckIndex(res)">Don't!</button>       -->
-</ion-card-content>
-        <ion-item>
-      <div item-left >
+    </ion-card-content>
+    <ion-item>
+      <div item-left>
         <b>Poll Type:</b><br> {{res.optionTypeName}}
       </div>
       <div item-right>
         <b>Odience:</b><br> {{res.typeName}}
       </div>
     </ion-item>
-          <button *ngIf="res.optionTypeId == 1" full ion-button color="secondary" [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>
-      <button *ngIf="res.optionTypeId == 2" full ion-button color="secondary" [disabled]="mul_enable" (click)="PollMulVoting(res.id,res)">Vote!</button>
-    
+    <button *ngIf="res.optionTypeId == 1" full ion-button color="secondary" [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>
+    <button *ngIf="res.optionTypeId == 2" full ion-button color="secondary" [disabled]="mul_enable" (click)="PollMulVoting(res.id,res)">Vote!</button>
   </ion-card>
-  <!--[disabled]="enable"-->
-  <!--<ion-card >
-  <ion-card-header>
-    <span>Random Question 102?? </span>
-    </ion-card-header>
-  <ion-card-content>
-    <ion-list>
-       <ion-item>
-         <ion-label>Daenerys Targaryen</ion-label>
-         <ion-checkbox></ion-checkbox>
-      </ion-item>
-
-    <ion-item>
-      <ion-label>Arya Stark</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-
-     <ion-item>
-      <ion-label>ben afflek</ion-label>
-      <ion-checkbox ></ion-checkbox>
-    </ion-item>
-
-  </ion-list>
-
-<button class="PollButton" ion-button color="secondary">Vote!</button>
-
-</ion-card-content>
- </ion-card>-->
 </ion-content>

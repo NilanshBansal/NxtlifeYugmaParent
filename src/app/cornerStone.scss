@@ -181,3 +181,18 @@ ion-toolbar {
 .item-ios{
     font-size:1.4rem !important;
 }
+//Student Rating (Management)
+.csRating{
+    ion-item{
+    p{
+        color:black;
+        text-align:center;
+    }
+    }
+}
+rating{
+    color:$color1;
+}
+.csStudentName{
+    text-align:center !important;
+}

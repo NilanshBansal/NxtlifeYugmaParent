@@ -55,6 +55,7 @@ import { EventService } from '../service/planner.service';
 import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';
 import { CircularService } from '../service/circular.servce';
+import { SurveyService } from '../service/survey.service';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,6 @@ import { CircularService } from '../service/circular.servce';
     CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
-
     HomeworkComponent,
     CircularComponent,
     CircularViewComponent,
@@ -140,6 +140,6 @@ import { CircularService } from '../service/circular.servce';
 
     ViewComponent
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
+  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService,SurveyService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })
 export class AppModule {}

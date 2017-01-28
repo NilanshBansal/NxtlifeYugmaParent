@@ -8,5 +8,25 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Yugma Survey</h3>
+  <ion-list>
+    <ion-item>
+      <h1> survey title - amigos </h1>
+    </ion-item>
+  </ion-list>
+  <ion-card *ngFor="let a of allsurveys">
+    <ion-card-header>
+     <h1> survey question resss</h1>
+    </ion-card-header>
+    <ion-card-content>
+       <ion-checkbox ></ion-checkbox>
+      <span>options 1</span>
+       <ion-checkbox ></ion-checkbox>
+       <span>options 2</span>
+        <ion-checkbox ></ion-checkbox>
+        <span>options 3</span>
+         <ion-checkbox ></ion-checkbox>
+         <span>options 4</span>
+         <button ion-button color="primary">submit!</button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

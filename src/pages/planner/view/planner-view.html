@@ -11,29 +11,47 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content class="planner" padding>
-
-  <ion-card class="csCalEvent">
-    <ion-card-header>
-      <h2 text-center>{{ResponseData.plannerTypeName}}</h2>
-      <!-- Planner Type -->
-      <h1 text-center class="calTitle2">Title: {{ResponseData.title}}</h1>
-      <h5>
-        <span class="calTitle2"> Start on</span>
-        <span class="calTitle2 calRight">End at </span>
-      </h5>
-      <h5>{{ResponseData.startDate}} <span class="calRight">{{ResponseData.endDate}}</span></h5>
-      <h5>{{ResponseData.startTime}}<span class="calRight">{{ResponseData.endTime}}</span></h5>
-      <!--Start and ENdtime-->
-      <h5 *ngIf="ResponseData.plannerTypeId == 2">Standards : {{ResponseData.standards}}</h5>
-    </ion-card-header>
-    <ion-card-content>
-      Description: {{ ResponseData.description}}
-    </ion-card-content>
+<ion-content class="planner">
+  <ion-card>
+    <ion-item>
+      {{ResponseData.title}}
+      <p class="csParagraph">{{ ResponseData.description}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-note item-left>
+        <span>
+            <b>Start Date</b>
+          </span>
+        <br>
+        <span style="color:black">
+            {{ResponseData.startDate | date}}
+          </span>
+      </ion-note>
+      <ion-note item-right>
+        <span>
+          <b>End Date</b>
+          </span>
+        <br>
+        <span style="color:black">
+          {{ResponseData.endDate | date}}
+          </span>
+      </ion-note>
+    </ion-item>
   </ion-card>
-
-
-
-
+  <ion-card>
+    <ion-item>
+      <span item-left>Type:</span>
+      <span item-right> 
+        {{ResponseData.plannerTypeName}}
+      </span>
+    </ion-item>
+    <ion-item>
+      <span item-left>Start Time:</span>
+      <span item-right>{{ResponseData.startTime}}</span>
+    </ion-item>
+    <ion-item>
+      <span item-left>End Time:</span>
+      <span item-right>{{ResponseData.endTime}}</span>
+    </ion-item>
+  </ion-card>
 </ion-content>

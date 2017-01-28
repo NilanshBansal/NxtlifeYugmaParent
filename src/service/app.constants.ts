@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Headers } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { CustomService } from './customService';
 
 @Injectable()
 export class Configuration {
 
-  constructor() {
+  constructor(public http: Http,
+              public cs: CustomService) {
 
   }
 
   headers;
+  options;
 
   getHeader() {
     this.headers = new Headers({
@@ -40,6 +44,7 @@ export class Configuration {
   }
 
   setUrl(url) {
+    this.cs.setHeaderText(url);
     this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/" + url;
   }
 
@@ -49,10 +54,27 @@ export class Configuration {
 
   setUrlForSuggestion() {
     this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/suggestion";
+    console.log("url", this.Server)
   }
 
   setUrlForStudentAppreciations(url) {
     this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/appreciation/" + url;
+  }
+
+  tokenUpdate(tokenId) {
+    const notificationToken = {
+      notificationToken: tokenId
+    }
+    this.headers = new Headers({
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
+    });
+    this.options = new RequestOptions({
+      headers : this.header()
+    });
+    return this.http.put(this.Server + "/parent/" + this.getParentId(), notificationToken, this.options).map((res: Response) => {
+      return res;
+    }).catch((error: any) => Observable.throw(error || 'server error'));
   }
 
 }

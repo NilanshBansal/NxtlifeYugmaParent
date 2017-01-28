@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController } from 'ionic-angular';
+import { Nav, Platform, AlertController, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 // import component
@@ -31,17 +31,20 @@ export class MyApp {
 
   public rootPage: any;
   name: string;
+  selectedPage:string;
 
   pages: Array<{title: string, component: any, icon: any, url: string}>;
   account: Array<{title: string, component: any, icon: any}>;
 
   constructor(public platform: Platform,
               public authService: AuthService,
+              public events: Events,
               private alertCtrl: AlertController,
               private configuration: Configuration,
               public networkService: NetworkService) {
 
     this.initializeApp();
+    this.listenToLoginEvents();
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -94,6 +97,7 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
+    this.selectedPage = page.title;
     this.configuration.setUrl(page.url);
     this.nav.setRoot(page.component);
   }
@@ -114,5 +118,11 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+  listenToLoginEvents() {
+    this.events.subscribe('user:login', () => {
+      this.loadUser();
+    });
   }
 }

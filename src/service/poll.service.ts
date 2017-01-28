@@ -3,7 +3,6 @@ import { Headers,Http,Response,RequestOptions } from '@angular/http';
 import {Configuration } from './app.constants';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergemap';
 import 'rxjs/add/operator/toPromise';
 
 
@@ -35,5 +34,5 @@ export class PollService {
 		.map((res:Response) => res.json())
         .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
     }
-    
+
 }

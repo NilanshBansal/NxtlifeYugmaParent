@@ -27,10 +27,12 @@ export class newComplaintModal implements OnInit {
   public childCategory;
   public child;
   public title = [];
-  public description = [];
+  public desc = [];
 
   newComplaint: FormGroup;
   myForm: FormGroup;
+
+  headerTitle: string;
 
   constructor(public viewCtrl: ViewController,
               public parentInfo: ParentInfo,
@@ -42,6 +44,10 @@ export class newComplaintModal implements OnInit {
 
   }
 
+  complaint = {
+    anonymous: false
+  }
+
   selectChild(student) {
     if (student) {
       this.studentId = student.id;
@@ -50,13 +56,20 @@ export class newComplaintModal implements OnInit {
   }
 
   public getTeachers() {
+    this.nl.showLoader();
     this.c.getTeachers(this.standardId).subscribe((teachers) => {
+      this.nl.hideLoader();
       this.teachers = teachers.json(); // Get teachers list
+    }, (err) => {
+      this.nl.hideLoader();
+      this.nl.errMessage();
+      this.dismiss();
     });
   }
 
   ngOnInit() {
     this.loadForm();
+    this.headerTitle = this.nl.getHeaderText();
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child
@@ -71,7 +84,8 @@ export class newComplaintModal implements OnInit {
       childCategory: ['', Validators.required],
       againstEmployeeId: ['', Validators.required],
       title: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.maxLength(200)]]
+      description: ['', [Validators.required, Validators.maxLength(200)]],
+      anonymous: [false]
     });
   }
 
@@ -83,6 +97,7 @@ export class newComplaintModal implements OnInit {
     }, (err) => {
       this.nl.hideLoader();
       this.nl.errMessage();
+      this.dismiss();
     });
   }
 
@@ -137,6 +152,10 @@ export class newComplaintModal implements OnInit {
             this.c.saveComplaint(newComplaint).subscribe((complaint) => {
               this.nl.hideLoader();
               this.viewCtrl.dismiss(complaint.json());
+            }, (err) => {
+              this.nl.hideLoader();
+              this.viewCtrl.dismiss();
+              this.nl.errMessage();
             });
           }
         },{
@@ -153,7 +172,6 @@ export class newComplaintModal implements OnInit {
   }
 
   saveComplaint(){
-
     if (this.newComplaint.invalid) {
       console.log("Complaint invalid")
     } else {
@@ -162,11 +180,10 @@ export class newComplaintModal implements OnInit {
         againstCategoryId: this.newComplaint.value.category.id,
         studentId: this.newComplaint.value.student.id
       });
-
       newComplaint = _.pick(newComplaint, function(value, key, object) {
         return _.isNumber(value) || _.isString(value);
       });
-
+      newComplaint.anonymous = this.newComplaint.value.anonymous;
       if (newComplaint.childCategory) {
         newComplaint.againstCategoryId = newComplaint.childCategory;
         delete newComplaint.childCategory;

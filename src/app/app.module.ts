@@ -27,6 +27,7 @@ import { StudentRating } from '../pages/rating/rating';
 import { HomeworkComponent } from '../pages/homework/homework.component';
 import { CircularComponent } from '../pages/circular/circular.component';
 import { CircularViewComponent } from '../pages/circular/view/circular-view';
+import { SurveyListPage } from '../pages/survey/list/survey-list';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -91,7 +92,7 @@ import { SurveyService } from '../service/survey.service';
     HomeworkComponent,
     CircularComponent,
     CircularViewComponent,
-    
+    SurveyListPage,
 
     ViewComponent
 
@@ -133,7 +134,7 @@ import { SurveyService } from '../service/survey.service';
     CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
-
+    SurveyListPage,
     HomeworkComponent,
     CircularComponent,
     CircularViewComponent,

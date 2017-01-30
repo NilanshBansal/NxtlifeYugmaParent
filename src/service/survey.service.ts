@@ -22,9 +22,16 @@ export class SurveyService {
 
 
         getallsurveys(){
-            this.serverUrl = this.configuration.Server;
-            return this.http.get(this.serverUrl,this.options)
-            .map((res:Response) => res.json())
+          console.log('headers',this.headers);
+          this.serverUrl = this.configuration.Server;
+           return this.http.get(this.serverUrl,this.options)
+             .map((res:Response) => res.json())
+        }
+
+        PostSurveys(body){
+          this.serverUrl = this.configuration.Server;
+            return this.http.post(this.serverUrl ,body, this.options)
+             .map((res:Response) => res.json())
         }
 
 }

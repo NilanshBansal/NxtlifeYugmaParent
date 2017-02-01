@@ -35,26 +35,27 @@ export class Configuration {
     }
   }
 
-  public Server: string = "https://yugmasrgstesting.appspot.com";
+  // public Server: string = "https://yugmasrgstesting.appspot.com";
+    public Server: string = "https://yugma-ut.appspot.com/";
 
   public ComplaintUrl(): string {
     return this.Server + "/parent/" + this.getParentId() + "/";
   }
 
   setUrl(url) {
-    this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/" + url;
+    this.Server = "https://yugma-ut.appspot.com//parent/" + this.getParentId() + "/" + url;
   }
 
   setUrlForStudentSuggestions(url) {
-    this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/suggestion/" + url;
+    this.Server = "https://yugma-ut.appspot.com//parent/" + this.getParentId() + "/suggestion/" + url;
   }
 
   setUrlForSuggestion() {
-    this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/suggestion";
+    this.Server = "https://yugma-ut.appspot.com//parent/" + this.getParentId() + "/suggestion";
   }
 
   setUrlForStudentAppreciations(url) {
-    this.Server = "https://yugmasrgstesting.appspot.com/parent/" + this.getParentId() + "/appreciation/" + url;
+    this.Server = "https://yugma-ut.appspot.com//parent/" + this.getParentId() + "/appreciation/" + url;
   }
 
   tokenUpdate(tokenId) {

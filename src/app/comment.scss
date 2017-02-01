@@ -1,5 +1,18 @@
 .csChatBox{
   background:$csBackgroundColor;
+  .circle-spinner{
+    margin-left: auto !important;
+    display: block !important;
+    margin-top: 40vh;
+    margin-right: auto !important;
+  }
+  .no-comment{
+  }
+}
+
+.loader{
+  width: 180vw;
+  height: 5vh;
 }
 
 .csMyCommentBox{
@@ -17,17 +30,13 @@
   }
 }
 
-.message-box:first-child{
-  margin-top:15% !important;
-}
-
 .message-box.mine{
-  width:100% !important;
+  width:80% !important;
   float:right;
   .csMyComment{
     @extend .csMyCommentBox;
     float: right;
-    background: #beffbb;  
+    background: #beffbb;
   }
   .csCommentTime{
     color: #676666;
@@ -36,7 +45,7 @@
     right:6px;
     position:absolute;
   }
-  
+
 }
 
 .csMyComment{

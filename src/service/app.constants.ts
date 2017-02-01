@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { CustomService } from './customService';
 
 @Injectable()
 export class Configuration {
 
-  constructor(public http: Http) {
+  constructor(public http: Http,
+              public cs: CustomService) {
 
   }
 
@@ -44,6 +46,7 @@ export class Configuration {
 
   setUrl(url) {
     this.Server = "https://yugma-ut.appspot.com//parent/" + this.getParentId() + "/" + url;
+    this.cs.setHeaderText(url);
   }
 
   setUrlForStudentSuggestions(url) {

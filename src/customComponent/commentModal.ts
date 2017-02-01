@@ -9,34 +9,37 @@ import { CustomService } from '../service/customService';
 @Component({
   selector: 'comment',
   template: `
+    <ion-header>
+      <nl-modal-navbar [title]="title" [complaint]="complaint"></nl-modal-navbar>
+    </ion-header>
     <ion-content id="chat" class="csChatBox" >
-      <ion-list *ngIf="emptyComments">
+      <ion-list class="no-comment" *ngIf="emptyComments">
         <h3>No Comments</h3>
       </ion-list>
-      <ion-spinner *ngIf="!hasData"></ion-spinner>
+      <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
       <div  class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>
         <div no-padding class="csMyComment">
           <h3>{{ m.comment }}</h3>
         </div>
-        <div class="csCommentTime">{{m.employeeNickName}}{{m.parentName}}:{{ m.createdAt | amCalendar }}</div>
+        <div class="csCommentTime">{{m.employeeNickName}}{{m.parentName}} {{ m.createdAt | amCalendar }}</div>
       </div>
+      <ion-spinner class="loader"  name="dots" *ngIf="!notPost"></ion-spinner>
     </ion-content>
-
     <ion-footer keyboard-attach class="bar-stable" #commentBtn>
-    <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postComment()" novalidate>
-<ion-grid>
-  <ion-row>
-    <ion-col width-80>
-      <ion-textarea rows="2" class="csCommentInput" type="text" formControlName="comment" placeholder=" Write comment..."></ion-textarea>
-    </ion-col>
-    <ion-col>
-         <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid">
-            <ion-icon name="md-send" role="img"></ion-icon>
-          </button>      
-    </ion-col>    
-  </ion-row>
-</ion-grid>
- </form>
+      <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postComment()" novalidate>
+        <ion-grid>
+          <ion-row>
+            <ion-col width-80>
+              <ion-textarea rows="2" class="csCommentInput" type="text" formControlName="comment" placeholder=" Write comment..."></ion-textarea>
+            </ion-col>
+            <ion-col>
+              <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
+                <ion-icon name="md-send" role="img"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
     </ion-footer>
   `
 })
@@ -52,6 +55,8 @@ export class CommentModal implements OnInit {
   complaintId: number;
   hasData = false;
   notPost = true;
+
+  title = "COMMENTS";
 
   @ViewChild(Content) content: Content;
   @ViewChild('commentBtn') el : ElementRef;
@@ -69,11 +74,12 @@ export class CommentModal implements OnInit {
   ngOnInit() {
     let complaint = this.navParams.get('complaint');
     this.complaintId = complaint.id;
+    console.log(complaint)
     this.loadComments();
     this.commentForm = new FormGroup({
       comment: new FormControl('', [Validators.required])
     });
-    if (this.complaint.statusId === 4 || this.complaint.statusId === 6) {
+    if (complaint.statusId === 4 || complaint.statusId === 6) {
       this.renderer.setElementStyle(this.el.nativeElement, "visibility", 'hidden');
       this.showToastMessage();
     }
@@ -92,9 +98,9 @@ export class CommentModal implements OnInit {
     toast.present();
   }
 
-  scrollToBottom() {
+  scrollToBottom(){
     let dimensions = this.content.getContentDimensions();
-    this.content.scrollTo(0, dimensions.scrollBottom, 0);
+    this.content.scrollTo(0, 700, 200);
   }
 
   loadComments() {
@@ -123,16 +129,19 @@ export class CommentModal implements OnInit {
     } else {
       this.notPost = false;
       this.emptyComments = false;
-      this.c.postComment(this.complaint.id, this.commentForm.value).subscribe(res => {
+      this.c.postComment(this.complaintId, this.commentForm.value).subscribe((res) => {
         this.notPost = true;
         if (!this.comments) { this.comments = []; }
         this.comments.push({
           createdAt: new Date(),
           employeeName: null,
-          parentName: localStorage.getItem("name"),
           comment: this.commentForm.value.comment,
           parentId: localStorage.getItem("id")
         });
+        this.commentForm.reset();
+      }, (err) => {
+        this.nl.errMessage();
+        this.notPost = true;
         this.commentForm.reset();
       });
     }

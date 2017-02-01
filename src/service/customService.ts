@@ -9,6 +9,7 @@ import { ToastController,
 export class CustomService {
 
   public loading;
+  public txt;
 
   constructor(private l: LoadingController,
               private a: AlertController,
@@ -41,6 +42,14 @@ export class CustomService {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  setHeaderText(text) {
+    this.txt = text;
+  }
+
+  getHeaderText() {
+    return this.txt;
   }
 
 }

@@ -12,7 +12,7 @@ import { Events, ViewController } from 'ionic-angular';
         </button>
       </ion-buttons>
       <ion-title>
-        {{title}}
+        {{title | uppercase}}
       </ion-title>
     </ion-toolbar>
   `,

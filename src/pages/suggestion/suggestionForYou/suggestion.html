@@ -2,7 +2,7 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 <ion-content class="complaint-list watermark">
-  <ion-refresher (ionRefresh)="loadNewComplaints($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-card *ngFor="let suggestion of complaints">
@@ -24,4 +24,7 @@
       <h3> NO SUGGESTIONS </h3>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

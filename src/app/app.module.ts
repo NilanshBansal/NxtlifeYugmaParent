@@ -28,16 +28,15 @@ import { StudentRating } from '../pages/rating/rating';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
-import { viewComplaintModal } from '../pages/complaint/view/viewComplaintModal';
-import { CommentComplaintModal } from '../pages/complaint/comment/comment.modal';
+import { ViewComponent } from '../pages/complaint/view/viewComplaintModal';
 import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 
 // import custom component
 import { ListView } from '../customComponent/list/listview.component';
-import { ListViewCloseButton } from '../customComponent/list/listview.closebtn.component.ts';
-import { ListViewCommentButton } from '../customComponent/list/listview.commentbtn.component.ts';
-import { ListViewReopenButton } from '../customComponent/list/listview.reopenbtn.component.ts';
-import { ListViewSatisfiedButton } from '../customComponent/list/listview.satisfiedbtn.component.ts';
+import { ListViewCloseButton,
+         ListViewReopenButton,
+         ListViewSatisfiedButton,
+         ListViewCommentButton } from '../customComponent/list/edit-cs-status-and-comment.component';
 import { CustomNavbar } from '../customComponent/navbar.component.ts';
 import { ModalNavbarComponent } from '../customComponent/modal.navbar.component.ts';
 import { CommentModal } from '../customComponent/commentModal.ts';
@@ -70,8 +69,7 @@ import { PollService } from '../service/poll.service';
     ReportIssuePage,
     SurveyPage,
     newComplaintModal,
-    viewComplaintModal,
-    CommentComplaintModal,
+    ViewComponent,
     ListView,
     CustomNavbar,
     ListViewCloseButton,
@@ -84,7 +82,8 @@ import { PollService } from '../service/poll.service';
     EventModalPage,
     CalendarTimelinePage,
     NewAppreciationModal,
-    StudentRating
+    StudentRating,
+    ViewComponent
   ],
   imports: [
     MomentModule,
@@ -109,8 +108,7 @@ import { PollService } from '../service/poll.service';
     ReportIssuePage,
     SurveyPage,
     newComplaintModal,
-    viewComplaintModal,
-    CommentComplaintModal,
+    ViewComponent,
     ListView,
     CustomNavbar,
     ListViewCloseButton,
@@ -123,7 +121,8 @@ import { PollService } from '../service/poll.service';
     EventModalPage,
     CalendarTimelinePage,
     NewAppreciationModal,
-    StudentRating
+    StudentRating,
+    ViewComponent
   ],
   providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })

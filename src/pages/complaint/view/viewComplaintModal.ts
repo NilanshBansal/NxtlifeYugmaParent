@@ -1,25 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from 'ionic-angular';
-
+import { ModalController, AlertController, ActionSheetController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
 
+// import base class
+import { EditComplaintStatusAndComment } from '../../../customComponent/list/edit-cs-status-and-comment.class';
+
+// import service
+import { CustomService } from '../../../service/customService';
+import { ComplaintSuggestion } from '../../../service/cs.service';
+
 @Component({
-  selector: 'view-complaint-modal',
-  templateUrl: 'viewComplaintModal.html'
+  selector: 'nl-view',
+  templateUrl: 'view.component.html'
 })
 
-export class viewComplaintModal {
+export class ViewComponent extends EditComplaintStatusAndComment implements OnInit {
 
   complaint;
+  title: string;
 
-  constructor(private navParams: NavParams,
+  constructor(public modalCtrl: ModalController,
+              public nl: CustomService,
+              public c: ComplaintSuggestion,
+              public actionSheetCtrl: ActionSheetController,
+              public alertCtrl: AlertController,
+              private navParams: NavParams,
               private viewCtrl: ViewController) {
-
+    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
   }
 
   ngOnInit() {
+    this.title = "VIEW " + this.nl.getHeaderText();
     this.complaint = this.navParams.get('complaint');
-    console.log("complaint", this.complaint);
   }
 
   dismiss() {

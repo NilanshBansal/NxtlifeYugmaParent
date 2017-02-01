@@ -21,41 +21,23 @@ import { ComplaintPage } from '../../complaint/complaint';
 export class YourSuggestion extends ComplaintPage {
 
   // set header title
-  title: string = "Suggestions";
+  title: string = "SUGGESTIONS";
 
   // used in event
   public master: string = "suggestion";
 
   constructor(public nl: CustomService,
-              public events: Events,
               public con: Configuration,
               public alertCtrl: AlertController,
               public actionSheetCtrl: ActionSheetController,
               public modalCtrl: ModalController,
               public c: ComplaintSuggestion) {
-    super(modalCtrl, alertCtrl, events, nl, c, actionSheetCtrl);
+    super(modalCtrl, alertCtrl, nl, c, actionSheetCtrl);
     this.getComplaints();
   }
 
   ionViewWillEnter() {
     this.con.setUrlForSuggestion();
-  }
-
-  // Respond after Angular projects external content into the component's view.
-  // Called once after the first NgDoCheck
-  ngAfterContentInit() {
-    this.events.subscribe('suggestion:comment', (data) => {
-      this.openCommentModal(data[0]);
-    });
-    this.events.subscribe('suggestion:close', (data) => {
-      this.openCloseModal(data[0]);
-    });
-    this.events.subscribe('suggestion:reopen', (data) => {
-      this.openReopenModal(data[0]);
-    });
-    this.events.subscribe('suggestion:satisfied', (data) => {
-      this.openSatisfiedModal(data[0]);
-    });
   }
 
 }

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController,
          AlertController,
          PopoverController,
-         ActionSheetController,
-         Events } from 'ionic-angular';
+         ActionSheetController } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../../service/customService';
@@ -27,13 +26,12 @@ export class AppreciationForYou extends ComplaintPage {
   public master: string = "appreciation";
 
   constructor(public nl: CustomService,
-              public events: Events,
               public con: Configuration,
               public alertCtrl: AlertController,
               public actionSheetCtrl: ActionSheetController,
               public modalCtrl: ModalController,
               public c: ComplaintSuggestion) {
-    super(modalCtrl, alertCtrl, events, nl, c, actionSheetCtrl);
+    super(modalCtrl, alertCtrl, nl, c, actionSheetCtrl);
     this.con.setUrlForStudentAppreciations("for-student");
     this.getComplaints();
   }

@@ -1,127 +1,85 @@
-$csBoardColor:#3f3f3f;
-ion-note {
-    ion-icon {
-        margin-right: 3px;
-    }
-    span {
-        top: -1px;
-        position: relative;
-    }
-    font-size: $font-sm;
-    align-self: flex-start;
+ion-note{
+  ion-icon {
+    margin-right: 3px;
+  }
+  span{
+    top:-1px;
+    position: relative;
+  }
+  font-size: $font-sm;
+  align-self: flex-start;
 }
-.complaint-list,
-.suggestion-list {
-    background: $csBackgroundColor;
-    ion-item-sliding {
-        h3 {
-            text-overflow: ellipsis;
-            overflow: hidden;
+.complaint-list{
+  ion-item-sliding {
+    h3{
+      line-height: 20px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    a{
+      .item-inner{
+        border-left-color:$inherit;
+        .input-wrapper{
+          border-left-color:$inherit;
+          ion-label{
+            border-left: 3px groove; 
+            border-left-color:$inherit;
+            padding: 0px 5px 0px 10px;
+          }
         }
-        a {
-            .item-inner {
-                border-left-color: $inherit;
-                .input-wrapper {
-                    border-left-color: $inherit;
-                    ion-label {
-                        border-left: 3px solid;
-                        border-left-color: $inherit;
-                        padding: 0px 5px 0px 10px;
-                    }
-                }
-            }
+      }
+    }
+  }
+}
+.view-complaint{
+  ion-card{
+    ion-item{
+      
+      h2{
+        padding: 6px 0px 0px 20px;
+        white-space: normal;
+        line-height: 20px;
+        pre {
+          overflow: visible;
+          white-space: pre-line;
+          line-height: 20px;
+          font-family: $inherit;
+          margin: 0px;
         }
-        nl-edit-button,
-        nl-comment-button,
-        nl-close-button,
-        nl-reopen-button,
-        nl-satisfied-button {
-            height: 100%;
-        }
+      }
     }
+  }  
 }
-.view-complaint {
-    background: $csBackgroundColor;
-    ion-card {
-        ion-item {
-            h2 {
-                font-size: 1.4rem;
-                white-space: normal;
-                line-height: 20px;
-                pre {
-                    overflow: visible;
-                    white-space: pre-line;
-                    line-height: 20px;
-                    margin: 0px;
-                }
-            }
-        }
+
+.complaint-item{
+  hr{
+    height: 1px;
+  }
+  span{
+    position: $absolute;
+    top: 12px;
+    left: 30px;
+    font-size: medium;
+    background: $background-color;
+    font-weight: 600;
+    padding: 0px 5px 0px 5px;
+  }
+}
+
+.new-complaint{
+  ion-item{
+    .item-inner{
+      border-bottom: 0.55px solid #c8c7cc !important;
     }
-}
-.complaint-item {
-    hr {
-        height: 1px;
+  }
+  ion-item-divider{
+    background-color: $inherit;
+    margin-top: 13px;
+    text-decoration: underline;
+    color: #387ef5;
+    font-weight: 700;
+    span{
+      float: right;
     }
-    span {
-        position: $absolute;
-        top: 12px;
-        left: 30px;
-        font-size: 1.4rem;
-        background: $background-color;
-        font-weight: 600;
-        padding: 0px 5px 0px 5px;
-    }
-    padding-bottom: 6px;
-}
-.list-ios ion-item-sliding,
-.list-md ion-item-sliding,
-.list-wp ion-item-sliding {
-    box-shadow: 0px 0px 1px #bbbbbb;
-}
-.item-ios,
-.item-wp,
-.item-md {
-    h2 {
-        margin: 0 0 2px;
-        font-size: 1.4rem;
-        font-weight: normal;
-        color: $csBoardColor;
-    }
-}
-.new-complaint ion-item ion-badge {
-    float: right;
-}
-.csInput-title {
-    width: 95%;
-}
-.csFiftyLimit {
-    float: right;
-    margin-top: -22px;
-    margin-right: 5px;
-}
-div {
-    .csSlideClose {
-        background-color: $color0;
-    }
-}
-.csBottom-card {
-    font-size: 15px !important;
-}
-.csParagraph {
-    white-space: pre-line;
-}
-//Ionic Changes:
-.item-inner {
-    border-bottom: none;
-}
-.new-list {
-    .item-block .item-inner, .list-md .item-block .item-inner {
-        border-bottom: none;
-    }
-}
-.csRemoveBottom {
-    border-bottom: none;
-}
-.csInProgress {
-    border-bottom: none !important;
+  }
 }

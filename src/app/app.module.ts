@@ -24,7 +24,10 @@ import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestion';
 import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 import { StudentRating } from '../pages/rating/rating';
-
+import { HomeworkComponent } from '../pages/homework/homework.component';
+import { CircularComponent } from '../pages/circular/circular.component';
+import { CircularViewComponent } from '../pages/circular/view/circular-view';
+import { SurveyListPage } from '../pages/survey/list/survey-list';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -51,6 +54,9 @@ import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/customService';
 import { EventService } from '../service/planner.service';
 import { PollService } from '../service/poll.service';
+import { HomeworkService } from '../service/homework.service';
+import { CircularService } from '../service/circular.servce';
+import { SurveyService } from '../service/survey.service';
 
 @NgModule({
   declarations: [
@@ -83,7 +89,13 @@ import { PollService } from '../service/poll.service';
     CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
+    HomeworkComponent,
+    CircularComponent,
+    CircularViewComponent,
+    SurveyListPage,
+
     ViewComponent
+
   ],
   imports: [
     MomentModule,
@@ -122,8 +134,13 @@ import { PollService } from '../service/poll.service';
     CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
+    SurveyListPage,
+    HomeworkComponent,
+    CircularComponent,
+    CircularViewComponent,
+
     ViewComponent
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
+  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService,SurveyService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })
 export class AppModule {}

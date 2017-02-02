@@ -12,7 +12,6 @@ export class EventService {
 
 	constructor(private http: Http){}
 
-
 	public AddNewEvent(body){
 		let headers = new Headers({'Content-Type': 'application/json'});
      	let options = new RequestOptions({ headers : headers });
@@ -34,7 +33,6 @@ export class EventService {
 		return this.http.get('https://yugma-ut.appspot-preview.com/director/3060931604/planner/'+ id)
 		.map((res:Response) => res.json())
 	}
-
 
 
 	public GetEvents(Eventmonth){
@@ -66,18 +64,15 @@ export class EventService {
 		let headers = new Headers({'Content-Type': 'application/json'});
      	let options = new RequestOptions({ headers : headers });
 
-
 		 return this.http.put(`https://yugma-ut.appspot-preview.com/director/3060931604/planner/`+id,body,options)
             .map((res:Response) => res.json())
              .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
 
 	}
 
-
 	public deleteEvent(id){
 		let headers = new Headers({'Content-Type': 'application/json'});
      	let options = new RequestOptions({ headers : headers });
-
 		return this.http.delete(`https://yugma-ut.appspot-preview.com/director/3060931604/planner/`+id,options);
 	}
 

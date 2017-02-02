@@ -54,7 +54,6 @@ export class Configuration {
 
   setUrlForSuggestion() {
     this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/suggestion";
-    console.log("url", this.Server)
   }
 
   setUrlForStudentAppreciations(url) {

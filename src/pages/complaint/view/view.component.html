@@ -5,7 +5,7 @@
 <ion-content class="view-complaint">
   <ion-card>
     <ion-item>
-      <ion-note item-right><span [style.color]="complaint.statusColor"><ion-icon name="at" ></ion-icon> {{complaint.statusName}}</span></ion-note>
+      <ion-note item-right><span [style.color]="complaint.statusColor" class="bold"><ion-icon name="at" ></ion-icon> {{complaint.statusName}}</span></ion-note>
     </ion-item>
     <ion-item>
       <div class="complaint-item">
@@ -109,26 +109,31 @@
           <h5>{{complaint.priorityName}}</h5>
         </span>
       </ion-item>
-      <ion-row>
-        <ion-col>
-          <button (click)="openReopenModal(complaint)" *ngIf="complaint.statusId === 4" ion-button icon-left clear small>
-            <ion-icon name="ios-thumbs-down"></ion-icon>
-            <div>Reopen</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button (click)="openSatisfiedModal(complaint)" *ngIf="complaint.statusId === 4" ion-button icon-left clear small>
-            <ion-icon name="ios-thumbs-up"></ion-icon>
-            <div>Satisfied</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button (click)="openCloseModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button icon-left clear small>
-            <ion-icon name="md-close"></ion-icon>
-            <div>Close</div>
-          </button>
-        </ion-col>
-      </ion-row>
+   
     </ion-card>
+        <ion-card>
+    <ion-row>
+      <ion-col width-33>
+        <button (click)="openEditModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button icon-left
+          clear small>
+          <ion-icon name="md-create"></ion-icon>
+        <div class="bold csCenter">Edit</div>
+      </button>
+      </ion-col>
+      <ion-col width-33>
+        <button (click)="openCommentModal(complaint)" ion-button icon-left clear small>
+        <ion-icon name="md-chatbubbles"></ion-icon>
+        <div class="bold csCenter">Comment</div>
+      </button>
+      </ion-col>
+      <ion-col width-33>
+        <button class="csRight" (click)="openCloseModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button icon-left
+          clear small>
+        <ion-icon name="close-circle"></ion-icon>
+        <div class="bold csCenter">Close</div>
+      </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
   </ion-list>
 </ion-content>

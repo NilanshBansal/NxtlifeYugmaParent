@@ -196,3 +196,18 @@ rating{
 .csStudentName{
     text-align:center !important;
 }
+button{
+    font-style:initial;
+}
+.bold{
+    font-weight: bold;
+}
+.header-ios .toolbar-ios:last-child .toolbar-background-ios, .header-md .toolbar-md:last-child .toolbar-background-md {
+    border-width: 0px !important;
+}
+.item-ios.item-block .item-inner , .item-md.item-block .item-inner {
+    border-bottom: 0px;
+}
+.csFooter{
+    background:$color1;
+}

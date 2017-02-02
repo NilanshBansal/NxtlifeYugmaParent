@@ -54,14 +54,14 @@
     <ion-card>
       <ion-item class="csTransparent">
         <ion-label stacked>Title (max. 50)</ion-label>
-        <ion-textarea rows="2" class="csInput-title" formControlName="title" maxlength="50"> </ion-textarea>
+        <ion-textarea rows="2" class="csInput-title" formControlName="title" maxlength="50" placeholder="Enter Title (max 50)"> </ion-textarea>
       </ion-item>
       <ion-badge class="csFiftyLimit"><span>{{50 - newComplaint.value.title.length}}</span></ion-badge>
     </ion-card>
     <ion-card>
       <ion-item class="csTransparent">
         <ion-label stacked>Description</ion-label>
-        <ion-textarea class="csInput-title" rows="8" formControlName="description" maxlength="200"></ion-textarea>
+        <ion-textarea class="csInput-title" rows="8" formControlName="description" maxlength="200" placeholder="Enter Title (max 200)"></ion-textarea>
       </ion-item>
       <ion-badge class="csFiftyLimit"><span>{{200 - newComplaint.value.description.length}}</span></ion-badge>
     </ion-card>
@@ -73,7 +73,7 @@
       </ion-item>
     </ion-card>
     <div padding>
-      <button ion-button full type="submit" [disabled]="newComplaint.invalid">Submit</button>
+      <button ion-button block type="submit" [disabled]="newComplaint.invalid">Submit</button>
     </div>
   </form>
 </ion-content>

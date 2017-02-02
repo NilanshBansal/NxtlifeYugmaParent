@@ -70,14 +70,6 @@ $inherit : inherit;
     background-image: url(''); 
     }
 }
-.PollOptions {
-    margin: 13px 8px 13px 0;
-    color: chocolate;
-}
-
-.PollButton {
-    float:right;
-}
 .csSelected{
   @extend .csWhiteText;
   background:$color1;

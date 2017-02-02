@@ -1,0 +1,21 @@
+<ion-header>
+    <nl-navbar [title]="title">
+
+    </nl-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    
+    <ion-list *ngFor="let a of homeworks">
+        <ion-item > 
+           <h1>{{ a.description }}</h1>
+           
+           <h3>{{ a.subjectName }}</h3>
+
+           <h3>{{ a.dueDate }}</h3>
+           
+           <h3> standardId : {{ a.standardId }} </h3>
+        </ion-item>
+    </ion-list>
+</ion-content>

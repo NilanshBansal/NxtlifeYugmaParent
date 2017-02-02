@@ -1,0 +1,11 @@
+<ion-header>
+    <nl-navbar [title]="title"></nl-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let a of allsurveys">
+            <h1> {{a.title}} </h1>
+        </ion-item>
+    </ion-list>
+</ion-content>

@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'nl-navbar',
   template: `
     <ion-navbar color="primary">
+    <ion-toolbar color="primary">
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
@@ -13,6 +14,7 @@ import { Component, Input } from '@angular/core';
       <ion-buttons end>
         <ng-content></ng-content>
       </ion-buttons>
+      </ion-toolbar>
     </ion-navbar>
   `,
   styles: [`

@@ -22,7 +22,7 @@ import { NewAppreciationModal } from '../new/appreciation';
 export class YourAppreciation {
 
   // set header title
-  title: string = "Appreciations";
+  title: string = "APPRECIATIONS";
 
   // used in event
   public master: string = "appreciation";

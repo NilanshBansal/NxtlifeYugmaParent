@@ -31,7 +31,7 @@ export class NewAppreciationModal implements OnInit {
   newSuggestion: FormGroup;
   myForm: FormGroup;
 
-  title = "New Appreciation";
+  title = "NEW APPRECIATION";
 
   master = "appreciation";
 

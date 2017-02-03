@@ -1,4 +1,4 @@
- .segment-md .segment-button {
+.segment-md .segment-button {
      -webkit-flex: 1;
      -ms-flex: 1;
      flex: 1;
@@ -19,8 +19,13 @@
  .cal-past {
      padding:0px;
      margin:0px;
-     opacity:0.2;
-     box-shadow: inset 0px 0px 20px #000000;
+    color: rgba(53, 53, 53, 0.11) !important;
+    .cal-cell-top{
+        .cal-day-number {
+        color: rgba(53, 53, 53, 0.11) !important;
+    }
+    }
+    
 }
  .nextBtn{
      float: right;
@@ -81,9 +86,9 @@
      align-items: stretch;
 }
  .cal-month-view .cal-day-cell {
-     border-bottom: 3px solid rgba(225, 225, 225, 0.16);
+     border-bottom: 3px solid rgba(225, 225, 225, 0.5);
      min-height: 50px;
-     transition: box-shadow 0.4s ease-in-out;
+     transition: box-shadow 0.2s ease-in-out;
 }
 //  .cal-month-view .cal-day-cell:not(:last-child) {
 //      border-right: 3px solid rgba(225, 225, 225, 0.16);
@@ -147,12 +152,15 @@
      color: darkred;
 }
  .cal-month-view .cal-day-cell.cal-today {
-    box-shadow: 0px 1px 1px grey;
-    border-bottom: #00bcd4 solid 3px;   
+    color: white;
+    background:$color1;
+     .cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
+     color: $color1;
+}
 }
  .cal-month-view .cal-day-cell.cal-today .cal-day-number {
      font-size: 1.3em;
-     font-weight: 700;
+     font-weight: 600;
 }
  .cal-month-view .cal-open-day-events {
      padding: 10px;
@@ -160,7 +168,7 @@
      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     -webkit-transition-property: top, bottom;
     -webkit-transition-duration: 0.6s;
-        div{
+    div{
         
         text-align:left;
     }
@@ -169,6 +177,7 @@
      position: relative;
      top: 2px;
 }
+
  .cal-month-view .cal-out-month .cal-day-badge, .cal-month-view .cal-out-month .cal-event {
      opacity: 0.3;
 }
@@ -242,7 +251,7 @@
      height: 30px;
 }
  .cal-day-view .cal-hour:not(:last-child) .cal-hour-segment, .cal-day-view .cal-hour:last-child :not(:last-child) .cal-hour-segment {
-     border-bottom: thin dashed rgba(225, 225, 225, 0.16);
+     border-bottom: thin dashed rgba(225, 225, 225, 0.5);
     ;
 }
  .cal-day-view .cal-time {
@@ -289,7 +298,7 @@ $csChalkGreen:  rgb(158, 255, 158);
         padding: 15px;
          font:{
              weight:bold;
-             size:20px;
+             size: 17px;
         }
     }
      .csCalMonth{

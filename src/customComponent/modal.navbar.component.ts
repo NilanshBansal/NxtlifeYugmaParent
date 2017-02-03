@@ -4,7 +4,7 @@ import { Events, ViewController } from 'ionic-angular';
 @Component({
   selector: 'nl-modal-navbar',
   template: `
-    <ion-toolbar color="primary">
+  <ion-toolbar color="primary">
       <ion-buttons start>
         <button ion-button color="light" class="navBtnRight" (click)="dismiss()">
           <span color="light" showWhen="ios"><ion-icon name="close-circle"></ion-icon></span>
@@ -14,7 +14,7 @@ import { Events, ViewController } from 'ionic-angular';
       <ion-title>
         {{title | uppercase}}
       </ion-title>
-    </ion-toolbar>
+ </ion-toolbar>   
   `,
   styles: [`
 

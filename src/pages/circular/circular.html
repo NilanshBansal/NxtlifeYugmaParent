@@ -1,20 +1,20 @@
-<ion-header>
-    <nl-navbar [title]="title"></nl-navbar>
-     
-</ion-header>
 
-<ion-content padding>
-    
-    <ion-list *ngFor="let a of circulars">
-       
-        <ion-item *ngFor="let b of a.dayCirculars">
-            <h3> {{ b.title }} </h3>
-           
-            <h3> {{ a.fullDate }} </h3>
-            <h3> {{ b.circularTypeColor }} </h3>
-            <h3> {{ b.circularTypeName }} </h3>
-            <button ion-button (click)="ranFunc(b.id)">click!!</button>
-        </ion-item>
-  
+
+
+<ion-header>
+  <nl-navbar [title]="title">
+  </nl-navbar>
+</ion-header>
+<ion-content class="csGrayBackground">
+    <ion-list>
+  <div *ngFor="let a of circulars">
+    <ion-item *ngFor="let b of a.dayCirculars" (click)="ranFunc(b.id)">
+        <div class="csIndicator" [style.border-left-color]="b.circularTypeColor">
+      <span> <b>{{b.title}}</b></span>
+      <div class="csPaleragraph"> Click to view</div>
+      <p class="csPaleragraph"> <span>{{ b.circularTypeName}}</span> <span class="csRight">{{ a.fullDate | amTimeAgo}}</span> </p>
+      </div>
+    </ion-item>
+  </div>
     </ion-list>
 </ion-content>

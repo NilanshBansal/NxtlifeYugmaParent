@@ -15,18 +15,16 @@
   <ion-card *ngFor="let res of resdata">
     <ion-card-header>
       <span>
-           <b>{{res.question}}</b>
+           <div class="csParagraph"><b>{{res.question}}</b></div>
          </span>
     </ion-card-header>
     <ion-card-content>
       <ion-list radio-group [(ngModel)]="relationship" *ngFor="let d of res.subOptions">
-        
           <ion-item>
             <ion-label>{{d.name}}</ion-label>
             <ion-radio *ngIf="res.optionTypeId == 1" ngmodel="choice1" checked (click)="PollChoiceClicked(d.id)"></ion-radio>
             <ion-checkbox *ngIf="res.optionTypeId == 2" [(ngModel)]="checkItems[d.id]" (click)="buttonEnable()"></ion-checkbox>
           </ion-item>
-     
       </ion-list>
     </ion-card-content>
     <ion-item>

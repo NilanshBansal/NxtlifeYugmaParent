@@ -221,3 +221,10 @@ button{
 .item-input .label-ios, .item-select .label-ios, .item-datetime .label-ios{
     color: #464646;
 }
+.no-comment{
+    @extend .csCenter;
+    margin-top:150px;
+    width:100px;
+    color:dimgray;
+    text-align:center;
+}

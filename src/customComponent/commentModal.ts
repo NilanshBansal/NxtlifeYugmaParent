@@ -13,9 +13,10 @@ import { CustomService } from '../service/customService';
       <nl-modal-navbar [title]="title" [complaint]="complaint"></nl-modal-navbar>
     </ion-header>
     <ion-content id="chat" class="csChatBox" >
-      <ion-list class="no-comment" *ngIf="emptyComments">
-        <h3>No Comments</h3>
-      </ion-list>
+    <ion-list class="no-comment" *ngIf="emptyComments">
+        <img src="../../assets/svg/empty.svg" />
+        <span>No Comment</span>
+    </ion-list>
       <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
       <div  class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>
         <div no-padding class="csMyComment">

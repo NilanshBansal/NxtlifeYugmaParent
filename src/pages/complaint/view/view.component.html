@@ -109,28 +109,20 @@
           <h5>{{complaint.priorityName}}</h5>
         </span>
       </ion-item>
-   
     </ion-card>
         <ion-card>
     <ion-row>
-      <ion-col width-33>
-        <button (click)="openEditModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button icon-left
-          clear small>
-          <ion-icon name="md-create"></ion-icon>
-        <div class="bold csCenter">Edit</div>
-      </button>
-      </ion-col>
-      <ion-col width-33>
-        <button (click)="openCommentModal(complaint)" ion-button icon-left clear small>
+      <ion-col>
+        <button class="csCenter" (click)="openCommentModal(complaint)" ion-button icon-left clear small>
         <ion-icon name="md-chatbubbles"></ion-icon>
         <div class="bold csCenter">Comment</div>
       </button>
       </ion-col>
-      <ion-col width-33>
-        <button class="csRight" (click)="openCloseModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button icon-left
+      <ion-col *ngIf="complaint.statusId != 6 && complaint.statusId != 4">
+        <button (click)="openCloseModal(complaint)" ion-button icon-left
           clear small>
-        <ion-icon name="close-circle"></ion-icon>
-        <div class="bold csCenter">Close</div>
+        <ion-icon name="md-hammer"></ion-icon>
+        <div class="bold csCenter">Close Complaint</div>
       </button>
       </ion-col>
     </ion-row>

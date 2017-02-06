@@ -20,9 +20,8 @@
       </div>
     </ion-item>
   </ion-card>
-  <ion-list>
-    <ion-item *ngIf="EmptyComplaints">
-      <h3> No Appreciations </h3>
-    </ion-item>
+  <ion-list class="no-comment" *ngIf="EmptyComplaints">
+      <img src="../../assets/svg/empty.svg" />
+      <span>No Appreciation</span>
   </ion-list>
 </ion-content>

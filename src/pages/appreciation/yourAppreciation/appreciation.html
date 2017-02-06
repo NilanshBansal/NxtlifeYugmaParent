@@ -23,11 +23,10 @@
       </div>
     </ion-item>
   </ion-card>
-  <ion-list>
-    <ion-item *ngIf="EmptyAppreciations">
-      <h3> NO SUGGESTIONS </h3>
-    </ion-item>
-  </ion-list>
+  <ion-list class="no-comment" *ngIf="EmptyAppreciations">
+      <img src="../../assets/svg/empty.svg" />
+      <span>No Appreciation</span>
+  </ion-list>  
   <ion-infinite-scroll (ionInfinite)="loadMoreComplaints($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

@@ -75,10 +75,6 @@ ion-toolbar {
         weight: bold;
     }
 }
-.item-ios.item-label-stacked .text-input,
-.item-ios.item-label-floating .text-input {
-    letter-spacing: 3px !important;
-}
 .csInputIcon {
     font-size: $csInputIconSize !important;
     margin-bottom: -5px !important;

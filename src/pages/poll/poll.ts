@@ -36,7 +36,7 @@ public EmptyPolls = false;
       () => console.log('Polls',this.resdata)
     )};
 
-
+ 
   RemoveItem(theItem) {
     console.log('theItem',theItem);
     let index = this.resdata.indexOf(theItem);

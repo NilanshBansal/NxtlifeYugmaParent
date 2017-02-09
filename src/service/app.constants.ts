@@ -37,7 +37,7 @@ export class Configuration {
     }
   }
 
-  public Server: string = "https://yugma-ut.appspot.com";
+  public Server: string = "https://yugma-ut.appspot-preview.com";
 
   public ComplaintUrl(): string {
     return this.Server + "/parent/" + this.getParentId() + "/";
@@ -45,7 +45,7 @@ export class Configuration {
 
   setUrl(url) {
     this.cs.setHeaderText(url);
-    this.Server = "https://yugma-ut.appspot.com/parent/" + this.getParentId() + "/" + url;
+    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/" + url ;
   }
 
   setUrlForStudentSuggestions(url) {

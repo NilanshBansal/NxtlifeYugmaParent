@@ -36,10 +36,12 @@ export class AuthService {
   }
 
   public getUser(phoneNo: number) {
-    return this._http.get(this.actionUrl + "/login/parent/" + phoneNo)
+    return this._http.get(this.actionUrl + "/login/parent/" + phoneNo+"/")
       .toPromise()
-      .then(res => { return Promise.resolve(res) })
-      .catch(err => {
+      .then(res => { 
+        console.log(res)
+        return Promise.resolve(res) 
+      }).catch(err => {
         if (err.status == 0) {
           this.safeHttp.ErrorMessage();
         } else {
@@ -53,7 +55,7 @@ export class AuthService {
       username: phoneNo,
       password: otp
     }
-    return this._http.post(this.actionUrl + "/login", this.data)
+    return this._http.post(this.actionUrl + "/login/", this.data)
       .toPromise()
       .then(response => {
         console.log("otp verify response", response)
@@ -73,7 +75,7 @@ export class AuthService {
   }
 
   public getParentInfo() {
-    return this.safeHttp.get(this.actionUrl + "/parent/info")
+    return this.safeHttp.get(this.actionUrl + "/parent/info/")
       .then(res => {
         console.log("parent info", res);
         return Promise.resolve(res);

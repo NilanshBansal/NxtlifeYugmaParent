@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers,Http,Response,RequestOptions } from '@angular/http';
-
+import {Configuration } from './app.constants';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -10,71 +10,78 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class EventService {
 
-	constructor(private http: Http){}
+	public headers;
+    public options;
+    serverUrl;
+
+	constructor(private http: Http,
+				private configuration : Configuration){
+
+		this.headers = this.configuration.header();
+                  this.options = new RequestOptions({
+                    headers : this.headers
+                  });
+	}
 
 	public AddNewEvent(body){
-		let headers = new Headers({'Content-Type': 'application/json'});
-     	let options = new RequestOptions({ headers : headers });
+		this.serverUrl = this.configuration.Server;
+		
 
-     return this.http.post(`https://yugma-ut.appspot.com/director/3060931604/planner`,body,options)
+     return this.http.post(this.serverUrl,body,this.options)
              .map((res:Response) => res.json())
              .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
 
 	}
 
-
 	public GetParticularEvent(id){
-		return this.http.get('https://yugma-ut.appspot.com/director/3060931604/planner/'+ id)
+		this.serverUrl = this.configuration.Server;
+		return this.http.get(this.serverUrl + id,this.options)
 		.map((res:Response) => res.json())
 	}
-
 
 	public CopyGetParticularEvent(id){
-		return this.http.get('https://yugma-ut.appspot.com/director/3060931604/planner/'+ id)
+		this.serverUrl = this.configuration.Server;
+		return this.http.get(this.serverUrl + id,this.options)
 		.map((res:Response) => res.json())
 	}
-
 
 	public GetEvents(Eventmonth){
-		return this.http.get('https://yugma-ut.appspot.com/director/3060931604/planner/month/'+ Eventmonth)
+		this.serverUrl = this.configuration.Server;
+		return this.http.get(this.serverUrl +'/month/'+ Eventmonth,this.options)
 		.map((res:Response) => res.json())
 	}
-
 
 	public GetPlannerType(){
-		return this.http.get('https://yugma-ut.appspot.com/director/3060931604/planner/type')
+		this.serverUrl = this.configuration.Server;
+		return this.http.get(this.serverUrl +'type',this.options)
 		.map((res:Response) => res.json())
 	}
-
 
 	public GetEventsTimeLine(){
-		return this.http.get(`https://yugma-ut.appspot.com/director/3060931604/planner`)
+		this.serverUrl = this.configuration.Server;
+		return this.http.get(this.serverUrl,this.options)
 		.map((res:Response) => res.json())
 	}
-
 
 	public GetStandard(){
-		return this.http.get('https://yugma-ut.appspot.com/director/3060931604/planner/type/standard')
+		this.serverUrl = this.configuration.Server;
+		return this.http.get(this.serverUrl +'/type/standard',this.options)
 		.map((res:Response) => res.json())
 	}
 
-
 	public putEvent(id,body){
+		this.serverUrl = this.configuration.Server;
 
-		let headers = new Headers({'Content-Type': 'application/json'});
-     	let options = new RequestOptions({ headers : headers });
-
-		 return this.http.put(`https://yugma-ut.appspot.com/director/3060931604/planner/`+id,body,options)
+		 return this.http.put(this.serverUrl+id,body,this.options)
             .map((res:Response) => res.json())
              .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
 
 	}
 
 	public deleteEvent(id){
-		let headers = new Headers({'Content-Type': 'application/json'});
-     	let options = new RequestOptions({ headers : headers });
-
-		return this.http.delete(`https://yugma-ut.appspot.com/director/3060931604/planner/`+id,options);
+		this.serverUrl = this.configuration.Server;
+	
+		return this.http.delete(this.serverUrl+id,this.options);
 	}
 
 }

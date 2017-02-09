@@ -57,9 +57,9 @@ export class EventService {
 		.map((res:Response) => res.json())
 	}
 
-	public GetEventsTimeLine(){
+	public GetEventsTimeLine(pageNo){
 		this.serverUrl = this.configuration.Server;
-		return this.http.get(this.serverUrl,this.options)
+		return this.http.get(this.serverUrl+"/page/"+pageNo,this.options)
 		.map((res:Response) => res.json())
 	}
 

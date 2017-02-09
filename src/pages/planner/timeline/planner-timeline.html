@@ -1,27 +1,45 @@
-<ion-header >
-  <ion-navbar color="primary">
+<ion-header>
+  <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Calendar</ion-title>
+    <ion-title>Timeline</ion-title>
 </ion-navbar>
 </ion-header>
 
-
-<ion-content class="timeline" padding>
+<ion-content class="csGrayBackground">
         <section id="cd-timeline" class="cd-container">
-          <div *ngFor="let activity of timeline">
+          <div class="timeline-row" *ngFor="let activity of timeline">
             <div class="cd-timeline-block">
               <div class="cd-timeline-picture dark">
-					    <span>{{activity.date}} {{activity.month}}</span>
-					     <p class="daytimeline"> {{activity.day}}</p>
+					    <!--<span>{{activity.date}} {{activity.month}}</span>
+					     <p class="daytimeline"> {{activity.day}}</p>-->
+               <span>{{activity.fullDate}}</span>
 			       </div>
              </div>
               <div *ngFor="let tre of activity.events">
               <div class="cd-timeline-content dark">
-                <h6 class="timeline-title">{{tre.title}}</h6>
+                <!--<div  ></div>-->
+                <!--<span class="daytimeline"> {{activity.day}}</span>-->
+                <div class="color-col" [style.border-left-color]= "tre.plannerTypeColor">
+                  
+                  <h5 class="timeline-title">{{tre.title}}</h5>
+                  <span class="startTime">{{tre.startTime}} </span>
+                  <span class="startTime2">{{tre.durationDays}}d</span>
+                  <span class="startTime3">{{tre.durationHours}}h</span>
+                  <span class="startTime3">{{tre.durationMinutes}}m</span>
+
+                  <span class="Timelinelocation"> {{ tre.location }} </span>
+                  </div>
+                  <!--<p class="Timelinelocation">location of event</p>-->
+                
               </div>
             </div>
           </div>
         </section>
+
+          <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
+
 </ion-content>

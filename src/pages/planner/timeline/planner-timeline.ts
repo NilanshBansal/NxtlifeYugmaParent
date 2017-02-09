@@ -24,6 +24,7 @@ import { NavController, NavParams } from 'ionic-angular';
 export class CalendarTimelinePage implements OnInit {
 
   public timeline = [];
+  public currentPage = 1;
   public Timeline = ['Dec 2016'];
   public newtimeline = [{'title':[],'month':'','day':'','date': {}}];
   //public events = [];
@@ -43,7 +44,7 @@ export class CalendarTimelinePage implements OnInit {
 
    AllEvents(){
 
-     this.eventservice.GetEventsTimeLine()
+     this.eventservice.GetEventsTimeLine(this.currentPage)
      .subscribe(
          data => { this.timeline = data; this.pop(); },
          err => console.error(err)
@@ -81,6 +82,10 @@ export class CalendarTimelinePage implements OnInit {
 
 //   console.log('newtimeline[]',this.newtimeline);
 // }
+
+titleClicked(id){
+  console.log('title clicked',id);
+}
 
 
 

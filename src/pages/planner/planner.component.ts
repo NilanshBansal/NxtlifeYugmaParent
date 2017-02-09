@@ -145,7 +145,6 @@ public title : string = "planner";
   viewDate: Date = new Date();
 
 
-
     actions2: CalendarEventAction[] = [
       
     //   {

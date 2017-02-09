@@ -16,7 +16,7 @@
 <ion-card class="planner" padding>
   <ion-grid class="csCalMonth">
     <ion-row>
-      <ion-col width-20 class="csCalNavigation">
+      <ion-col width-20 class="csCalNavigation" *ngIf='!(count <= 0)'>
         <button ion-button color="dark" (click)="decrement()" clear><ion-icon name="arrow-dropleft-circle"></ion-icon></button>
       </ion-col>
       <ion-col>
@@ -29,7 +29,7 @@
   </ion-grid>
   <div [ngSwitch]="view" text-center class="csCalDays">
     <div>
-      <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events2" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+      <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events2" (eventClicked)="EventClicked($event)" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
         (dayClicked)="dayClicked($event.day)">
       </mwl-calendar-month-view>
     </div>

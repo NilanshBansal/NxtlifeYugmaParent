@@ -35,13 +35,13 @@ export class EventService {
 
 	public GetParticularEvent(id){
 		this.serverUrl = this.configuration.Server;
-		return this.http.get(this.serverUrl + id,this.options)
+		return this.http.get(this.serverUrl +'/' +id,this.options)
 		.map((res:Response) => res.json())
 	}
 
 	public CopyGetParticularEvent(id){
 		this.serverUrl = this.configuration.Server;
-		return this.http.get(this.serverUrl + id,this.options)
+		return this.http.get(this.serverUrl +'/'+ id,this.options)
 		.map((res:Response) => res.json())
 	}
 

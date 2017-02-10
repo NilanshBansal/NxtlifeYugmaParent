@@ -21,10 +21,6 @@ Date:    21/12/2016
     position: fixed;
     background-repeat: no-repeat;
 }
-.csBorderWhite {
-    border: solid 1px white;
-    box-shadow: 0px 0px 8px #000000;
-}
 .csFull {
     width: 100% !important;
 }
@@ -98,11 +94,6 @@ ion-toolbar {
 }
 .csLoginBox {
     background-color: rgba(255, 255, 255, 0.75) !important;
-}
-.csOtpBox {
-    @extend .csCenter;
-    background-color: rgba(255, 255, 255, 0.75) !important;
-    width: 55%;
 }
 .csButtonList {
     @extend .csCenter;

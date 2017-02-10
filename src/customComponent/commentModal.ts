@@ -9,39 +9,39 @@ import { CustomService } from '../service/customService';
 @Component({
   selector: 'comment',
   template: `
-    <ion-header>
-      <nl-modal-navbar [title]="title" [complaint]="complaint"></nl-modal-navbar>
-    </ion-header>
-    <ion-content id="chat" class="csChatBox" >
-    <ion-list class="no-comment" *ngIf="emptyComments">
-        <img src="../../assets/svg/empty.svg" />
-        <span>No Comment</span>
-    </ion-list>
-      <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
-      <div  class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>
-        <div no-padding class="csMyComment">
-          <h3>{{ m.comment }}</h3>
-        </div>
-        <div class="csCommentTime">{{m.employeeNickName}}{{m.parentName}} {{ m.createdAt | amCalendar }}</div>
-      </div>
-      <ion-spinner class="loader"  name="dots" *ngIf="!notPost"></ion-spinner>
-    </ion-content>
-    <ion-footer keyboard-attach class="bar-stable" #commentBtn>
-      <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postComment()" novalidate>
-        <ion-grid>
-          <ion-row>
-            <ion-col width-80>
-              <ion-textarea rows="2" class="csCommentInput" type="text" formControlName="comment" placeholder=" Write comment..."></ion-textarea>
-            </ion-col>
-            <ion-col>
-              <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
+<ion-header>
+  <nl-modal-navbar [title]="title" [complaint]="complaint"></nl-modal-navbar>
+</ion-header>
+<ion-content id="chat" class="csChatBox">
+  <ion-list class="no-comment" *ngIf="emptyComments">
+    <img src="assets/svg/empty.svg" />
+    <span>No Comment</span>
+  </ion-list>
+  <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
+  <div class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>
+    <div class="csMyComment">
+      <h3>{{ m.comment }}</h3>
+    </div>
+    <div class="csCommentTime">{{m.employeeNickName}}{{m.parentName}} {{ m.createdAt | amCalendar }}</div>
+  </div>
+  <ion-spinner class="loader" name="dots" *ngIf="!notPost"></ion-spinner>
+</ion-content>
+<ion-footer keyboard-attach class="bar-stable" #commentBtn>
+  <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postComment()" novalidate>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-80>
+          <ion-textarea rows="2" class="csCommentInput" type="text" formControlName="comment" placeholder=" Write comment..."></ion-textarea>
+        </ion-col>
+        <ion-col>
+          <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
                 <ion-icon name="md-send" role="img"></ion-icon>
               </button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </form>
-    </ion-footer>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>
   `
 })
 

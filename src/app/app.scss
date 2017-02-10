@@ -75,3 +75,8 @@ $inherit : inherit;
   color: #6d6d6d;
   font-weight: bold;
 }
+.noBorder-item{
+  .item-inner {
+    border-bottom: 0px !important;
+  }  
+}

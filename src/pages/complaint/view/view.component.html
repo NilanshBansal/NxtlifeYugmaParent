@@ -97,22 +97,20 @@
         </span>
       </ion-item>
     </ion-card>
-        <ion-card>
     <ion-row>
       <ion-col>
-        <button class="csCenter" (click)="openCommentModal(complaint)" ion-button icon-left clear small>
+        <button  (click)="openCommentModal(complaint)" color="primary" ion-button icon-left item-right block>
         <ion-icon name="md-chatbubbles"></ion-icon>
         <div class="bold csCenter">Comment</div>
       </button>
       </ion-col>
       <ion-col *ngIf="complaint.statusId != 6 && complaint.statusId != 4">
-        <button (click)="openCloseModal(complaint)" ion-button icon-left
-          clear small>
+        <button (click)="openCloseModal(complaint)" color="primary" ion-button icon-left item-right
+         block>
         <ion-icon name="md-hammer"></ion-icon>
-        <div class="bold csCenter">Close Complaint</div>
+        <div class="bold csCenter">Close</div>
       </button>
       </ion-col>
     </ion-row>
-  </ion-card>
   </ion-list>
 </ion-content>

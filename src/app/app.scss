@@ -71,6 +71,12 @@ $inherit : inherit;
     }
 }
 .csSelected{
-  @extend .csWhiteText;
-  background:$color1;
+  background: #dedede;
+  color: #6d6d6d;
+  font-weight: bold;
+}
+.noBorder-item{
+  .item-inner {
+    border-bottom: 0px !important;
+  }  
 }

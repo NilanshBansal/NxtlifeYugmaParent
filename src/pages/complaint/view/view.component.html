@@ -35,36 +35,23 @@
         {{complaint.rca}}
       </h2>
     </ion-item>
-    <ion-item *ngIf="complaint.closedOn">
-      <ion-note item-left>
-        <span [style.color]="complaint.statusColor">
-            <b>Created at</b>
-          </span>
-        <br>
-        <span style="color:black">
-            {{complaint.createdAt  | amDateFormat: 'LL'}}
-          </span>
-      </ion-note>
-      <ion-note item-right *ngIf="complaint.closedOn">
-        <span [style.color]="complaint.statusColor">
-          <b>Closed on</b>
-          </span>
-        <br>
-        <span style="color:black">
-          {{complaint.closedOn  | amDateFormat: 'LL'}}
-          </span>
-      </ion-note>
-    </ion-item>
   </ion-card>
   <ion-list>
     <ion-card>
-      <ion-item *ngIf="complaint.closedOn==null" class="csTransparent csBottom-card">
+      <ion-item class="csTransparent csBottom-card">
         <ion-icon name="body" [style.color]="complaint.statusColor"></ion-icon>
         <span [style.color]="complaint.statusColor" class="csBoldFont">Created at</span>
         <span item-right icon-left>
           <h5>{{complaint.createdAt  | amDateFormat: 'LL'}}</h5>
         </span>
       </ion-item>
+      <ion-item *ngIf="complaint.closedOn" class="csTransparent csBottom-card">
+        <ion-icon name="body" [style.color]="complaint.statusColor"></ion-icon>
+        <span [style.color]="complaint.statusColor" class="csBoldFont">Closed on</span>
+        <span item-right icon-left>
+          <h5>{{complaint.closedOn  | amDateFormat: 'LL'}}</h5>
+        </span>
+      </ion-item>      
       <ion-item *ngIf="complaint.anonymous" class="csTransparent csBottom-card">
         <ion-icon name="body" [style.color]="complaint.statusColor"></ion-icon>
         <span [style.color]="complaint.statusColor" class="csBoldFont">Complaint by</span>
@@ -83,7 +70,7 @@
     <ion-card>
       <ion-item *ngIf="complaint.assignedEmployeeName" class="csTransparent" class="csTransparent">
         <ion-icon name="person-add" [style.color]="complaint.statusColor"></ion-icon>
-        <span [style.color]="complaint.statusColor" class="csBoldFont">Assigned</span>
+        <span [style.color]="complaint.statusColor" class="csBoldFont">Assigned to</span>
         <span item-right icon-left>
           <h5>{{complaint.assignedEmployeeName}}</h5>
         </span>
@@ -109,31 +96,21 @@
           <h5>{{complaint.priorityName}}</h5>
         </span>
       </ion-item>
-   
     </ion-card>
-        <ion-card>
     <ion-row>
-      <ion-col width-33>
-        <button (click)="openEditModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button icon-left
-          clear small>
-          <ion-icon name="md-create"></ion-icon>
-        <div class="bold csCenter">Edit</div>
-      </button>
-      </ion-col>
-      <ion-col width-33>
-        <button (click)="openCommentModal(complaint)" ion-button icon-left clear small>
+      <ion-col>
+        <button  (click)="openCommentModal(complaint)" color="primary" ion-button icon-left item-right block>
         <ion-icon name="md-chatbubbles"></ion-icon>
         <div class="bold csCenter">Comment</div>
       </button>
       </ion-col>
-      <ion-col width-33>
-        <button class="csRight" (click)="openCloseModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4" ion-button icon-left
-          clear small>
-        <ion-icon name="close-circle"></ion-icon>
+      <ion-col *ngIf="complaint.statusId != 6 && complaint.statusId != 4">
+        <button (click)="openCloseModal(complaint)" color="primary" ion-button icon-left item-right
+         block>
+        <ion-icon name="md-hammer"></ion-icon>
         <div class="bold csCenter">Close</div>
       </button>
       </ion-col>
     </ion-row>
-  </ion-card>
   </ion-list>
 </ion-content>

@@ -13,16 +13,15 @@
     </ion-item>
     <ion-item>
       <div item-left>
-        <b> Student:</b><br> {{appreciation.studentName}}
-      </div>
-      <div item-right>
-        <b>Created at:</b><br> {{appreciation.createdAt | date:'mediumDate'}}
-      </div>
+         <b><ion-icon name="body" color="primary"></ion-icon></b> {{appreciation.studentName}}
+        </div>
+        <div item-right>
+          <b>  <ion-icon name="time" color="primary"></ion-icon></b> {{appreciation.createdAt | amDateFormat: 'LL'}}
+        </div>
     </ion-item>
   </ion-card>
-  <ion-list>
-    <ion-item *ngIf="EmptyComplaints">
-      <h3> No Appreciations </h3>
-    </ion-item>
+  <ion-list class="no-comment" *ngIf="EmptyComplaints">
+      <img src="assets/svg/empty.svg" />
+      <span>No Record Found</span>
   </ion-list>
 </ion-content>

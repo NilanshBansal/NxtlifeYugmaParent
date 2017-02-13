@@ -15,19 +15,18 @@
       <div class="csParagraph">{{appreciation.description}}</div>
     </ion-item>
     <ion-item>
-      <div item-left>
-        <b> Student:</b><br> {{appreciation.studentName}}
-      </div>
-      <div item-right>
-        <b>Created at:</b><br> {{appreciation.createdAt | date:'mediumDate'}}
-      </div>
+      <div item-left >
+         <b><ion-icon name="body" color="primary"></ion-icon></b> {{appreciation.studentName}}
+        </div>
+        <div item-right>
+          <b>  <ion-icon name="time" color="primary"></ion-icon></b> {{appreciation.createdAt | amDateFormat: 'LL'}}
+        </div>
     </ion-item>
   </ion-card>
-  <ion-list>
-    <ion-item *ngIf="EmptyAppreciations">
-      <h3> NO SUGGESTIONS </h3>
-    </ion-item>
-  </ion-list>
+  <ion-list class="no-comment" *ngIf="EmptyAppreciations">
+      <img src="assets/svg/empty.svg" />
+      <span>No Record Found</span>
+  </ion-list>  
   <ion-infinite-scroll (ionInfinite)="loadMoreComplaints($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

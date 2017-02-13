@@ -10,15 +10,15 @@
     <button ion-fab (click)="newComplaint()" color="cool"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item-sliding *ngFor="let complaint of complaints" #slidingItem >
-      <a ion-item detail-push detail-none href="#" (click)="viewComplaint(complaint)" [style.border-left-color]="complaint.statusColor">
-        <nl-list-view [complaint]="complaint"></nl-list-view>
+    <ion-item-sliding *ngFor="let data of allData" #slidingItem >
+      <a ion-item detail-push detail-none href="#" (click)="viewComplaint(data)" [style.border-left-color]="data.statusColor">
+        <nl-list-view [complaint]="data"></nl-list-view>
       </a>
       <ion-item-options side="right">
-        <nl-comment-button [master]="master" [complaint]="complaint"></nl-comment-button>
-        <nl-close-button [master]="master" [complaint]="complaint"></nl-close-button>
-        <nl-reopen-button [master]="master" [complaint]="complaint"></nl-reopen-button>
-        <nl-satisfied-button [master]="master" [complaint]="complaint"></nl-satisfied-button>
+        <nl-comment-button [master]="master" [complaint]="data"></nl-comment-button>
+        <nl-close-button [master]="master" [complaint]="data"></nl-close-button>
+        <nl-reopen-button [master]="master" [complaint]="data"></nl-reopen-button>
+        <nl-satisfied-button [master]="master" [complaint]="data"></nl-satisfied-button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

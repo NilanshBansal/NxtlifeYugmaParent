@@ -19,7 +19,7 @@ import { ComplaintSuggestion } from '../../service/cs.service';
 
 export class ComplaintPage {
 
-  complaints = [];
+  allData = [];
   EmptyComplaints = false;
   currentPage: number = 1;
 
@@ -48,7 +48,7 @@ export class ComplaintPage {
         this.EmptyComplaints = true;
       } else {
         this.EmptyComplaints = false;
-        this.complaints = res;
+        this.allData = res;
       }
       this.nl.hideLoader();
     }, (err) => {
@@ -61,9 +61,9 @@ export class ComplaintPage {
     newComplaint.onDidDismiss((newComplaint) => {
       console.log("DSa", newComplaint)
       if (!newComplaint) { return; }
-      if (!this.complaints) { this.complaints = []; }
+      if (!this.allData) { this.allData = []; }
       this.EmptyComplaints = false;
-      this.complaints.unshift(newComplaint);
+      this.allData.unshift(newComplaint);
     });
     newComplaint.present();
   }
@@ -82,7 +82,7 @@ export class ComplaintPage {
           infiniteScroll.complete();
           return;
         }
-        this.complaints = this.complaints.concat(res);
+        this.allData = this.allData.concat(res);
       }, (err) => {
         this.currentPage -= 1;
         this.EmptyComplaints = false;
@@ -101,7 +101,7 @@ export class ComplaintPage {
           this.currentPage -= 1;
         } else {
           this.EmptyComplaints = false;
-          this.complaints = res;
+          this.allData = res;
         }
       }, (err) => {
         this.nl.onError(err);

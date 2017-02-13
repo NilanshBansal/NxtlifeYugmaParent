@@ -5,7 +5,7 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let suggestion of complaints">
+  <ion-card *ngFor="let suggestion of allData">
     <ion-item >
       <div class="csParagraph"><b>{{suggestion.title}}</b></div>
       <div class="csParagraph">{{suggestion.description}}</div>

@@ -10,7 +10,7 @@
     <button ion-fab (click)="newComplaint()" color="cool"> <ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item-sliding *ngFor="let suggestion of complaints" #slidingItem>
+    <ion-item-sliding *ngFor="let suggestion of allData" #slidingItem>
       <a ion-item detail-push detail-none href="#" (click)="viewComplaint(suggestion)" [style.border-left-color]="suggestion.statusColor">
         <nl-list-view [complaint]="suggestion"></nl-list-view>
       </a>

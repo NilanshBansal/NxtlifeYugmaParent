@@ -26,6 +26,8 @@ export class Dashboard {
       this.menuCtrl.enable(true);
   }
 
+  title: string = "Dashboard";
+
   openComplaint() {
     this.configuration.setUrl("complaint");
     this.navCtrl.setRoot(ComplaintPage);

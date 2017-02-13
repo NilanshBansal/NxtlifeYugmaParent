@@ -38,7 +38,7 @@ export class AccountPage {
 
   logoutActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Are you sure ?',
+      title: 'Are you sure you want to logout ?',
       buttons: [
         {
           text: 'Submit',

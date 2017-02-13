@@ -53,7 +53,7 @@ export class YourAppreciation {
         this.EmptyAppreciations = true;
       } else {
         this.EmptyAppreciations = false;
-        this.appreciations = appreciations.json();
+        this.appreciations = appreciations;
       }
       this.nl.hideLoader();
     }, err => {
@@ -71,7 +71,7 @@ export class YourAppreciation {
           this.currentPage -= 1;
         } else {
           this.EmptyAppreciations = false;
-          this.appreciations = response.json();
+          this.appreciations = response;
         }
       });
       refresher.complete();

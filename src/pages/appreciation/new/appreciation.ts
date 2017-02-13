@@ -57,7 +57,7 @@ export class NewAppreciationModal implements OnInit {
     this.nl.showLoader();
     this.c.getTeachers(this.standardId).subscribe((teachers) => {
       this.nl.hideLoader();
-      this.teachers = teachers.json(); // Get teachers list
+      this.teachers = teachers; // Get teachers list
     });
   }
 
@@ -93,7 +93,7 @@ export class NewAppreciationModal implements OnInit {
           this.nl.showLoader();
           this.c.saveComplaint(newSuggestion).subscribe((complaint) => {
             this.nl.hideLoader();
-            this.viewCtrl.dismiss(complaint.json());
+            this.viewCtrl.dismiss(complaint);
           });
         }
       }, {

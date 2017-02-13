@@ -48,7 +48,7 @@ export class ComplaintPage {
         this.EmptyComplaints = true;
       } else {
         this.EmptyComplaints = false;
-        this.complaints = complaints.json();
+        this.complaints = complaints;
       }
       this.nl.hideLoader();
     }, err => {
@@ -83,7 +83,7 @@ export class ComplaintPage {
           infiniteScroll.complete();
           return;
         }
-        this.complaints = this.complaints.concat(response.json());
+        this.complaints = this.complaints.concat(response);
       }, (err) => {
         this.currentPage -= 1;
         this.EmptyComplaints = false;
@@ -101,7 +101,7 @@ export class ComplaintPage {
           this.currentPage -= 1;
         } else {
           this.EmptyComplaints = false;
-          this.complaints = response.json();
+          this.complaints = response;
         }
       });
       refresher.complete();

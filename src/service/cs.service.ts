@@ -31,69 +31,86 @@ export class ComplaintSuggestion {
   }
 
   public getComplaints(pageNo): any {
-    this.getUrl();
     this.serverUrl = this.configuration.Server;
-    return this.http.get(this.serverUrl + "/page/" + pageNo).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.get(this.serverUrl + "/page/" + pageNo)
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public getTeachers(standardId) {
-    return this.http.get(this.serverUrl + "/teacher/" + standardId, this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.get(this.serverUrl + "/teacher/" + standardId)
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public getCategories() {
     this.getUrl();
     this.serverUrl = this.configuration.Server;
-    return this.http.get(this.serverUrl + "/category", this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.get(this.serverUrl + "/category")
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public saveComplaint(complaintData): any {
-    return this.http.post(this.serverUrl, complaintData, this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.post(this.serverUrl, complaintData)
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public closeComplaint(complaintId, complaintReason) {
-    return this.http.put(this.serverUrl + "/" + complaintId + "/close", complaintReason, this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.put(this.serverUrl + "/" + complaintId + "/close", complaintReason)
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public satisfiedComplaint(complaintId) {
-    return this.http.put(this.serverUrl + "/" + complaintId + "/satisfied", {}, this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.put(this.serverUrl + "/" + complaintId + "/satisfied", {})
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public reopenComplaint(complaintId, reopenData) {
-    return this.http.put(this.serverUrl + "/" + complaintId + "/reopen", reopenData, this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.put(this.serverUrl + "/" + complaintId + "/reopen", reopenData)
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public postComment(complaintId, comment) {
-    return this.http.post(this.serverUrl + "/" + complaintId + "/comment", comment, this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.post(this.serverUrl + "/" + complaintId + "/comment", comment)
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public getComments(complaintId) {
-    return this.http.get(this.serverUrl + "/" + complaintId + "/comment", this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.get(this.serverUrl + "/" + complaintId + "/comment")
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public getRatingInfo(studentId): any {
     this.getUrl();
     this.serverUrl = this.configuration.Server;
-    return this.http.get(this.serverUrl + "/" + studentId, this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.get(this.serverUrl + "/" + studentId)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  private extractData(res: Response) {
+    if (res.status === 204) { return res; }
+    let body = res.json();
+    return body || { };
+  }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    return Observable.throw(errMsg);
   }
 
 }

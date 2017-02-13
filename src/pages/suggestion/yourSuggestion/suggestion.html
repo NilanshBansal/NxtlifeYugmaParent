@@ -10,7 +10,7 @@
     <button ion-fab (click)="newComplaint()" color="cool"> <ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item-sliding *ngFor="let suggestion of complaints" #slidingItem >
+    <ion-item-sliding *ngFor="let suggestion of complaints" #slidingItem>
       <a ion-item detail-push detail-none href="#" (click)="viewComplaint(suggestion)" [style.border-left-color]="suggestion.statusColor">
         <nl-list-view [complaint]="suggestion"></nl-list-view>
       </a>
@@ -23,9 +23,9 @@
     </ion-item-sliding>
   </ion-list>
   <ion-list class="no-comment" *ngIf="EmptyComplaints">
-      <img src="assets/svg/empty.svg" />
-      <span>No Record Found</span>
-  </ion-list>     
+    <img src="assets/svg/empty.svg"/>
+    <span>NO RECORD FOUND</span>
+  </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

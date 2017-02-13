@@ -43,17 +43,16 @@ export class ComplaintPage {
 
   getComplaints() {
     this.nl.showLoader();
-    this.c.getComplaints(this.currentPage).subscribe((complaints) => {
-      if (complaints.status === 204) {
+    this.c.getComplaints(this.currentPage).subscribe((res) => {
+      if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
         this.EmptyComplaints = false;
-        this.complaints = complaints;
+        this.complaints = res;
       }
       this.nl.hideLoader();
-    }, err => {
-      this.nl.errMessage();
-      this.nl.hideLoader();
+    }, (err) => {
+      this.nl.onError(err);
     });
   }
 
@@ -69,24 +68,25 @@ export class ComplaintPage {
     newComplaint.present();
   }
 
-  viewComplaint(complaint): void {
-    let viewComplaint = this.modalCtrl.create(ViewComponent, {complaint: complaint});
+  viewComplaint(viewData): void {
+    let viewComplaint = this.modalCtrl.create(ViewComponent, {complaint: viewData});
     viewComplaint.present();
   }
 
   doInfinite(infiniteScroll) {
     this.currentPage += 1;
     setTimeout(() => {
-      this.c.getComplaints(this.currentPage).subscribe(response => {
-        if (response.status === 204) {
+      this.c.getComplaints(this.currentPage).subscribe((res) => {
+        if (res.status === 204) {
           this.currentPage -= 1;
           infiniteScroll.complete();
           return;
         }
-        this.complaints = this.complaints.concat(response);
+        this.complaints = this.complaints.concat(res);
       }, (err) => {
         this.currentPage -= 1;
         this.EmptyComplaints = false;
+        this.nl.onError(err);
       });
       infiniteScroll.complete();
     }, 1000);
@@ -95,14 +95,16 @@ export class ComplaintPage {
   doRefresh(refresher) {
     this.currentPage = 1;
     setTimeout(() => {
-      this.c.getComplaints(this.currentPage).subscribe(response => {
-        if (response.status === 204) {
+      this.c.getComplaints(this.currentPage).subscribe((res) => {
+        if (res.status === 204) {
           this.EmptyComplaints = true;
           this.currentPage -= 1;
         } else {
           this.EmptyComplaints = false;
-          this.complaints = response;
+          this.complaints = res;
         }
+      }, (err) => {
+        this.nl.onError(err);
       });
       refresher.complete();
     }, 1000);

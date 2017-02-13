@@ -124,5 +124,8 @@ export class MyApp {
     this.events.subscribe('user:login', () => {
       this.loadUser();
     });
+    this.events.subscribe('session:expired', () => {
+      this.presentConfirm();
+    });
   }
 }

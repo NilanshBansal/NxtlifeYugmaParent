@@ -113,7 +113,7 @@ export class CommentModal implements OnInit {
       } else {
         this.hasData = true;
         this.emptyComments = false;
-        this.comments = response.json().reverse();
+        this.comments = response.json();
         this.scrollToBottom();
       }
     });

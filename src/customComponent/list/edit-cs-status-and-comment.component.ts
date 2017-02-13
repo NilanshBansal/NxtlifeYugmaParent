@@ -11,7 +11,7 @@ import { ComplaintSuggestion } from '../../service/cs.service';
   template: `
     <div style="height:100%;">
       <button ion-button color="secondary" (click)="openCloseModal(complaint)" *ngIf="complaint.statusId != 6 && complaint.statusId != 4">
-        <ion-icon name="md-close"></ion-icon>
+        <ion-icon name="md-close" class="csBigIcon"></ion-icon>
         Close
       </button>
     </div>
@@ -38,7 +38,7 @@ export class ListViewCloseButton extends EditComplaintStatusAndComment {
   template: `
     <div style="height:100%;">
       <button ion-button color="danger" (click)="openReopenModal(complaint)" *ngIf="complaint.statusId === 4">
-        <ion-icon name="ios-thumbs-down"></ion-icon>
+        <ion-icon name="ios-thumbs-down" class="csBigIcon"></ion-icon>
         Reopen
       </button>
     </div>
@@ -65,7 +65,7 @@ export class ListViewReopenButton extends EditComplaintStatusAndComment  {
   template: `
     <div style="height:100%;">
       <button ion-button color="primary" (click)="openSatisfiedModal(complaint)" *ngIf="complaint.statusId === 4">
-        <ion-icon name="ios-thumbs-up"></ion-icon>
+        <ion-icon name="ios-thumbs-up" class="csBigIcon"></ion-icon>
         Satisfied
       </button>
     </div>
@@ -92,7 +92,7 @@ export class ListViewSatisfiedButton extends EditComplaintStatusAndComment {
   template: `
     <div style="height:100%;">
       <button ion-button color="cool" (click)="openCommentModal(complaint)">
-        <ion-icon name="ios-chatbubbles"></ion-icon>
+        <ion-icon name="ios-chatbubbles" class="csBigIcon"></ion-icon>
         Comments
       </button>
     </div>

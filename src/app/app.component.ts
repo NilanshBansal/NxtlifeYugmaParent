@@ -50,13 +50,13 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: Dashboard, icon: 'ios-home-outline', url: 'dashboard' },
       { title: 'Complaints', component: ComplaintPage, icon: 'ios-sad-outline', url: 'complaint' },
-      { title: 'Suggestions', component: SuggestionTabs, icon: 'md-bulb', url: 'suggestion' },
+      { title: 'Suggestions', component: SuggestionTabs, icon: 'ios-bulb-outline', url: 'suggestion' },
       { title: 'Appreciations', component: AppreciationTabs, icon: 'ios-thumbs-up-outline', url: 'appreciation' },
-      { title: 'Calendar',component: PlannerComponent , icon: 'md-calendar', url: 'planner'},
+      { title: 'Calendar',component: PlannerComponent , icon: 'ios-calendar-outline', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },
       { title: 'Survey', component: SurveyListPage, icon: 'ios-analytics-outline', url: 'survey' },
-      { title : 'Homework' , component : HomeworkComponent , icon : 'md-book' , url : 'homework'},
-      { title: 'Circular',component : CircularComponent , icon : 'md-disc' , url : 'circular'},
+      { title : 'Homework' , component : HomeworkComponent , icon : 'ios-book-outline' , url : 'homework'},
+      { title: 'Circular',component : CircularComponent , icon : 'ios-paper-outline' , url : 'circular'},
       { title: 'Student Rating', component: StudentRating, icon: 'ios-pulse-outline', url: 'student-profile' },
     ];
 

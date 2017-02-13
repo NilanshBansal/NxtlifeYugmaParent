@@ -115,6 +115,7 @@
 }
 
  .cal-month-view .cal-events {
+     display:block !important;
      -webkit-box-flex: 1;
      -webkit-flex: 1;
      -ms-flex: 1;
@@ -163,9 +164,11 @@
      font-weight: 600;
 }
  .cal-month-view .cal-open-day-events {
+     background:#f6c2d8;
+     border-radius:25px;
      padding: 10px;
      margin:10px;
-     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+     box-shadow: 0px 16px 30px rgb(206, 226, 255);
     -webkit-transition-property: top, bottom;
     -webkit-transition-duration: 0.6s;
     div{
@@ -290,12 +293,9 @@ $csChalkGreen:  rgb(158, 255, 158);
  .planner{
      @extend .csGrayBackground;
      padding:0px;
-     .csPlannerIcon{
-         font-size: 30px !important;
-    }
      .csMonth{
          @extend .csCenter;
-        padding: 15px;
+        padding: 12px;
          font:{
              weight:bold;
              size: 17px;
@@ -374,4 +374,9 @@ $csChalkGreen:  rgb(158, 255, 158);
 
   .details{
     width:7%;
+  }
+  .cal-month-view .cal-open-day-events div{
+     a{
+         color:#d15375 !important;
+     }
   }

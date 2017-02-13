@@ -1,69 +1,68 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
+  <ion-toolbar color="primary">
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Account</ion-title>
-  </ion-navbar>
+      <ion-title>Account</ion-title>
+    </ion-navbar>
+  </ion-toolbar>
 </ion-header>
-
 <ion-content class="csGrayBackground">
-          <ion-item-divider>
-          Profile
-        </ion-item-divider>
-    <ion-card>
-        <ion-item>
-          <ion-icon name="person" class="csFontColor1" item-left> </ion-icon>
-          <h2 color="primary">Name</h2>
-          <b>{{name}}</b> <span class="csGrayText">({{nickName}})</span>
-        </ion-item>
-    </ion-card>
-    <ion-card>
-              <ion-item>
-          <ion-icon name="egg" class="csFontColor1" item-left> </ion-icon>
-          <h2 color="primary">ID</h2>
-          <b>{{id}}</b>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="unlock" class="csFontColor1" item-left> </ion-icon>
-          <h2 color="primary">Password</h2>
-          <b>*********</b>
-        </ion-item>
-    </ion-card>
-    <ion-card>
-        <ion-item>
-          <ion-icon name="mail" class="csFontColor1" item-left> </ion-icon>
-          <h2 color="primary">E-mail</h2>
-          <b>{{emailID}}</b>
-        </ion-item>
-                <ion-item>
-          <ion-icon name="phone-portrait" class="csFontColor1" item-left> </ion-icon>
-          <h2 color="primary">Mobile Number</h2>
-          <b>{{contactNo}}</b>
-        </ion-item>
-    </ion-card>
-        <ion-item-divider>
-          Students
-        </ion-item-divider>
-          <ion-grid>
-                          <ion-item>
-            <ion-row>
-
-              <ion-col width-30 class="csFontColor1">Name</ion-col>
-              <ion-col width-30 class="csFontColor1">Class</ion-col>
-              <ion-col width-40 class="csFontColor1">Teacher</ion-col>
-              
-            </ion-row>
-            </ion-item>
-            <ion-item *ngFor="let a of students">
-            <ion-row>
-              <ion-col width-30> {{a.name}}</ion-col>
-              <ion-col width-30>{{a.standardName}}</ion-col>
-              <ion-col width-40>{{a.classTeacher}}</ion-col>
-            </ion-row>            
-            </ion-item>
-          </ion-grid>     
-    <button ion-button icon-left color="color1" full type="button" (click)="logoutActionSheet()">
+  <ion-item-divider>
+    Profile
+  </ion-item-divider>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="person" class="csFontColor1" item-left> </ion-icon>
+      <h2 color="primary">Name</h2>
+      <b>{{name}}</b> <span class="csGrayText" *ngIf="nickName">({{nickName}})</span>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="finger-print" class="csFontColor1" item-left> </ion-icon>
+      <h2 color="primary">ID</h2>
+      <b>{{id}}</b>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="unlock" class="csFontColor1" item-left> </ion-icon>
+      <h2 color="primary">Password</h2>
+      <b>*********</b>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item *ngIf="emailID">
+      <ion-icon name="mail" class="csFontColor1" item-left> </ion-icon>
+      <h2 color="primary">E-mail</h2>
+      <b>{{emailID}}</b>
+    </ion-item>
+    <ion-item *ngIf="contactNo">
+      <ion-icon name="phone-portrait" class="csFontColor1" item-left> </ion-icon>
+      <h2 color="primary">Mobile Number</h2>
+      <b>{{contactNo}}</b>
+    </ion-item>
+  </ion-card>
+  <ion-item-divider>
+    Students
+  </ion-item-divider>
+  <ion-grid>
+    <ion-item>
+      <ion-row>
+        <ion-col width-30 class="csFontColor1">Name</ion-col>
+        <ion-col width-30 class="csFontColor1">Class</ion-col>
+        <ion-col width-40 class="csFontColor1">Teacher</ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item *ngFor="let a of students">
+      <ion-row>
+        <ion-col width-30> {{a.name}}</ion-col>
+        <ion-col width-30>{{a.standardName}}</ion-col>
+        <ion-col width-40>{{a.classTeacher}}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-grid>
+  <button ion-button icon-left color="color1" full type="button" (click)="logoutActionSheet()">
     <ion-icon name="power"></ion-icon>
     <b>Logout</b>
   </button>

@@ -77,7 +77,6 @@ export class AuthService {
   public getParentInfo() {
     return this.safeHttp.get(this.actionUrl + "/parent/info/")
       .then(res => {
-        console.log("parent info", res);
         return Promise.resolve(res);
       })
       .catch(err => {

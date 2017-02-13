@@ -59,7 +59,7 @@ export class newComplaintModal implements OnInit {
     this.nl.showLoader();
     this.c.getTeachers(this.standardId).subscribe((teachers) => {
       this.nl.hideLoader();
-      this.teachers = teachers.json(); // Get teachers list
+      this.teachers = teachers; // Get teachers list
     }, (err) => {
       this.nl.hideLoader();
       this.nl.errMessage();
@@ -93,7 +93,7 @@ export class newComplaintModal implements OnInit {
     this.nl.showLoader();
     this.c.getCategories().subscribe((categories) => {
       this.nl.hideLoader();
-      this.categories = categories.json();
+      this.categories = categories;
     }, (err) => {
       this.nl.hideLoader();
       this.nl.errMessage();
@@ -151,7 +151,7 @@ export class newComplaintModal implements OnInit {
             this.nl.showLoader();
             this.c.saveComplaint(newComplaint).subscribe((complaint) => {
               this.nl.hideLoader();
-              this.viewCtrl.dismiss(complaint.json());
+              this.viewCtrl.dismiss(complaint);
             }, (err) => {
               this.nl.hideLoader();
               this.viewCtrl.dismiss();

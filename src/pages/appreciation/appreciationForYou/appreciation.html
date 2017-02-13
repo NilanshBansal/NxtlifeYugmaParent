@@ -2,27 +2,26 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 
-<ion-content class="complaint-list watermark">
-  <ion-refresher (ionRefresh)="loadNewComplaints($event)">
+<ion-content class="complaint-list csGrayBackground">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let appreciation of complaints">
+  <ion-card *ngFor="let appreciation of allData">
     <ion-item>
       <div class="csParagraph"><b>{{appreciation.title}}</b></div>
       <div class="csParagraph">{{appreciation.description}}</div>
     </ion-item>
     <ion-item>
       <div item-left>
-        <b> Student:</b><br> {{appreciation.studentName}}
-      </div>
-      <div item-right>
-        <b>Created at:</b><br> {{appreciation.createdAt | date:'mediumDate'}}
-      </div>
+         <b><ion-icon name="body" color="primary"></ion-icon></b> {{appreciation.studentName}}
+        </div>
+        <div item-right>
+          <b><ion-icon name="time" color="primary"></ion-icon></b> {{appreciation.createdAt | amDateFormat: 'LL'}}
+        </div>
     </ion-item>
   </ion-card>
-  <ion-list>
-    <ion-item *ngIf="EmptyComplaints">
-      <h3> No Appreciations </h3>
-    </ion-item>
+  <ion-list class="no-comment" *ngIf="EmptyComplaints">
+    <img src="assets/svg/empty.svg" />
+    <span>NO RECORD FOUND</span>
   </ion-list>
 </ion-content>

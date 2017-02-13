@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="csHeader">
     <ion-buttons start>
-      <button ion-button class="navBtnRight" (click)="dismiss()">
+      <button ion-button color="primary" class="navBtnRight csGrayBackground" (click)="dismiss()">
         <span showWhen="ios"><ion-icon class="close-button" name="close-circle"></ion-icon></span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
@@ -14,7 +14,7 @@
 <ion-content class="planner">
   <ion-card>
     <ion-item>
-      {{ResponseData.title}}
+      <b>{{ResponseData.title}}</b>
       <p class="csParagraph">{{ ResponseData.description}}</p>
     </ion-item>
     <ion-item>

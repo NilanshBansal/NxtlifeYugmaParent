@@ -41,7 +41,7 @@ $dim:           #dddddd;
 $csBlue:        #37cbff;
 $csGreen:       #47c947;
 $csGray:        #818181;
-$csDark:          #000; 
+$csDark:          #000;
 $csBorder:        #ffd180;
 $csBackgroundColor: #f0f0f0;
 $csStripColor:#f8f8f8;
@@ -53,6 +53,11 @@ $csInputIconSize: 25px;
 $csTop:           5px;
 
 $csZindex: 10;
+
+$toolbar-ios-height: 56px;
+$toolbar-ios-title-font-size: 2rem;
+$toolbar-ios-title-font-weight: normal;
+$tabs-ios-tab-min-height: 4.6rem;
 
 // App iOS Variables
 // --------------------------------------------------
@@ -96,9 +101,9 @@ $ionicons-font-path: "../assets/fonts";
 
 //Defined Function
 @function csBackgroundSvg($image){
-    @return url('../assets/svg/'+$image); 
+    @return url('../assets/svg/'+$image);
 }
 
 @function csBackgroundImage($image){
-    @return url('../assets/images/'+$image); 
+    @return url('../assets/images/'+$image);
 }

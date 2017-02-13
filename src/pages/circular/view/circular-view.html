@@ -2,33 +2,26 @@
     <nl-navbar [title]="title" >
         
     </nl-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-        <ion-card>
-             <ion-card-header>
-                <h1> {{onecirc.title}} </h1>
-            </ion-card-header>
-
-            <ion-card-content>
-                 <h3> Dear Parents,</h3>
-                 <br/>
-                 <h3> {{ onecirc.description}} </h3>
-                 <br/>
-                <span> {{onecirc.circularTypeName }} </span>
-                <span> - [</span>
-                <span *ngFor="let a of onecirc.standards">
-                    <span> {{ a }} ,</span>
+<ion-content class="csGrayBackground">
+  <ion-card>
+    <ion-item>
+      <div class="csParagraph"><b>{{onecirc.title}} </b></div>
+      <div class="csParagraph">Dear Parents,<br>{{onecirc.description}}</div>
+    </ion-item>
+    <ion-item>
+      <div item-left>
+        <b class="csParagraph">{{ onecirc.employeeName }}</b><br>Principal
+      </div>
+      <div item-right>
+        <b class="csParagraph">Created at</b><br> {{onecirc.date | date:'mediumDate'}}
+      </div>
+    </ion-item>
+    <ion-item *ngIf="onecirc.circularTypeName=='Class'">
+                        <b>Class:</b> | <span *ngFor="let a of onecirc.standards">
+                    <span> {{ a }} | </span>
                 </span>
-                <span>]</span>
-                
-                <br/>
-                <h3>Date n Time : {{onecirc.date}} </h3>
-                <br/>
-                <h3>{{ onecirc.employeeName }}</h3>
-                <h3> Principle </h3>
-            </ion-card-content>
-        </ion-card>
+    </ion-item>
+  </ion-card>
 </ion-content>

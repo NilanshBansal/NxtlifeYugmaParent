@@ -13,13 +13,13 @@ import { CustomService } from '../../service/customService';
 import { ComplaintSuggestion } from '../../service/cs.service';
 
 @Component({
-  selector: 'page-speaker-list',
+  selector: 'complaint-page',
   templateUrl: 'complaint.html'
 })
 
 export class ComplaintPage {
 
-  complaints = [];
+  allData = [];
   EmptyComplaints = false;
   currentPage: number = 1;
 
@@ -43,70 +43,85 @@ export class ComplaintPage {
 
   getComplaints() {
     this.nl.showLoader();
-    this.c.getComplaints(this.currentPage).subscribe((complaints) => {
-      if (complaints.status === 204) {
-        this.EmptyComplaints = true;
-      } else {
-        this.EmptyComplaints = false;
-        this.complaints = complaints.json();
-      }
-      this.nl.hideLoader();
-    }, err => {
-      this.nl.errMessage();
-      this.nl.hideLoader();
+    this.c.getComplaints(this.currentPage).subscribe((res) => {
+      this.onSuccess(res);
+    }, (err) => {
+      this.nl.onError(err);
     });
+  }
+
+  showEmptyMsg(val) {
+    this.EmptyComplaints = val;
+  }
+
+  onSuccess(res) {
+    if (res.status === 204) {
+      this.showEmptyMsg(true);
+    } else {
+      this.showEmptyMsg(false);
+      this.allData = res;
+    }
+    this.nl.hideLoader();
   }
 
   newComplaint(): void {
-    let newComplaint = this.modalCtrl.create(newComplaintModal);
-    newComplaint.onDidDismiss((newComplaint) => {
-      console.log("DSa", newComplaint)
-      if (!newComplaint) { return; }
-      if (!this.complaints) { this.complaints = []; }
-      this.EmptyComplaints = false;
-      this.complaints.unshift(newComplaint);
+    let createNew = this.modalCtrl.create(newComplaintModal);
+    createNew.onDidDismiss((newData) => {
+      if (!newData) { return; }
+      if (!this.allData) { this.allData = []; }
+      this.showEmptyMsg(false);
+      this.allData.unshift(newData);
     });
-    newComplaint.present();
+    createNew.present();
   }
 
-  viewComplaint(complaint): void {
-    let viewComplaint = this.modalCtrl.create(ViewComponent, {complaint: complaint});
-    viewComplaint.present();
+  viewComplaint(viewData): void {
+    let openViewModal = this.modalCtrl.create(ViewComponent, {complaint: viewData});
+    openViewModal.present();
+  }
+
+  doRefresh(refresher) {
+    setTimeout(() => {
+      this.c.getComplaints(1).subscribe((res) => {
+        this.onSuccess(res);
+        refresher.complete();
+      }, (err) => {
+        refresher.complete();
+        this.nl.onError(err);
+      });
+    }, 500);
   }
 
   doInfinite(infiniteScroll) {
     this.currentPage += 1;
     setTimeout(() => {
-      this.c.getComplaints(this.currentPage).subscribe(response => {
-        if (response.status === 204) {
-          this.currentPage -= 1;
-          infiniteScroll.complete();
-          infiniteScroll.enable(false);
-          return;
-        }
-        this.complaints = this.complaints.concat(response.json());
-      }, (err) => {
-        this.currentPage -= 1;
-        this.EmptyComplaints = false;
-      });
-      infiniteScroll.complete();
-    }, 1000);
+      this.loadMoreData(infiniteScroll);
+    }, 500);
   }
 
-  doRefresh(refresher) {
-    this.currentPage = 1;
-    setTimeout(() => {
-      this.c.getComplaints(this.currentPage).subscribe(response => {
-        if (response.status === 204) {
-          this.EmptyComplaints = true;
-          this.currentPage -= 1;
-        } else {
-          this.EmptyComplaints = false;
-          this.complaints = response.json();
-        }
-      });
-      refresher.complete();
-    }, 1000);
+  loadMoreData(infiniteScroll) {
+    this.c.getComplaints(this.currentPage).subscribe((res) => {
+      infiniteScroll.complete();
+      this.loadDataSuccess(res);
+    }, (err) => {
+      infiniteScroll.complete();
+      this.loadDataError(err);
+    });
   }
+
+  loadDataSuccess(res) {
+    if (res.status === 204) {
+      this.currentPage -= 1;
+      return;
+    }
+    this.allData = this.allData.concat(res);
+  }
+
+  loadDataError(err) {
+    this.currentPage -= 1;
+    this.showEmptyMsg(false);
+    this.nl.onError(err);
+  }
+
 
 }

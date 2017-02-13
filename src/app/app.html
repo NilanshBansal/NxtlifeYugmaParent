@@ -1,11 +1,13 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-item class="csHeader">
+    <ion-toolbar color="primary">
+    <ion-item class="csHeader noBorder-item">
       <ion-avatar item-left>
         <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png">
       </ion-avatar>
-      {{name}}
+      <b>{{name}}</b>
     </ion-item>
+    </ion-toolbar>
   </ion-header>
 
   <ion-content class="csBlueColor">
@@ -14,8 +16,6 @@
         <ion-icon item-left [name]="p.icon"></ion-icon>
         {{p.title}}
       </button>
-    </ion-list>
-    <ion-list>
       <button class="csStrip" ion-item menuClose [class.csSelected]="selectedPage == p.title" *ngFor="let p of account" (click)="openPage(p)">
         <ion-icon item-left [name]="p.icon"></ion-icon>
         {{p.title}}

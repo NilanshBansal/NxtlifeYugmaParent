@@ -1,13 +1,20 @@
-<ion-header>
-  <ion-navbar>
+
+<ion-header >
+  <ion-toolbar color="primary">
+  <ion-navbar color="primary">
+
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Timeline</ion-title>
 </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="csGrayBackground">
+
+
+<ion-content class="timeline csGrayBackground" padding>
+
         <section id="cd-timeline" class="cd-container">
           <div class="timeline-row" *ngFor="let activity of timeline">
             <div class="cd-timeline-block">

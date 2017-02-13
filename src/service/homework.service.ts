@@ -3,7 +3,6 @@ import { Headers,Http,Response,RequestOptions } from '@angular/http';
 import {Configuration } from './app.constants';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergemap';
 import 'rxjs/add/operator/toPromise';
 
 
@@ -25,9 +24,9 @@ export class HomeworkService {
 
      getHomeworks(){
        // this.serverUrl = this.configuration.Server;
-        return this.http.get('https://yugmasrgstesting.appspot.com/parent/864867303/homework',this.options)
+        return this.http.get('https://yugma-ut.appspot-preview.com/parent/864867303/homework',this.options)
          .map((res:Response) => res.json())
 
-     }           
+     }
 
 }

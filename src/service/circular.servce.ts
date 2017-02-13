@@ -3,7 +3,6 @@ import { Headers,Http,Response,RequestOptions } from '@angular/http';
 import {Configuration } from './app.constants';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergemap';
 import 'rxjs/add/operator/toPromise';
 
 

@@ -1,21 +1,20 @@
 <ion-header>
     <nl-navbar [title]="title">
-
     </nl-navbar>
 </ion-header>
-
-
-<ion-content padding>
-    
-    <ion-list *ngFor="let a of homeworks">
-        <ion-item > 
-           <h1>{{ a.description }}</h1>
-           
-           <h3>{{ a.subjectName }}</h3>
-
-           <h3>{{ a.dueDate }}</h3>
-           
-           <h3> standardId : {{ a.standardId }} </h3>
-        </ion-item>
-    </ion-list>
+<ion-content class="csGrayBackground">
+  <ion-card *ngFor="let a of homeworks">
+    <ion-item>
+      <div class="csParagraph"><b>{{a.subjectName}}</b><span item-right class="csGrayText"> ({{a.employeeName}})</span></div>
+      <div class="csParagraph">{{a.description}}</div>
+    </ion-item>
+    <ion-item>
+      <div item-left>
+        <b class="csParagraph">  <ion-icon name="school" color="primary"></ion-icon><span class="csGrayText"> {{a.standardName}}</span></b>
+      </div>
+      <div item-right>
+        <b class="csParagraph"> <ion-icon name="create" color="primary"></ion-icon><span class="csGrayText"> {{a.dueDate | date:'mediumDate'}}</span></b>
+      </div>
+    </ion-item>
+  </ion-card>
 </ion-content>

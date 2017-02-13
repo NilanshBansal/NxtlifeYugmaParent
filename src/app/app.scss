@@ -70,15 +70,13 @@ $inherit : inherit;
     background-image: url(''); 
     }
 }
-.PollOptions {
-    margin: 13px 8px 13px 0;
-    color: chocolate;
-}
-
-.PollButton {
-    float:right;
-}
 .csSelected{
-  @extend .csWhiteText;
-  background:$color1;
+  background: #dedede;
+  color: #6d6d6d;
+  font-weight: bold;
+}
+.noBorder-item{
+  .item-inner {
+    border-bottom: 0px !important;
+  }  
 }

@@ -1,14 +1,14 @@
-<ion-content class="csLoginScreen" padding>
-  <img src="assets/images/logo2.png" class="marginTop csLoginLogo">
+<ion-content class="csLoginScreen">
+  <img src="assets/images/logo2.png" class="marginTop csLoginLogo csLogo-CornerStone">
   <form [formGroup]="loginForm" (ngSubmit)="getOtp()" class="marginTop csTransparent" *ngIf="!user" novalidate>
 
-    <ion-item class="csBorderWhite csLoginBox" round>
+    <ion-item>
       <ion-icon name="phone-portrait" class="csInput csInputIcon" item-left></ion-icon>
       <ion-label stacked>Enter Mobile Number</ion-label>
-      <ion-input #username maxlength="10" formControlName="mobileNo" type="tel" class="csInput" text-center autofocus></ion-input>
+      <ion-input #username maxlength="10" formControlName="mobileNo" type="tel"  class="letter-space" text-center autofocus></ion-input>
     </ion-item>
     <button item-right icon-left type="submit" ion-button class="csCenter csButtonList" round>
-      <ion-icon name="checkmark"></ion-icon>
+      <ion-icon name="checkmark" class="csBigIcon"></ion-icon>
         Login
      </button>
     <ion-item class="marginTop csBorderWhite csLoginBox" *ngIf="(!loginForm.controls['mobileNo'].valid && numberSubmit) && (loginForm.controls['mobileNo'].touched || numberSubmit)"
@@ -18,10 +18,10 @@
   </form>
 
   <form [formGroup]="loginVerifyForm" (ngSubmit)="verifyOtp()" novalidate *ngIf="user">
-    <ion-item class="csBorderWhite csLoginBox" round>
-      <!--<ion-icon name="unlock" class="csInput csInputIcon" item-left></ion-icon>-->
+    <ion-item round>
+      <ion-icon name="lock" class="csInput csInputIcon" item-left></ion-icon>
       <ion-label stacked>Enter OTP</ion-label>
-      <ion-input class="csOTPInput" #otp type="text" formControlName="otp" maxlength="5" text-center autofocus></ion-input>
+      <ion-input class="letter-space" #otp type="text" formControlName="otp" maxlength="5" text-center autofocus></ion-input>
     </ion-item>
     <button type="submit" item-right icon-left full color="secondary" ion-button class="csCenter csButtonList" (click)="resendOtp()" round>
       <ion-icon name="checkmark"></ion-icon>

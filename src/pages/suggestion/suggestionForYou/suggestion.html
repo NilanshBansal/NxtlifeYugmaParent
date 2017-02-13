@@ -1,28 +1,27 @@
 <ion-header>
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
-<ion-content class="complaint-list watermark">
+<ion-content class="complaint-list csGrayBackground">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let suggestion of complaints">
+  <ion-card *ngFor="let suggestion of allData">
     <ion-item >
       <div class="csParagraph"><b>{{suggestion.title}}</b></div>
       <div class="csParagraph">{{suggestion.description}}</div>
     </ion-item>
     <ion-item>
-      <div item-left >
-        <b> Student:</b><br> {{suggestion.studentName}}
+      <div item-left>
+       <b><ion-icon name="body" color="primary"></ion-icon></b> {{suggestion.studentName}}
       </div>
       <div item-right>
-        <b>Created at:</b><br> {{suggestion.createdAt | date:'mediumDate'}}
+        <b><ion-icon name="time" color="primary"></ion-icon></b> {{suggestion.createdAt | amDateFormat: 'LL'}}
       </div>
     </ion-item>
   </ion-card>
-  <ion-list>
-    <ion-item *ngIf="EmptyComplaints">
-      <h3> NO SUGGESTIONS </h3>
-    </ion-item>
+  <ion-list class="no-comment" *ngIf="EmptyComplaints">
+      <img src="assets/svg/empty.svg" />
+      <span>NO RECORD FOUND</span>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

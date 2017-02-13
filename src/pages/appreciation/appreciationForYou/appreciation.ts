@@ -20,7 +20,7 @@ import { ComplaintPage } from '../../complaint/complaint';
 export class AppreciationForYou extends ComplaintPage {
 
   // set header title
-  title: string = "Appreciations";
+  title: string = "APPRECIATIONS";
 
   // used in event
   public master: string = "appreciation";

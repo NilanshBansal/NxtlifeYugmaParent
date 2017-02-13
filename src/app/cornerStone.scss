@@ -21,10 +21,6 @@ Date:    21/12/2016
     position: fixed;
     background-repeat: no-repeat;
 }
-.csBorderWhite {
-    border: solid 1px white;
-    box-shadow: 0px 0px 8px #000000;
-}
 .csFull {
     width: 100% !important;
 }
@@ -35,6 +31,9 @@ Date:    21/12/2016
 }
 .csWhiteText {
     color: white;
+}
+.csGrayText{
+    color:gray;
 }
 .csMainBackground {
     @extend .csFillBackground;
@@ -75,10 +74,6 @@ ion-toolbar {
         weight: bold;
     }
 }
-.item-ios.item-label-stacked .text-input,
-.item-ios.item-label-floating .text-input {
-    letter-spacing: 3px !important;
-}
 .csInputIcon {
     font-size: $csInputIconSize !important;
     margin-bottom: -5px !important;
@@ -99,11 +94,6 @@ ion-toolbar {
 }
 .csLoginBox {
     background-color: rgba(255, 255, 255, 0.75) !important;
-}
-.csOtpBox {
-    @extend .csCenter;
-    background-color: rgba(255, 255, 255, 0.75) !important;
-    width: 55%;
 }
 .csButtonList {
     @extend .csCenter;
@@ -161,7 +151,7 @@ ion-toolbar {
     background: $csBackgroundColor;
 }
 .csParagraph {
-    font-size: 13px;
+    font-size: 1.4rem;
     white-space: pre-line;
     margin-top: 5px;
 }
@@ -180,4 +170,60 @@ ion-toolbar {
 }
 .item-ios{
     font-size:1.4rem !important;
+}
+//Student Rating (Management)
+.csRating{
+    ion-item{
+    p{
+        color:black;
+        text-align:center;
+    }
+    }
+}
+rating{
+    color:$color1;
+}
+.csStudentName{
+    text-align:center !important;
+}
+button{
+    font-style:initial;
+}
+.bold{
+    font-weight: bold;
+}
+.header-ios .toolbar-ios:last-child .toolbar-background-ios, .header-md .toolbar-md:last-child .toolbar-background-md {
+    border-width: 0px !important;
+}
+.csFooter{
+    background:$color1;
+}
+.csIndicator{
+    border-left:3px solid;
+    padding-left:10px;
+}
+.item-input .label-md, .item-select .label-md, .item-datetime .label-md{
+    color: #464646;
+}
+.item-input .label-ios, .item-select .label-ios, .item-datetime .label-ios{
+    color: #464646;
+}
+.no-comment{
+    @extend .csCenter;
+    margin-top:150px;
+    width:100px;
+    color:dimgray;
+    text-align:center;
+}
+.csBigIcon{
+    font-size: 2.2em;
+}
+.tabs-ios-primary .tab-button[aria-selected=true], .tabs-ios-primary .tab-button[aria-selected=true] .tab-button-icon,
+.tabs-md-primary .tab-button[aria-selected=true], .tabs-md-primary .tab-button[aria-selected=true] .tab-button-icon{
+    color: #fff;
+    font-weight:bold;
+    border-top: white solid;
+}
+.csPrimaryBackground{
+    background:$color1;
 }

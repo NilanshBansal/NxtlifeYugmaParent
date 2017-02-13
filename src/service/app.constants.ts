@@ -45,20 +45,21 @@ export class Configuration {
 
   setUrl(url) {
     this.cs.setHeaderText(url);
-    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/" + url ;
+
+    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/" + url;
+
   }
 
   setUrlForStudentSuggestions(url) {
-    this.Server = "https://yugma-ut.appspot.com/parent/" + this.getParentId() + "/suggestion/" + url;
+    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/suggestion/" + url;
   }
 
   setUrlForSuggestion() {
-    this.Server = "https://yugma-ut.appspot.com/parent/" + this.getParentId() + "/suggestion";
-    console.log("url", this.Server)
+    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/suggestion";
   }
 
   setUrlForStudentAppreciations(url) {
-    this.Server = "https://yugma-ut.appspot.com/parent/" + this.getParentId() + "/appreciation/" + url;
+    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/appreciation/" + url;
   }
 
   tokenUpdate(tokenId) {

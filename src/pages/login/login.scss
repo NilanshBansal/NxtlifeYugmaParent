@@ -1,34 +1,32 @@
-
-
-/*Corner stone theme*/
-
-.errInfo{
-  text-align: center;
-  box-shadow: 2px 4px 8px grey;
-  margin-top: 5px;
+.csLoginScreen {
+  border: #c6c6c6 10px solid;
+  border-bottom: #f4f4f4 55px solid;
+  border-top:none;
+  background:#e3e3e3;
+}
+.letter-space {
+  .text-input {
+    @extend .csFontColor1;
+    font-weight:bold;
+    letter-spacing: 7px;
+  }
+  font-weight: 600;
+}
+.csLogo {
+  @extend .csCenter;
+  height: auto;
+}
+.csLogo-CornerStone{
+    width: 60%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.csBottom {
+  position: absolute;
+  bottom: 0;
 }
 
-.csOTPInput{
-  @extend .csInput;
-  letter-spacing: 37px;
-  font-size:17px;
-  border-bottom: solid 3px;
-  margin-left:10%;
-}
-
-.item-label-stacked .text-input-md, .item-label-floating .text-input-md {
-    .csOTPInput{
-  letter-spacing: 4px;
-    }
-}
-
-.item-label-stacked .text-input-ios, .item-label-floating .text-input-ios {
-    .csOTPInput{
-          letter-spacing: 4px;
-    font-size:25px;
-    }
-}
-
-.item-ios.item-block .item-inner {
-    border-bottom: 0px solid #c8c7cc;
+.csForgetPassword {
+  @extend .csBottom;
+  @extend .csCenter;
 }

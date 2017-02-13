@@ -54,7 +54,6 @@ export class SafeHttp {
     return this.http.get(url, options)
       .toPromise()
       .then(response => {
-        console.log("SafeHttp111111111111", response)
         return Promise.resolve(response);
       }, function(err) {
         console.log('err12222222', err)

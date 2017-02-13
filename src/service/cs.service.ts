@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+import { CustomHttpService } from './default.header.service';
 import { Configuration } from './app.constants';
 
 @Injectable()
@@ -17,7 +18,7 @@ export class ComplaintSuggestion {
   public headers: any;
   public options;
 
-  constructor(private http: Http,
+  constructor(private http: CustomHttpService,
               private configuration: Configuration) {
 
   }
@@ -32,7 +33,7 @@ export class ComplaintSuggestion {
   public getComplaints(pageNo): any {
     this.getUrl();
     this.serverUrl = this.configuration.Server;
-    return this.http.get(this.serverUrl + "/page/" + pageNo, this.options).map((res: Response) => {
+    return this.http.get(this.serverUrl + "/page/" + pageNo).map((res: Response) => {
       return res;
     }).catch((error: any) => Observable.throw(error || 'server error'));
   }

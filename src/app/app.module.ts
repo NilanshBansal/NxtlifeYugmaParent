@@ -4,6 +4,8 @@ import { MomentModule } from 'angular2-moment/moment.module';
 import { MyApp } from './app.component';
 import { CalendarDateFormatter, CalendarEventTitle, CalendarModule } from 'angular-calendar';
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { RequestOptions, HttpModule, XHRBackend } from '@angular/http';
+import { CustomHttpService } from '../service/default.header.service';
 
 // import component
 import { LoginPage } from '../pages/login/login';
@@ -141,6 +143,13 @@ import { SurveyService } from '../service/survey.service';
 
     ViewComponent
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService,SurveyService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
+  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService,SurveyService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
+    {
+      provide: CustomHttpService,
+      useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
+        return new CustomHttpService(backend, defaultOptions);
+      },
+      deps: [XHRBackend, RequestOptions]
+    }]
 })
 export class AppModule {}

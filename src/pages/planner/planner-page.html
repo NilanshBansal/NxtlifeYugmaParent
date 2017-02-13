@@ -14,29 +14,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="csGrayBackground">
-<ion-card class="planner" padding>
-  <ion-grid class="csCalMonth">
-    <ion-row>
-      <ion-col width-20 class="csCalNavigation">
-        <button ion-button color="dark" (click)="decrement()" clear><ion-icon name="arrow-dropleft-circle"></ion-icon></button>
-      </ion-col>
-      <ion-col>
-        <span text-center class="csMonth csChalkText">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
-      </ion-col>
-      <ion-col width-20 class="csCalNavigation">
-        <button ion-button color="dark" (click)="increment()" clear><ion-icon name="arrow-dropright-circle"></ion-icon></button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <div [ngSwitch]="view" text-center class="csCalDays">
-    <div>
-      <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events2" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
-        (dayClicked)="dayClicked($event.day)">
-      </mwl-calendar-month-view>
+<ion-content>
+  <div class="planner">
+    <ion-grid class="csCalMonth">
+      <ion-row>
+        <ion-col width-20 class="csCalNavigation">
+          <button ion-button color="dark" (click)="decrement()" clear *ngIf='!(count <= 0)'><ion-icon name="ios-arrow-back"></ion-icon></button>
+        </ion-col>
+        <ion-col>
+          <span text-center class="csMonth">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
+        </ion-col>
+        <ion-col width-20 class="csCalNavigation">
+          <button ion-button color="dark" (click)="increment()" clear class="csRight"><ion-icon  name="ios-arrow-forward"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div [ngSwitch]="view" text-center class="csCalDays">
+      <div>
+        <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events2" [refresh]="refresh" (eventClicked)="EventClicked($event)"
+          [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)">
+          </mwl-calendar-month-view>
+      </div>
+    </div>
+    <div class="row text-center">
     </div>
   </div>
-  <div class="row text-center">
-  </div>
-</ion-card>
 </ion-content>

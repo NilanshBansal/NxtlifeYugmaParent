@@ -15,7 +15,7 @@ import { CustomService } from '../service/customService';
 <ion-content id="chat" class="csChatBox">
   <ion-list class="no-comment" *ngIf="emptyComments">
     <img src="assets/svg/empty.svg" />
-    <span>No Comment</span>
+    <span>NO COMMENT</span>
   </ion-list>
   <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
   <div class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>
@@ -113,7 +113,7 @@ export class CommentModal implements OnInit {
       } else {
         this.hasData = true;
         this.emptyComments = false;
-        this.comments = response.json();
+        this.comments = response;
         this.scrollToBottom();
       }
     });

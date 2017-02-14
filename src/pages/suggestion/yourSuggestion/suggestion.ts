@@ -28,11 +28,9 @@ export class YourSuggestion extends ComplaintPage {
 
   constructor(public nl: CustomService,
               public con: Configuration,
-              public alertCtrl: AlertController,
-              public actionSheetCtrl: ActionSheetController,
               public modalCtrl: ModalController,
               public c: ComplaintSuggestion) {
-    super(modalCtrl, alertCtrl, nl, c, actionSheetCtrl);
+    super(modalCtrl, nl, c);
     this.getComplaints();
   }
 

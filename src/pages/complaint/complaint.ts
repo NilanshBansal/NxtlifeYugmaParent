@@ -30,12 +30,8 @@ export class ComplaintPage {
   public master: string = "complaint";
 
   constructor(public modalCtrl: ModalController,
-              public alertCtrl: AlertController,
               public nl: CustomService,
-              public c: ComplaintSuggestion,
-              public actionSheetCtrl: ActionSheetController) {
-
-  }
+              public c: ComplaintSuggestion) { }
 
   ionViewWillEnter() {
     this.getComplaints();

@@ -67,7 +67,7 @@ export class NewAppreciationModal implements OnInit {
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child
     }
-    this.nl.showToast("All fields are mandatory to create a new complaint");
+    this.nl.showToast("All fields are mandatory to send appreciation");
   }
 
   loadForm() {

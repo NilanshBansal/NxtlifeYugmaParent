@@ -1,17 +1,11 @@
 import { Component } from '@angular/core';
-import { ModalController,
-         AlertController,
-         PopoverController,
-         ActionSheetController,
-         Events } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../../service/customService';
 import { ComplaintSuggestion } from '../../../service/cs.service';
-import { Configuration } from '../../../service/app.constants';
 
 // import Component
-import { ComplaintPage } from '../../complaint/complaint';
 import { NewAppreciationModal } from '../new/appreciation';
 
 @Component({
@@ -27,65 +21,62 @@ export class YourAppreciation {
   // used in event
   public master: string = "appreciation";
 
-  appreciations;
+  allData;
+  currentPage = 0;
   EmptyAppreciations = false;
 
   constructor(public nl: CustomService,
-              public events: Events,
-              public con: Configuration,
-              public alertCtrl: AlertController,
-              public actionSheetCtrl: ActionSheetController,
               public modalCtrl: ModalController,
               public c: ComplaintSuggestion) {
-    // super(modalCtrl, alertCtrl, events, nl, c, actionSheetCtrl);
   }
 
   ngOnInit() {
     this.getAppreciations();
   }
 
-  currentPage = 0;
-
   getAppreciations() {
     this.nl.showLoader();
-    this.c.getComplaints(this.currentPage).subscribe((appreciations) => {
-      if (appreciations.status === 204) {
-        this.EmptyAppreciations = true;
-      } else {
-        this.EmptyAppreciations = false;
-        this.appreciations = appreciations;
-      }
-      this.nl.hideLoader();
-    }, err => {
-      this.nl.errMessage();
-      this.nl.hideLoader();
+    this.c.getComplaints(this.currentPage).subscribe((res) => {
+      this.onSuccess(res);
+    }, (err) => {
+      this.nl.onError(err);
     });
-  }
-
-  loadNewAppreciations(refresher) {
-    this.currentPage = 1;
-    setTimeout(() => {
-      this.c.getComplaints(this.currentPage).subscribe(response => {
-        if (response.status === 204) {
-          this.EmptyAppreciations = true;
-          this.currentPage -= 1;
-        } else {
-          this.EmptyAppreciations = false;
-          this.appreciations = response;
-        }
-      });
-      refresher.complete();
-    }, 1000);
   }
 
   newAppreciation() {
-    let appreciateModal = this.modalCtrl.create(NewAppreciationModal);
-    appreciateModal.onDidDismiss((res) => {
+    let createNew = this.modalCtrl.create(NewAppreciationModal);
+    createNew.onDidDismiss((res) => {
       if (!res) { return; }
-      this.EmptyAppreciations = false;
-      this.appreciations.unshift(res);
+      this.showEmptyMsg(false);
+      this.allData.unshift(res);
     });
-    appreciateModal.present();
+    createNew.present();
+  }
+
+  doRefresh(refresher) {
+    setTimeout(() => {
+      this.c.getComplaints(1).subscribe((res) => {
+        this.onSuccess(res);
+        refresher.complete();
+      }, (err) => {
+        refresher.complete();
+        this.nl.onError(err);
+      });
+    }, 500);
+  }
+
+  onSuccess(res) {
+    if (res.status === 204) {
+      this.showEmptyMsg(true);
+    } else {
+      this.showEmptyMsg(false);
+      this.allData = res;
+    }
+    this.nl.hideLoader();
+  }
+
+  showEmptyMsg(val) {
+    this.EmptyAppreciations = val;
   }
 
 }

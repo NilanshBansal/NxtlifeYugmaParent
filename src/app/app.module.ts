@@ -13,6 +13,7 @@ import { Dashboard } from '../pages/homepage/homepage';
 import { PollPage } from '../pages/poll/poll';
 import { AccountPage } from '../pages/account/account';
 import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';
+import { CustomSelect } from '../customComponent/custom-select';
 import { AppreciationForYou } from '../pages/appreciation/appreciationForYou/appreciation';
 import { YourAppreciation } from '../pages/appreciation/yourAppreciation/appreciation';
 import { ComplaintPage } from '../pages/complaint/complaint';
@@ -95,7 +96,7 @@ import { SurveyService } from '../service/survey.service';
     CircularComponent,
     CircularViewComponent,
     SurveyListPage,
-
+    CustomSelect,
     ViewComponent
 
   ],
@@ -140,7 +141,7 @@ import { SurveyService } from '../service/survey.service';
     HomeworkComponent,
     CircularComponent,
     CircularViewComponent,
-
+    CustomSelect,
     ViewComponent
   ],
   providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService,SurveyService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter },

@@ -1,15 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons start>
-      <button ion-button class="navBtnRight" (click)="dismiss()">
-        <span color="light" showWhen="ios"><ion-icon name="close-circle"></ion-icon></span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>
-      NEW {{headerTitle | uppercase}}
-    </ion-title>
-  </ion-toolbar>
+  <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content class="newComplaint csGrayBackground">
   <form name="newcomplaint" [formGroup]="newComplaint" (ngSubmit)="saveComplaint()" novalidate>

@@ -1,33 +1,34 @@
 <ion-header>
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
-
 <ion-content class="complaint-list csGrayBackground">
-  <ion-refresher (ionRefresh)="loadNewAppreciations($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-fab top right edge>
-    <button ion-fab (click)="newAppreciation()" color="cool"> <ion-icon name="add"></ion-icon></button>
+    <button ion-fab (click)="newAppreciation()" color="cool">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
-  <ion-card *ngFor="let appreciation of appreciations">
+  <ion-card *ngFor="let data of allData">
     <ion-item>
-      <div class="csParagraph"><b>{{appreciation.title}}</b></div>
-      <div class="csParagraph">{{appreciation.description}}</div>
+      <div class="csParagraph"><b>{{data.title}}</b></div>
+      <div class="csParagraph">{{data.description}}</div>
     </ion-item>
     <ion-item>
       <div item-left>
-        <b><ion-icon name="body" color="primary"></ion-icon></b> {{appreciation.studentName}}
+        <b><ion-icon name="body" color="primary"></ion-icon></b> {{data.studentName}}
       </div>
       <div item-right>
-        <b><ion-icon name="time" color="primary"></ion-icon></b> {{appreciation.createdAt | amDateFormat: 'LL'}}
+        <b><ion-icon name="time" color="primary"></ion-icon></b> {{data.createdAt | amDateFormat: 'LL'}}
       </div>
     </ion-item>
   </ion-card>
   <ion-list class="no-comment" *ngIf="EmptyAppreciations">
-      <img src="assets/svg/empty.svg" />
-      <span>NO RECORD FOUND</span>
+    <img src="assets/svg/empty.svg" />
+    <span>NO RECORD FOUND</span>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="loadMoreComplaints($event)">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -25,6 +25,7 @@ export class StudentRating implements OnInit  {
   public studentId;
   public child;
   public studentInfo;
+  public emptyMessage;
 
   constructor(private r: ComplaintSuggestion,
               public parentInfo: ParentInfo,
@@ -44,6 +45,7 @@ export class StudentRating implements OnInit  {
 
   public getRatingInfo() {
     this.nl.showLoader();
+    this.emptyMessage = false;
     this.r.getRatingInfo(this.studentId).subscribe((res) => {
       this.onSuccess(res)
     }, (err) => {
@@ -55,7 +57,8 @@ export class StudentRating implements OnInit  {
     this.nl.hideLoader();
     this.studentInfo = info.profile;
     if (info.isEmpty) {
-      this.nl.showToast("student rating not filled by class teacher");
+      this.studentInfo = [];
+      this.emptyMessage = true;
     }
   }
 

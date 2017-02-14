@@ -12,11 +12,23 @@
     </ion-item>
   </ion-card>
   <div *ngIf="studentInfo">
-    <ion-item class="csTransparent" *ngFor="let sp of studentInfo">
-      <p>{{sp.responsibility}}</p>
-      <ion-card>
-        <rating [(ngModel)]="sp.ratingIndex" max="5" readOnly="true"></rating>
-      </ion-card>
-    </ion-item>
+
+    <ion-card *ngFor="let sp of studentInfo">
+      <ion-grid>
+        <ion-row>
+          <ion-col width-25>
+            <ion-icon class="csStarIcon" name="star-half"></ion-icon>
+          </ion-col>
+          <ion-col width-75>
+            <ion-row class="center title">
+                <p >{{sp.responsibility}}</p>
+            </ion-row>
+            <ion-row class="stars">
+                <rating [(ngModel)]="sp.ratingIndex" max="5" readOnly="true"></rating>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
   </div>
 </ion-content>

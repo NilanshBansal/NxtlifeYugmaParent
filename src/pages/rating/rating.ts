@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from 'ionic-angular';
 
 // import modal
 import { RatingModal } from './ratingModal';
@@ -29,10 +28,7 @@ export class StudentRating implements OnInit  {
 
   constructor(private r: ComplaintSuggestion,
               public parentInfo: ParentInfo,
-              public modalCtrl: ModalController,
-              private nl: CustomService) {
-
-  }
+              private nl: CustomService) { }
 
   ngOnInit() {
     this.students = this.parentInfo.getStudents();
@@ -49,7 +45,7 @@ export class StudentRating implements OnInit  {
   public getRatingInfo() {
     this.nl.showLoader();
     this.r.getRatingInfo(this.studentId).subscribe((res) => {
-      this.onSuccess(res.json())
+      this.onSuccess(res)
     }, (err) => {
       this.onError();
     });

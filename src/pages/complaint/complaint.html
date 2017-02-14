@@ -14,14 +14,14 @@
         <nl-list-view [complaint]="data"></nl-list-view>
       </a>
       <ion-item-options side="right">
-        <nl-comment-button [master]="master" [complaint]="data"></nl-comment-button>
-        <nl-close-button [master]="master" [complaint]="data"></nl-close-button>
-        <nl-reopen-button [master]="master" [complaint]="data"></nl-reopen-button>
-        <nl-satisfied-button [master]="master" [complaint]="data"></nl-satisfied-button>
+        <nl-comment-button [complaint]="data"></nl-comment-button>
+        <nl-close-button [complaint]="data"></nl-close-button>
+        <nl-reopen-button [complaint]="data"></nl-reopen-button>
+        <nl-satisfied-button [complaint]="data"></nl-satisfied-button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <ion-list class="no-comment" *ngIf="EmptyAppreciations">
+  <ion-list class="no-comment" *ngIf="EmptyComplaints">
     <img src="assets/svg/empty.svg" />
     <span>NO RECORD FOUND</span>
   </ion-list>

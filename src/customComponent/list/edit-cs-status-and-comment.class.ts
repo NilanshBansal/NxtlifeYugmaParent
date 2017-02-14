@@ -17,13 +17,11 @@ export class EditComplaintStatusAndComment {
 
   onSuccess(res) {
     this.nl.hideLoader();
-    let data = res.json();
-    this.updateData(data);
+    this.updateData(res);
   }
 
-  onError() {
-    this.nl.hideLoader();
-    this.nl.errMessage();
+  onError(err) {
+    this.nl.onError(err);
   }
 
   updateData(data) {
@@ -37,7 +35,7 @@ export class EditComplaintStatusAndComment {
     this.c.reopenComplaint(complaint.id, data).subscribe((res) => {
       this.onSuccess(res);
     }, (err) => {
-      this.onError();
+      this.onError(err);
     });
   }
 
@@ -48,7 +46,7 @@ export class EditComplaintStatusAndComment {
         this.onSuccess(res);
       }
     }, (err) => {
-      this.onError();
+      this.onError(err);
     });
   }
 
@@ -59,7 +57,7 @@ export class EditComplaintStatusAndComment {
         this.onSuccess(res);
       }
     }, (err) => {
-      this.onError();
+      this.onError(err);
     });
   }
 

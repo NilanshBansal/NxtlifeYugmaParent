@@ -6,7 +6,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-fab top right edge>
-    <button ion-fab (click)="newComplaint()" color="cool"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab (click)="createNew()" color="cool"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
     <ion-item-sliding *ngFor="let data of allData" #slidingItem>

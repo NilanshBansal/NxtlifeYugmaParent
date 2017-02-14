@@ -31,7 +31,7 @@ export class ViewComponent extends EditComplaintStatusAndComment implements OnIn
 
   ngOnInit() {
     this.title = "VIEW " + this.nl.getHeaderText();
-    this.complaint = this.navParams.get('complaint');
+    this.complaint = this.navParams.get('viewData');
   }
 
   dismiss() {

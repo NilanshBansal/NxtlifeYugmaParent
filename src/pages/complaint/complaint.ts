@@ -71,8 +71,8 @@ export class ComplaintPage {
     createNew.present();
   }
 
-  viewComplaint(viewData): void {
-    let openViewModal = this.modalCtrl.create(ViewComponent, {complaint: viewData});
+  openViewModal(viewData): void {
+    let openViewModal = this.modalCtrl.create(ViewComponent, {viewData: viewData});
     openViewModal.present();
   }
 

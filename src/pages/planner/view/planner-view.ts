@@ -18,10 +18,9 @@ export class EventModalPage implements OnInit{
 	
 	public ResponseData = [];
 	public resdata;
-	
 	public EventID;
 	public userID;
-
+	public evenTs;
 
 	constructor(public viewCtrl: ViewController,
 				public modalCtrl: ModalController,
@@ -33,22 +32,17 @@ export class EventModalPage implements OnInit{
     public _loadingCtrl: LoadingController){
 			//	public _configurtion : Configuration){
 
-
+		this.EventID = this.navParams.get('eventId');
+		this.ResponseData = this.navParams.get('eventss');
 		
 
-		this.EventID = this.navParams.get('eventId');
-
+		console.log('eventss',this.ResponseData);
 		this._events.subscribe('events:edited', 
    			(data) => { this.loll(data);
       				console.log("_events subscribe", data);
      
   		});
 	}
-
-	
-
-
-	
 
 	
     
@@ -168,7 +162,7 @@ presentLoading() {
 	 }
 
 	ngOnInit(): void{
-		this.GetOneEvent();
+		
 		
 	}
 }

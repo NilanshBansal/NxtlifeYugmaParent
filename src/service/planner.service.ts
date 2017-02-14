@@ -100,6 +100,13 @@ export class EventService {
 
 	}
 
+	public DateEvents(Eventmonth,date){
+		this.serverUrl = this.configuration.Server;
+		return this.http.get(this.serverUrl+'/month/'+Eventmonth+'/'+date,this.options)
+		.map((res:Response) => res.json())
+	}
+
+
 	public deleteEvent(id){
 
 		this.serverUrl = this.configuration.Server;

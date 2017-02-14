@@ -352,7 +352,6 @@ doll(data){
   }
 
 
-
   decrement(): void {
  this.count -= 1;
 

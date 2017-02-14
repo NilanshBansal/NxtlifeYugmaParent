@@ -1,22 +1,15 @@
-
-<ion-header >
-  <ion-toolbar color="primary">
-  <ion-navbar color="primary">
-
+<ion-header>
+  <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Timeline</ion-title>
 </ion-navbar>
-  </ion-toolbar>
 </ion-header>
 
-
-
-<ion-content class="timeline csGrayBackground" padding>
-
-        <section id="cd-timeline" class="cd-container">
-          <div class="timeline-row" *ngFor="let activity of timeline">
+<ion-content class="csGrayBackground">
+        <section id="cd-timeline">
+          <ion-card class="timeline-row" *ngFor="let activity of timeline">
             <div class="cd-timeline-block">
               <div class="cd-timeline-picture dark">
 					    <!--<span>{{activity.date}} {{activity.month}}</span>
@@ -28,7 +21,7 @@
               <div class="cd-timeline-content dark">
                 <!--<div  ></div>-->
                 <!--<span class="daytimeline"> {{activity.day}}</span>-->
-                <div class="color-col" [style.border-left-color]= "tre.plannerTypeColor">
+                <div class="color-col" [style.border-left-color]= "tre.plannerTypeColor" (click)="EventTimelineClick(tre.id)">
                   
                   <h5 class="timeline-title">{{tre.title}}</h5>
                   <span class="startTime">{{tre.startTime}} </span>
@@ -42,11 +35,11 @@
                 
               </div>
             </div>
-          </div>
+          </ion-card>
         </section>
 
-          <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>-->
+  </ion-infinite-scroll>
 
 </ion-content>

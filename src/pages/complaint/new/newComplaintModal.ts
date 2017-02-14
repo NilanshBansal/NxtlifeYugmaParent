@@ -69,7 +69,7 @@ export class newComplaintModal implements OnInit {
 
   ngOnInit() {
     this.loadForm();
-    this.headerTitle = this.nl.getHeaderText();
+    this.headerTitle = "New " + this.nl.getHeaderText();
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child

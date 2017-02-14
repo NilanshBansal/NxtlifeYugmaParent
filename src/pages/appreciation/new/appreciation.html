@@ -7,37 +7,39 @@
       <ion-item>
         <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
         <ion-label>Select Child</ion-label>
-        <ion-select [(ngModel)]="child" formControlName="studentId" (ngModelChange)="selectChild($event)">
-        <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
-        </ion-select>
+        <custom-select item-content [(ngModel)]="child" formControlName="studentId" (ngModelChange)="selectChild($event)">
+          <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
+        </custom-select>
       </ion-item>
     </ion-card>
     <ion-card>
       <ion-item *ngIf="teachers">
         <ion-icon name="ios-person-outline" item-left large  color="primary"></ion-icon>
         <ion-label>Teacher</ion-label>
-        <ion-select formControlName="teacherId">
+        <custom-select name="a" #a item-content formControlName="teacherId">
           <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}}</ion-option>
-        </ion-select>
+        </custom-select>
       </ion-item>
     </ion-card>
     <ion-card>
       <ion-item class="csTransparent">
-        <ion-label stacked>Title (max. 50)</ion-label>
-        <ion-textarea rows="2" class="csInput-title" formControlName="title" maxlength="50" placeholder="Enter title"> </ion-textarea>
+        <ion-label stacked>Title</ion-label>
+        <ion-textarea rows="2" class="csInput-title" formControlName="title" maxlength="50"></ion-textarea>
       </ion-item>
-      <ion-badge class="csFiftyLimit"><span>{{50}}</span></ion-badge>
+      <ion-badge class="csFiftyLimit"><span>{{50 - newSuggestion.value.title.length}}</span></ion-badge>
     </ion-card>
    <ion-card>
       <ion-item class="csTransparent">
         <ion-label stacked>Description</ion-label>
-        <ion-textarea class="csInput-title" rows="8" [(ngModel)]="description" placeholder="Enter description" formControlName="description"
+        <ion-textarea class="csInput-title" rows="5" [(ngModel)]="description" formControlName="description"
           maxlength="200"></ion-textarea>
       </ion-item>
       <ion-badge class="csFiftyLimit"><span>{{200 - description.length}}</span></ion-badge>
     </ion-card>
   <ion-buttons padding>
-    <button ion-button block type="submit" [disabled]="newSuggestion.invalid">Submit</button>
+    <button ion-button icon-right block type="submit" [disabled]="newSuggestion.invalid">
+      SEND <ion-icon name="send"></ion-icon>
+    </button>
   </ion-buttons>
   </form>
 </ion-content>

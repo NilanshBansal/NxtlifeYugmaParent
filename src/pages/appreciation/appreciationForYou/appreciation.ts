@@ -31,7 +31,7 @@ export class AppreciationForYou extends ComplaintPage {
               public c: ComplaintSuggestion) {
     super(modalCtrl, nl, c);
     this.con.setUrlForStudentAppreciations("for-student");
-    this.getComplaints();
+    this.getAllData();
   }
 
   ionViewWillEnter() {

@@ -43,17 +43,21 @@
     </ion-card>
     <ion-card>
       <ion-item class="csTransparent">
-        <ion-label stacked>Title (max. 50)</ion-label>
-        <ion-textarea rows="2"  formControlName="title" maxlength="50" placeholder="Enter Title (max 50)"> </ion-textarea>
+        <ion-label stacked>Title</ion-label>
+        <ion-textarea rows="2"  formControlName="title" maxlength="50"> </ion-textarea>
       </ion-item>
-      <ion-badge class="csFiftyLimit" style="top: -18px; position: relative;margin-right:5px; float:right"><span>{{50 - newComplaint.value.title.length}}</span></ion-badge>
+      <ion-badge class="csFiftyLimit">
+        <span>{{50 - newComplaint.value.title.length}}</span>
+      </ion-badge>
     </ion-card>
     <ion-card>
       <ion-item class="csTransparent">
         <ion-label stacked>Description</ion-label>
-        <ion-textarea  rows="8" formControlName="description" maxlength="200" placeholder="Enter Title (max 200)"></ion-textarea>
+        <ion-textarea rows="5" formControlName="description" maxlength="200"></ion-textarea>
       </ion-item>
-      <ion-badge class="csFiftyLimit" style="top: -18px; position: relative;margin-right:5px; float:right"><span>{{200 - newComplaint.value.description.length}}</span></ion-badge>
+      <ion-badge class="csFiftyLimit">
+        <span>{{200 - newComplaint.value.description.length}}</span>
+      </ion-badge>
     </ion-card>
     <ion-card>
       <ion-item class="csInProgress">

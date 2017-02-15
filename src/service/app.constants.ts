@@ -69,9 +69,9 @@ export class Configuration {
     const notificationToken = {
       notificationToken: tokenId
     }
-    return this.http.put(this.Server + "/parent/" + this.getParentId(), notificationToken).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.put(this.Server + "/parent/" + this.getParentId(), notificationToken)
+                    .map((res: Response) => { return res; })
+                    .catch((error: any) => Observable.throw(error || 'server error'));
   }
 
 }

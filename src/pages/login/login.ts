@@ -83,6 +83,7 @@ export class LoginPage implements OnInit {
   public otpVarifyFailed(err) {
     this.showLoginForm(false);
     this.loading.dismiss();
+    this.otp = "";
     if (err === 400) {
       this.nl.showToast("otp not matched");
     } else {

@@ -23,12 +23,12 @@ export class ComplaintSuggestion {
 
   }
 
-  getUrl() {
-    this.headers = this.configuration.header();
-    this.options = new RequestOptions({
-      headers : this.headers
-    });
-  }
+  // getUrl() {
+  //   this.headers = this.configuration.header();
+  //   this.options = new RequestOptions({
+  //     headers : this.headers
+  //   });
+  // }
 
   public getComplaints(pageNo): any {
     this.serverUrl = this.configuration.Server;
@@ -44,7 +44,7 @@ export class ComplaintSuggestion {
   }
 
   public getCategories() {
-    this.getUrl();
+    // this.getUrl();
     this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/category")
                     .map(this.extractData)
@@ -88,7 +88,7 @@ export class ComplaintSuggestion {
   }
 
   public getRatingInfo(studentId): any {
-    this.getUrl();
+    // this.getUrl();
     this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/" + studentId)
                     .map(this.extractData)

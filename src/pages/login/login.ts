@@ -95,6 +95,7 @@ export class LoginPage implements OnInit {
       this.loading.dismiss();
       this.authService.storeParentData(res);
       this.navCtrl.setRoot(Dashboard);
+      this.setNotificationToken();
     }, (err) => {
       this.loading.dismiss();
       this.nl.errMessage();

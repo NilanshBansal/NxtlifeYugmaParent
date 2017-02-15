@@ -14,16 +14,16 @@ export class Configuration {
   headers;
   options;
 
-  getHeader() {
-    this.headers = new Headers({
-      'Content-Type' : 'application/json',
-      'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
-    });
-  }
-
-  header() {
-    return this.headers;
-  }
+  // getHeader() {
+  //   this.headers = new Headers({
+  //     'Content-Type' : 'application/json',
+  //     'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
+  //   });
+  // }
+  //
+  // header() {
+  //   return this.headers;
+  // }
 
   public getParentId(): string {
     if (localStorage.getItem("id") != null) {
@@ -68,14 +68,14 @@ export class Configuration {
     const notificationToken = {
       notificationToken: tokenId
     }
-    this.headers = new Headers({
-      'Content-Type' : 'application/json',
-      'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
-    });
-    this.options = new RequestOptions({
-      headers : this.header()
-    });
-    return this.http.put(this.Server + "/parent/" + this.getParentId(), notificationToken, this.options).map((res: Response) => {
+    // this.headers = new Headers({
+    //   'Content-Type' : 'application/json',
+    //   'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
+    // });
+    // this.options = new RequestOptions({
+    //   headers : this.header()
+    // });
+    return this.http.put(this.Server + "/parent/" + this.getParentId(), notificationToken).map((res: Response) => {
       return res;
     }).catch((error: any) => Observable.throw(error || 'server error'));
   }

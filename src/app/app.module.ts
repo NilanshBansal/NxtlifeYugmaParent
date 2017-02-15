@@ -49,7 +49,6 @@ import { CommentModal } from '../customComponent/commentModal.ts';
 
 // import service
 import { NetworkService } from '../service/network.service';
-import { SafeHttp } from '../service/safe-http';
 import { AuthService } from '../service/auth.service';
 import { Configuration } from '../service/app.constants';
 import { ParentInfo } from '../service/parentInfo';
@@ -144,7 +143,7 @@ import { SurveyService } from '../service/survey.service';
     CustomSelect,
     ViewComponent
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService,SurveyService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
+  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService,SurveyService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
     {
       provide: CustomHttpService,
       useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {

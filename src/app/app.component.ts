@@ -73,11 +73,7 @@ export class MyApp {
     if (this.authService.isLoggedIn()) {
       this.loadUser();
       this.rootPage = Dashboard;
-      this.authService.getParentInfo().then(user => {
-        this.authService.storeParentData(user.json());
-      }).catch(err => {
-        if (err.status === 401) { this.presentConfirm(); }
-      });
+      this.getUserInfo();
     } else {
       this.rootPage = LoginPage;
     }
@@ -87,6 +83,14 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+    });
+  }
+
+  public getUserInfo() {
+    this.authService.getParentInfo().subscribe((res) => {
+      this.authService.storeParentData(res);
+    }, (err) => {
+      if (err === 401) { this.presentConfirm(); }
     });
   }
 

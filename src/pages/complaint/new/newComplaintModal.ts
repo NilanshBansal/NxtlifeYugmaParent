@@ -90,9 +90,17 @@ export class newComplaintModal implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.categories = this.c.myCategories();
+    if (this.categories === null) {
+      this.getCategories();
+    }
+  }
+
+  getCategories() {
     this.nl.showLoader();
     this.c.getCategories().subscribe((categories) => {
       this.nl.hideLoader();
+      this.c.storeCategories(categories);
       this.categories = categories;
     }, (err) => {
       this.nl.hideLoader();

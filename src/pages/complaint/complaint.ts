@@ -35,6 +35,7 @@ export class ComplaintPage {
 
   ionViewWillEnter() {
     this.getAllData();
+    this.getCategories();
   }
 
   getAllData() {
@@ -43,6 +44,13 @@ export class ComplaintPage {
       this.onSuccess(res);
     }, (err) => {
       this.nl.onError(err);
+    });
+  }
+
+  // its used in new complaint
+  getCategories() {
+    this.c.getCategories().subscribe((categories) => {
+      this.c.storeCategories(categories);
     });
   }
 
@@ -118,6 +126,5 @@ export class ComplaintPage {
     this.showEmptyMsg(false);
     this.nl.onError(err);
   }
-
 
 }

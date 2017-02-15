@@ -23,13 +23,6 @@ export class ComplaintSuggestion {
 
   }
 
-  // getUrl() {
-  //   this.headers = this.configuration.header();
-  //   this.options = new RequestOptions({
-  //     headers : this.headers
-  //   });
-  // }
-
   public getComplaints(pageNo): any {
     this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/page/" + pageNo)
@@ -44,7 +37,6 @@ export class ComplaintSuggestion {
   }
 
   public getCategories() {
-    // this.getUrl();
     this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/category")
                     .map(this.extractData)
@@ -88,7 +80,6 @@ export class ComplaintSuggestion {
   }
 
   public getRatingInfo(studentId): any {
-    // this.getUrl();
     this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/" + studentId)
                     .map(this.extractData)
@@ -111,6 +102,14 @@ export class ComplaintSuggestion {
       errMsg = error.message ? error.message : error.toString();
     }
     return Observable.throw(errMsg);
+  }
+
+  public storeCategories(data) {
+    localStorage.setItem("categories", JSON.stringify(data));
+  }
+
+  public myCategories() {
+    return JSON.parse(localStorage.getItem("categories"));
   }
 
 }

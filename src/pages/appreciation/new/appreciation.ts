@@ -6,6 +6,8 @@ import { ParentInfo } from '../../../service/parentInfo';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ComplaintSuggestion } from '../../../service/cs.service';
 import { CustomService } from '../../../service/customService';
+import { Configuration } from '../../../service/app.constants';
+
 import * as _ from 'underscore';
 
 @Component({
@@ -41,8 +43,9 @@ export class NewAppreciationModal implements OnInit {
               public formBuilder: FormBuilder,
               public nl: CustomService,
               public c: ComplaintSuggestion,
+              public con: Configuration,
               public actionSheetCtrl: ActionSheetController) {
-
+    this.con.setUrlForAppreciations();
   }
 
   selectChild(student) {
@@ -57,7 +60,10 @@ export class NewAppreciationModal implements OnInit {
     this.nl.showLoader();
     this.c.getTeachers(this.standardId).subscribe((teachers) => {
       this.nl.hideLoader();
+      this.nl.hideLoader();
       this.teachers = teachers; // Get teachers list
+    }, (err) => {
+      this.nl.onError(err);
     });
   }
 
@@ -65,6 +71,7 @@ export class NewAppreciationModal implements OnInit {
     this.loadForm();
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
+      this.nl.showLoader();
       this.child = this.students[0];  // Auto select for one child
     }
     this.nl.showToast("All fields are mandatory to send appreciation");

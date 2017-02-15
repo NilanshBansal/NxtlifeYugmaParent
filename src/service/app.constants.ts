@@ -60,6 +60,10 @@ export class Configuration {
     this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/appreciation/" + url;
   }
 
+  setUrlForAppreciations() {
+    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/appreciation";
+  }
+
   tokenUpdate(tokenId) {
     const notificationToken = {
       notificationToken: tokenId

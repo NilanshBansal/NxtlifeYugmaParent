@@ -31,10 +31,10 @@
    <ion-card>
       <ion-item class="csTransparent">
         <ion-label stacked>Description</ion-label>
-        <ion-textarea class="csInput-title" rows="5" [(ngModel)]="description" formControlName="description"
+        <ion-textarea class="csInput-title" rows="5" formControlName="description"
           maxlength="200"></ion-textarea>
       </ion-item>
-      <ion-badge class="csFiftyLimit"><span>{{200 - description.length}}</span></ion-badge>
+      <ion-badge class="csFiftyLimit"><span>{{200 - newSuggestion.value.description.length}}</span></ion-badge>
     </ion-card>
   <ion-buttons padding>
     <button ion-button icon-right block type="submit" [disabled]="newSuggestion.invalid">

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import { Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CustomService } from './customService';
+import { CustomHttpService } from './default.header.service';
 
 @Injectable()
 export class Configuration {
 
-  constructor(public http: Http,
+  constructor(public http: CustomHttpService,
               public cs: CustomService) {
 
   }
@@ -14,16 +15,16 @@ export class Configuration {
   headers;
   options;
 
-  // getHeader() {
-  //   this.headers = new Headers({
-  //     'Content-Type' : 'application/json',
-  //     'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
-  //   });
-  // }
-  //
-  // header() {
-  //   return this.headers;
-  // }
+  getHeader() {
+    this.headers = new Headers({
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
+    });
+  }
+
+  header() {
+    return this.headers;
+  }
 
   public getParentId(): string {
     if (localStorage.getItem("id") != null) {
@@ -68,13 +69,6 @@ export class Configuration {
     const notificationToken = {
       notificationToken: tokenId
     }
-    // this.headers = new Headers({
-    //   'Content-Type' : 'application/json',
-    //   'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
-    // });
-    // this.options = new RequestOptions({
-    //   headers : this.header()
-    // });
     return this.http.put(this.Server + "/parent/" + this.getParentId(), notificationToken).map((res: Response) => {
       return res;
     }).catch((error: any) => Observable.throw(error || 'server error'));

@@ -13,7 +13,7 @@ import { Dashboard } from '../pages/homepage/homepage';
 import { PollPage } from '../pages/poll/poll';
 import { AccountPage } from '../pages/account/account';
 import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';
-import { CustomSelect } from '../customComponent/custom-select';
+import { CustomSelect } from '../custom-component/custom-select';
 import { AppreciationForYou } from '../pages/appreciation/appreciationForYou/appreciation';
 import { YourAppreciation } from '../pages/appreciation/yourAppreciation/appreciation';
 import { ComplaintPage } from '../pages/complaint/complaint';
@@ -38,15 +38,15 @@ import { ViewComponent } from '../pages/complaint/view/viewComplaintModal';
 import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 
 // import custom component
-import { ListView } from '../customComponent/list/listview.component';
+import { ListView } from '../custom-component/list/listview.component';
 import { ListViewCloseButton,
          ListViewReopenButton,
          ListViewSatisfiedButton,
-         ListViewCommentButton } from '../customComponent/list/edit-cs-status-and-comment.component';
-import { CustomNavbar } from '../customComponent/navbar.component.ts';
-import { ModalNavbarComponent } from '../customComponent/modal.navbar.component.ts';
-import { CommentModal } from '../customComponent/commentModal.ts';
-import { NoInternet } from '../customComponent/noInternet.component';
+         ListViewCommentButton } from '../custom-component/list/edit-cs-status-and-comment.component';
+import { CustomNavbar } from '../custom-component/navbar.component.ts';
+import { ModalNavbarComponent } from '../custom-component/modal.navbar.component.ts';
+import { CommentModal } from '../custom-component/commentModal.ts';
+import { NoInternet } from '../custom-component/noInternet.component';
 
 // import service
 import { NetworkService } from '../service/network.service';

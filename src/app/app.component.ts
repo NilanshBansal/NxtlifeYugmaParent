@@ -15,7 +15,7 @@ import { StudentRating } from '../pages/rating/rating';
 import { AccountPage } from '../pages/account/account';
 import { HomeworkComponent } from '../pages/homework/homework.component';
 import { CircularComponent } from '../pages/circular/circular.component';
-import { NoInternet } from '../customComponent/noInternet.component';
+import { NoInternet } from '../custom-component/noInternet.component';
 
 // import service
 import { AuthService } from '../service/auth.service';

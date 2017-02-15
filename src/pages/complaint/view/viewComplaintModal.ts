@@ -3,7 +3,7 @@ import { ModalController, AlertController, ActionSheetController, NavParams } fr
 import { ViewController } from 'ionic-angular';
 
 // import base class
-import { EditComplaintStatusAndComment } from '../../../customComponent/list/edit-cs-status-and-comment.class';
+import { EditComplaintStatusAndComment } from '../../../custom-component/list/edit-cs-status-and-comment.class';
 
 // import service
 import { CustomService } from '../../../service/customService';

@@ -9,7 +9,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Push } from 'ionic-native';
 import { Dashboard } from '../homepage/homepage';
 import { CustomService } from '../../service/customService';
-import { Notification } from '../../customComponent/notification.component';
+import { Notification } from '../../custom-component/notification.component';
 
 @Component({
   selector: 'page-login',

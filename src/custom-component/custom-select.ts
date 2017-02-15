@@ -1,8 +1,8 @@
-import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, Input, HostListener, OnDestroy, Optional, Output, Renderer, QueryList, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, forwardRef, OnDestroy, Optional, Renderer, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ActionSheet, Alert, App, Config, Form, Ion, Item, NavController, Option, ViewController } from 'ionic-angular';
-import { isBlank, isCheckedProperty, isTrueProperty, deepCopy } from 'ionic-angular/util/util';
+import { Alert, App, Config, Form, Item, NavController } from 'ionic-angular';
+import { deepCopy } from 'ionic-angular/util/util';
 import { Select as ImportSelect } from 'ionic-angular/components/select/select';
 
 
@@ -97,8 +97,6 @@ export class CustomSelect extends TempSelect implements AfterContentInit, Contro
     if (!selectOptions.title && this._item) {
       selectOptions.title = this._item.getLabelText();
     }
-
-    let options = this._options.toArray();
 
     // default to use the alert interface
     this.interface = 'alert';

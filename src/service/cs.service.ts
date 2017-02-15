@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
@@ -12,7 +12,6 @@ import { Configuration } from './app.constants';
 @Injectable()
 export class ComplaintSuggestion {
 
-  private baseUrl: string;
   public serverUrl: string;
   public access_token;
   public headers: any;

@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController,
-         AlertController,
-         ActionSheetController,
-         ItemSliding } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 
 // import modal
 import { newComplaintModal } from './new/newComplaintModal';

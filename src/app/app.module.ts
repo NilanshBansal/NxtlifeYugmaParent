@@ -4,7 +4,7 @@ import { MomentModule } from 'angular2-moment/moment.module';
 import { MyApp } from './app.component';
 import { CalendarDateFormatter, CalendarEventTitle, CalendarModule } from 'angular-calendar';
 import { Ionic2RatingModule } from 'ionic2-rating';
-import { RequestOptions, HttpModule, XHRBackend } from '@angular/http';
+import { RequestOptions, XHRBackend } from '@angular/http';
 import { CustomHttpService } from '../service/default.header.service';
 
 // import component

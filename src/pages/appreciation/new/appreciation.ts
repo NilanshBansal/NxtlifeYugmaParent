@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewController, ToastController, ActionSheetController } from 'ionic-angular';
+import { ViewController, ActionSheetController } from 'ionic-angular';
 
 import { ParentInfo } from '../../../service/parentInfo';
-
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ComplaintSuggestion } from '../../../service/cs.service';
 import { CustomService } from '../../../service/custom.service';
 import { Configuration } from '../../../service/app.constants';
-
-import * as _ from 'underscore';
 
 @Component({
   selector: 'new-appreciation-modal',
@@ -39,7 +36,6 @@ export class NewAppreciationModal implements OnInit {
 
   constructor(public viewCtrl: ViewController,
               public parentInfo: ParentInfo,
-              public toastCtrl: ToastController,
               public formBuilder: FormBuilder,
               public nl: CustomService,
               public c: ComplaintSuggestion,

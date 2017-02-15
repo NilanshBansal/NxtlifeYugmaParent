@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-
 import { NavController, ActionSheetController, Events } from 'ionic-angular';
-
-import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-account',

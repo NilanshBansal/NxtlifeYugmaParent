@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController,
-         AlertController,
-         PopoverController,
-         ActionSheetController,
-         Events } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../../service/custom.service';

@@ -100,7 +100,6 @@ export class CommentModal implements OnInit {
   }
 
   scrollToBottom(){
-    let dimensions = this.content.getContentDimensions();
     this.content.scrollTo(0, 700, 200);
   }
 

@@ -9,8 +9,6 @@ import 'rxjs/add/operator/toPromise';
 export class AuthService {
 
   private actionUrl: string = "https://yugma-ut.appspot-preview.com";
-  private access_token: string;
-  private data;
   public header;
 
   constructor(private http: CustomHttpService,

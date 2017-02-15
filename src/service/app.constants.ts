@@ -9,7 +9,6 @@ export class Configuration {
 
   constructor(public http: CustomHttpService,
               public cs: CustomService) {
-
   }
 
   headers;
@@ -69,7 +68,7 @@ export class Configuration {
     const notificationToken = {
       notificationToken: tokenId
     }
-    return this.http.put(this.Server + "/parent/" + this.getParentId(), notificationToken)
+    return this.http.put("https://yugma-ut.appspot-preview.com/parent/" + this.getParentId(), notificationToken)
                     .map((res: Response) => { return res; })
                     .catch((error: any) => Observable.throw(error || 'server error'));
   }

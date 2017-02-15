@@ -21,7 +21,6 @@ import { AuthService } from '../service/auth.service';
 import { NetworkService } from '../service/network.service';
 import { Configuration } from '../service/app.constants';
 
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -117,15 +116,13 @@ export class MyApp {
       title: 'Session Expired',
       message: "You're already logged in some other device. You may again login.",
       enableBackdropDismiss: false,
-      buttons: [
-        {
-          text: 'Logout',
-          handler: () => {
-            localStorage.clear();
-            this.rootPage = LoginPage;
-          }
+      buttons: [{
+        text: 'Logout',
+        handler: () => {
+          localStorage.clear();
+          this.rootPage = LoginPage;
         }
-      ]
+      }]
     });
     alert.present();
   }
@@ -135,7 +132,6 @@ export class MyApp {
       this.loadUser();
       this.enableMenu(true);
       this.nav.setRoot(Dashboard);
-      console.log("login")
     });
     this.events.subscribe('session:expired', () => {
       this.presentConfirm();
@@ -144,7 +140,6 @@ export class MyApp {
       localStorage.clear();
       this.enableMenu(false);
       this.selectedPage = "";
-      console.log("logout");
       this.nav.setRoot(LoginPage);
     });
   }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController, ActionSheetController } from 'ionic-angular';
+import { NavController, ActionSheetController, Events } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
 
@@ -19,6 +19,7 @@ export class AccountPage {
   students;
 
   constructor(public navCtrl: NavController,
+              public events: Events,
               private actionSheetCtrl: ActionSheetController,) {
   }
 
@@ -32,8 +33,9 @@ export class AccountPage {
   }
 
   logout() {
-    localStorage.clear();
-    this.navCtrl.setRoot(LoginPage);
+    // localStorage.clear();
+    // this.navCtrl.setRoot(LoginPage);
+    this.events.publish('user:logout');
   }
 
   logoutActionSheet() {

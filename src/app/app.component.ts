@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController, Events } from 'ionic-angular';
+import { Nav, Platform, AlertController, Events, MenuController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 // import component
@@ -21,6 +21,7 @@ import { AuthService } from '../service/auth.service';
 import { NetworkService } from '../service/network.service';
 import { Configuration } from '../service/app.constants';
 
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -38,6 +39,7 @@ export class MyApp {
 
   constructor(public platform: Platform,
               public authService: AuthService,
+              public menu: MenuController,
               public events: Events,
               private alertCtrl: AlertController,
               private configuration: Configuration,
@@ -106,6 +108,10 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+  enableMenu(loggedIn) {
+    this.menu.enable(loggedIn);
+  }
+
   presentConfirm() {
     let alert = this.alertCtrl.create({
       title: 'Session Expired',
@@ -127,9 +133,19 @@ export class MyApp {
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
       this.loadUser();
+      this.enableMenu(true);
+      this.nav.setRoot(Dashboard);
+      console.log("login")
     });
     this.events.subscribe('session:expired', () => {
       this.presentConfirm();
+    });
+    this.events.subscribe('user:logout', () => {
+      localStorage.clear();
+      this.enableMenu(false);
+      this.selectedPage = "";
+      console.log("logout");
+      this.nav.setRoot(LoginPage);
     });
   }
 }

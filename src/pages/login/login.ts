@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoadingController, NavController, AlertController, MenuController, Events } from 'ionic-angular';
+import { LoadingController, NavController, AlertController, Events } from 'ionic-angular';
 
 import { Configuration } from '../../service/app.constants';
 import { AuthService } from '../../service/auth.service';
@@ -27,10 +27,9 @@ export class LoginPage implements OnInit {
               public loadingCtrl: LoadingController,
               private formBuilder: FormBuilder,
               public configuration: Configuration,
-              public menuCtrl: MenuController,
               public events: Events,
               public nl: CustomService,
-              private alertCtrl: AlertController) { this.menuCtrl.enable(false); }
+              private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -95,7 +94,8 @@ export class LoginPage implements OnInit {
     this.authService.getParentInfo().subscribe((res) => {
       this.loading.dismiss();
       this.authService.storeParentData(res);
-      this.navCtrl.setRoot(Dashboard);
+      // this.navCtrl.setRoot(Dashboard);
+      this.events.publish('user:login');
       this.setNotificationToken();
     }, (err) => {
       this.loading.dismiss();

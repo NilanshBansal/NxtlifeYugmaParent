@@ -9,7 +9,7 @@ import { newComplaintModal } from './new/newComplaintModal';
 import { ViewComponent } from './view/viewComplaintModal';
 
 // import service
-import { CustomService } from '../../service/customService';
+import { CustomService } from '../../service/custom.service';
 import { ComplaintSuggestion } from '../../service/cs.service';
 
 @Component({

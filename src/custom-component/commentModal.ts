@@ -4,7 +4,7 @@ import { ViewController, ToastController, NavParams, Content } from 'ionic-angul
 
 // import service
 import { ComplaintSuggestion } from '../service/cs.service';
-import { CustomService } from '../service/customService';
+import { CustomService } from '../service/custom.service';
 
 @Component({
   selector: 'comment',

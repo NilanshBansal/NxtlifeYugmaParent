@@ -1,5 +1,5 @@
 import { LoadingController, NavController, AlertController } from 'ionic-angular';
-import { CustomService } from '../service/customService';
+import { CustomService } from '../service/custom.service';
 import { Configuration } from '../service/app.constants';
 import { Push } from 'ionic-native';
 import { Dashboard } from '../pages/homepage/homepage';

@@ -5,7 +5,7 @@ import { ModalController,
          ActionSheetController } from 'ionic-angular';
 
 // import service
-import { CustomService } from '../../../service/customService';
+import { CustomService } from '../../../service/custom.service';
 import { ComplaintSuggestion } from '../../../service/cs.service';
 import { Configuration } from '../../../service/app.constants';
 

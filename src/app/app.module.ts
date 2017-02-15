@@ -54,7 +54,7 @@ import { AuthService } from '../service/auth.service';
 import { Configuration } from '../service/app.constants';
 import { ParentInfo } from '../service/parentInfo';
 import { ComplaintSuggestion } from '../service/cs.service';
-import { CustomService } from '../service/customService';
+import { CustomService } from '../service/custom.service';
 import { EventService } from '../service/planner.service';
 import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';

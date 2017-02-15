@@ -2,7 +2,7 @@ import { ModalController, AlertController, ActionSheetController } from 'ionic-a
 import { CommentModal } from '../commentModal';
 
 // import service
-import { CustomService } from '../../service/customService';
+import { CustomService } from '../../service/custom.service';
 import { ComplaintSuggestion } from '../../service/cs.service';
 
 export class EditComplaintStatusAndComment {

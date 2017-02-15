@@ -5,7 +5,7 @@ import { ParentInfo } from '../../../service/parentInfo';
 
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ComplaintSuggestion } from '../../../service/cs.service';
-import { CustomService } from '../../../service/customService';
+import { CustomService } from '../../../service/custom.service';
 import * as _ from 'underscore';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { CustomService } from './customService';
+import { CustomService } from './custom.service';
 import { CustomHttpService } from './default.header.service';
 
 @Injectable()

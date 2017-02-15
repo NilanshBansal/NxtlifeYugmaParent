@@ -5,7 +5,7 @@ import { RatingModal } from './ratingModal';
 
 // import service
 import { ComplaintSuggestion } from '../../service/cs.service';
-import { CustomService } from '../../service/customService';
+import { CustomService } from '../../service/custom.service';
 import { ParentInfo } from '../../service/parentInfo';
 import * as _ from 'underscore';
 

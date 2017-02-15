@@ -36,6 +36,8 @@ $colors: (
 
 $color0 :       #fd4544;
 $color1 :       #00bcd4;
+$csPink:        #f6c2d8;
+$csDarkPink:    #d35a7b;
 $colorLight:    #00acc1;
 $dim:           #dddddd;
 $csBlue:        #37cbff;
@@ -55,7 +57,8 @@ $csTop:           5px;
 $csZindex: 10;
 
 $toolbar-ios-height: 56px;
-$toolbar-ios-title-font-size: 2rem;
+$toolbar-ios-title-font-size: 1.6rem;
+$toolbar-md-title-font-size: 1.6rem;
 $toolbar-ios-title-font-weight: normal;
 $tabs-ios-tab-min-height: 4.6rem;
 $toolbar-md-height: 64px;

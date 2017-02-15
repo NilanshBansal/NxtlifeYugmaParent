@@ -19,13 +19,13 @@
     <ion-grid class="csCalMonth">
       <ion-row>
         <ion-col width-20 class="csCalNavigation">
-          <button ion-button color="dark" (click)="decrement()" clear *ngIf='!(count <= 0)'><ion-icon name="ios-arrow-back"></ion-icon></button>
+          <button ion-button color="dark" (click)="decrement()" clear *ngIf='!(count <= 0)'><ion-icon style="color:#d35a7b" name="ios-arrow-back"></ion-icon></button>
         </ion-col>
         <ion-col>
           <span text-center class="csMonth">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
         </ion-col>
         <ion-col width-20 class="csCalNavigation">
-          <button ion-button color="dark" (click)="increment()" clear class="csRight"><ion-icon  name="ios-arrow-forward"></ion-icon></button>
+          <button ion-button color="dark" (click)="increment()" clear class="csRight"><ion-icon style="color:#d35a7b" name="ios-arrow-forward"></ion-icon></button>
         </ion-col>
       </ion-row>
     </ion-grid>

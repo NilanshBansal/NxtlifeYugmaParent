@@ -119,8 +119,7 @@ export class MyApp {
       buttons: [{
         text: 'Logout',
         handler: () => {
-          localStorage.clear();
-          this.rootPage = LoginPage;
+          this.events.publish("user:logout");
         }
       }]
     });

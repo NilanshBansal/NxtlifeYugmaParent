@@ -5,9 +5,10 @@ import { LoadingController, NavController, ToastController, AlertController, Men
 import { Configuration } from '../../service/app.constants';
 import { AuthService } from '../../service/auth.service';
 
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Push } from 'ionic-native';
 import { Dashboard } from '../homepage/homepage';
+import { CustomService } from '../../service/customService';
 
 @Component({
   selector: 'page-login',
@@ -22,9 +23,10 @@ export class LoginPage implements OnInit {
   otpSubmit: boolean = false;
 
   loginForm: FormGroup;
-  loginVerifyForm: FormGroup;
+  // loginVerifyForm: FormGroup;
 
   loading;
+  otp;
 
   constructor(public navCtrl: NavController,
               public authService: AuthService,
@@ -33,6 +35,7 @@ export class LoginPage implements OnInit {
               public configuration: Configuration,
               public menuCtrl: MenuController,
               public events: Events,
+              public nl: CustomService,
               public toastCtrl: ToastController,
               private alertCtrl: AlertController) { this.menuCtrl.enable(false); }
 
@@ -42,87 +45,121 @@ export class LoginPage implements OnInit {
     });
   }
 
-  getOtp() {
-     if (!this.loginForm.valid) {
-      this.numberSubmit = true;
+  loader;
+
+  public onError(err) {
+    this.loading.dismiss();
+    this.showOtp = false;
+    if (err === 400) {
+      this.nl.showToast("Number not registered");
     } else {
-
-      let loader = this.loadingCtrl.create({
-        content: "Authenticating..."
-      });
-
-      loader.present();
-
-      this.authService.getUser(this.loginForm.value.mobileNo)
-      .then(user => {
-        this.user = user;
-        loader.dismiss();
-        this.loginVerifyForm = this.formBuilder.group({
-          otp: ['', Validators.compose([Validators.minLength(5), Validators.required])]
-        });
-      })
-      .catch(err => {
-        loader.dismiss();
-        if (err && err.status === 400) {
-          let toast = this.toastCtrl.create({
-            message: 'Number not registered.',
-            duration: 5000,
-            position: 'bottom'
-          });
-          toast.present();
-        }
-      });
+      this.nl.errMessage();
     }
   }
 
-  verifyOtp() {
-    if (!this.loginVerifyForm.valid) {
-      this.otpSubmit = true;
-    } else {
-      let loader = this.loadingCtrl.create({
-        content: "Authenticating..."
-      });
-
-      loader.present();
-      this.authService.verifyOtp(this.loginForm.value.mobileNo, this.loginVerifyForm.value.otp)
-      .then(user => {
-        this.authService.getParentInfo().then(res => {
-          loader.dismiss();
-          this.authService.storeParentData(res.json());
-          this.navCtrl.setRoot(Dashboard);
-          let toast1 = this.toastCtrl.create({
-            message: 'Account setup successfully',
-            duration: 5000,
-            position: 'bottom'
-          });
-          toast1.present();
-          console.log("get parent Info", res);
-          this.events.publish("user:login");
-          this.setNotificationToken();
-        });
-      })
-      .catch(err => {
-        console.log("Errr", err)
-        loader.dismiss();
-        delete this.user;
-        if (err.status === 400) {
-          let toast = this.toastCtrl.create({
-            message: 'otp not match',
-            duration: 5000,
-            position: 'bottom'
-          });
-          toast.present();
-        }
-      });
-    }
+  public onSuccess(res) {
+    this.showOtp = true;
+    this.loading.dismiss();
   }
 
-  presentLoadingDefault(msg) {
+  public showLoader(msg) {
     this.loading = this.loadingCtrl.create({
       content: msg
     });
     this.loading.present();
   }
+
+  public otpVerifySuccessfully(res) {
+    localStorage.setItem("access_token", res.access_token);
+    this.authService.getParentInfo().subscribe((res) => {
+      this.loading.dismiss();
+      this.authService.storeParentData(res);
+      this.navCtrl.setRoot(Dashboard);
+    }, (err) => {
+      console.log("DSDSD", err)
+    });
+  }
+
+  showOtp: boolean = false;
+
+  public otpVarifyFailed(err) {
+    this.showOtp = true;
+    this.loading.dismiss();
+    if (err === 400) {
+      this.nl.showToast("otp not matched");
+    } else {
+      this.nl.errMessage();
+    }
+  }
+
+  getOtp() {
+     if (!this.loginForm.valid) {
+      this.numberSubmit = true;
+    } else {
+      this.showLoader("Authenticating...");
+      this.authService.getUser(this.loginForm.value.mobileNo).subscribe((res) => {
+        this.onSuccess(res);
+      }, (err) => {
+        this.onError(err);
+      });
+    }
+  }
+
+  verifyOtp() {
+    if (this.otp != "") {
+      console.log("dsada", this.otp)
+      this.showLoader("otp verifying...");
+      this.authService.verifyOtp(this.loginForm.value.mobileNo, this.otp).subscribe((res) => {
+        this.otpVerifySuccessfully(res);
+      }, (err) => {
+        this.otpVarifyFailed(err);
+      });
+    }
+  }
+
+
+
+  // verifyOtp() {
+  //   if (!this.loginVerifyForm.valid) {
+  //     this.otpSubmit = true;
+  //   } else {
+  //     let loader = this.loadingCtrl.create({
+  //       content: "Authenticating..."
+  //     });
+  //
+  //     loader.present();
+  //     this.authService.verifyOtp(this.loginForm.value.mobileNo, this.loginVerifyForm.value.otp)
+  //     .then(user => {
+  //       this.authService.getParentInfo().then(res => {
+  //         loader.dismiss();
+  //         this.authService.storeParentData(res.json());
+  //         this.navCtrl.setRoot(Dashboard);
+  //         let toast1 = this.toastCtrl.create({
+  //           message: 'Account setup successfully',
+  //           duration: 5000,
+  //           position: 'bottom'
+  //         });
+  //         toast1.present();
+  //         console.log("get parent Info", res);
+  //         this.events.publish("user:login");
+  //         this.setNotificationToken();
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log("Errr", err)
+  //       loader.dismiss();
+  //       delete this.user;
+  //       if (err.status === 400) {
+  //         let toast = this.toastCtrl.create({
+  //           message: 'otp not match',
+  //           duration: 5000,
+  //           position: 'bottom'
+  //         });
+  //         toast.present();
+  //       }
+  //     });
+  //   }
+  // }
 
   notificationError() {
     let toast = this.toastCtrl.create({
@@ -156,7 +193,7 @@ export class LoginPage implements OnInit {
         }, {
           text: 'YES',
           handler: () => {
-            this.presentLoadingDefault('Please wait...');
+            this.showLoader('Please wait...');
             let tokenId = data.registrationId;
             this.configuration.tokenUpdate(tokenId).subscribe((res) => {
               this.loading.dismiss();
@@ -204,7 +241,7 @@ export class LoginPage implements OnInit {
   }
 
   public updateNo(): void {
-    delete this.user;
+    this.showOtp = false;
   }
 
 }

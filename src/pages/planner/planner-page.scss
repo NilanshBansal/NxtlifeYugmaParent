@@ -34,11 +34,12 @@
  .cal-month-view .cal-header {
    text-align: center;
    font-weight: bold;
-   background: $csBackgroundColor;
+   color:$csDarkPink;
+   background: $csPink;
  }
  
  .cal-month-view .cal-header .cal-cell {
-   padding-top: 5px;
+  //  padding-top: 5px;
    padding-bottom: 5px;
    overflow: hidden;
    text-overflow: ellipsis;
@@ -180,7 +181,7 @@
  }
  
  .cal-month-view .cal-open-day-events {
-   background: #f6c2d8;
+   background: $csPink;
    border-radius: 25px;
    padding: 10px;
    margin: 10px;
@@ -344,8 +345,8 @@
      padding: 0px;
      background-size: cover;
      background-repeat: no-repeat;
-     background:$color1;
-     color:white;
+     background:$csPink;
+     color:$csDarkPink;
      border-top: 1px solid white;
      ion-icon {
        font-size: 2.0em;
@@ -416,6 +417,6 @@
  
  .cal-month-view .cal-open-day-events div {
    a {
-     color: #d15375 !important;
+     color: $csDarkPink !important;
    }
  }

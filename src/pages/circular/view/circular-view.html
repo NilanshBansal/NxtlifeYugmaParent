@@ -1,9 +1,7 @@
 <ion-header>
-    <nl-navbar [title]="title" >
-        
-    </nl-navbar>
+  <nl-navbar [title]="title">
+  </nl-navbar>
 </ion-header>
-
 <ion-content class="csGrayBackground">
   <ion-card>
     <ion-item>
@@ -19,9 +17,7 @@
       </div>
     </ion-item>
     <ion-item *ngIf="onecirc.circularTypeName=='Class'">
-                        <b>Class:</b> | <span *ngFor="let a of onecirc.standards">
-                    <span> {{ a }} | </span>
-                </span>
+      <b>Class:</b> | <span *ngFor="let a of onecirc.standards"><span> {{ a }} | </span> </span>
     </ion-item>
   </ion-card>
 </ion-content>

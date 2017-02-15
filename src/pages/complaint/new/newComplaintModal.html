@@ -25,9 +25,9 @@
       <ion-item padding>
         <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Teacher</ion-label>
-        <ion-select [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId" (ngModelChange)="setTeacher($event)">
-          <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}}</ion-option>
-        </ion-select>
+        <custom-select item-content [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId" (ngModelChange)="setTeacher($event)">
+          <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}} ({{teacher.subject}})</ion-option>
+        </custom-select>
       </ion-item>
     </ion-card>
     <ion-card *ngIf="childCategories">

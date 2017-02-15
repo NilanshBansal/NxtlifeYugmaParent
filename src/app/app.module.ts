@@ -46,6 +46,7 @@ import { ListViewCloseButton,
 import { CustomNavbar } from '../customComponent/navbar.component.ts';
 import { ModalNavbarComponent } from '../customComponent/modal.navbar.component.ts';
 import { CommentModal } from '../customComponent/commentModal.ts';
+import { NoInternet } from '../customComponent/noInternet.component';
 
 // import service
 import { NetworkService } from '../service/network.service';
@@ -96,8 +97,8 @@ import { SurveyService } from '../service/survey.service';
     CircularViewComponent,
     SurveyListPage,
     CustomSelect,
-    ViewComponent
-
+    ViewComponent,
+    NoInternet
   ],
   imports: [
     MomentModule,
@@ -141,15 +142,14 @@ import { SurveyService } from '../service/survey.service';
     CircularComponent,
     CircularViewComponent,
     CustomSelect,
-    ViewComponent
+    ViewComponent,
+    NoInternet
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService,SurveyService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
-    {
-      provide: CustomHttpService,
-      useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
-        return new CustomHttpService(backend, defaultOptions);
-      },
-      deps: [XHRBackend, RequestOptions]
-    }]
+  providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
+              EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,
+              { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
+              { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
+                return new CustomHttpService(backend, defaultOptions);
+              }, deps: [XHRBackend, RequestOptions]}]
 })
 export class AppModule {}

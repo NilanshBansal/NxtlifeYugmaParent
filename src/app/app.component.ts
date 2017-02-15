@@ -15,6 +15,7 @@ import { StudentRating } from '../pages/rating/rating';
 import { AccountPage } from '../pages/account/account';
 import { HomeworkComponent } from '../pages/homework/homework.component';
 import { CircularComponent } from '../pages/circular/circular.component';
+import { NoInternet } from '../customComponent/noInternet.component';
 
 // import service
 import { AuthService } from '../service/auth.service';
@@ -140,6 +141,12 @@ export class MyApp {
       this.enableMenu(false);
       this.selectedPage = "";
       this.nav.setRoot(LoginPage);
+    });
+    this.events.subscribe("offline", () => {
+      this.nav.setRoot(NoInternet);
+    });
+    this.events.subscribe("online", () => {
+      this.nav.setRoot(Dashboard);
     });
   }
 }

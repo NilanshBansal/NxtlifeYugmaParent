@@ -33,12 +33,8 @@ export class AuthService {
                     .catch(this.handleError);
   }
 
-  public verifyOtp(phoneNo: number, otp: string) {
-    this.data = {
-      username: phoneNo,
-      password: otp
-    }
-    return this.http.post(this.actionUrl + "/login", this.data)
+  public verifyOtp(data) {
+    return this.http.post(this.actionUrl + "/login", data)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

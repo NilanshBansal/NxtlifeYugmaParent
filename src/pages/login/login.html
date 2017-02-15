@@ -4,16 +4,12 @@
     <ion-item>
       <ion-icon name="phone-portrait" class="csInput csInputIcon" item-left></ion-icon>
       <ion-label stacked>Enter Mobile Number</ion-label>
-      <ion-input #username maxlength="10" formControlName="mobileNo" type="tel"  class="letter-space" text-center autofocus></ion-input>
+      <ion-input maxlength="10" formControlName="mobileNo" type="tel"  class="letter-space" text-center autofocus> </ion-input>
     </ion-item>
     <button item-right icon-left type="button" (click)="getOtp()" ion-button class="csCenter csButtonList" round>
       <ion-icon name="checkmark" class="csBigIcon"></ion-icon>
         Login
      </button>
-    <ion-item class="marginTop csBorderWhite csLoginBox" *ngIf="(!loginForm.controls['mobileNo'].valid && numberSubmit) && (loginForm.controls['mobileNo'].touched || numberSubmit)"
-      class="errInfo">
-      <p>Not a valid number.</p>
-    </ion-item>
   </form>
 
   <form name="loginVerifyForm" novalidate *ngIf="showOtp">
@@ -26,10 +22,6 @@
       <ion-icon name="checkmark"></ion-icon>
         VERIFY
      </button>
-    <!-- <ion-item text-center *ngIf="(!loginVerifyForm.controls['otp'].valid  && otpSubmit) && (loginVerifyForm.controls['otp'].touched) || otpSubmit"
-      class="errInfo">
-      <p>Please Enter a Valid OTP</p>
-    </ion-item> -->
     <div class="csButtonSet">
       <button item-right icon-left ion-button class="csCenter csButtonList" (click)="resendOtp()" round>
         <ion-icon name="refresh"></ion-icon>

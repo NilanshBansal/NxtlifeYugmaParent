@@ -264,6 +264,8 @@ public title : string = "planner";
 
     for(let i=0;i<this.ResponseData.length;i++){
         this.ResponseData[i].color = colors[this.ResponseData[i].color];
+        this.ResponseData[i].startTime = this.ResponseData[i].start;
+        this.ResponseData[i].endTime = this.ResponseData[i].end;
          this.ResponseData[i].start = startOfDay(this.ResponseData[i].start);
          this.ResponseData[i].end = startOfDay(this.ResponseData[i].end);
          this.ResponseData[i].actions = this.actions2;
@@ -370,22 +372,23 @@ doll(data){
   }
 
 
-
+public EventsForTimeline = [];
   dayClicked({date, events}: {date: Date, events: CalendarEvent[]}): void {
 
     if (isSameMonth(date, this.viewDate)) {
       if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === false) ||
         events.length === 0
       ) {
-        this.activeDayIsOpen = false;
+           this.activeDayIsOpen = false;
         
-        this.clickdate = date ;
-        console.log('DayClicked',this.clickdate);
-        console.log('DayClicked',date);
+           this.clickdate = date ;
+           console.log('DayClicked',this.clickdate);
+           console.log('DayClicked',date);
 
       } else {
-        this.activeDayIsOpen = true;
+        this.EventsForTimeline = events;
+        this.activeDayIsOpen = false;
         this.clickdate = date ;
         console.log('haahhahaha',date);
         this.viewDate = date;
@@ -429,7 +432,21 @@ doll(data){
 
 
 
+    public eventsss;
+   eventsTimelineClicked(id){
+    console.log('eventsTimeline',id);
+    this.eventservice.GetParticularEvent(id)
+    .subscribe( data => { this.eventsss = data ; this.openNewModal(this.eventsss) },
+                () => console.log(this.eventsss))
+   }
+
   
+  openNewModal(abcd){
+    let modal3 = this.modalCtrl.create(EventModalPage,{
+      eventsss : abcd
+    });
+    modal3.present();
+  }
 
 
 

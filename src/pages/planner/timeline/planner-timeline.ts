@@ -108,12 +108,12 @@ pop(){
    }
  
 
-   public eventss;
+   public eventsss;
    EventTimelineClick(id){
      console.log('id',id);
       this.eventservice.GetParticularEvent(id)
-        .subscribe( data => { this.eventss =  data; this.OpenModal(this.eventss)},
-        () => console.log('tamoline',this.eventss))
+        .subscribe( data => { this.eventsss =  data; this.OpenModal(this.eventsss)},
+        () => console.log('tamoline',this.eventsss))
 
         //EventModalPage
    }
@@ -121,7 +121,7 @@ pop(){
 
    OpenModal(abc){
     let modal = this.modalCtrl.create(EventModalPage,{
-      eventss : abc
+      eventsss : abc
     });
        modal.present();
   }

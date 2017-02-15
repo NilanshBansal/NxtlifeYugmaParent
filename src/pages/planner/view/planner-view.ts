@@ -33,8 +33,8 @@ export class EventModalPage implements OnInit{
 			//	public _configurtion : Configuration){
 
 		this.EventID = this.navParams.get('eventId');
-		this.ResponseData = this.navParams.get('eventss');
-		
+		this.ResponseData = this.navParams.get('eventsss');
+		//this.ResponseData = this.navParams.get('eventss');
 
 		console.log('eventss',this.ResponseData);
 		this._events.subscribe('events:edited', 

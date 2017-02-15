@@ -21,7 +21,6 @@ import { ComplaintSuggestion } from '../../service/cs.service';
 export class ListViewCloseButton extends EditComplaintStatusAndComment {
 
   @Input() complaint;
-  @Input('master') masterName: string;
 
   constructor(public modalCtrl: ModalController,
               public nl: CustomService,
@@ -48,7 +47,6 @@ export class ListViewCloseButton extends EditComplaintStatusAndComment {
 export class ListViewReopenButton extends EditComplaintStatusAndComment  {
 
   @Input() complaint;
-  @Input('master') masterName: string;
 
   constructor(public modalCtrl: ModalController,
               public nl: CustomService,
@@ -75,7 +73,6 @@ export class ListViewReopenButton extends EditComplaintStatusAndComment  {
 export class ListViewSatisfiedButton extends EditComplaintStatusAndComment {
 
   @Input() complaint;
-  @Input('master') masterName: string;
 
   constructor(public modalCtrl: ModalController,
               public nl: CustomService,
@@ -102,7 +99,6 @@ export class ListViewSatisfiedButton extends EditComplaintStatusAndComment {
 export class ListViewCommentButton extends EditComplaintStatusAndComment {
 
   @Input() complaint;
-  @Input('master') masterName: string;
 
   constructor(public modalCtrl: ModalController,
               public nl: CustomService,

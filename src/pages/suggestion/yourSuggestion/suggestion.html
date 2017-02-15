@@ -7,7 +7,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-fab top right edge>
-    <button ion-fab (click)="newComplaint()" color="cool"> <ion-icon name="add"></ion-icon></button>
+    <button ion-fab (click)="createNew()" color="cool"> <ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
     <ion-item-sliding *ngFor="let suggestion of allData" #slidingItem>
@@ -15,10 +15,10 @@
         <nl-list-view [complaint]="suggestion"></nl-list-view>
       </a>
       <ion-item-options side="right">
-        <nl-comment-button [master]="master" [complaint]="suggestion"></nl-comment-button>
-        <nl-close-button [master]="master" [complaint]="suggestion"></nl-close-button>
-        <nl-reopen-button [master]="master" [complaint]="suggestion"></nl-reopen-button>
-        <nl-satisfied-button [master]="master" [complaint]="suggestion"></nl-satisfied-button>
+        <nl-comment-button [complaint]="suggestion"></nl-comment-button>
+        <nl-close-button [complaint]="suggestion"></nl-close-button>
+        <nl-reopen-button [complaint]="suggestion"></nl-reopen-button>
+        <nl-satisfied-button [complaint]="suggestion"></nl-satisfied-button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

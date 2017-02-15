@@ -34,10 +34,10 @@ export class ComplaintPage {
               public c: ComplaintSuggestion) { }
 
   ionViewWillEnter() {
-    this.getComplaints();
+    this.getAllData();
   }
 
-  getComplaints() {
+  getAllData() {
     this.nl.showLoader();
     this.c.getComplaints(this.currentPage).subscribe((res) => {
       this.onSuccess(res);
@@ -60,7 +60,7 @@ export class ComplaintPage {
     this.nl.hideLoader();
   }
 
-  newComplaint(): void {
+  createNew(): void {
     let createNew = this.modalCtrl.create(newComplaintModal);
     createNew.onDidDismiss((newData) => {
       if (!newData) { return; }
@@ -71,8 +71,8 @@ export class ComplaintPage {
     createNew.present();
   }
 
-  viewComplaint(viewData): void {
-    let openViewModal = this.modalCtrl.create(ViewComponent, {complaint: viewData});
+  openViewModal(viewData): void {
+    let openViewModal = this.modalCtrl.create(ViewComponent, {viewData: viewData});
     openViewModal.present();
   }
 

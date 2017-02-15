@@ -31,7 +31,7 @@ export class YourSuggestion extends ComplaintPage {
               public modalCtrl: ModalController,
               public c: ComplaintSuggestion) {
     super(modalCtrl, nl, c);
-    this.getComplaints();
+    this.getAllData();
   }
 
   ionViewWillEnter() {

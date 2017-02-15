@@ -1,30 +1,29 @@
 <ion-header>
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
-
 <ion-content class="complaint-list csMargin csGrayBackground">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-fab top right edge>
-    <button ion-fab (click)="newComplaint()" color="cool"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab (click)="createNew()" color="cool"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item-sliding *ngFor="let data of allData" #slidingItem >
-      <a ion-item detail-push detail-none href="#" (click)="viewComplaint(data)" [style.border-left-color]="data.statusColor">
+    <ion-item-sliding *ngFor="let data of allData" #slidingItem>
+      <a ion-item detail-push detail-none href="#" (click)="openViewModal(data)" [style.border-left-color]="data.statusColor">
         <nl-list-view [complaint]="data"></nl-list-view>
       </a>
       <ion-item-options side="right">
-        <nl-comment-button [master]="master" [complaint]="data"></nl-comment-button>
-        <nl-close-button [master]="master" [complaint]="data"></nl-close-button>
-        <nl-reopen-button [master]="master" [complaint]="data"></nl-reopen-button>
-        <nl-satisfied-button [master]="master" [complaint]="data"></nl-satisfied-button>
+        <nl-comment-button [complaint]="data"></nl-comment-button>
+        <nl-close-button [complaint]="data"></nl-close-button>
+        <nl-reopen-button [complaint]="data"></nl-reopen-button>
+        <nl-satisfied-button [complaint]="data"></nl-satisfied-button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <ion-list class="no-comment" *ngIf="EmptyAppreciations">
-      <img src="../../assets/svg/empty.svg" />
-      <span>NO RECORD FOUND</span>
+  <ion-list class="no-comment" *ngIf="EmptyComplaints">
+    <img src="assets/svg/empty.svg" />
+    <span>NO RECORD FOUND</span>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

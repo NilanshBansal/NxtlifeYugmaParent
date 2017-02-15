@@ -31,7 +31,7 @@ export class SuggestionForYou extends ComplaintPage {
               public c: ComplaintSuggestion) {
     super(modalCtrl, nl, c);
     this.con.setUrlForStudentSuggestions("for-student");
-    this.getComplaints();
+    this.getAllData();
   }
 
   ionViewWillEnter() {

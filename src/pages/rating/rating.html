@@ -6,9 +6,9 @@
     <ion-item>
       <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
       <ion-label>Select Child</ion-label>
-      <ion-select [(ngModel)]="child" (ngModelChange)="selectChild($event)">
+      <custom-select item-content [(ngModel)]="child" (ngModelChange)="selectChild($event)">
         <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
-      </ion-select>
+      </custom-select>
     </ion-item>
   </ion-card>
   <div *ngIf="studentInfo">
@@ -31,4 +31,8 @@
       </ion-grid>
     </ion-card>
   </div>
+  <ion-list class="no-comment" *ngIf="emptyMessage">
+    <img src="assets/svg/empty.svg" />
+    <span>NO RECORD FOUND</span>
+  </ion-list>
 </ion-content>

@@ -21,12 +21,10 @@ export class StudentRating implements OnInit  {
   // set header title
   title: string = "Student Rating";
 
-  public students;
-  public student;
-  public standardId;
-  public studentId;
-  public child;
   public studentInfo;
+  public emptyMessage;
+  public students;
+  public child;
 
   constructor(private r: ComplaintSuggestion,
               public parentInfo: ParentInfo,
@@ -34,36 +32,36 @@ export class StudentRating implements OnInit  {
 
   ngOnInit() {
     this.students = this.parentInfo.getStudents();
+    let studentId = this.parentInfo.getStudents()[0].id;
     this.child = this.students[0];
-    this.studentId = this.child.id;
-    this.getRatingInfo();
+    this.getRatingInfo(studentId);
   }
 
   selectChild(student) {
-    this.studentId = student.id;
-    this.getRatingInfo();
+    this.getRatingInfo(student.id);
   }
 
-  public getRatingInfo() {
+  public getRatingInfo(stu_id) {
     this.nl.showLoader();
-    this.r.getRatingInfo(this.studentId).subscribe((res) => {
+    this.r.getRatingInfo(stu_id).subscribe((res) => {
       this.onSuccess(res)
     }, (err) => {
-      this.onError();
+      this.onError(err);
     });
   }
 
   onSuccess(info) {
     this.nl.hideLoader();
     this.studentInfo = info.profile;
+    this.emptyMessage = false;
     if (info.isEmpty) {
-      this.nl.showToast("student rating not filled by class teacher");
+      this.studentInfo = [];
+      this.emptyMessage = true;
     }
   }
 
-  onError() {
-    this.nl.hideLoader();
-    this.nl.errMessage();
+  onError(err) {
+    this.nl.onError(err);
   }
 
 }

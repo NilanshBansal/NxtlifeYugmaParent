@@ -64,7 +64,7 @@ export class EditComplaintStatusAndComment {
   openReopenModal(complaint): void {
     this.complaint = complaint;
     let prompt = this.alertCtrl.create({
-      title: 'If you are not happy with the complaint resolution then reopen complaint',
+      title: 'If you are not happy with the resolution then only reopen',
       message: "",
       inputs: [{
         name: 'comment',
@@ -72,10 +72,14 @@ export class EditComplaintStatusAndComment {
       }],
       buttons: [{
         text: 'Cancel',
-        handler: data => {}
+        handler: (data) => {}
       }, {
-        text: 'Reopen!!',
-        handler: data => {
+        text: 'Reopen It!!',
+        handler: (data) => {
+          if (data.comment === "") {
+            this.nl.showToast("write any comment to close");
+            return;
+          }
           this.reopenActionSheet(complaint, data);
         }
       }]
@@ -116,10 +120,10 @@ export class EditComplaintStatusAndComment {
         text: 'Cancel',
         handler: data => {}
       }, {
-        text: 'Save',
-        handler: data => {
+        text: 'Yes I Want!!',
+        handler: (data) => {
           if (data.comment === "") {
-            this.nl.showToast("Please menation why you want to close complaint");
+            this.nl.showToast("write any comment to close");
             return;
           }
           this.closeActionSheet(complaint, data);
@@ -150,8 +154,8 @@ export class EditComplaintStatusAndComment {
 
   openSatisfiedModal(complaint): void {
     let prompt = this.alertCtrl.create({
-      title: 'Complaint Satisfied ?',
-      message: "If you are happy with the complaint resolution then click on satisfied button",
+      title: 'Are you Satisfied ?',
+      message: "If you are happy with the problem resolution then click on satisfied button",
       buttons: [{
         text: 'Cancel',
         handler: data => {

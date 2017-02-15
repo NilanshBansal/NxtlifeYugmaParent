@@ -16,7 +16,7 @@
       <ion-item *ngIf="teachers">
         <ion-icon name="ios-person-outline" item-left large  color="primary"></ion-icon>
         <ion-label>Teacher</ion-label>
-        <custom-select name="a" #a item-content formControlName="teacherId">
+        <custom-select item-content formControlName="teacherId">
           <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}}</ion-option>
         </custom-select>
       </ion-item>

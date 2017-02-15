@@ -74,7 +74,7 @@ export class newComplaintModal implements OnInit {
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child
     }
-    this.nl.showToast("All fields are mandatory to create a new complaint");
+    this.nl.showToast("All fields are required to submit form");
   }
 
   loadForm() {
@@ -124,7 +124,6 @@ export class newComplaintModal implements OnInit {
   setCategory(category) {
 
     if (category && category.depth === 1 && category.childCategory.length === 0) {
-
       this.newComplaint.addControl('againstEmployeeId', new FormControl('', [Validators.required]));
 
       if (this.newComplaint.contains("childCategory")) {

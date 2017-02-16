@@ -52,6 +52,9 @@ export class CustomService {
     if (a == 401) {
       this.events.publish("session:expired");
     }
+    if (a == 0) {
+      this.events.publish("offline");
+    }
     this.showToast(err);
   }
 

@@ -97,6 +97,9 @@ export class ComplaintSuggestion {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      if (error.status === 0) {
+        errMsg = `${error.status} - "No Internet"`;
+      }
     } else {
       errMsg = error.message ? error.message : error.toString();
     }

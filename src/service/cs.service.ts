@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
@@ -12,7 +12,6 @@ import { Configuration } from './app.constants';
 @Injectable()
 export class ComplaintSuggestion {
 
-  private baseUrl: string;
   public serverUrl: string;
   public access_token;
   public headers: any;
@@ -21,13 +20,6 @@ export class ComplaintSuggestion {
   constructor(private http: CustomHttpService,
               private configuration: Configuration) {
 
-  }
-
-  getUrl() {
-    this.headers = this.configuration.header();
-    this.options = new RequestOptions({
-      headers : this.headers
-    });
   }
 
   public getComplaints(pageNo): any {
@@ -44,7 +36,6 @@ export class ComplaintSuggestion {
   }
 
   public getCategories() {
-    this.getUrl();
     this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/category")
                     .map(this.extractData)
@@ -88,7 +79,6 @@ export class ComplaintSuggestion {
   }
 
   public getRatingInfo(studentId): any {
-    this.getUrl();
     this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/" + studentId)
                     .map(this.extractData)
@@ -111,6 +101,14 @@ export class ComplaintSuggestion {
       errMsg = error.message ? error.message : error.toString();
     }
     return Observable.throw(errMsg);
+  }
+
+  public storeCategories(data) {
+    localStorage.setItem("categories", JSON.stringify(data));
+  }
+
+  public myCategories() {
+    return JSON.parse(localStorage.getItem("categories"));
   }
 
 }

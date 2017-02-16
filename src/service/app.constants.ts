@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import { Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { CustomService } from './customService';
+import { CustomService } from './custom.service';
+import { CustomHttpService } from './default.header.service';
 
 @Injectable()
 export class Configuration {
 
-  constructor(public http: Http,
+  constructor(public http: CustomHttpService,
               public cs: CustomService) {
-
   }
 
   headers;
@@ -60,20 +60,17 @@ export class Configuration {
     this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/appreciation/" + url;
   }
 
+  setUrlForAppreciations() {
+    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/appreciation";
+  }
+
   tokenUpdate(tokenId) {
     const notificationToken = {
       notificationToken: tokenId
     }
-    this.headers = new Headers({
-      'Content-Type' : 'application/json',
-      'Authorization' : 'Bearer ' + localStorage.getItem("access_token")
-    });
-    this.options = new RequestOptions({
-      headers : this.header()
-    });
-    return this.http.put(this.Server + "/parent/" + this.getParentId(), notificationToken, this.options).map((res: Response) => {
-      return res;
-    }).catch((error: any) => Observable.throw(error || 'server error'));
+    return this.http.put("https://yugma-ut.appspot-preview.com/parent/" + this.getParentId(), notificationToken)
+                    .map((res: Response) => { return res; })
+                    .catch((error: any) => Observable.throw(error || 'server error'));
   }
 
 }

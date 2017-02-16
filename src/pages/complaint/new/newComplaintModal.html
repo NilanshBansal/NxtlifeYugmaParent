@@ -7,38 +7,38 @@
       <ion-item>
         <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Select Child</ion-label>
-        <ion-select [(ngModel)]="child" formControlName="student" (ngModelChange)="selectChild($event)">
+        <custom-select item-content [(ngModel)]="child" formControlName="student" (ngModelChange)="selectChild($event)">
           <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
-        </ion-select>
+        </custom-select>
       </ion-item>
     </ion-card>
     <ion-card *ngIf="standardId">
       <ion-item padding>
         <ion-icon name="sad" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Against</ion-label>
-        <ion-select [(ngModel)]="category" formControlName="category" (ngModelChange)="setCategory(category)">
+        <custom-select item-content [(ngModel)]="category" formControlName="category" (ngModelChange)="setCategory(category)">
           <ion-option *ngFor="let category of categories" [value]="category">{{category.name}}</ion-option>
-        </ion-select>
+        </custom-select>
       </ion-item>
     </ion-card>
     <ion-card *ngIf="teachers">
       <ion-item padding>
         <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Teacher</ion-label>
-        <ion-select [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId" (ngModelChange)="setTeacher($event)">
-          <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}}</ion-option>
-        </ion-select>
+        <custom-select item-content [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId" (ngModelChange)="setTeacher($event)">
+          <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}} ({{teacher.subject}})</ion-option>
+        </custom-select>
       </ion-item>
     </ion-card>
     <ion-card *ngIf="childCategories">
       <ion-item padding>
         <ion-icon name="ios-options-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary">SubCategory</ion-label>
-        <ion-select [(ngModel)]="childCategory" formControlName="childCategory">
+        <custom-select item-content [(ngModel)]="childCategory" formControlName="childCategory">
           <ion-option *ngFor="let childCategory of childCategories" [value]="childCategory.id">
             {{childCategory.name}}
           </ion-option>
-        </ion-select>
+        </custom-select>
       </ion-item>
     </ion-card>
     <ion-card>

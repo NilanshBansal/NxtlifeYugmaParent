@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 
 // import service
-import { CustomService } from '../../../service/customService';
+import { CustomService } from '../../../service/custom.service';
 import { ComplaintSuggestion } from '../../../service/cs.service';
 
 // import Component
 import { NewAppreciationModal } from '../new/appreciation';
+import { Configuration } from '../../../service/app.constants';
 
 @Component({
   selector: 'your-appreciation',
@@ -22,12 +23,17 @@ export class YourAppreciation {
   public master: string = "appreciation";
 
   allData;
-  currentPage = 0;
+  currentPage = 1;
   EmptyAppreciations = false;
 
   constructor(public nl: CustomService,
               public modalCtrl: ModalController,
+              public con: Configuration,
               public c: ComplaintSuggestion) {
+  }
+
+  ionViewWillEnter() {
+    this.con.setUrlForAppreciations();
   }
 
   ngOnInit() {

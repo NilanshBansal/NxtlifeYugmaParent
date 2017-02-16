@@ -4,7 +4,7 @@ import { ViewController, ToastController, NavParams, Content } from 'ionic-angul
 
 // import service
 import { ComplaintSuggestion } from '../service/cs.service';
-import { CustomService } from '../service/customService';
+import { CustomService } from '../service/custom.service';
 
 @Component({
   selector: 'comment',
@@ -100,7 +100,6 @@ export class CommentModal implements OnInit {
   }
 
   scrollToBottom(){
-    let dimensions = this.content.getContentDimensions();
     this.content.scrollTo(0, 700, 200);
   }
 

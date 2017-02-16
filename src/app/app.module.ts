@@ -4,7 +4,7 @@ import { MomentModule } from 'angular2-moment/moment.module';
 import { MyApp } from './app.component';
 import { CalendarDateFormatter, CalendarEventTitle, CalendarModule } from 'angular-calendar';
 import { Ionic2RatingModule } from 'ionic2-rating';
-import { RequestOptions, HttpModule, XHRBackend } from '@angular/http';
+import { RequestOptions, XHRBackend } from '@angular/http';
 import { CustomHttpService } from '../service/default.header.service';
 
 // import component
@@ -13,7 +13,7 @@ import { Dashboard } from '../pages/homepage/homepage';
 import { PollPage } from '../pages/poll/poll';
 import { AccountPage } from '../pages/account/account';
 import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';
-import { CustomSelect } from '../customComponent/custom-select';
+import { CustomSelect } from '../custom-component/custom-select';
 import { AppreciationForYou } from '../pages/appreciation/appreciationForYou/appreciation';
 import { YourAppreciation } from '../pages/appreciation/yourAppreciation/appreciation';
 import { ComplaintPage } from '../pages/complaint/complaint';
@@ -38,23 +38,23 @@ import { ViewComponent } from '../pages/complaint/view/viewComplaintModal';
 import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 
 // import custom component
-import { ListView } from '../customComponent/list/listview.component';
+import { ListView } from '../custom-component/list/listview.component';
 import { ListViewCloseButton,
          ListViewReopenButton,
          ListViewSatisfiedButton,
-         ListViewCommentButton } from '../customComponent/list/edit-cs-status-and-comment.component';
-import { CustomNavbar } from '../customComponent/navbar.component.ts';
-import { ModalNavbarComponent } from '../customComponent/modal.navbar.component.ts';
-import { CommentModal } from '../customComponent/commentModal.ts';
+         ListViewCommentButton } from '../custom-component/list/edit-cs-status-and-comment.component';
+import { CustomNavbar } from '../custom-component/navbar.component.ts';
+import { ModalNavbarComponent } from '../custom-component/modal.navbar.component.ts';
+import { CommentModal } from '../custom-component/commentModal.ts';
+import { NoInternet } from '../custom-component/noInternet.component';
 
 // import service
 import { NetworkService } from '../service/network.service';
-import { SafeHttp } from '../service/safe-http';
 import { AuthService } from '../service/auth.service';
 import { Configuration } from '../service/app.constants';
 import { ParentInfo } from '../service/parentInfo';
 import { ComplaintSuggestion } from '../service/cs.service';
-import { CustomService } from '../service/customService';
+import { CustomService } from '../service/custom.service';
 import { EventService } from '../service/planner.service';
 import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';
@@ -97,8 +97,8 @@ import { SurveyService } from '../service/survey.service';
     CircularViewComponent,
     SurveyListPage,
     CustomSelect,
-    ViewComponent
-
+    ViewComponent,
+    NoInternet
   ],
   imports: [
     MomentModule,
@@ -142,15 +142,14 @@ import { SurveyService } from '../service/survey.service';
     CircularComponent,
     CircularViewComponent,
     CustomSelect,
-    ViewComponent
+    ViewComponent,
+    NoInternet
   ],
-  providers: [ AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, SafeHttp, EventService, CalendarEventTitle,PollService,HomeworkService,CircularService,SurveyService, CustomService, { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
-    {
-      provide: CustomHttpService,
-      useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
-        return new CustomHttpService(backend, defaultOptions);
-      },
-      deps: [XHRBackend, RequestOptions]
-    }]
+  providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
+              EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,
+              { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
+              { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
+                return new CustomHttpService(backend, defaultOptions);
+              }, deps: [XHRBackend, RequestOptions]}]
 })
 export class AppModule {}

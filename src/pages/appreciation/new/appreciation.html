@@ -16,7 +16,7 @@
       <ion-item *ngIf="teachers">
         <ion-icon name="ios-person-outline" item-left large  color="primary"></ion-icon>
         <ion-label>Teacher</ion-label>
-        <custom-select name="a" #a item-content formControlName="teacherId">
+        <custom-select item-content formControlName="teacherId">
           <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}}</ion-option>
         </custom-select>
       </ion-item>
@@ -31,10 +31,10 @@
    <ion-card>
       <ion-item class="csTransparent">
         <ion-label stacked>Description</ion-label>
-        <ion-textarea class="csInput-title" rows="5" [(ngModel)]="description" formControlName="description"
+        <ion-textarea class="csInput-title" rows="5" formControlName="description"
           maxlength="200"></ion-textarea>
       </ion-item>
-      <ion-badge class="csFiftyLimit"><span>{{200 - description.length}}</span></ion-badge>
+      <ion-badge class="csFiftyLimit"><span>{{200 - newSuggestion.value.description.length}}</span></ion-badge>
     </ion-card>
   <ion-buttons padding>
     <button ion-button icon-right block type="submit" [disabled]="newSuggestion.invalid">

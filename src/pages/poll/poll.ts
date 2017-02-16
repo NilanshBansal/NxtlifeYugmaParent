@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { PollService } from '../../service/poll.service';
 import * as _ from 'underscore';
-import { CustomService } from '../../service/customService';
+import { CustomService } from '../../service/custom.service';
 
 @Component({
   selector: 'page-about',
@@ -24,7 +24,7 @@ public EmptyPolls = false;
 
   PollFunc(){
     this.nl.showLoader();
-    this.pollServ.GetPolls().subscribe((datas) => 
+    this.pollServ.GetPolls().subscribe((datas) =>
       {  console.log('emptyPolls',datas);
         if (datas.status === 204) {
         this.EmptyPolls = true;
@@ -61,12 +61,12 @@ public EmptyPolls = false;
        data => { this.responseData = data ; this.RemoveItem(res); },
        () => console.log(this.responseData),
        )
-   } 
+   }
 
 
     PollMulVoting(resid,res){
       this.PollChoiceMultiple();
-      
+
      this.PollResult = {
        "pollId" : resid,
        "optionIds" : this.arrayy
@@ -75,13 +75,13 @@ public EmptyPolls = false;
        data => { this.responseData = data ; this.RemoveItem(res); },
        () => console.log(this.responseData),
        )
-   } 
+   }
 
 
    PollChoiceClicked(id){
     // this.Count += 1;
 
-    
+
      this.enable = false;
      console.log('clicked',id);
      this.OptionId = id;
@@ -96,14 +96,14 @@ public EmptyPolls = false;
     public mul_enable = true;
 
     buttonEnable(){
-     
+
       this.mul_enable = false;
     }
 
    PollChoiceMultiple(){
 
      //this.enable = false;
-     
+
      for(let i in this.checkItems){
          console.log(this.checkItems[i]);
        if(this.checkItems[i] == true) {
@@ -113,8 +113,8 @@ public EmptyPolls = false;
 
  console.log(this.arrayy);
 }
-   
-  
+
+
   ngOnInit() : void{
       this.PollFunc();
   }

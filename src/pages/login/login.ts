@@ -1,40 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoadingController, NavController, ToastController, AlertController, MenuController, Events } from 'ionic-angular';
+import { LoadingController, NavController, AlertController, Events } from 'ionic-angular';
 
 import { Configuration } from '../../service/app.constants';
 import { AuthService } from '../../service/auth.service';
 
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Push } from 'ionic-native';
-import { Dashboard } from '../homepage/homepage';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { CustomService } from '../../service/custom.service';
+import { Notification } from '../../custom-component/notification.component';
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 
-export class LoginPage implements OnInit {
+export class LoginPage extends Notification implements OnInit {
 
-  user: any;
-
-  numberSubmit: boolean = false;
-  otpSubmit: boolean = false;
-
-  loginForm: FormGroup;
-  loginVerifyForm: FormGroup;
-
+  otp;
   loading;
+  loginForm: FormGroup;
+  showOtp: boolean = false;
 
   constructor(public navCtrl: NavController,
               public authService: AuthService,
               public loadingCtrl: LoadingController,
               private formBuilder: FormBuilder,
               public configuration: Configuration,
-              public menuCtrl: MenuController,
               public events: Events,
-              public toastCtrl: ToastController,
-              private alertCtrl: AlertController) { this.menuCtrl.enable(false); }
+              public nl: CustomService,
+              public alertCtrl: AlertController) {
+    super(navCtrl, nl, loadingCtrl, configuration, alertCtrl);
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -43,160 +39,77 @@ export class LoginPage implements OnInit {
   }
 
   getOtp() {
-     if (!this.loginForm.valid) {
-      this.numberSubmit = true;
+    if (this.loginForm.valid) {
+      this.showLoader("Authenticating...");
+      this.authService.getUser(this.loginForm.value.mobileNo).subscribe((res) => {
+        this.onSuccess(res);
+      }, (err) => {
+        this.onError(err);
+      });
+    }
+  }
+
+  public onSuccess(res) {
+    this.showLoginForm(true);
+    this.loading.dismiss();
+  }
+
+  public onError(err) {
+    this.loading.dismiss();
+    this.showLoginForm(false);
+    if (err === 400) {
+      this.nl.showToast("Number not registered");
     } else {
-
-      let loader = this.loadingCtrl.create({
-        content: "Authenticating..."
-      });
-
-      loader.present();
-
-      this.authService.getUser(this.loginForm.value.mobileNo)
-      .then(user => {
-        this.user = user;
-        loader.dismiss();
-        this.loginVerifyForm = this.formBuilder.group({
-          otp: ['', Validators.compose([Validators.minLength(5), Validators.required])]
-        });
-      })
-      .catch(err => {
-        loader.dismiss();
-        if (err && err.status === 400) {
-          let toast = this.toastCtrl.create({
-            message: 'Number not registered.',
-            duration: 5000,
-            position: 'bottom'
-          });
-          toast.present();
-        }
-      });
+      this.nl.errMessage();
     }
   }
 
   verifyOtp() {
-    if (!this.loginVerifyForm.valid) {
-      this.otpSubmit = true;
-    } else {
-      let loader = this.loadingCtrl.create({
-        content: "Authenticating..."
-      });
-
-      loader.present();
-      this.authService.verifyOtp(this.loginForm.value.mobileNo, this.loginVerifyForm.value.otp)
-      .then(user => {
-        this.authService.getParentInfo().then(res => {
-          loader.dismiss();
-          this.authService.storeParentData(res.json());
-          this.navCtrl.setRoot(Dashboard);
-          let toast1 = this.toastCtrl.create({
-            message: 'Account setup successfully',
-            duration: 5000,
-            position: 'bottom'
-          });
-          toast1.present();
-          console.log("get parent Info", res);
-          this.events.publish("user:login");
-          this.setNotificationToken();
-        });
-      })
-      .catch(err => {
-        console.log("Errr", err)
-        loader.dismiss();
-        delete this.user;
-        if (err.status === 400) {
-          let toast = this.toastCtrl.create({
-            message: 'otp not match',
-            duration: 5000,
-            position: 'bottom'
-          });
-          toast.present();
-        }
+    if (this.otp != "") {
+      this.showLoader("otp verifying...");
+      let data = {
+        username: this.loginForm.value.mobileNo,
+        password: this.otp
+      }
+      this.authService.verifyOtp(data).subscribe((res) => {
+        this.otpVerifySuccessfully(res);
+      }, (err) => {
+        this.otpVarifyFailed(err);
       });
     }
   }
 
-  presentLoadingDefault(msg) {
-    this.loading = this.loadingCtrl.create({
-      content: msg
-    });
-    this.loading.present();
+  public otpVerifySuccessfully(res) {
+    localStorage.setItem("access_token", res.access_token);
+    this.getUserInfo();
   }
 
-  notificationError() {
-    let toast = this.toastCtrl.create({
-      message: "Failed to update notification setting... try again later",
-      duration: 3000,
-      position: 'bottom'
-    });
-    toast.present();
+  public otpVarifyFailed(err) {
+    this.showLoginForm(false);
+    this.loading.dismiss();
+    this.otp = "";
+    if (err === 400) {
+      this.nl.showToast("otp not matched");
+    } else {
+      this.nl.errMessage();
+    }
   }
 
-  setNotificationToken() {
-    let push = Push.init({
-      android: {
-        senderID: "562555006958"
-      },
-      ios: {
-        alert: "true",
-        badge: "true",
-        sound: "true"
-      },
-      windows: {}
+  public getUserInfo() {
+    this.authService.getParentInfo().subscribe((res) => {
+      this.loggedInSuccesfully(res);
+    }, (err) => {
+      this.loading.dismiss();
+      this.nl.errMessage();
+      this.showLoginForm(true);
     });
+  }
 
-    push.on('registration', (data) => {
-      let confirmAlert = this.alertCtrl.create({
-        title: 'Would you like to receive notification ?',
-        message: "",
-        buttons: [{
-          text: 'NO',
-          role: 'cancel'
-        }, {
-          text: 'YES',
-          handler: () => {
-            this.presentLoadingDefault('Please wait...');
-            let tokenId = data.registrationId;
-            this.configuration.tokenUpdate(tokenId).subscribe((res) => {
-              this.loading.dismiss();
-            }, (err) => {
-              this.loading.dismiss();
-              this.notificationError();
-            });
-          }
-        }]
-      });
-      confirmAlert.present();
-    });
-
-    push.on('notification', (data) => {
-      let self = this;
-      //if user using app and push notification comes
-      if (data.additionalData.foreground) {
-        // if application open, show popup
-        let confirmAlert = this.alertCtrl.create({
-          title: 'New Notification',
-          message: data.message,
-          buttons: [{
-            text: 'Ignore',
-            role: 'cancel'
-          }, {
-            text: 'View',
-            handler: () => {
-              self.navCtrl.setRoot(Dashboard);
-            }
-          }]
-        });
-        confirmAlert.present();
-      } else {
-        self.navCtrl.setRoot(Dashboard);
-      }
-    });
-
-    push.on('error', (e) => {
-      console.log("error---------------------------------------");
-    });
+  public loggedInSuccesfully(res) {
+    this.loading.dismiss();
+    this.authService.storeParentData(res);
+    this.events.publish('user:login');
+    this.setNotificationToken();
   }
 
   public resendOtp(): void {
@@ -204,7 +117,18 @@ export class LoginPage implements OnInit {
   }
 
   public updateNo(): void {
-    delete this.user;
+    this.showLoginForm(false);
+  }
+
+  public showLoader(msg) {
+    this.loading = this.loadingCtrl.create({
+      content: msg
+    });
+    this.loading.present();
+  }
+
+  public showLoginForm(val) {
+    this.showOtp = val;
   }
 
 }

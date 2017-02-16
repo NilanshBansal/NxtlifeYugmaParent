@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { ModalController,
-         AlertController,
-         ActionSheetController,
-         ItemSliding } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 
 // import modal
 import { newComplaintModal } from './new/newComplaintModal';
 import { ViewComponent } from './view/viewComplaintModal';
 
 // import service
-import { CustomService } from '../../service/customService';
+import { CustomService } from '../../service/custom.service';
 import { ComplaintSuggestion } from '../../service/cs.service';
 
 @Component({
@@ -35,6 +32,7 @@ export class ComplaintPage {
 
   ionViewWillEnter() {
     this.getAllData();
+    this.getCategories();
   }
 
   getAllData() {
@@ -43,6 +41,13 @@ export class ComplaintPage {
       this.onSuccess(res);
     }, (err) => {
       this.nl.onError(err);
+    });
+  }
+
+  // its used in new complaint
+  getCategories() {
+    this.c.getCategories().subscribe((categories) => {
+      this.c.storeCategories(categories);
     });
   }
 
@@ -118,6 +123,5 @@ export class ComplaintPage {
     this.showEmptyMsg(false);
     this.nl.onError(err);
   }
-
 
 }

@@ -44,7 +44,7 @@
   </div>
 
 
-  <ion-card>
+  <ion-card *ngIf="isCalendarTimeline">
      <section id="cd-timeline" class="cd-container">
           <div class="timeline-row" >
             
@@ -62,4 +62,13 @@
           </div>
         </section>
 </ion-card>
+
+
+<ion-card *ngIf="NoEvents">
+   <section>
+      <h2> No Events </h2>
+    </section>
+</ion-card>
+
+
 </ion-content>

@@ -6,10 +6,9 @@
     <ion-list>
   <div *ngFor="let a of circulars">
     <ion-item *ngFor="let b of a.dayCirculars" (click)="ranFunc(b.id)">
-        <div class="csIndicator" [style.border-left-color]="b.circularTypeColor">
-      <span> <b>{{b.title}}</b></span>
-      <div class="csPaleragraph"> Click to view</div>
-      <p class="csPaleragraph"> <span>{{ b.circularTypeName}}</span> <span class="csRight">{{ a.fullDate | amTimeAgo}}</span> </p>
+      <div style="border-left: 3px #76ff03 solid;padding-left: 10px;">
+          <span><b>{{a.title}}</b></span>
+          <p> <span>{{a.circularTypeName}}</span> <span class="csRight">{{ a.start}}</span> </p>
       </div>
     </ion-item>
   </div>

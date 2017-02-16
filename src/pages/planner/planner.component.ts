@@ -371,7 +371,8 @@ doll(data){
     this.viewDate = new Date();
   }
 
-
+public NoEvents = false;
+public isCalendarTimeline = false;
 public EventsForTimeline = [];
   dayClicked({date, events}: {date: Date, events: CalendarEvent[]}): void {
 
@@ -381,12 +382,15 @@ public EventsForTimeline = [];
         events.length === 0
       ) {
            this.activeDayIsOpen = false;
-        
+           this.isCalendarTimeline = false;
+           this.NoEvents = true;
            this.clickdate = date ;
            console.log('DayClicked',this.clickdate);
            console.log('DayClicked',date);
 
       } else {
+        this.isCalendarTimeline = true;
+        this.NoEvents = false ;
         this.EventsForTimeline = events;
         this.activeDayIsOpen = false;
         this.clickdate = date ;

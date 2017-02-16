@@ -14,6 +14,7 @@ export class AccountPage {
   id;
   nickname: string;
   students;
+  title = "Account";
 
   constructor(public navCtrl: NavController,
               public events: Events,
@@ -30,30 +31,26 @@ export class AccountPage {
   }
 
   logout() {
-    // localStorage.clear();
-    // this.navCtrl.setRoot(LoginPage);
     this.events.publish('user:logout');
   }
 
   logoutActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Are you sure you want to logout ?',
-      buttons: [
-        {
-          text: 'Submit',
-          icon: 'ios-paper-outline',
-          handler: () => {
-            this.logout();
-          }
-        },{
-          text: 'Cancel',
-          icon: 'md-close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+      buttons: [{
+        text: 'Submit',
+        icon: 'ios-paper-outline',
+        handler: () => {
+          this.logout();
         }
-      ]
+      },{
+        text: 'Cancel',
+        icon: 'md-close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
     });
     actionSheet.present();
   }

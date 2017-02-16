@@ -61,10 +61,13 @@ export class newComplaintModal implements OnInit {
       this.nl.hideLoader();
       this.teachers = teachers; // Get teachers list
     }, (err) => {
-      this.nl.hideLoader();
-      this.nl.errMessage();
-      this.dismiss();
+      this.onError(err);
     });
+  }
+
+  onError(err) {
+    this.dismiss();
+    this.nl.onError(err);
   }
 
   ngOnInit() {
@@ -103,9 +106,7 @@ export class newComplaintModal implements OnInit {
       this.c.storeCategories(categories);
       this.categories = categories;
     }, (err) => {
-      this.nl.hideLoader();
-      this.nl.errMessage();
-      this.dismiss();
+      this.onError(err);
     });
   }
 
@@ -143,10 +144,6 @@ export class newComplaintModal implements OnInit {
 
   }
 
-  setTeacher(teacherId) {
-    console.log("teacherId", teacherId)
-  }
-
   presentActionSheet(newComplaint) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Are you sure you want to submit ?',
@@ -160,9 +157,7 @@ export class newComplaintModal implements OnInit {
               this.nl.hideLoader();
               this.viewCtrl.dismiss(complaint);
             }, (err) => {
-              this.nl.hideLoader();
-              this.viewCtrl.dismiss();
-              this.nl.errMessage();
+              this.onError(err);
             });
           }
         },{
@@ -196,7 +191,6 @@ export class newComplaintModal implements OnInit {
         delete newComplaint.childCategory;
       }
       this.presentActionSheet(newComplaint);
-
     }
   }
 

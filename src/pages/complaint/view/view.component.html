@@ -3,10 +3,19 @@
 </ion-header>
 
 <ion-content class="view-complaint csGrayBackground">
-  <ion-card>
-    <ion-item>
+    <ion-item class="csStudentDetail">
       <ion-note item-right><span [style.color]="complaint.statusColor" class="bold"><ion-icon name="at" ></ion-icon> {{complaint.statusName}}</span></ion-note>
+    <ion-avatar item-left *ngIf="!complaint.anonymous">
+      <img class="csViewComponentAvatar" src="http://1.bp.blogspot.com/-biPiyi_H5_Y/UTm0ehJNzNI/AAAAAAAAC3E/t0OaSHIuDE0/s1600/kid-dp.jpg">
+    </ion-avatar>
+    <ion-avatar item-left *ngIf="complaint.anonymous">
+      <img class="csViewComponentAvatar" src="http://1.bp.blogspot.com/-biPiyi_H5_Y/UTm0ehJNzNI/AAAAAAAAC3E/t0OaSHIuDE0/s1600/kid-dp.jpg">
+    </ion-avatar>
+    <h2 *ngIf="!complaint.anonymous" [style.color]="complaint.statusColor"  style="font-size: 20px;">{{complaint.studentName}}</h2>
+    <h2 *ngIf="complaint.anonymous" style.color]="complaint.statusColor"  style="font-size: 20px;">Anonymous</h2>
+    <p>{{complaint.createdAt  | amDateFormat: 'LL'}}<span *ngIf="complaint.closedOn "><br>{{complaint.closedOn  | amDateFormat: 'LL'}} </span> </p> 
     </ion-item>
+  <ion-card>
     <ion-item>
       <div class="complaint-item">
         <hr [style.border-top]="'1px' + ' groove ' + complaint.statusColor">
@@ -37,7 +46,7 @@
     </ion-item>
   </ion-card>
   <ion-list>
-    <ion-card>
+    <!--<ion-card>
       <ion-item class="csTransparent csBottom-card">
         <ion-icon name="body" [style.color]="complaint.statusColor"></ion-icon>
         <span [style.color]="complaint.statusColor" class="csBoldFont">Created at</span>
@@ -66,7 +75,7 @@
           <h5>{{complaint.studentName}}</h5>
         </span>
       </ion-item>
-    </ion-card>
+    </ion-card>-->
     <ion-card>
       <ion-item *ngIf="complaint.assignedEmployeeName" class="csTransparent" class="csTransparent">
         <ion-icon name="person-add" [style.color]="complaint.statusColor"></ion-icon>

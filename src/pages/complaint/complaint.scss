@@ -125,3 +125,15 @@ div {
 .csInProgress {
     border-bottom: none !important;
 }
+.csStudentDetail{
+    // background:$csPink;
+    height: 150px !important;
+    .item-ios.item-block .item-inner {
+    padding-right: 8px;
+    border-bottom: 0px solid #c8c7cc !important;
+}
+}
+.csViewComponentAvatar{
+    width: 100px !important;
+    height: 100px !important;
+}

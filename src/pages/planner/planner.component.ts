@@ -86,7 +86,7 @@ export class PlannerComponent implements OnInit {
 public title : string = "planner";
   public ResponseData = [];
   public a;
-  
+  public count = 0; 
   public eventMonth;
   public clickdate:Date;
   public value = {};
@@ -145,70 +145,76 @@ public title : string = "planner";
   viewDate: Date = new Date();
 
 
+    actions2: CalendarEventAction[] = [
+      
+    //   {
 
-    actions2: CalendarEventAction[] = [{
+    //   // label: '<i><img class="details" src="../assets/images/glas.png"> </img></i>',
+    //   // onClick: ({event}:{event}): void => {
+    //   //    let modal = this.modalCtrl.create(EventModalPage,{eventId:event.id});
+    //   //    modal.present();
+    //   // //  console.log('Edit event', event.id);
+    //   // }
+    // }
+    
+    ];
+
+
+
+
+
+    actions: CalendarEventAction[] = [
+      
+    //   {
       
 
-      label: '<i><img class="details" src="../assets/images/glas.png"> </img></i>',
-      onClick: ({event}:{event}): void => {
-         let modal = this.modalCtrl.create(EventModalPage,{eventId:event.id});
-         modal.present();
-      //  console.log('Edit event', event.id);
-      }
-    }];
-
-
-
-
-
-    actions: CalendarEventAction[] = [{
+    //   label: '<i><img class="details" src="../assets/images/glas.png"> </img></i>',
+    //   onClick: ({event}:{event}): void => {
+    //      let modal = this.modalCtrl.create(EventModalPage,{eventId:event.id});
+    //      modal.present();
+    //   //  console.log('Edit event', event.id);
+    //   }
+    // },
+    // {
       
-
-      label: '<i><img class="details" src="../assets/images/glas.png"> </img></i>',
-      onClick: ({event}:{event}): void => {
-         let modal = this.modalCtrl.create(EventModalPage,{eventId:event.id});
-         modal.present();
-      //  console.log('Edit event', event.id);
-      }
-    },
-    {
-      
-        label: '<i>delete</i>',
-        onClick: ({event}:{event}): void => {
+    //     label: '<i>delete</i>',
+    //     onClick: ({event}:{event}): void => {
           
            
       
-            let alert = this._alertCtrl.create({
-            title: 'Delete event',
-        message: 'Do you want to delete this event?',
-        buttons: [
-            {
-                text: 'No',
-              role: 'No',
-              handler: () => {
+    //         let alert = this._alertCtrl.create({
+    //         title: 'Delete event',
+    //     message: 'Do you want to delete this event?',
+    //     buttons: [
+    //         {
+    //             text: 'No',
+    //           role: 'No',
+    //           handler: () => {
                 
-                 console.log('No clicked');
-                 // return 0;
-              }
-            },
-            {
-              text: 'Yes',
-              handler: () => {
-               this.eventservice.deleteEvent(event.id).subscribe(  data => {this.resdata = data,  this.DeleteEventToast()});
+    //              console.log('No clicked');
+    //              // return 0;
+    //           }
+    //         },
+    //         {
+    //           text: 'Yes',
+    //           handler: () => {
+    //            this.eventservice.deleteEvent(event.id).subscribe(  data => {this.resdata = data,  this.DeleteEventToast()});
               
-              this.events2 = this.events2.filter(iEvent => iEvent !== event);
+    //           this.events2 = this.events2.filter(iEvent => iEvent !== event);
 
-                  console.log('Yes clicked');
-                 // return true;
-              }
-            }
-        ]
-      });
-      alert.present();
+    //               console.log('Yes clicked');
+    //              // return true;
+    //           }
+    //         }
+    //     ]
+    //   });
+    //   alert.present();
       
-        }
+    //     }
     
-    }];
+    // }
+    
+    ];
 
 
  
@@ -222,6 +228,14 @@ public title : string = "planner";
         console.log('toast');
   }
 
+   EventClicked({event}: {event}): void {
+    console.log('Event clicked', event);
+    let modal = this.modalCtrl.create(EventModalPage,{eventId: event.id});
+         modal.present();
+  }
+
+
+
 
   refresh: Subject<any> = new Subject();
 
@@ -230,14 +244,15 @@ public title : string = "planner";
      
       console.log('eventMonth',this.eventMonth);
        let loader = this._loadingCtrl.create({
-             content: "Please wait..."
+             content: "Please wait...",
+
         });
         loader.present();
      this.eventservice.GetEvents(this.eventMonth)
      .subscribe(
          data => { this.ResponseData = data; this.ABC(); loader.dismiss(); },
-         err => console.error(err),
-         () => console.log('done',this.ResponseData),
+         err => {console.error(err); loader.dismiss();},
+         () => loader.dismiss()
       )
      
   }
@@ -249,6 +264,8 @@ public title : string = "planner";
 
     for(let i=0;i<this.ResponseData.length;i++){
         this.ResponseData[i].color = colors[this.ResponseData[i].color];
+        this.ResponseData[i].startTime = this.ResponseData[i].start;
+        this.ResponseData[i].endTime = this.ResponseData[i].end;
          this.ResponseData[i].start = startOfDay(this.ResponseData[i].start);
          this.ResponseData[i].end = startOfDay(this.ResponseData[i].end);
          this.ResponseData[i].actions = this.actions2;
@@ -310,6 +327,7 @@ doll(data){
   activeDayIsOpen: boolean = false;
 
   increment(): void {
+     this.count += 1;
 
     
     const addFn: any = {
@@ -336,9 +354,8 @@ doll(data){
   }
 
 
-
   decrement(): void {
-
+ this.count -= 1;
 
     const subFn: any = {
       day: subDays,
@@ -354,23 +371,28 @@ doll(data){
     this.viewDate = new Date();
   }
 
-
-
+public NoEvents = false;
+public isCalendarTimeline = false;
+public EventsForTimeline = [];
   dayClicked({date, events}: {date: Date, events: CalendarEvent[]}): void {
 
     if (isSameMonth(date, this.viewDate)) {
       if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === false) ||
         events.length === 0
       ) {
-        this.activeDayIsOpen = false;
-        
-        this.clickdate = date ;
-        console.log('DayClicked',this.clickdate);
-        console.log('DayClicked',date);
+           this.activeDayIsOpen = false;
+           this.isCalendarTimeline = false;
+           this.NoEvents = true;
+           this.clickdate = date ;
+           console.log('DayClicked',this.clickdate);
+           console.log('DayClicked',date);
 
       } else {
-        this.activeDayIsOpen = true;
+        this.isCalendarTimeline = true;
+        this.NoEvents = false ;
+        this.EventsForTimeline = events;
+        this.activeDayIsOpen = false;
         this.clickdate = date ;
         console.log('haahhahaha',date);
         this.viewDate = date;
@@ -414,7 +436,21 @@ doll(data){
 
 
 
+    public eventsss;
+   eventsTimelineClicked(id){
+    console.log('eventsTimeline',id);
+    this.eventservice.GetParticularEvent(id)
+    .subscribe( data => { this.eventsss = data ; this.openNewModal(this.eventsss) },
+                () => console.log(this.eventsss))
+   }
+
   
+  openNewModal(abcd){
+    let modal3 = this.modalCtrl.create(EventModalPage,{
+      eventsss : abcd
+    });
+    modal3.present();
+  }
 
 
 

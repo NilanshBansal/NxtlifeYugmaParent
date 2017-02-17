@@ -20,12 +20,17 @@ export class SurveyService {
                   });
                 }
 
-
         getallsurveys(){
           console.log('headers',this.headers);
           this.serverUrl = this.configuration.Server;
            return this.http.get(this.serverUrl,this.options)
              .map((res:Response) => res.json())
+        }
+
+        getOneSurvey(id){
+          this.serverUrl = this.configuration.Server;
+          return this.http.get(this.serverUrl+'/'+id+"/questions/",this.options)
+            .map((res:Response) => res.json())
         }
 
         PostSurveys(body){

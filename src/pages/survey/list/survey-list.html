@@ -3,9 +3,16 @@
 </ion-header>
 
 <ion-content padding class="csGrayBackground">
+
+   <ion-refresher (ionRefresh)="doRefresh($survey)">
+       <ion-refresher-content></ion-refresher-content>
+   </ion-refresher>
+
+
     <ion-list>
-        <ion-item *ngFor="let a of allsurveys">
+        <ion-item *ngFor="let a of allsurveys" (click)="getParticularSurvey(a.surveyId)"> 
             <h1> {{a.title}} </h1>
+            <h3> {{ a.createdAt | amTimeAgo }}</h3>
         </ion-item>
     </ion-list>
 </ion-content>

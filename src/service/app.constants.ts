@@ -45,7 +45,9 @@ export class Configuration {
 
   setUrl(url) {
     this.cs.setHeaderText(url);
+
     this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/" + url;
+
   }
 
   setUrlForStudentSuggestions(url) {

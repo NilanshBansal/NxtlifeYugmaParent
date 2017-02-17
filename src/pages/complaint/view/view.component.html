@@ -11,9 +11,9 @@
     <ion-avatar item-left *ngIf="complaint.anonymous">
       <img class="csViewComponentAvatar" src="http://1.bp.blogspot.com/-biPiyi_H5_Y/UTm0ehJNzNI/AAAAAAAAC3E/t0OaSHIuDE0/s1600/kid-dp.jpg">
     </ion-avatar>
-    <h2 *ngIf="!complaint.anonymous" [style.color]="complaint.statusColor"  style="font-size: 20px;">{{complaint.studentName}}</h2>
+    <span *ngIf="!complaint.anonymous" [style.color]="complaint.statusColor" style="font-size: 20px;font-weight:bold">{{complaint.studentName}}</span>
     <h2 *ngIf="complaint.anonymous" style.color]="complaint.statusColor"  style="font-size: 20px;">Anonymous</h2>
-    <p>{{complaint.createdAt  | amDateFormat: 'LL'}}<span *ngIf="complaint.closedOn "><br>{{complaint.closedOn  | amDateFormat: 'LL'}} </span> </p> 
+    <p>{{complaint.createdAt  | date:"dd/MM/yy"}}<span *ngIf="complaint.closedOn "> - {{complaint.closedOn  | date:"dd/MM/yy"}} </span> </p> 
     </ion-item>
   <ion-card>
     <ion-item>

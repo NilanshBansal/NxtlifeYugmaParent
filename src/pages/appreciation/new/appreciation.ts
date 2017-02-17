@@ -60,10 +60,7 @@ export class NewAppreciationModal implements OnInit {
       this.teachers = teachers; // Get teachers list
     }, (err) => {
       this.nl.onError(err);
-<<<<<<< HEAD
-=======
       this.dismiss();
->>>>>>> fc6f0495aea52f379a6e57fa91e91998e709653d
     });
   }
 

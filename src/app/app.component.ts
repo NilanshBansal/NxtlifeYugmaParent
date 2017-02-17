@@ -1,9 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-<<<<<<< HEAD
-import { Nav, Platform, AlertController, Events, MenuController } from 'ionic-angular';
-=======
 import { Nav, Platform, AlertController, Events, MenuController, App } from 'ionic-angular';
->>>>>>> fc6f0495aea52f379a6e57fa91e91998e709653d
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 // import component
@@ -18,11 +14,7 @@ import { StudentRating } from '../pages/rating/rating';
 import { AccountPage } from '../pages/account/account';
 import { HomeworkComponent } from '../pages/homework/homework.component';
 import { CircularComponent } from '../pages/circular/circular.component';
-<<<<<<< HEAD
-import { NoInternet } from '../custom-component/noInternet.component';
-=======
 import { UserSessionManage } from '../custom-component/user.session.manage';
->>>>>>> fc6f0495aea52f379a6e57fa91e91998e709653d
 
 // import service
 import { AuthService } from '../service/auth.service';
@@ -82,88 +74,6 @@ export class MyApp extends UserSessionManage {
     this.account = [
       { title: 'Account', component: AccountPage, icon: 'ios-contact-outline' }
     ];
-  }
-
-  initializeApp() {
-
-    this.networkService.checkNetworkStatus();
-
-    if (this.authService.isLoggedIn()) {
-      this.loadUser();
-      this.rootPage = Dashboard;
-      this.getUserInfo();
-    } else {
-      this.rootPage = LoginPage;
-    }
-
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      Splashscreen.hide();
-    });
-  }
-
-  public getUserInfo() {
-    this.authService.getParentInfo().subscribe((res) => {
-      this.authService.storeParentData(res);
-    }, (err) => {
-      if (err === 401) { this.presentConfirm(); }
-    });
-  }
-
-  loadUser() {
-    this.name = localStorage.getItem("name");
-  }
-
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.selectedPage = page.title;
-    this.configuration.setUrl(page.url);
-    this.nav.setRoot(page.component);
-  }
-
-  enableMenu(loggedIn) {
-    this.menu.enable(loggedIn);
-  }
-
-  presentConfirm() {
-    let alert = this.alertCtrl.create({
-      title: 'Session Expired',
-      message: "You're already logged in some other device. You may again login.",
-      enableBackdropDismiss: false,
-      buttons: [{
-        text: 'Logout',
-        handler: () => {
-          this.events.publish("user:logout");
-        }
-      }]
-    });
-    alert.present();
-  }
-
-  listenToLoginEvents() {
-    this.events.subscribe('user:login', () => {
-      this.loadUser();
-      this.enableMenu(true);
-      this.nav.setRoot(Dashboard);
-    });
-    this.events.subscribe('session:expired', () => {
-      this.presentConfirm();
-    });
-    this.events.subscribe('user:logout', () => {
-      localStorage.clear();
-      this.enableMenu(false);
-      this.selectedPage = "";
-      this.nav.setRoot(LoginPage);
-    });
-    this.events.subscribe("offline", () => {
-      this.nav.setRoot(NoInternet);
-    });
-    this.events.subscribe("online", () => {
-      this.nav.setRoot(Dashboard);
-    });
   }
 
 }

@@ -49,20 +49,17 @@ export class CustomService {
   public onError(err) {
     this.hideLoader();
     let a = err.split("-")[0];
-    if (a == 401) {
+    if (a == 401 || a == 0) {
       this.events.publish("session:expired");
-    }
-    if (a == 0) {
-      this.events.publish("offline");
     }
     this.showToast(err);
   }
 
-  setHeaderText(text) {
+  public setHeaderText(text) {
     this.txt = text;
   }
 
-  getHeaderText() {
+  public getHeaderText() {
     return this.txt;
   }
 

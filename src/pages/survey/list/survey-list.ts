@@ -1,5 +1,8 @@
 import { Component , OnInit } from '@angular/core';
 import { SurveyService } from '../../../service/survey.service';
+import { NavController } from 'ionic-angular';
+import { SurveyPage } from '../survey';
+import { CustomService } from '../../../service/custom.service';
 
 @Component({
     selector : 'survey-list',
@@ -8,9 +11,15 @@ import { SurveyService } from '../../../service/survey.service';
 
 export class SurveyListPage implements OnInit{
 
+    public title: string = "Survey";
     public allsurveys;
+    public onesurveys;
+    public allData = [];
+    public EmptySurveys : boolean = false;
 
-    constructor(private _surveyServ : SurveyService ){
+    constructor(private _surveyServ : SurveyService ,
+                private navCtrl : NavController,
+                private nl : CustomService ){
         this.getSurveys();
     }
 
@@ -20,7 +29,51 @@ export class SurveyListPage implements OnInit{
                 () => console.log('allsurveys',this.allsurveys))
     }
 
+    getParticularSurvey(surveyId){
+        this._surveyServ.getOneSurvey(surveyId)
+        .subscribe( data => { this.onesurveys = data ; this.clickablesurvey(this.onesurveys)},
+              () => console.log('onesurveys',this.onesurveys))
+    }
+
+   clickablesurvey(objj){
+       console.log('clickablesurvey');
+       this.navCtrl.push(SurveyPage,{
+           objj : objj
+       });
+   }
+
+
+
+ doRefresh(refresher) {
+    setTimeout(() => {
+         this._surveyServ.getallsurveys().subscribe((res) => {
+                this.onSuccess(res);
+                refresher.complete();
+            }, (err) => {
+                refresher.complete();
+                 this.onError(err);
+            });
+        }, 500);
+     }
+
+    onSuccess(res) {
+        this.nl.hideLoader();
+            if (res.status === 204) {
+             this.EmptySurveys = true;
+            }
+            else{
+                this.EmptySurveys = false;
+                this.allData = res;
+           }
+     }
+
+    onError(err) {
+       this.nl.onError(err);
+    }
+
+
+
     ngOnInit():void{
-        
+
     }
 }

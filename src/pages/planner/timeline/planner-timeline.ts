@@ -6,8 +6,8 @@ import {
   getDate
   } from 'date-fns';
 //import { AddEventPage } from '../add/planner-add';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { EventModalPage } from '../view/planner-view';
 
 
 
@@ -24,11 +24,13 @@ import { NavController, NavParams } from 'ionic-angular';
 export class CalendarTimelinePage implements OnInit {
 
   public timeline = [];
+  public currentPage = 1;
   public Timeline = ['Dec 2016'];
   public newtimeline = [{'title':[],'month':'','day':'','date': {}}];
   //public events = [];
   constructor(public eventservice : EventService,
-              public navCtrl : NavController){};
+              public navCtrl : NavController,
+              public modalCtrl: ModalController){};
 
  //  AllEvents(){
 
@@ -43,7 +45,7 @@ export class CalendarTimelinePage implements OnInit {
 
    AllEvents(){
 
-     this.eventservice.GetEventsTimeLine()
+     this.eventservice.GetEventsTimeLine(this.currentPage)
      .subscribe(
          data => { this.timeline = data; this.pop(); },
          err => console.error(err)
@@ -82,6 +84,10 @@ export class CalendarTimelinePage implements OnInit {
 //   console.log('newtimeline[]',this.newtimeline);
 // }
 
+titleClicked(id){
+  console.log('title clicked',id);
+}
+
 
 
 pop(){
@@ -101,6 +107,24 @@ pop(){
   console.log('heheTimeLine',this.timeline);
    }
  
+
+   public eventsss;
+   EventTimelineClick(id){
+     console.log('id',id);
+      this.eventservice.GetParticularEvent(id)
+        .subscribe( data => { this.eventsss =  data; this.OpenModal(this.eventsss)},
+        () => console.log('tamoline',this.eventsss))
+
+        //EventModalPage
+   }
+
+
+   OpenModal(abc){
+    let modal = this.modalCtrl.create(EventModalPage,{
+      eventsss : abc
+    });
+       modal.present();
+  }
 
 
 	ngOnInit(){

@@ -15,6 +15,8 @@ export class PollPage implements OnInit {
   public resdata = [];
   public responseData;
   public theItem;
+  public allData;
+  public currentPage = 1;
   constructor(private pollServ : PollService,
               private nl : CustomService) {
 
@@ -35,7 +37,6 @@ public EmptyPolls = false;
       //(err) => {console.log('err'); this.nl.hideLoader()},
       () => console.log('Polls',this.resdata)
     )};
-
 
   RemoveItem(theItem) {
     console.log('theItem',theItem);
@@ -101,20 +102,41 @@ public EmptyPolls = false;
     }
 
    PollChoiceMultiple(){
-
-     //this.enable = false;
-
      for(let i in this.checkItems){
          console.log(this.checkItems[i]);
        if(this.checkItems[i] == true) {
          this.arrayy.push(i);
        }
      }
+    console.log(this.arrayy);
+  }
 
- console.log(this.arrayy);
-}
+  doRefresh(refresher) {
+            setTimeout(() => {
+                this.pollServ.GetPolls().subscribe((res) => {
+                    this.onSuccess(res);
+                    refresher.complete();
+                }, (err) => {
+                    refresher.complete();
+                    this.onError(err);
+                });
+                }, 500);
+     }
 
+    onSuccess(res) {
+    this.nl.hideLoader();
+            if (res.status === 204) {
+            this.EmptyPolls = true;
+            } else {
+            this.EmptyPolls = false;
+            this.allData = res;
+            }
+     }
 
+    onError(err) {
+        this.nl.onError(err);
+    }   
+  
   ngOnInit() : void{
       this.PollFunc();
   }

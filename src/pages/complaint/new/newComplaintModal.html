@@ -13,7 +13,7 @@
       </ion-item>
     </ion-card>
     <ion-card *ngIf="standardId">
-      <ion-item padding>
+      <ion-item>
         <ion-icon name="sad" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Against</ion-label>
         <custom-select item-content [(ngModel)]="category" formControlName="category" (ngModelChange)="setCategory(category)">
@@ -31,7 +31,7 @@
       </ion-item>
     </ion-card>
     <ion-card *ngIf="childCategories">
-      <ion-item padding>
+      <ion-item>
         <ion-icon name="ios-options-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary">SubCategory</ion-label>
         <custom-select item-content [(ngModel)]="childCategory" formControlName="childCategory">

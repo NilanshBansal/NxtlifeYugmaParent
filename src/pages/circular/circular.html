@@ -3,12 +3,17 @@
   </nl-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
+
+   <ion-refresher (ionRefresh)="doRefresh($circular)">
+       <ion-refresher-content></ion-refresher-content>
+   </ion-refresher>
+
     <ion-list>
   <div *ngFor="let a of circulars">
     <ion-item *ngFor="let b of a.dayCirculars" (click)="ranFunc(b.id)">
       <div style="border-left: 3px #76ff03 solid;padding-left: 10px;">
-          <span><b>{{a.title}}</b></span>
-          <p> <span>{{a.circularTypeName}}</span> <span class="csRight">{{ a.start}}</span> </p>
+          <span><b>{{b.title}}</b></span>
+          <p> <span>{{b.circularTypeName}}</span> <span class="csRight">{{ b.start}}</span> </p>
       </div>
     </ion-item>
   </div>

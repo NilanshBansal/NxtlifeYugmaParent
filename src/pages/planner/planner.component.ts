@@ -247,11 +247,11 @@ public title : string = "planner";
              content: "Please wait...",
 
         });
-       // loader.present();
+        loader.present();
      this.eventservice.GetEvents(this.eventMonth)
      .subscribe(
          data => { this.ResponseData = data; this.ABC(); loader.dismiss(); },
-         err => console.error(err),
+         err => {console.error(err); loader.dismiss();},
          () => loader.dismiss()
       )
      

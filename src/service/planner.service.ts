@@ -25,8 +25,6 @@ export class EventService {
 
 	public AddNewEvent(body){
 		this.serverUrl = this.configuration.Server;
-		
-
 
      return this.http.post(this.serverUrl,body,this.options)
 

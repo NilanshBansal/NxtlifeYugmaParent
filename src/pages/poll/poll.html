@@ -9,6 +9,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="csGrayBackground">
+
+   <ion-refresher (ionRefresh)="doRefresh($poll)">
+       <ion-refresher-content></ion-refresher-content>
+   </ion-refresher>
+
     <ion-list class="no-comment" *ngIf="EmptyPolls">
         <img src="../../assets/svg/empty.svg" />
         <span>No Record Found</span>
@@ -33,7 +38,7 @@
         <b>Poll Type:</b><br> {{res.optionTypeName}}
       </div>
       <div item-right>
-        <b>Odience:</b><br> {{res.typeName}}
+        <b> audience :</b><br> {{res.typeName}}
       </div>
     </ion-item>
     <button class="csWidth csCenter" *ngIf="res.optionTypeId == 1" block center ion-button color="primary" [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>

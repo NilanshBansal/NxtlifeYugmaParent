@@ -210,10 +210,12 @@ button{
 }
 .no-comment{
     @extend .csCenter;
-    margin-top:150px;
-    width:100px;
+    margin-top:20vh;
     color:dimgray;
     text-align:center;
+    ion-icon{
+        font-size:100px;
+    }
 }
 .csBigIcon{
     font-size: 2.2em;

@@ -10,8 +10,8 @@
 </ion-header>
 <ion-content class="csGrayBackground">
     <ion-list class="no-comment" *ngIf="EmptyPolls">
-        <img src="../../assets/svg/empty.svg" />
-        <span>No Record Found</span>
+  <ion-icon name="stats"></ion-icon>
+        <br>No Record Found
     </ion-list>
   <ion-card class="csPoll" *ngFor="let res of resdata">
     <ion-card-header>

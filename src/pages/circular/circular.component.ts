@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { CircularService } from './../../service/circular.servce';
 import { CircularViewComponent } from './view/circular-view';
 import { NavController,NavParams } from 'ionic-angular';
-import { CustomService } from './../../service/customService';
+import { CustomService } from './../../service/custom.service';
 
 @Component({
     selector : 'circular-parent',
@@ -16,10 +16,10 @@ export class CircularComponent implements OnInit{
 
     public circulars = [];
     title : string = "Circular";
-    public allData = []; 
+    public allData = [];
     public EmptyPolls:boolean = false;
 
-    
+
     constructor(private circserv : CircularService ,
                 private navCtrl : NavController ,
                 private navparams : NavParams ,

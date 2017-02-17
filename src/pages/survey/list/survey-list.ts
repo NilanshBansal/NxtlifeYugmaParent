@@ -2,7 +2,7 @@ import { Component , OnInit } from '@angular/core';
 import { SurveyService } from '../../../service/survey.service';
 import { NavController } from 'ionic-angular';
 import { SurveyPage } from '../survey';
-import { CustomService } from '../../../service/customService';
+import { CustomService } from '../../../service/custom.service';
 
 @Component({
     selector : 'survey-list',
@@ -60,7 +60,7 @@ export class SurveyListPage implements OnInit{
         this.nl.hideLoader();
             if (res.status === 204) {
              this.EmptySurveys = true;
-            } 
+            }
             else{
                 this.EmptySurveys = false;
                 this.allData = res;
@@ -74,6 +74,6 @@ export class SurveyListPage implements OnInit{
 
 
     ngOnInit():void{
-        
+
     }
 }

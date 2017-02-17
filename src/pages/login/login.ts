@@ -66,7 +66,7 @@ export class LoginPage extends Notification implements OnInit {
 
   verifyOtp() {
     if (this.otp != "") {
-      this.showLoader("otp verifying...");
+      this.showLoader("OTP Verifying...");
       let data = {
         username: this.loginForm.value.mobileNo,
         password: this.otp
@@ -89,7 +89,7 @@ export class LoginPage extends Notification implements OnInit {
     this.loading.dismiss();
     this.otp = "";
     if (err === 400) {
-      this.nl.showToast("otp not matched");
+      this.nl.showToast("OTP not matched");
     } else {
       this.nl.errMessage();
     }

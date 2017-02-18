@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar class="csHeader">
+  <ion-toolbar class="csModelHeader">
     <ion-buttons start>
-      <button ion-button color="primary" class="navBtnRight csGrayBackground" (click)="dismiss()">
-        <span showWhen="ios"><ion-icon class="close-button" name="close-circle"></ion-icon></span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      <button ion-button class="navBtnRight" (click)="dismiss()">
+        <span showWhen="ios">Cancel</span>
+        <span showWhen="android,windows"><ion-icon name="close-circle" ></ion-icon></span>
       </button>
     </ion-buttons>
     <ion-title text-center>
@@ -14,44 +14,44 @@
 <ion-content class="planner">
   <ion-card>
     <ion-item>
-      <b>{{ResponseData.title}}</b>
-      <p class="csParagraph">{{ ResponseData.description}}</p>
+      <h1>{{ResponseData.title}}</h1>
+      <span class="csParagraph">{{ ResponseData.description}}</span>
     </ion-item>
     <ion-item>
-      <ion-note item-left>
+      <div item-left>
         <span>
             <b>Start Date</b>
-          </span>
+        </span>
         <br>
         <span style="color:black">
-            {{ResponseData.startDate | date}}
+            {{ResponseData.startDate | date}}<br>{{ResponseData.startTime}}
           </span>
-      </ion-note>
-      <ion-note item-right>
+      </div>
+      <div item-right>
         <span>
           <b>End Date</b>
           </span>
         <br>
         <span style="color:black">
-          {{ResponseData.endDate | date}}
+          {{ResponseData.endDate | date}}<br right>{{ResponseData.endTime}}
           </span>
-      </ion-note>
+      </div>
     </ion-item>
   </ion-card>
   <ion-card>
-    <ion-item>
-      <span item-left>Type:</span>
-      <span item-right> 
+    <ion-list>
+      <ion-item>
+        <span item-left>Type:</span>
+        <span item-right> 
         {{ResponseData.plannerTypeName}}
       </span>
-    </ion-item>
-    <ion-item>
-      <span item-left>Start Time:</span>
-      <span item-right>{{ResponseData.startTime}}</span>
-    </ion-item>
-    <ion-item>
-      <span item-left>End Time:</span>
-      <span item-right>{{ResponseData.endTime}}</span>
-    </ion-item>
+      </ion-item>
+      <ion-item>
+        <span item-left>Location:</span>
+        <span item-right> 
+        {{ResponseData.location}}
+      </span>
+      </ion-item>
+    </ion-list>
   </ion-card>
 </ion-content>

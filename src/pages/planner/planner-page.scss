@@ -420,3 +420,23 @@
      color: $csDarkPink !important;
    }
  }
+#cd-timeline-page {
+    position: relative;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    margin-left: 10px !important;
+}
+.csTimeline-list{
+  height: 25vh;
+  width: 100vw;
+  overflow-y: scroll;
+}
+.no-event{
+    @extend .csCenter;
+    margin-top:20px;
+    color:dimgray;
+    text-align:center;
+    ion-icon{
+        font-size:60px;
+    }
+}

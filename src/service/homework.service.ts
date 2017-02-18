@@ -16,6 +16,7 @@ export class HomeworkService {
 
     constructor(private http: Http,
                 private configuration : Configuration) {
+                  this.configuration.getHeader();
                     this.headers = this.configuration.header();
                   this.options = new RequestOptions({
                     headers : this.headers

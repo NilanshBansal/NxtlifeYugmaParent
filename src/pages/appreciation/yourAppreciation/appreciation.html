@@ -25,8 +25,8 @@
     </ion-item>
   </ion-card>
   <ion-list class="no-comment" *ngIf="EmptyAppreciations">
-    <img src="assets/svg/empty.svg" />
-    <span>NO RECORD FOUND</span>
+    <ion-icon name="sad"></ion-icon>
+    <span>RECORD FOUND</span>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

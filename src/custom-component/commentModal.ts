@@ -14,8 +14,8 @@ import { CustomService } from '../service/custom.service';
 </ion-header>
 <ion-content id="chat" class="csChatBox">
   <ion-list class="no-comment" *ngIf="emptyComments">
-    <img src="assets/svg/empty.svg" />
-    <span>NO COMMENT</span>
+      <ion-icon name="chatbubbles"></ion-icon>
+    <br>NO COMMENT
   </ion-list>
   <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
   <div class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>

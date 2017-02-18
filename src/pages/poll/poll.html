@@ -9,16 +9,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="csGrayBackground">
-
-   <ion-refresher (ionRefresh)="doRefresh($poll)">
-       <ion-refresher-content></ion-refresher-content>
-   </ion-refresher>
-
-    <ion-list class="no-comment" *ngIf="EmptyPolls">
-        <img src="../../assets/svg/empty.svg" />
-        <span>No Record Found</span>
-    </ion-list>
-  <ion-card *ngFor="let res of resdata">
+  <ion-refresher (ionRefresh)="doRefresh($poll)">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="no-comment" *ngIf="EmptyPolls">
+    <ion-icon name="stats"></ion-icon>
+    <br>No Record Found
+  </ion-list>
+  <ion-card class="csPoll" *ngFor="let res of resdata">
     <ion-card-header>
       <span>
         <div class="csParagraph"><b>{{res.question}}</b></div>
@@ -41,7 +39,7 @@
         <b> audience :</b><br> {{res.typeName}}
       </div>
     </ion-item>
-    <button class="csWidth csCenter" *ngIf="res.optionTypeId == 1" block center ion-button color="primary" [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>
-    <button class="csWidth csCenter" *ngIf="res.optionTypeId == 2" block center ion-button color="primary" [disabled]="mul_enable" (click)="PollMulVoting(res.id,res)">Vote!</button>
+    <button full *ngIf="res.optionTypeId == 1" ion-button color="primary" style="margin-bottom:0px" [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>
+    <button full *ngIf="res.optionTypeId == 2" ion-button color="primary" style="margin-bottom:0px" [disabled]="mul_enable" (click)="PollMulVoting(res.id,res)">Vote!</button>
   </ion-card>
 </ion-content>

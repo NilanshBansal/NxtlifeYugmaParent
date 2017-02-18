@@ -31,14 +31,6 @@
           </ion-item>
       </ion-list>
     </ion-card-content>
-    <ion-item>
-      <div item-left>
-        <b>Poll Type:</b><br> {{res.optionTypeName}}
-      </div>
-      <div item-right>
-        <b> audience :</b><br> {{res.typeName}}
-      </div>
-    </ion-item>
     <button full *ngIf="res.optionTypeId == 1" ion-button color="primary" style="margin-bottom:0px" [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>
     <button full *ngIf="res.optionTypeId == 2" ion-button color="primary" style="margin-bottom:0px" [disabled]="mul_enable" (click)="PollMulVoting(res.id,res)">Vote!</button>
   </ion-card>

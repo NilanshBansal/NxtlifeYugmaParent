@@ -42,33 +42,23 @@
 
     </div>
   </div>
-
-
-  <ion-card *ngIf="isCalendarTimeline">
-     <section id="cd-timeline" class="cd-container">
-          <div class="timeline-row" >
-            
-           <div>
-                    <div class="cd-timeline-content dark"  *ngFor="let a of EventsForTimeline" (click)="eventsTimelineClicked(a.id)">
-                              <div class="color-col" [style.border-left-color]= "a.color.primary">
-                                  <h5 class="timeline-title">{{ a.title }}</h5>
-                                  <span class="startTime"> {{a.startTime | amDateFormat:'hh:mmA'  }}   </span>
-                                  <span class="startTime"> - {{ a.endTime | amDateFormat:'hh:mmA' }}</span>
-                                
-                         </div>  
-                       </div>
-                
+  <ion-list class="csTimeline-list" *ngIf="isCalendarTimeline">
+    <section id="cd-timeline-page">
+      <div class="timeline-row">
+          <div class="cd-timeline-content dark" *ngFor="let a of EventsForTimeline" (click)="eventsTimelineClicked(a.id)">
+            <div class="color-col" [style.border-left-color]="a.color.primary">
+              <h5 class="timeline-title">{{ a.title }}</h5>
+              <span class="startTime"> {{a.startTime | amDateFormat:'hh:mmA'  }}   </span>
+              <span class="startTime"> - {{ a.endTime | amDateFormat:'hh:mmA' }}</span>
+              <span class="Timelinelocation">{{ a.location }} </span>
             </div>
           </div>
-        </section>
-</ion-card>
-
-
-<ion-card *ngIf="NoEvents">
-   <section>
-      <h2> No Events </h2>
+      </div>
     </section>
-</ion-card>
-
+  </ion-list>
+  <ion-list class="no-event" *ngIf="NoEvents">
+    <ion-icon name="calendar"></ion-icon>
+    <br>No Event
+  </ion-list>
 
 </ion-content>

@@ -50,12 +50,9 @@ $cardText: #7b7b7b;
 
 .bullitinBoard{
   padding:1px;
-  ion-icon{
-    color:$cardText;
-  }
   p{
-    color: $cardText;
     margin-top:-8px;
+    font-size:12px;
   }
   .pin{
     margin-left: 35%;

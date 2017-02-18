@@ -42,11 +42,11 @@ export class MyApp extends UserSessionManage {
               public networkService: NetworkService) {
     super(events, menu, appCtrl, authService, alertCtrl, networkService);
     this.initializeApp();
+    this.sidebarConfig();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.sidebarConfig();
       StatusBar.styleDefault();
       Splashscreen.hide();
     });

@@ -66,7 +66,7 @@ export class LoginPage extends Notification implements OnInit {
 
   verifyOtp() {
     if (this.otp != "") {
-      this.showLoader("OTP Verifying...");
+      this.showLoader("Verifying OTP...");
       let data = {
         username: this.loginForm.value.mobileNo,
         password: this.otp

@@ -17,11 +17,30 @@ export class UserSessionManage {
               public authService: AuthService,
               public alertCtrl: AlertController,
               public networkService: NetworkService) {
-    this.listenToLoginEvents();
+    this.handleEvents();
+    this.networkService.checkNetworkStatus();
+    this.hasLoggedIn();
   }
 
-  public listenToLoginEvents() {
-    this.networkService.checkNetworkStatus();
+  public handleEvents() {
+    this.events.subscribe('user:login', () => {
+      this.login();
+    });
+    this.events.subscribe('session:expired', () => {
+      this.sessionExpired();
+    });
+    this.events.subscribe('user:logout', () => {
+      this.logout();
+    });
+    this.events.subscribe("offline", () => {
+      this.offline();
+    });
+    this.events.subscribe("online", () => {
+      this.online();
+    });
+  }
+
+  public hasLoggedIn() {
     if (this.authService.isLoggedIn()) {
       this.loadUser();
       this.getUserInfo();
@@ -29,38 +48,40 @@ export class UserSessionManage {
     } else {
       this.rootPage = LoginPage;
     }
-    this.events.subscribe('user:login', () => {
-      this.enableMenu(true);
-      this.loadUser();
-      this.appCtrl.getRootNav().setRoot(Dashboard);
-    });
-    this.events.subscribe('session:expired', () => {
-      this.presentConfirm();
-    });
-    this.events.subscribe('user:logout', () => {
-      localStorage.clear();
-      this.enableMenu(false);
-      this.selectedPage = "";
-      this.appCtrl.getRootNav().setRoot(LoginPage);
-    });
-    this.events.subscribe("offline", () => {
-      this.appCtrl.getRootNav().setRoot(NoInternet);
-    });
-    this.events.subscribe("online", () => {
-      if (this.authService.isLoggedIn()) {
-        this.loadUser();
-        this.appCtrl.getRootNav().setRoot(Dashboard);
-      } else {
-        this.appCtrl.getRootNav().setRoot(LoginPage);
-      }
-    });
+  }
+
+  public login() {
+    this.enableMenu(true);
+    this.loadUser();
+    this.menu.close();
+    this.appCtrl.getRootNav().setRoot(Dashboard);
+  }
+
+  public logout() {
+    localStorage.clear();
+    this.enableMenu(false);
+    this.selectedPage = "";
+    this.appCtrl.getRootNav().setRoot(LoginPage);
+  }
+
+  public offline() {
+    this.menu.close();
+    this.appCtrl.getRootNav().setRoot(NoInternet);
+  }
+
+  public online() {
+    if (this.authService.isLoggedIn()) {
+      this.login();
+    } else {
+      this.logout();
+    }
   }
 
   public enableMenu(loggedIn) {
     this.menu.enable(loggedIn);
   }
 
-  public presentConfirm() {
+  public sessionExpired() {
     let alert = this.alertCtrl.create({
       title: 'Session Expired',
       message: "You're already logged in some other device. You may again login.",
@@ -83,8 +104,7 @@ export class UserSessionManage {
     this.authService.getParentInfo().subscribe((res) => {
       this.authService.storeParentData(res);
     }, (err) => {
-      if (err === 401) { this.presentConfirm(); }
-      if (err === 0) { this.events.publish("offline");}
+      if (err === 401 || err == 0) { this.sessionExpired(); }
     });
   }
 

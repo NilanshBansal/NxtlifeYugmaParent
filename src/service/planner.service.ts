@@ -17,10 +17,11 @@ export class EventService {
 	constructor(private http: Http,
 				private configuration : Configuration){
 
+		this.configuration.getHeader();
 		this.headers = this.configuration.header();
-                  this.options = new RequestOptions({
-                    headers : this.headers
-                  });
+    this.options = new RequestOptions({
+      headers : this.headers
+    });
 	}
 
 	public AddNewEvent(body){
@@ -68,7 +69,7 @@ export class EventService {
 		this.serverUrl = this.configuration.Server;
 		return this.http.get(this.serverUrl+"/page/"+pageNo,this.options)
 
-		
+
 		.map((res:Response) => res.json())
 	}
 
@@ -108,7 +109,7 @@ export class EventService {
 	public deleteEvent(id){
 
 		this.serverUrl = this.configuration.Server;
-	
+
 		return this.http.delete(this.serverUrl+id,this.options);
 
 	}

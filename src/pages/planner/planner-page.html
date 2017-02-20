@@ -34,7 +34,7 @@
     <div [ngSwitch]="view" text-center class="csCalDays">
       <div>
         <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events2" [refresh]="refresh" (eventClicked)="EventClicked($event)"
-          [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)">
+          [activeDayIsOpen]="true" (dayClicked)="dayClicked($event.day)">
           </mwl-calendar-month-view>
       </div>
     </div>

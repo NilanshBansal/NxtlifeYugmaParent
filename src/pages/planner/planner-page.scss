@@ -175,9 +175,9 @@
  }
  
  .cal-month-view .cal-day-cell.cal-today .cal-day-number {
-   border: 5px $color1 solid;
+   border: 5px #8cde87 solid;
    border-radius: 50%;
-   background: $color1;
+   background: #8cde87;
  }
  
  .cal-month-view .cal-open-day-events {
@@ -440,4 +440,7 @@
     ion-icon{
         font-size:60px;
     }
+}  
+.cal-open-day-events{
+  display:none;
 }

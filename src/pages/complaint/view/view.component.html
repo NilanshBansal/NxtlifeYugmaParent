@@ -6,10 +6,10 @@
     <ion-item class="csStudentDetail">
       <ion-note item-right><span [style.color]="complaint.statusColor" class="csBold"><ion-icon name="at" ></ion-icon> {{complaint.statusName}}</span></ion-note>
     <ion-avatar item-left *ngIf="!complaint.anonymous">
-      <img class="csViewComponentAvatar" src="http://1.bp.blogspot.com/-biPiyi_H5_Y/UTm0ehJNzNI/AAAAAAAAC3E/t0OaSHIuDE0/s1600/kid-dp.jpg">
+          <ion-icon class="csViewComponentAvatar" [style.color]="complaint.statusColor" name="contact"></ion-icon>
     </ion-avatar>
     <ion-avatar item-left *ngIf="complaint.anonymous">
-      <img class="csViewComponentAvatar" src="http://1.bp.blogspot.com/-biPiyi_H5_Y/UTm0ehJNzNI/AAAAAAAAC3E/t0OaSHIuDE0/s1600/kid-dp.jpg">
+          <ion-icon class="csViewComponentAvatar" [style.color]="complaint.statusColor" name="contact"></ion-icon>
     </ion-avatar>
     <h2 *ngIf="!complaint.anonymous" [style.color]="complaint.statusColor">{{complaint.studentName}}</h2>
     <h2 *ngIf="complaint.anonymous" [style.color]="complaint.statusColor">Anonymous</h2>
@@ -31,9 +31,9 @@
         <span [style.color]="complaint.statusColor">Against</span>
         <span [style.color]="complaint.statusColor">Description</span>
       </div>
-      <h2 class="csParagraph">
+      <div class="csParagraph">
         {{complaint.description}}
-      </h2>
+      </div>
     </ion-item>
     <ion-item *ngIf="complaint.rca">
       <div class="complaint-item">
@@ -46,36 +46,6 @@
     </ion-item>
   </ion-card>
   <ion-list>
-    <!--<ion-card>
-      <ion-item class="csTransparent csBottom-card">
-        <ion-icon name="body" [style.color]="complaint.statusColor"></ion-icon>
-        <span [style.color]="complaint.statusColor" class="csBoldFont">Created at</span>
-        <span item-right icon-left>
-          <h5>{{complaint.createdAt  | amDateFormat: 'LL'}}</h5>
-        </span>
-      </ion-item>
-      <ion-item *ngIf="complaint.closedOn" class="csTransparent csBottom-card">
-        <ion-icon name="body" [style.color]="complaint.statusColor"></ion-icon>
-        <span [style.color]="complaint.statusColor" class="csBoldFont">Closed on</span>
-        <span item-right icon-left>
-          <h5>{{complaint.closedOn  | amDateFormat: 'LL'}}</h5>
-        </span>
-      </ion-item>
-      <ion-item *ngIf="complaint.anonymous" class="csTransparent csBottom-card">
-        <ion-icon name="body" [style.color]="complaint.statusColor"></ion-icon>
-        <span [style.color]="complaint.statusColor" class="csBoldFont">Complaint by</span>
-        <span item-right icon-left>
-          <h5>Anonymous</h5>
-        </span>
-      </ion-item>
-      <ion-item *ngIf="!complaint.anonymous" class="csTransparent">
-        <ion-icon name="body" [style.color]="complaint.statusColor"></ion-icon>
-        <span [style.color]="complaint.statusColor" class="csBoldFont">Student Name</span>
-        <span item-right icon-left>
-          <h5>{{complaint.studentName}}</h5>
-        </span>
-      </ion-item>
-    </ion-card>-->
     <ion-card class="csCardTopBorder" [style.border-color]="complaint.statusColor">
       <ion-item *ngIf="complaint.assignedEmployeeName" class="csTransparent" class="csTransparent">
         <ion-icon name="person-add" [style.color]="complaint.statusColor"></ion-icon>

@@ -74,6 +74,10 @@ $inherit : inherit;
   background: #dedede;
   color: #6d6d6d;
   font-weight: bold;
+  border-left:3px solid $color1;
+  ion-icon{
+    color:$color1;
+  }
 }
 .noBorder-item{
   .item-inner {

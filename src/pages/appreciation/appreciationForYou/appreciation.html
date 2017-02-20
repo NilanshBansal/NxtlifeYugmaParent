@@ -6,7 +6,7 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let appreciation of allData">
+  <ion-card *ngFor="let appreciation of allData" class="csCardTopBorder">
     <ion-item>
       <div class="csParagraph"><b>{{appreciation.title}}</b></div>
       <div class="csParagraph">{{appreciation.description}}</div>

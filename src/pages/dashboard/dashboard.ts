@@ -34,10 +34,12 @@ export class Dashboard {
   }
 
   openPlanner() {
+    this.configuration.setUrl("planner");
     this.navCtrl.setRoot(PlannerComponent);
   }
 
   openPoll() {
+    this.configuration.setUrl("poll");
     this.navCtrl.setRoot(PollPage);
   }
 

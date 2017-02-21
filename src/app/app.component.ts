@@ -64,9 +64,7 @@ export class MyApp extends UserSessionManage {
       { title: 'Complaints', component: ComplaintPage, icon: 'ios-sad-outline', url: 'complaint' },
       { title: 'Suggestions', component: SuggestionTabs, icon: 'ios-bulb-outline', url: 'suggestion' },
       { title: 'Appreciations', component: AppreciationTabs, icon: 'ios-thumbs-up-outline', url: 'appreciation' },
-
       { title: 'Calendar',component: PlannerComponent , icon: 'ios-calendar-outline', url: 'planner'},
-
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },
       { title: 'Survey', component: SurveyListPage, icon: 'ios-analytics-outline', url: 'survey' },
       { title: 'Homework' , component : HomeworkComponent , icon : 'ios-book-outline' , url : 'homework' },

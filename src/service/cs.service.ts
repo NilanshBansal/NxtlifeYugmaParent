@@ -22,6 +22,13 @@ export class ComplaintSuggestion {
 
   }
 
+  public getDashboardData() {
+    this.serverUrl = this.configuration.Server;
+    return this.http.get(this.serverUrl)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   public getComplaints(pageNo): any {
     this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/page/" + pageNo)

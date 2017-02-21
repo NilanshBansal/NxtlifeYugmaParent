@@ -3,6 +3,20 @@
 </ion-header>
 
 <ion-content class="homeBackground csGrayBackground">
+  <ion-list padding>
+    <button ion-button outline (click)="openPage(page.poll, 'poll')">Open Poll - {{openPoll}}</button>
+  </ion-list>
+  <ion-list padding>
+    <ion-item *ngFor="let d of data">
+      <b>Events of the day</b>
+      <p *ngFor="let event of d.events">
+        {{event.title}}
+        {{event.startTime}}
+        {{event.endTime}}
+        {{event.location}}
+      </p>
+    </ion-item>
+  </ion-list>
   <ion-slides pager>
     <ion-slide>
       <ion-grid class="home-tabs bullitinBoard">

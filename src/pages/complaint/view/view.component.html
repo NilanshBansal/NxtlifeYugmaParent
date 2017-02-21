@@ -18,7 +18,7 @@
     </ion-avatar>
     <h2 *ngIf="!complaint.anonymous" [style.color]="complaint.statusColor">{{complaint.studentName}}</h2>
     <h2 *ngIf="complaint.anonymous" [style.color]="complaint.statusColor">Anonymous</h2>
-    <p>{{complaint.createdAt | amDateFormat: 'dd-MM-yy'}}<span *ngIf="complaint.closedOn "> - {{complaint.closedOn | amDateFormat: 'dd-MM-yy'}} </span> </p>
+    <p>{{complaint.createdAt | amDateFormat: 'DD/MM/YYYY'}}<span *ngIf="complaint.closedOn "> - {{complaint.closedOn | amDateFormat: 'DD/MM/YYYY'}} </span> </p>
     </ion-item>
   <ion-card>
     <ion-item>

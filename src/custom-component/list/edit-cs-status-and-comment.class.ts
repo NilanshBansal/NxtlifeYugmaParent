@@ -64,7 +64,7 @@ export class EditComplaintStatusAndComment {
   openReopenModal(complaint): void {
     this.complaint = complaint;
     let prompt = this.alertCtrl.create({
-      title: 'If you are not happy with the resolution then only reopen',
+      title: 'If you are not happy with the resolution then reopen',
       message: "",
       inputs: [{
         name: 'comment',
@@ -153,21 +153,22 @@ export class EditComplaintStatusAndComment {
   }
 
   openSatisfiedModal(complaint): void {
-    let prompt = this.alertCtrl.create({
+    let actionSheet = this.actionSheetCtrl.create({
       title: 'Are you Satisfied ?',
-      message: "If you are happy with the problem resolution then click on satisfied button",
       buttons: [{
-        text: 'Cancel',
-        handler: data => {
-        }
-      }, {
-        text: 'Satisfied!!',
-        handler: data => {
+        text: 'YES',
+        icon: 'ios-paper-outline',
+        handler: () => {
           this.satisfiedActionSheet(complaint);
         }
+      }, {
+        text: 'CANCEL',
+        icon: 'md-close',
+        role: 'cancel',
+        handler: () => {}
       }]
     });
-    prompt.present();
+    actionSheet.present();
   }
 
   satisfiedActionSheet(complaint) {

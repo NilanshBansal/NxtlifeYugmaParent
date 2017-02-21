@@ -15,7 +15,7 @@ import { PlannerComponent } from '../planner/planner.component';
 
 @Component({
   selector: 'page-dashboard',
-  templateUrl: 'homepage.html'
+  templateUrl: 'dashboard.html'
 })
 
 export class Dashboard {

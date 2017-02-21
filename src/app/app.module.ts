@@ -9,7 +9,7 @@ import { CustomHttpService } from '../service/default.header.service';
 
 // import component
 import { LoginPage } from '../pages/login/login';
-import { Dashboard } from '../pages/homepage/homepage';
+import { Dashboard } from '../pages/dashboard/dashboard';
 import { PollPage } from '../pages/poll/poll';
 import { AccountPage } from '../pages/account/account';
 import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';

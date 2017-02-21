@@ -3,7 +3,7 @@ import { Nav, Platform, AlertController, Events, MenuController, App } from 'ion
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 // import component
-import { Dashboard } from '../pages/homepage/homepage';
+import { Dashboard } from '../pages/dashboard/dashboard';
 import { SurveyListPage } from '../pages/survey/list/survey-list';
 import { PollPage } from '../pages/poll/poll';
 import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';

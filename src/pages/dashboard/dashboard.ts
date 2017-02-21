@@ -12,6 +12,9 @@ import { MenuController } from 'ionic-angular';
 
 import { Configuration } from '../../service/app.constants';
 import { PlannerComponent } from '../planner/planner.component';
+import { HomeworkComponent } from '../homework/homework.component';
+import { CircularComponent } from '../circular/circular.component';
+import { SurveyListPage } from '../survey/list/survey-list';
 
 @Component({
   selector: 'page-dashboard',
@@ -20,46 +23,29 @@ import { PlannerComponent } from '../planner/planner.component';
 
 export class Dashboard {
 
+  title: string = "Dashboard";
+
   constructor(public menuCtrl: MenuController,
               public configuration: Configuration,
               private navCtrl: NavController) {
       this.menuCtrl.enable(true);
   }
 
-  title: string = "Dashboard";
-
-  openComplaint() {
-    this.configuration.setUrl("complaint");
-    this.navCtrl.setRoot(ComplaintPage);
+  page = {
+    complaint: ComplaintPage,
+    suggestion: SuggestionTabs,
+    planner: PlannerComponent,
+    appreciation: AppreciationTabs,
+    rating: StudentRating,
+    poll: PollPage,
+    homework: HomeworkComponent,
+    circular: CircularComponent,
+    survey: SurveyListPage
   }
 
-  openPlanner() {
-    this.configuration.setUrl("planner");
-    this.navCtrl.setRoot(PlannerComponent);
-  }
-
-  openPoll() {
-    this.configuration.setUrl("poll");
-    this.navCtrl.setRoot(PollPage);
-  }
-
-  openSuggestion() {
-    this.configuration.setUrl("suggestion");
-    this.navCtrl.setRoot(SuggestionTabs);
-  }
-
-  openAppreciation() {
-    this.configuration.setUrl("appreciation");
-    this.navCtrl.setRoot(AppreciationTabs);
-  }
-
-  openSurvey() {
-    this.navCtrl.setRoot(SurveyPage);
-  }
-
-  openRating() {
-    this.configuration.setUrl("student-profile");
-    this.navCtrl.setRoot(StudentRating);
+  openPage(componentName, urlName) {
+    this.configuration.setUrl(urlName);
+    this.navCtrl.setRoot(componentName);
   }
 
 }

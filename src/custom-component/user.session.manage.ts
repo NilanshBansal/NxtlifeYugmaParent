@@ -1,7 +1,7 @@
 import { MenuController, AlertController, Events, App } from 'ionic-angular';
 import { NoInternet } from './noInternet.component';
 import { LoginPage } from '../pages/login/login';
-import { Dashboard } from '../pages/homepage/homepage';
+import { Dashboard } from '../pages/dashboard/dashboard';
 import { AuthService } from '../service/auth.service';
 import { NetworkService } from '../service/network.service';
 

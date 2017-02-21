@@ -3,24 +3,38 @@
 </ion-header>
 
 <ion-content class="homeBackground csGrayBackground">
+  <ion-list padding>
+    <button ion-button outline (click)="openPage(page.poll, 'poll')">Open Poll - {{openPoll}}</button>
+  </ion-list>
+  <ion-list padding>
+    <ion-item *ngFor="let d of data">
+      <b>Events of the day</b>
+      <p *ngFor="let event of d.events">
+        {{event.title}}
+        {{event.startTime}}
+        {{event.endTime}}
+        {{event.location}}
+      </p>
+    </ion-item>
+  </ion-list>
   <ion-slides pager>
     <ion-slide>
       <ion-grid class="home-tabs bullitinBoard">
         <ion-row>
-          <ion-col class="greenCard" (click)="openComplaint()" width-33>
+          <ion-col class="greenCard" (click)="openPage(page.complaint, 'complaint')" width-33>
             <div class="pinYellow"></div>
               <ion-icon name="ios-bulb-outline"></ion-icon>
               <p text-center>Complaints</p>
           </ion-col>
-          <ion-col width-33  class="blueCard" (click)="openSuggestion()">
+          <ion-col width-33  class="blueCard" (click)="openPage(page.suggestion, 'suggestion')">
             <div class="pinGreen"></div>
               <ion-icon class="my-icon" name="ios-sad-outline"></ion-icon>
               <p>Suggestions</p>
           </ion-col>
-          <ion-col width-33  class="peachCard" (click)="openPlanner()">
+          <ion-col width-33  class="peachCard" (click)="openPage(page.planner, 'planner')">
             <div class="pinYellow"></div>
               <ion-icon class="my-icon" name="ios-stats-outline"></ion-icon>
-              <p text-center>Planner</p>
+              <p text-center>Calendar</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -28,17 +42,17 @@
     <ion-slide>
       <ion-grid class="home-tabs bullitinBoard">
         <ion-row>
-          <ion-col width-33 class="peachCard" (click)="openSurvey()" >
+          <ion-col width-33 class="peachCard" (click)="openPage(page.survey, 'survey')">
             <div class="pinGreen"></div>
               <ion-icon class="my-icon" name="ios-analytics-outline"></ion-icon>
               <p>Survey</p>
           </ion-col>
-          <ion-col width-33  class="greenCard" (click)="openAppreciation()">
+          <ion-col width-33  class="greenCard" (click)="openPage(page.appreciation, 'appreciation')">
             <div class="pinYellow"></div>
               <ion-icon class="my-icon" name="ios-thumbs-up-outline"></ion-icon>
               <p>Appreciations</p>
           </ion-col>
-          <ion-col width-33  class="blueCard" (click)="openRating()">
+          <ion-col width-33  class="blueCard" (click)="openPage(page.rating, 'student-profile')">
             <div class="pinGreen"></div>
               <ion-icon class="my-icon" name="ios-pulse-outline"></ion-icon>
               <p>Student Rating</p>
@@ -49,17 +63,17 @@
     <ion-slide>
       <ion-grid class="home-tabs bullitinBoard">
         <ion-row>
-          <ion-col width-33 class="peachCard" (click)="openSurvey()" >
+          <ion-col width-33 class="peachCard" (click)="openPage(page.poll, 'poll')">
             <div class="pinGreen"></div>
               <ion-icon class="my-icon" name="ios-stats-outline"></ion-icon>
               <p>Poll</p>
           </ion-col>
-          <ion-col width-33  class="greenCard" (click)="openAppreciation()">
+          <ion-col width-33  class="greenCard" (click)="openPage(page.homework, 'homework')">
             <div class="pinYellow"></div>
               <ion-icon class="my-icon" name="ios-book-outline"></ion-icon>
-              <p>Home Work</p>
+              <p>Homework</p>
           </ion-col>
-          <ion-col width-33  class="blueCard" (click)="openRating()">
+          <ion-col width-33  class="blueCard" (click)="openPage(page.circular, 'circular')">
             <div class="pinGreen"></div>
               <ion-icon class="my-icon" name="ios-paper-outline"></ion-icon>
               <p>Circular</p>

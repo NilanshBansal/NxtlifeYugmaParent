@@ -7,7 +7,7 @@
       <div class="csStatus">
         <span [style.color]="complaint.statusColor" class="csBold">
           <ion-icon name="at" ></ion-icon> 
-          <b>{{complaint.statusName}}</b>
+          {{complaint.statusName}}
         </span>
       </div>
     <ion-avatar item-left *ngIf="!complaint.anonymous">

@@ -3,10 +3,9 @@ import { HomeworkService } from '../../../service/homework.service';
 import { CustomService } from '../../../service/custom.service';
 
 @Component({
-  selector: 'homework-parent',
+  selector: 'passed-homework',
   templateUrl: 'homework.html'
 })
-
 
 export class PassedHomework implements OnInit {
 
@@ -15,7 +14,6 @@ export class PassedHomework implements OnInit {
 
   constructor(private hw : HomeworkService,
               public nl: CustomService) {
-
   }
 
   ngOnInit() {
@@ -31,6 +29,5 @@ export class PassedHomework implements OnInit {
       this.nl.onError(err);
     });
   }
-
 
 }

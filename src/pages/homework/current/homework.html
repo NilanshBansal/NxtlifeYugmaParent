@@ -2,6 +2,15 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
+  <ion-card>
+    <ion-item>
+      <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
+      <ion-label>Child Name</ion-label>
+      <custom-select item-content [(ngModel)]="child" (ngModelChange)="selectChild($event)">
+        <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
+      </custom-select>
+    </ion-item>
+  </ion-card>
   <ion-card *ngFor="let hw of homework" class="csCardTopBorder">
     <ion-item>
       <div class="csParagraph"><b>{{hw.subjectName}}</b>

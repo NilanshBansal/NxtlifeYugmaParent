@@ -44,6 +44,10 @@ export class NewAppreciationModal implements OnInit {
     this.con.setUrlForAppreciations();
   }
 
+  ionViewWillEnter() {
+    this.con.setUrlForAppreciations();
+  }
+
   selectChild(student) {
     if (student) {
       this.studentId = student.id;
@@ -87,6 +91,16 @@ export class NewAppreciationModal implements OnInit {
     this.viewCtrl.dismiss();
   }
 
+  saveSuggestion(){
+    if (this.newSuggestion.invalid) {
+      console.log("Suggestion invalid")
+    } else {
+      let a = this.newSuggestion.value.studentId.id;
+      this.newSuggestion.value.studentId = a;
+      this.presentActionSheet(this.newSuggestion.value);
+    }
+  }
+
   presentActionSheet(newSuggestion) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Are you sure you want to submit ?',
@@ -94,14 +108,7 @@ export class NewAppreciationModal implements OnInit {
         text: 'Submit',
         icon: 'ios-paper-outline',
         handler: () => {
-          this.nl.showLoader();
-          this.c.saveComplaint(newSuggestion).subscribe((complaint) => {
-            this.nl.hideLoader();
-            this.viewCtrl.dismiss(complaint);
-          }, (err) => {
-            this.nl.onError(err);
-            this.dismiss();
-          });
+          this.onSubmit(newSuggestion);
         }
       }, {
         text: 'Cancel',
@@ -115,15 +122,23 @@ export class NewAppreciationModal implements OnInit {
     actionSheet.present();
   }
 
-  saveSuggestion(){
+  onSubmit(newSuggestion) {
+    this.nl.showLoader();
+    this.c.saveComplaint(newSuggestion).subscribe((res) => {
+      this.onSuccess(res);
+    }, (err) => {
+      this.onError(err);
+    });
+  }
 
-    if (this.newSuggestion.invalid) {
-      console.log("Suggestion invalid")
-    } else {
-      let a = this.newSuggestion.value.studentId.id;
-      this.newSuggestion.value.studentId = a;
-      this.presentActionSheet(this.newSuggestion.value);
-    }
+  onSuccess(res) {
+    this.nl.hideLoader();
+    this.viewCtrl.dismiss(res);
+  }
+
+  onError(err) {
+    this.nl.onError(err);
+    this.dismiss();
   }
 
 }

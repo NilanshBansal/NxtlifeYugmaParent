@@ -10,7 +10,7 @@ import { SurveyPage} from '../survey/survey';
 import { ComplaintPage} from '../complaint/complaint';
 import { Configuration } from '../../service/app.constants';
 import { PlannerComponent } from '../planner/planner.component';
-import { HomeworkComponent } from '../homework/homework.component';
+import { HomeworkTabs } from '../homework/homeworkTabs';
 import { CircularComponent } from '../circular/circular.component';
 import { SurveyListPage } from '../survey/list/survey-list';
 
@@ -44,7 +44,7 @@ export class Dashboard {
     appreciation: AppreciationTabs,
     rating: StudentRating,
     poll: PollPage,
-    homework: HomeworkComponent,
+    homework: HomeworkTabs,
     circular: CircularComponent,
     survey: SurveyListPage
   }

@@ -6,7 +6,7 @@
     <ion-card>
       <ion-item>
         <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
-        <ion-label color="primary">Select Child</ion-label>
+        <ion-label color="primary">Child Name</ion-label>
         <custom-select item-content [(ngModel)]="child" formControlName="student" (ngModelChange)="selectChild($event)">
           <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
         </custom-select>
@@ -25,7 +25,7 @@
       <ion-item padding>
         <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Teacher</ion-label>
-        <custom-select item-content [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId" (ngModelChange)="setTeacher($event)">
+        <custom-select item-content [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId">
           <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}} ({{teacher.subject}})</ion-option>
         </custom-select>
       </ion-item>

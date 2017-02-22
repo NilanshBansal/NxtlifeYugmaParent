@@ -12,7 +12,7 @@ import { ComplaintPage } from '../pages/complaint/complaint';
 import { PlannerComponent } from '../pages/planner/planner.component';
 import { StudentRating } from '../pages/rating/rating';
 import { AccountPage } from '../pages/account/account';
-import { HomeworkComponent } from '../pages/homework/homework.component';
+import { HomeworkTabs } from '../pages/homework/homeworkTabs';
 import { CircularComponent } from '../pages/circular/circular.component';
 import { UserSessionManage } from '../custom-component/user.session.manage';
 
@@ -67,7 +67,7 @@ export class MyApp extends UserSessionManage {
       { title: 'Calendar',component: PlannerComponent , icon: 'ios-calendar-outline', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },
       { title: 'Survey', component: SurveyListPage, icon: 'ios-analytics-outline', url: 'survey' },
-      { title: 'Homework' , component : HomeworkComponent , icon : 'ios-book-outline' , url : 'homework' },
+      { title: 'Homework' , component : HomeworkTabs , icon : 'ios-book-outline' , url : 'homework' },
       { title: 'Circular',component : CircularComponent , icon : 'ios-paper-outline' , url : 'circular' },
       { title: 'Student Rating', component: StudentRating, icon: 'ios-pulse-outline', url: 'student-profile' },
     ];

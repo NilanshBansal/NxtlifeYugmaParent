@@ -3,7 +3,7 @@
     </nl-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
-  <ion-card *ngFor="let a of homeworks" class="csCardTopBorder">
+  <ion-card *ngFor="let a of homeworks" class="csCardTopBorder" [style.border-color]="a.subjectColor">
     <ion-item>
       <div class="csParagraph"><b>{{a.subjectName}}</b><span item-right class="csGrayText"> ({{a.employeeName}})</span></div>
       <div class="csParagraph">{{a.description}}</div>

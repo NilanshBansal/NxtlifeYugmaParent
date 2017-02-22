@@ -6,8 +6,8 @@
     <ion-item class="csStudentDetail">
       <div class="csStatus">
         <span [style.color]="complaint.statusColor" class="csBold">
-          <ion-icon name="at" ></ion-icon>
-          <b>{{complaint.statusName}}</b>
+          <ion-icon name="at" ></ion-icon> 
+          {{complaint.statusName}}
         </span>
       </div>
     <ion-avatar item-left *ngIf="!complaint.anonymous">
@@ -36,9 +36,9 @@
         <span [style.color]="complaint.statusColor">Against</span>
         <span [style.color]="complaint.statusColor">Description</span>
       </div>
-      <div class="csParagraph">
+      <h2 class="csParagraph">
         {{complaint.description}}
-      </div>
+      </h2>
     </ion-item>
     <ion-item *ngIf="complaint.rca">
       <div class="complaint-item">

@@ -18,7 +18,7 @@ import { CustomService } from '../service/custom.service';
     <br>NO COMMENT
   </ion-list>
   <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
-  <div class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId != null}" no-margin>
+  <div class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId == userId}" no-margin>
     <div class="csMyComment">
       <h3>{{ m.comment }}</h3>
     </div>
@@ -59,6 +59,8 @@ export class CommentModal implements OnInit {
 
   title = "COMMENTS";
 
+  userId;
+
   @ViewChild(Content) content: Content;
   @ViewChild('commentBtn') el : ElementRef;
 
@@ -69,7 +71,7 @@ export class CommentModal implements OnInit {
               private renderer: Renderer,
               private elementRef: ElementRef,
               private toastCtrl: ToastController) {
-
+    this.userId = localStorage.getItem("id");
   }
 
   ngOnInit() {

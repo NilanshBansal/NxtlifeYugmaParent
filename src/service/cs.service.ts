@@ -13,9 +13,6 @@ import { Configuration } from './app.constants';
 export class ComplaintSuggestion {
 
   public serverUrl: string;
-  public access_token;
-  public headers: any;
-  public options;
 
   constructor(private http: CustomHttpService,
               private configuration: Configuration) {

@@ -1,29 +1,36 @@
-import { Component , OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HomeworkService } from './../../service/homework.service';
+import { CustomService } from '../../service/custom.service';
 
 @Component({
-    selector : 'homework-parent',
-    templateUrl : 'homework.html'
+  selector : 'homework-parent',
+  templateUrl : 'homework.html'
 })
 
 
-export class HomeworkComponent implements OnInit{
+export class HomeworkComponent {
 
-    public homeworks = [];
-    public title : string = 'Homework';
+  public title : string = 'Homework';
+  public homework = [];
 
-    constructor(private homeserv : HomeworkService){}
+  constructor(private hw : HomeworkService,
+              public nl: CustomService) {
 
-    getAllHomework(){
-        this.homeserv.getHomeworks()
-        .subscribe( response => { this.homeworks =  response},
-                                () => console.log('homeworks',this.homeworks)
-                    )
-    }
+  }
 
+  ionViewWillEnter() {
+    this.getHomework();
+  }
 
-    ngOnInit():void{
-        this.getAllHomework();
-    }
+  getHomework() {
+    this.nl.showLoader();
+    this.hw.getHomeworkByStandard("4").subscribe((res) => {
+      this.nl.hideLoader();
+      this.homework = res;
+    }, (err) => {
+      this.nl.onError(err);
+    });
+  }
+
 
 }

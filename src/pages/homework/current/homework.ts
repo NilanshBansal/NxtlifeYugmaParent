@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { HomeworkService } from './../../service/homework.service';
-import { CustomService } from '../../service/custom.service';
+import { HomeworkService } from '../../../service/homework.service';
+import { CustomService } from '../../../service/custom.service';
 
 @Component({
-  selector : 'homework-parent',
-  templateUrl : 'homework.html'
+  selector: 'homework-parent',
+  templateUrl: 'homework.html'
 })
 
 
-export class HomeworkComponent {
+export class CurrentHomework {
 
   public title : string = 'Homework';
   public homework = [];
@@ -31,6 +31,5 @@ export class HomeworkComponent {
       this.nl.onError(err);
     });
   }
-
 
 }

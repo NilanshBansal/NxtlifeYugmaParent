@@ -1,27 +1,9 @@
 <ion-header>
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
-<ion-content class="csGrayBackground">
-  <ion-card *ngFor="let hw of homework" class="csCardTopBorder">
-    <ion-item>
-      <div class="csParagraph"><b>{{hw.subjectName}}</b>
-        <span item-right class="csGrayText"> ({{hw.employeeName}})</span>
-      </div>
-      <div class="csParagraph">{{hw.description}}</div>
-    </ion-item>
-    <ion-item>
-      <div item-left>
-        <b class="csParagraph">
-          <ion-icon name="school" color="primary"></ion-icon>
-          <span class="csGrayText"> {{hw.standardName}}</span>
-        </b>
-      </div>
-      <div item-right>
-        <b class="csParagraph">
-          <ion-icon name="create" color="primary"></ion-icon>
-          <span class="csGrayText"> {{hw.dueDate | amDateFormat: 'DD/MM/YYYY'}}</span>
-        </b>
-      </div>
-    </ion-item>
-  </ion-card>
+<ion-content class="csGrayBackground" padding>
+  <p>
+    Abhi tak ajay ne service nai banai, Jab banayega tab data aayega.
+    <b>Thanks</b>
+  </p>
 </ion-content>

@@ -21,8 +21,15 @@
         <b class="csParagraph">  <ion-icon name="school" color="primary"></ion-icon><span class="csGrayText"> {{a.standardName}}</span></b>
       </div>
       <div item-right>
-        <b class="csParagraph"> <ion-icon name="create" color="primary"></ion-icon><span class="csGrayText"> {{a.dueDate | date:'mediumDate'}}</span></b>
+        <b class="csParagraph"> <ion-icon name="create" color="primary"></ion-icon><span class="csGrayText"> {{a.dueDate | amDateFormat: 'DD/MM/YYYY'}}</span></b>
       </div>
     </ion-item>
   </ion-card>
+  <ion-list class="no-comment" *ngIf="NoHomework">
+    <ion-icon name="happy"></ion-icon>
+    <br>NO RECORD FOUND
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

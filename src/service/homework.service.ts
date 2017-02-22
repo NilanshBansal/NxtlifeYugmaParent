@@ -19,8 +19,8 @@ export class HomeworkService {
     this.serverUrl = this.configuration.Server;
   }
 
-  public getHomeworkByStandard(standardId) {
-    return this.http.get(this.serverUrl + "/standard/" + standardId)
+  public getHomeworkByStandard(standardId, page) {
+    return this.http.get(this.serverUrl + "/standard/" + standardId + "/page/" + page)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

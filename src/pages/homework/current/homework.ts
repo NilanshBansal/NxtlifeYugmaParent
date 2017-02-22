@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeworkService } from '../../../service/homework.service';
 import { CustomService } from '../../../service/custom.service';
 
@@ -8,7 +8,7 @@ import { CustomService } from '../../../service/custom.service';
 })
 
 
-export class CurrentHomework {
+export class CurrentHomework implements OnInit {
 
   public title : string = 'Homework';
   public homework = [];
@@ -18,7 +18,7 @@ export class CurrentHomework {
 
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.getHomework();
   }
 

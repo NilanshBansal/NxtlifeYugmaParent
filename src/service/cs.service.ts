@@ -37,6 +37,7 @@ export class ComplaintSuggestion {
   }
 
   public getTeachers(standardId) {
+    this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/teacher/" + standardId)
                     .map(this.extractData)
                     .catch(this.handleError);

@@ -44,6 +44,10 @@ export class NewAppreciationModal implements OnInit {
     this.con.setUrlForAppreciations();
   }
 
+  ionViewWillEnter() {
+    this.con.setUrlForAppreciations();
+  }
+
   selectChild(student) {
     if (student) {
       this.studentId = student.id;

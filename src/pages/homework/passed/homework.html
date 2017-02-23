@@ -1,9 +1,35 @@
 <ion-header>
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
-<ion-content class="csGrayBackground" padding>
-  <p>
-    Abhi tak ajay ne service nai banai, Jab banayega tab data aayega.
-    <b>Thanks</b>
-  </p>
+<ion-content class="csGrayBackground">
+  <ion-card>
+    <ion-item>
+      <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
+      <ion-label>Child Name</ion-label>
+      <custom-select item-content [(ngModel)]="child" (ngModelChange)="selectChild($event)">
+        <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
+      </custom-select>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngFor="let a of homework" class="csCardTopBorder" [style.border-color]="a.subjectColor">
+    <ion-item>
+      <div class="csParagraph"><b>{{a.subjectName}}</b></div>
+      <div class="csParagraph">{{a.description}}</div>
+    </ion-item>
+    <ion-item>
+      <div item-left>
+        <b class="csParagraph">  <ion-icon name="body" color="primary"></ion-icon><span class="csGrayText"> {{a.employeeName}}</span></b>
+      </div>
+      <div item-right>
+        <b class="csParagraph"> <ion-icon name="create" color="primary"></ion-icon><span class="csGrayText"> {{a.dueDate | amDateFormat: 'DD/MM/YYYY'}}</span></b>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-list class="no-comment" *ngIf="NoHomework">
+    <ion-icon name="book"></ion-icon>
+    <br>NO RECORD FOUND
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

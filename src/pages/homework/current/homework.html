@@ -13,12 +13,12 @@
   </ion-card>
   <ion-card *ngFor="let a of homework" class="csCardTopBorder" [style.border-color]="a.subjectColor">
     <ion-item>
-      <div class="csParagraph"><b>{{a.subjectName}}</b><span item-right class="csGrayText"> ({{a.employeeName}})</span></div>
+      <div class="csParagraph"><b>{{a.subjectName}}</b></div>
       <div class="csParagraph">{{a.description}}</div>
     </ion-item>
     <ion-item>
       <div item-left>
-        <b class="csParagraph">  <ion-icon name="school" color="primary"></ion-icon><span class="csGrayText"> {{a.standardName}}</span></b>
+        <b class="csParagraph">  <ion-icon name="body" color="primary"></ion-icon><span class="csGrayText"> {{a.employeeName}}</span></b>
       </div>
       <div item-right>
         <b class="csParagraph"> <ion-icon name="create" color="primary"></ion-icon><span class="csGrayText"> {{a.dueDate | amDateFormat: 'DD/MM/YYYY'}}</span></b>
@@ -26,7 +26,7 @@
     </ion-item>
   </ion-card>
   <ion-list class="no-comment" *ngIf="NoHomework">
-    <ion-icon name="happy"></ion-icon>
+    <ion-icon name="book"></ion-icon>
     <br>NO RECORD FOUND
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

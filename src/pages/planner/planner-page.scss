@@ -175,9 +175,10 @@
  }
  
  .cal-month-view .cal-day-cell.cal-today .cal-day-number {
-   border: 5px #8cde87 solid;
+   border: 5px $csPink solid;
    border-radius: 50%;
-   background: #8cde87;
+   background: $csPink;
+   color:$csDarkPink;
  }
  
  .cal-month-view .cal-open-day-events {
@@ -408,6 +409,7 @@
        border-radius: 50%;
        background: $color1;
        color: white;
+       margin-top: -5px;
      }
    }
  }

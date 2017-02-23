@@ -36,10 +36,10 @@
       </ion-item>
       <ion-badge class="csFiftyLimit"><span>{{200 - newSuggestion.value.description.length}}</span></ion-badge>
     </ion-card>
-  <ion-buttons padding>
-    <button ion-button icon-right block type="submit" [disabled]="newSuggestion.invalid">
+  <div padding>
+    <button ion-button icon-right full type="submit" [disabled]="newSuggestion.invalid">
       SEND <ion-icon name="send"></ion-icon>
     </button>
-  </ion-buttons>
+  </div>
   </form>
 </ion-content>

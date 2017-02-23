@@ -3,9 +3,74 @@
 </ion-header>
 
 <ion-content class="homeBackground csGrayBackground">
-  <ion-list padding>
-    <button ion-button outline (click)="openPage(page.poll, 'poll')">Open Poll - {{openPoll}}</button>
-  </ion-list>
+  <div class="csDashboardOne">
+    <ion-row>
+      <ion-col width-33 class="col1">
+        <button ion-button clear full>Homeowork</button>
+      </ion-col>
+      <ion-col width-33  class="col2">
+        <button ion-button full>Planner</button>
+      </ion-col>
+      <ion-col width-33  class="col3">
+        <button ion-button clear full (click)="openPage(page.poll, 'poll')">
+          Poll <ion-badge class="csCount">{{openPoll}}</ion-badge>
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="csDashboardTwo" padding>
+    <ion-row class="tiles">
+      <ion-col class="col1">
+        
+      </ion-col>
+      <ion-col>
+        <ion-row class="col2">
+          
+        </ion-row>
+        <ion-row class="col3">
+        
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+ <div class="csDashboardThree" padding>
+    <ion-row class="tiles">
+      <ion-col>
+        <ion-row class="col2">
+          
+        </ion-row>
+        <ion-row class="col3">
+        
+        </ion-row>
+      </ion-col>
+      <ion-col class="col1">
+        ff
+      </ion-col>      
+    </ion-row>
+  </div>
+
+
+
+  <div class="csDashboardFour" padding>
+    <ion-row class="tile1">
+
+    </ion-row>
+    <ion-row class="tile2">
+      <ion-col class="col2">
+
+      </ion-col>
+      <ion-col class="col3">
+
+      </ion-col>
+    </ion-row>
+  </div>
+
+ 
+
+
   <ion-list padding>
     <ion-item *ngFor="let d of data">
       <b>Events of the day</b>
@@ -17,7 +82,10 @@
       </p>
     </ion-item>
   </ion-list>
-  <ion-slides pager>
+  
+
+</ion-content>
+<!--<ion-slides pager>
     <ion-slide>
       <ion-grid class="home-tabs bullitinBoard">
         <ion-row>
@@ -81,5 +149,4 @@
         </ion-row>
       </ion-grid>
     </ion-slide>
-  </ion-slides>
-</ion-content>
+  </ion-slides>-->

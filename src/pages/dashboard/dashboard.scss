@@ -75,19 +75,22 @@ $cardText: #7b7b7b;
   margin-top: 2vh;
   border-radius: 30px 30px 30px 30px;
   border: 2px solid $color1;
+  button{
+    height:25px;
+  }
   .col1 {
-    // background: white;
+    background: white;
     border-radius: 30px 0px 0px 30px;
   }
   .col3 {
-    // background: white;
+    background: white;
     border-radius: 0px 30px 30px 0px;
   }
   .col2 {
     background: $color1;
     height: 100%;
     margin: 0px;
-    ion-badge{
+    ion-badge {
       background:white !important;
       color:$color1 !important;
     }
@@ -95,24 +98,39 @@ $cardText: #7b7b7b;
 }
 
 .csDashboardTwo{
+        font-weight:bold; 
+  text-align:center;
   .tiles{
     height:150px;
   }
     .col1{
+      color:white;
       background:$color1;
       border: white 3px solid ;
+      ion-icon{
+        font-size:5.2em;
+        margin-top: 10%;
+      }
+      &:active{
+        color:#8af0fd;
+      }
     }
     .col2{
+      color:$color1;
       background:white;
-      height:70px;
+      height:73px;
       margin:-5px 0px 4px 0px;
           border: 3px solid $color1;
+          padding-top: 25px;
     }
+        padding: 25px;
     .col3{
+      color:$color1;     
       background:white;
-      height:70px;
+      height:73px;
           margin: 5px 0px 0px 0px;
     border: 3px solid $color1;
+    padding-top: 25px;
     }
 }
 
@@ -140,6 +158,7 @@ $cardText: #7b7b7b;
 
 .csDashboardFour{
   .tile1{
+    color:white;
     height:100px;
       background:$color1;
   }
@@ -151,11 +170,32 @@ $cardText: #7b7b7b;
     }
     .col2{
       background:white;
-      height:70px;
+      height:73px;
       border-right:2px solid $color1;
     }
     .col3{
       background:white;
-      height:70px;
+      height:73px;
     }
+}
+
+
+.csDashboardNavigator {
+  color: white;
+  text-align: center;
+  font-size:10px;
+  ion-toolbar {
+    background: $color1;
+  }
+  ion-icon {
+    font-size: 8.5vw;
+    margin-left: 2vw;
+          &:active {
+    color: #c5ffc8;
+  }
+  }
+  .addButton {
+    font-size: 15vw;
+    margin: -1vh;
+  }
 }

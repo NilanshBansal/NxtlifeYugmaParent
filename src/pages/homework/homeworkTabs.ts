@@ -6,7 +6,7 @@ import { PassedHomework } from './passed/homework';
   template: `
     <ion-tabs color="primary">
       <ion-tab tabTitle="Current" [root]="tab1"></ion-tab>
-      <ion-tab tabTitle="Passed" [root]="tab2"></ion-tab>
+      <ion-tab tabTitle="Past" [root]="tab2"></ion-tab>
     </ion-tabs>
 `})
 

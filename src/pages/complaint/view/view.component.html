@@ -20,10 +20,41 @@
     <h2 *ngIf="complaint.anonymous" [style.color]="complaint.statusColor">Anonymous</h2>
     <p>{{complaint.createdAt | amDateFormat: 'DD/MM/YYYY'}}<span *ngIf="complaint.closedOn "> - {{complaint.closedOn | amDateFormat: 'DD/MM/YYYY'}} </span> </p>
     </ion-item>
-  <ion-card>
+    <ion-item class="csStudentButtons">
+    <ion-row>
+      <ion-col  width-33>
+        <button (click)="openReopenModal(complaint)" style="background:white;border:solid 1px" *ngIf="complaint.statusId === 4" [style.border-color]='complaint.statusColor' ion-button
+         small round>
+          <ion-icon name="ios-thumbs-down" [style.color]='complaint.statusColor'></ion-icon>
+          <span class="csCenter csFiveLeft csVWSmallText" [style.color]='complaint.statusColor'>Reopen</span>
+        </button>
+      </ion-col>
+      <ion-col width-33>
+        <button class="csFiveLeft" full (click)="openCommentModal(complaint)" style="background:white;border:solid 1px" [style.border-color]='complaint.statusColor' ion-button  small round>
+        <ion-icon name="md-chatbubbles"  [style.color]='complaint.statusColor'></ion-icon>
+        <span class="csVWSmallText csCenter csFiveLeft" [style.color]='complaint.statusColor'  class="csVWSmallText">Comment</span>
+      </button>
+      </ion-col>
+      <ion-col  width-33>
+        <button full (click)="openSatisfiedModal(complaint)" style="background:white;border:solid 1px" [style.border-color]='complaint.statusColor' *ngIf="complaint.statusId === 4" ion-button
+         small round>
+          <ion-icon name="ios-thumbs-up" [style.color]='complaint.statusColor'></ion-icon>
+          <div class="bold csCenter csFiveLeft" [style.color]='complaint.statusColor'  class="csVWSmallText">Satisfied</div>
+        </button>
+      </ion-col>
+      <ion-col width-33>
+        <button (click)="openCloseModal(complaint)" style="background:white;border:solid 1px" [style.border-color]='complaint.statusColor' *ngIf="complaint.statusId != 6 && complaint.statusId != 4"  ion-button
+         small round>
+          <ion-icon name="md-hammer" [style.color]='complaint.statusColor'></ion-icon>
+          <div class="bold csCenter csFiveLeft" [style.color]='complaint.statusColor'  class="csVWSmallText">Close</div>
+        </button>
+      </ion-col>
+    </ion-row>
+    </ion-item>
+  <ion-card class="csCardTopBorder" [style.border-color]="complaint.statusColor">
     <ion-item>
       <div class="complaint-item">
-        <hr [style.border-top]="'1px' + ' solid ' + complaint.statusColor">
+        <hr [style.border-top]="'3px' + ' solid ' + complaint.statusColor">
         <span [style.color]="complaint.statusColor">Title</span>
       </div>
       <h2 class="csParagraph">
@@ -32,7 +63,7 @@
     </ion-item>
     <ion-item>
       <div class="complaint-item">
-        <hr [style.border-top]="'1px' + ' solid ' + complaint.statusColor">
+        <hr [style.border-top]="'3px' + ' solid ' + complaint.statusColor">
         <span [style.color]="complaint.statusColor">Against</span>
         <span [style.color]="complaint.statusColor">Description</span>
       </div>
@@ -42,7 +73,7 @@
     </ion-item>
     <ion-item *ngIf="complaint.rca">
       <div class="complaint-item">
-        <hr [style.border-top]="'1px' + ' solid ' + complaint.statusColor">
+        <hr [style.border-top]="'3px' + ' solid ' + complaint.statusColor">
         <span [style.color]="complaint.statusColor">Root Cause Analysis</span>
       </div>
       <h2 class="csParagraph">
@@ -81,34 +112,5 @@
         </span>
       </ion-item>
     </ion-card>
-    <ion-row>
-      <ion-col  width-33>
-        <button (click)="openReopenModal(complaint)" style="background:white;border:solid 1px" *ngIf="complaint.statusId === 4" [style.border-color]='complaint.statusColor' ion-button
-         small round>
-          <ion-icon name="ios-thumbs-down" [style.color]='complaint.statusColor'></ion-icon>
-          <span class="csCenter csFiveLeft csVWSmallText" [style.color]='complaint.statusColor'>Reopen</span>
-        </button>
-      </ion-col>
-      <ion-col width-33>
-        <button class="csFiveLeft" full (click)="openCommentModal(complaint)" style="background:white;border:solid 1px" [style.border-color]='complaint.statusColor' ion-button  small round>
-        <ion-icon name="md-chatbubbles"  [style.color]='complaint.statusColor'></ion-icon>
-        <span class="csVWSmallText csCenter csFiveLeft" [style.color]='complaint.statusColor'  class="csVWSmallText">Comment</span>
-      </button>
-      </ion-col>
-      <ion-col  width-33>
-        <button full (click)="openSatisfiedModal(complaint)" style="background:white;border:solid 1px" [style.border-color]='complaint.statusColor' *ngIf="complaint.statusId === 4" ion-button
-         small round>
-          <ion-icon name="ios-thumbs-up" [style.color]='complaint.statusColor'></ion-icon>
-          <div class="bold csCenter csFiveLeft" [style.color]='complaint.statusColor'  class="csVWSmallText">Satisfied</div>
-        </button>
-      </ion-col>
-      <ion-col width-33>
-        <button (click)="openCloseModal(complaint)" style="background:white;border:solid 1px" [style.border-color]='complaint.statusColor' *ngIf="complaint.statusId != 6 && complaint.statusId != 4"  ion-button
-         small round>
-          <ion-icon name="md-hammer" [style.color]='complaint.statusColor'></ion-icon>
-          <div class="bold csCenter csFiveLeft" [style.color]='complaint.statusColor'  class="csVWSmallText">Close</div>
-        </button>
-      </ion-col>
-    </ion-row>
   </ion-list>
 </ion-content>

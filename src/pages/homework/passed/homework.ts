@@ -17,7 +17,6 @@ export class PassedHomework {
   public currentPage = 1;
   public standardId;
   public NoHomework = false;
-
   constructor(private hw : HomeworkService,
               public parentInfo: ParentInfo,
               public nl: CustomService) {
@@ -63,7 +62,7 @@ export class PassedHomework {
   }
 
   loadMoreData(infiniteScroll) {
-    this.hw.getHomeworkByStandard(this.standardId, this.currentPage).subscribe((res) => {
+    this.hw.getOldHomeworkByStandard(this.standardId, this.currentPage).subscribe((res) => {
       infiniteScroll.complete();
       this.loadDataSuccess(res);
     }, (err) => {
@@ -89,4 +88,5 @@ export class PassedHomework {
   showEmptyMsg(val) {
     this.NoHomework = val;
   }
+
 }

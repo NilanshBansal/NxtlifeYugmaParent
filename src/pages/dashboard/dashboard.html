@@ -3,21 +3,89 @@
 </ion-header>
 
 <ion-content class="homeBackground csGrayBackground">
-  <ion-list padding>
-    <button ion-button outline (click)="openPage(page.poll, 'poll')">Open Poll - {{openPoll}}</button>
+  <div class="csDashboardOne">
+    <ion-row>
+      <ion-col width-33 class="col1">
+        <button ion-button clear small full>Homeowork</button>
+      </ion-col>
+      <ion-col width-33  class="col2">
+        <button ion-button small full>Planner</button>
+      </ion-col>
+      <ion-col width-33  class="col3">
+        <button ion-button clear small full (click)="openPage(page.poll, 'poll')">
+          Poll <ion-badge class="csCount">{{openPoll}}</ion-badge>
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="csDashboardTwo" padding>
+    <ion-row class="tiles">
+      <ion-col class="col1">
+        <ion-icon name="bulb"></ion-icon>
+        <br>Suggestions
+      </ion-col>
+      <ion-col>
+        <ion-row class="col2">
+          <ion-col>
+          By Me
+          </ion-col>
+        </ion-row>
+        <ion-row class="col3">
+          <ion-col>
+          For Me
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+
+
+
+  <ion-list *ngFor="let d of data">
+    <ion-list-header>
+      Events
+    </ion-list-header>
+    <ion-card *ngFor="let event of d.events" padding>
+        <h2>{{event.title}}</h2>
+        <p>{{event.startTime}} - {{event.endTime}} <span class="csRight">{{event.location}}</span></p>
+    </ion-card>
   </ion-list>
-  <ion-list padding>
-    <ion-item *ngFor="let d of data">
-      <b>Events of the day</b>
-      <p *ngFor="let event of d.events">
-        {{event.title}}
-        {{event.startTime}}
-        {{event.endTime}}
-        {{event.location}}
-      </p>
-    </ion-item>
-  </ion-list>
-  <ion-slides pager>
+  
+ <div class="csDashboardThree" padding>
+    <ion-row class="tiles">
+      <ion-col>
+        <ion-row class="col2">
+          
+        </ion-row>
+        <ion-row class="col3">
+        
+        </ion-row>
+      </ion-col>
+      <ion-col class="col1">
+        ff
+      </ion-col>      
+    </ion-row>
+  </div>
+
+
+  <div class="csDashboardFour" padding>
+    <ion-row class="tile1">
+      
+    </ion-row>
+    <ion-row class="tile2">
+      <ion-col class="col2">
+
+      </ion-col>
+      <ion-col class="col3">
+
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+<!--<ion-slides pager>
     <ion-slide>
       <ion-grid class="home-tabs bullitinBoard">
         <ion-row>
@@ -81,5 +149,31 @@
         </ion-row>
       </ion-grid>
     </ion-slide>
-  </ion-slides>
-</ion-content>
+  </ion-slides>-->
+
+
+  <ion-footer class="csDashboardNavigator">
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <ion-icon name="home"></ion-icon>
+        <br>Home
+      </ion-col>
+      <ion-col>
+        <ion-icon name="bulb"></ion-icon>
+        <br>Suggestion
+      </ion-col>
+      <ion-col width-25>
+          <ion-icon class="addButton" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="calendar"></ion-icon>
+        <br>Calendar
+      </ion-col>
+      <ion-col>
+        <ion-icon name="book"></ion-icon>
+        <br>Homework
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

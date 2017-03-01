@@ -25,6 +25,12 @@ export class HomeworkService {
                     .catch(this.handleError);
   }
 
+  public getOldHomeworkByStandard(standardId, page) {
+    return this.http.get(this.serverUrl + "/standard/" + standardId + "/old/page/" + page)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     if (res.status === 204) { return res; }
     let body = res.json();

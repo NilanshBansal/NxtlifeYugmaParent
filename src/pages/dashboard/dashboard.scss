@@ -1,72 +1,201 @@
 $cardText: #7b7b7b;
-.home-tabs{  
+.home-tabs {
   position: absolute;
   bottom: 0px;
   ion-icon {
     font-size: 3.4rem;
     margin-bottom: 15px;
   }
-
-  span .mybtnlabel{
+  span .mybtnlabel {
     position: $absolute;
     font-size: $font-sm;
     font-weight: 600;
     left: 0px;
     bottom: 10px;
-    right: 0px;    
-  }  
+    right: 0px;
+  }
 }
 
-.homeBackground{
+.homeBackground {
   @extend .csFillBackground;
   @extend .csBackground;
   background-image: csBackgroundSvg('gBoard.svg');
 }
 
-.colorCard{
+.colorCard {
   margin: 1px;
-  background-size:cover;
-  text-align:center;
-  width:100%;
-  height:100%;
+  background-size: cover;
+  text-align: center;
+  width: 100%;
+  height: 100%;
 }
-.greenCard{
+
+.greenCard {
   @extend .colorCard;
   background-image: csBackgroundSvg('greenCard.svg');
 }
 
-
-.peachCard{
+.peachCard {
   @extend .colorCard;
   background-image: csBackgroundSvg('peachCard.svg');
 }
 
-
-.blueCard{
+.blueCard {
   @extend .colorCard;
   background-image: csBackgroundSvg('blueCard.svg');
 }
 
-
-.bullitinBoard{
-  padding:1px;
-  p{
-    margin-top:-8px;
-    font-size:12px;
+.bullitinBoard {
+  padding: 1px;
+  p {
+    margin-top: -8px;
+    font-size: 12px;
   }
-  .pin{
+  .pin {
     margin-left: 35%;
-    margin-top:-15%;
-    width:50px;
-    height:50px;
+    margin-top: -15%;
+    width: 50px;
+    height: 50px;
     background-repeat: no-repeat;
   }
-  .pinYellow{
+  .pinYellow {
     @extend .pin;
     background-image: csBackgroundSvg('clip2.svg');
   }
-  .pinGreen{
+  .pinGreen {
     @extend .pin;
     background-image: csBackgroundSvg('clip2-green.svg');
+  }
+}
+
+.csDashboardOne {
+  @extend .csCenter;
+  width: 80vw;
+  padding: 0px;
+  margin-top: 2vh;
+  border-radius: 30px 30px 30px 30px;
+  border: 2px solid $color1;
+  button{
+    height:25px;
+  }
+  .col1 {
+    background: white;
+    border-radius: 30px 0px 0px 30px;
+  }
+  .col3 {
+    background: white;
+    border-radius: 0px 30px 30px 0px;
+  }
+  .col2 {
+    background: $color1;
+    height: 100%;
+    margin: 0px;
+    ion-badge {
+      background:white !important;
+      color:$color1 !important;
+    }
+  }
+}
+
+.csDashboardTwo{
+        font-weight:bold; 
+  text-align:center;
+  .tiles{
+    height:150px;
+  }
+    .col1{
+      color:white;
+      background:$color1;
+      border: white 3px solid ;
+      ion-icon{
+        font-size:5.2em;
+        margin-top: 10%;
+      }
+      &:active{
+        color:#8af0fd;
+      }
+    }
+    .col2{
+      color:$color1;
+      background:white;
+      height:73px;
+      margin:-5px 0px 4px 0px;
+          border: 3px solid $color1;
+          padding-top: 25px;
+    }
+        padding: 25px;
+    .col3{
+      color:$color1;     
+      background:white;
+      height:73px;
+          margin: 5px 0px 0px 0px;
+    border: 3px solid $color1;
+    padding-top: 25px;
+    }
+}
+
+.csDashboardThree{
+  .tiles{
+    height:150px;
+  }
+    .col1{
+      background:$color1;
+      border: white 3px solid ;
+    }
+    .col2{
+      background:white;
+      height:70px;
+      margin:-5px 4px 0px 0px;
+        border: 3px solid $color1;
+    }
+    .col3{
+      background:white;
+      height:70px;
+          margin: 5px 0px 0px 0px;
+    border: 3px solid $color1;
+    }
+}
+
+.csDashboardFour{
+  .tile1{
+    color:white;
+    height:100px;
+      background:$color1;
+  }
+  .tile2{
+    height:50px;
+  }
+    .col1{
+
+    }
+    .col2{
+      background:white;
+      height:73px;
+      border-right:2px solid $color1;
+    }
+    .col3{
+      background:white;
+      height:73px;
+    }
+}
+
+
+.csDashboardNavigator {
+  color: white;
+  text-align: center;
+  font-size:10px;
+  ion-toolbar {
+    background: $color1;
+  }
+  ion-icon {
+    font-size: 8.5vw;
+    margin-left: 2vw;
+          &:active {
+    color: #c5ffc8;
+  }
+  }
+  .addButton {
+    font-size: 15vw;
+    margin: -1vh;
   }
 }

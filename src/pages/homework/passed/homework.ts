@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HomeworkService } from '../../../service/homework.service';
 import { CustomService } from '../../../service/custom.service';
 import { ParentInfo } from '../../../service/parentInfo';
- 
+
 @Component({
   selector: 'passed-homework',
   templateUrl: 'homework.html'
@@ -17,7 +17,6 @@ export class PassedHomework {
   public currentPage = 1;
   public standardId;
   public NoHomework = false;
-
   constructor(private hw : HomeworkService,
               public parentInfo: ParentInfo,
               public nl: CustomService) {

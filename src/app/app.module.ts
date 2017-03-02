@@ -9,7 +9,7 @@ import { CustomHttpService } from '../service/default.header.service';
 
 // import component
 import { LoginPage } from '../pages/login/login';
-import { Dashboard } from '../pages/homepage/homepage';
+import { Dashboard } from '../pages/dashboard/dashboard';
 import { PollPage } from '../pages/poll/poll';
 import { AccountPage } from '../pages/account/account';
 import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';
@@ -27,7 +27,9 @@ import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestion';
 import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 import { StudentRating } from '../pages/rating/rating';
-import { HomeworkComponent } from '../pages/homework/homework.component';
+import { HomeworkTabs } from '../pages/homework/homeworkTabs';
+import { CurrentHomework } from '../pages/homework/current/homework';
+import { PassedHomework } from '../pages/homework/passed/homework';
 import { CircularComponent } from '../pages/circular/circular.component';
 import { CircularViewComponent } from '../pages/circular/view/circular-view';
 import { SurveyListPage } from '../pages/survey/list/survey-list';
@@ -92,7 +94,9 @@ import { SurveyService } from '../service/survey.service';
     CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
-    HomeworkComponent,
+    HomeworkTabs,
+    CurrentHomework,
+    PassedHomework,
     CircularComponent,
     CircularViewComponent,
     SurveyListPage,
@@ -138,7 +142,9 @@ import { SurveyService } from '../service/survey.service';
     NewAppreciationModal,
     StudentRating,
     SurveyListPage,
-    HomeworkComponent,
+    HomeworkTabs,
+    CurrentHomework,
+    PassedHomework,
     CircularComponent,
     CircularViewComponent,
     CustomSelect,

@@ -3,7 +3,7 @@
   </nl-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
-  <ion-card>
+  <ion-card class="csCardTopBorder" [style.border-color]="onecirc.circularTypeColor">
     <ion-item>
       <div class="csParagraph"><b>{{onecirc.title}} </b></div>
       <div class="csParagraph">Dear Parents,<br>{{onecirc.description}}</div>
@@ -13,7 +13,7 @@
         <b class="csParagraph">{{ onecirc.employeeName }}</b><br>Principal
       </div>
       <div item-right>
-        <b class="csParagraph">Created at</b><br> {{onecirc.date | date:'mediumDate'}}
+        <b class="csParagraph">Created at</b><br> {{onecirc.createdAt | date:'mediumDate'}}
       </div>
     </ion-item>
     <ion-item *ngIf="onecirc.circularTypeName=='Class'">

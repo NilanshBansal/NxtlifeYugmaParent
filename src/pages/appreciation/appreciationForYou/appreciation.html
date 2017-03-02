@@ -6,7 +6,7 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let appreciation of allData">
+  <ion-card *ngFor="let appreciation of allData" class="csCardTopBorder">
     <ion-item>
       <div class="csParagraph"><b>{{appreciation.title}}</b></div>
       <div class="csParagraph">{{appreciation.description}}</div>
@@ -16,7 +16,7 @@
          <b><ion-icon name="body" color="primary"></ion-icon></b> {{appreciation.studentName}}
         </div>
         <div item-right>
-          <b><ion-icon name="time" color="primary"></ion-icon></b> {{appreciation.createdAt | amDateFormat: 'LL'}}
+          <b><ion-icon name="time" style="margin-top: 1px;" color="primary"></ion-icon></b> {{appreciation.createdAt | amDateFormat: 'LL'}}
         </div>
     </ion-item>
   </ion-card>

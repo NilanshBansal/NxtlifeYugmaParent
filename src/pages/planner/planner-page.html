@@ -7,15 +7,12 @@
     <ion-title icon-left item-right>Calendar</ion-title>
     <ion-buttons end>
       <button ion-button clear end (click)="CalendarTimeline()">
-        <ion-icon name="md-clock" class="csBigIcon"></ion-icon>
+        <ion-icon name="ios-clock-outline" class="csBigIcon"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
   </ion-toolbar>
 </ion-header>
-
-
-
 <ion-content>
   <div class="planner">
     <ion-grid class="csCalMonth">
@@ -34,12 +31,11 @@
     <div [ngSwitch]="view" text-center class="csCalDays">
       <div>
         <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events2" [refresh]="refresh" (eventClicked)="EventClicked($event)"
-          [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)">
+          [activeDayIsOpen]="true" (dayClicked)="dayClicked($event.day)">
           </mwl-calendar-month-view>
       </div>
     </div>
     <div class="row text-center">
-
     </div>
   </div>
   <ion-list class="csTimeline-list" *ngIf="isCalendarTimeline">

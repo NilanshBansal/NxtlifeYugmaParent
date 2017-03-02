@@ -5,21 +5,20 @@
   <ion-card>
     <ion-item>
       <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
-      <ion-label>Select Child</ion-label>
+      <ion-label>Child Name</ion-label>
       <custom-select item-content [(ngModel)]="child" (ngModelChange)="selectChild($event)">
         <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
       </custom-select>
     </ion-item>
   </ion-card>
   <div *ngIf="studentInfo">
-
     <ion-card *ngFor="let sp of studentInfo">
       <ion-grid>
         <ion-row>
-          <ion-col width-25>
+          <ion-col width-20>
             <ion-icon class="csStarIcon" name="star-half"></ion-icon>
           </ion-col>
-          <ion-col width-75>
+          <ion-col width-80>
             <ion-row class="center title">
                 <p >{{sp.responsibility}}</p>
             </ion-row>

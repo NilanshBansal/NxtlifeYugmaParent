@@ -5,7 +5,7 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let suggestion of allData">
+  <ion-card *ngFor="let suggestion of allData" class="csCardTopBorder" >
     <ion-item >
       <div class="csParagraph"><b>{{suggestion.title}}</b></div>
       <div class="csParagraph">{{suggestion.description}}</div>
@@ -20,7 +20,7 @@
     </ion-item>
   </ion-card>
   <ion-list class="no-comment" *ngIf="EmptyComplaints">
-  <ion-icon name="build"></ion-icon>
+  <ion-icon name="bulb"></ion-icon>
       <br>NO RECORD FOUND
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

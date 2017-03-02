@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar class="csHeader">
+  <ion-toolbar class="csModelHeader">
     <ion-buttons start>
-      <button ion-button color="primary" class="navBtnRight csGrayBackground" (click)="dismiss()">
-        <span showWhen="ios"><ion-icon class="close-button" name="close-circle"></ion-icon></span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      <button ion-button class="navBtnRight" (click)="dismiss()">
+        <span showWhen="ios">Cancel</span>
+        <span showWhen="android,windows"><ion-icon name="close-circle" ></ion-icon></span>
       </button>
     </ion-buttons>
     <ion-title text-center>
@@ -12,46 +12,77 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="planner">
-  <ion-card>
+  <!--  DO NOT Delete
+    <ion-card class="csSideDateCard">
+    <ion-row>
+      <ion-col width-20 class="col1" no-padding>
+        <ion-card>
+          <h1>38</h1>
+          <p>Jan</p>
+        </ion-card>
+      </ion-col>
+      <ion-col class="col2">
+        <h1>{{ResponseData.title}}</h1>
+        <span class="csParagraph">{{ ResponseData.description}}</span>
+      </ion-col>
+    </ion-row>
+  </ion-card>-->
+
+  <div padding>
+    <h1>{{ResponseData.title}}</h1>
+    <span class="csParagraph">{{ ResponseData.description}}</span>
+  </div>
+
+  <ion-card [style.border-color]="ResponseData.plannerTypeColor" class="csCardTopBorder">
+  <ion-list class="csDetailsList">
     <ion-item>
-      <b>{{ResponseData.title}}</b>
-      <p class="csParagraph">{{ ResponseData.description}}</p>
+      <ion-row>
+        <ion-col item-left width-20 >
+          Start:
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            Date: {{ResponseData.startDate | date}}
+          </ion-item>
+          <ion-item>
+            Time: {{ResponseData.startTime}}
+          </ion-item>
+        </ion-col>
+      </ion-row>
     </ion-item>
     <ion-item>
-      <ion-note item-left>
-        <span>
-            <b>Start Date</b>
-          </span>
-        <br>
-        <span style="color:black">
-            {{ResponseData.startDate | date}}
-          </span>
-      </ion-note>
-      <ion-note item-right>
-        <span>
-          <b>End Date</b>
-          </span>
-        <br>
-        <span style="color:black">
-          {{ResponseData.endDate | date}}
-          </span>
-      </ion-note>
+      <ion-row>
+        <ion-col item-left width-20 >
+          End:
+        </ion-col>
+        <ion-col item-right>
+          <ion-item>
+            Date: {{ResponseData.endDate | date}}
+          </ion-item>
+          <ion-item>
+            Time: {{ResponseData.endTime}}
+          </ion-item>
+        </ion-col>
+      </ion-row>
     </ion-item>
-  </ion-card>
-  <ion-card>
     <ion-item>
-      <span item-left>Type:</span>
+      <span item-left >Type:</span>
       <span item-right> 
         {{ResponseData.plannerTypeName}}
       </span>
     </ion-item>
     <ion-item>
-      <span item-left>Start Time:</span>
-      <span item-right>{{ResponseData.startTime}}</span>
+      <span item-left>Location:</span>
+      <span item-right> 
+        {{ResponseData.location}}
+      </span>
     </ion-item>
-    <ion-item>
-      <span item-left>End Time:</span>
-      <span item-right>{{ResponseData.endTime}}</span>
+    <ion-item *ngIf="ResponseData.plannerTypeId == 2">
+      <span item-left >Standards:</span>
+      <span item-right *ngFor=" let a of ResponseData.standards"> 
+         {{a}}
+       </span>
     </ion-item>
-  </ion-card>
+  </ion-list>
+</ion-card>
 </ion-content>

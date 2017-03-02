@@ -13,13 +13,17 @@ import { Configuration } from './app.constants';
 export class ComplaintSuggestion {
 
   public serverUrl: string;
-  public access_token;
-  public headers: any;
-  public options;
 
   constructor(private http: CustomHttpService,
               private configuration: Configuration) {
 
+  }
+
+  public getDashboardData() {
+    this.serverUrl = this.configuration.Server;
+    return this.http.get(this.serverUrl)
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
   public getComplaints(pageNo): any {
@@ -30,6 +34,7 @@ export class ComplaintSuggestion {
   }
 
   public getTeachers(standardId) {
+    this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/teacher/" + standardId)
                     .map(this.extractData)
                     .catch(this.handleError);

@@ -30,7 +30,6 @@
  .timeline-title{
      color: rgba(72, 70, 70, 0.89);
      margin-top: -.3rem;
-     margin-bottom: -.2rem;
      font-size:15px;
 }
  .timelineIcon {
@@ -119,6 +118,9 @@
      
      padding: 4px 10px 4px 10px;
      background-color: #ffffff;
+}
+.cd-timeline-content:active{
+    background:$csPink;
 }
  .cd-timeline-content:after {
      content: "";

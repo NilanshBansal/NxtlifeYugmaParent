@@ -10,7 +10,7 @@
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-  <ion-card *ngFor="let data of allData">
+  <ion-card *ngFor="let data of allData" class="csCardTopBorder">
     <ion-item>
       <div class="csParagraph"><b>{{data.title}}</b></div>
       <div class="csParagraph">{{data.description}}</div>
@@ -20,7 +20,7 @@
         <b><ion-icon name="body" color="primary"></ion-icon></b> {{data.studentName}}
       </div>
       <div item-right>
-        <b><ion-icon name="time" color="primary"></ion-icon></b> {{data.createdAt | amDateFormat: 'LL'}}
+        <b><ion-icon name="time" style="margin-top: 1px;" color="primary"></ion-icon></b> {{data.createdAt | amDateFormat: 'LL'}}
       </div>
     </ion-item>
   </ion-card>

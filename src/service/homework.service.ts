@@ -24,8 +24,8 @@ export class HomeworkService {
                 }
 
      getHomeworks(){
-       // this.serverUrl = this.configuration.Server;
-        return this.http.get('https://yugma-ut.appspot-preview.com/parent/864867303/homework',this.options)
+        this.serverUrl = this.configuration.Server;
+        return this.http.get(this.serverUrl + '/homework',this.options)
          .map((res:Response) => res.json())
 
      }

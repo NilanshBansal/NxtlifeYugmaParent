@@ -261,7 +261,13 @@ public title : string = "planner";
  
   events2 = [];
   ABC(){
-
+   if(this.ResponseData==null){
+          this.ResponseData = [];
+        }
+        else if(this.ResponseData.length == 0){
+            this.ResponseData = [];
+        }
+        else{
     for(let i=0;i<this.ResponseData.length;i++){
         this.ResponseData[i].color = colors[this.ResponseData[i].color];
         this.ResponseData[i].startTime = this.ResponseData[i].start;
@@ -270,7 +276,7 @@ public title : string = "planner";
          this.ResponseData[i].end = startOfDay(this.ResponseData[i].end);
          this.ResponseData[i].actions = this.actions2;
        }
-   
+        }
      this.events2 = this.ResponseData;
      console.log('this.actions',this.actions[0]);
      console.log('id',this.events2);
@@ -296,24 +302,25 @@ loll(data){
 
 }
 
+  doll(bata){
+        bata.id = bata.id;
+        bata.color = colors[bata.plannerTypeColor];
+        bata.title = bata.title;
+    //    bata.startTime = bata.startDate+'T'+bata.startTime+':01.000+0530';
+      //  bata.endTime = bata.endDate+'T'+bata.endTime+':59.000+0530' ;
+        bata.startDate = bata.startDate;
+        bata.endDate = bata.endDate; 
 
-doll(data){
+       bata.startTime = bata.startTime;
+       bata.endTime = bata.endTime;
 
-      data[0].id = data[0].id;
-      data[0].color = colors["blue"];
-      data[0].title = data[0].title;
-      data[0].start = data[0].startDate +  data[0].startTime;
-      data[0].end = data[0].endDate+data[0].endTime ;
-      data[0].actions = this.actions;
-
-
-     // this.events2 = data[0];
-     // this.refresh.next(true);
-      console.log(this.events2);
-      console.log('this.valuedd doll',data[0]);
-
-
-}
+       // bata.actions = this.actions;
+       // bata.draggable = true;
+        //this.EventsForTimeline[this.indexx]= (bata);
+        this.refresh.next(true);
+        console.log(this.events2);
+      console.log('this.valuedd doll',bata);
+  }
 
     
      XYZ(){

@@ -24,12 +24,12 @@
      <h2>{{ a.questionText }}</h2>
     </ion-card-header>
     <ion-card-content >
-      <div *ngFor="let c of onesurveys.questions"> 
+      <div *ngFor="let c of onesurveys.questions.options"> 
         <div *ngFor="let d of c.options">
         <ion-radio *ngIf="c.questionTypeId == 1" ngmodel="choice1" (click)="SurveyChoiceClicked(d.id)"></ion-radio>
         <ion-checkbox *ngIf="c.questionTypeId == 2" (click)="SurveyChoiceClicked(d.id)"></ion-checkbox>
           <span>{{ d.name }}</span><br/>
-      </div>
+         </div>
      
         
           </div>

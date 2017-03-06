@@ -52,7 +52,7 @@ $cardText: #7b7b7b;
     font-size: 12px;
   }
   .pin {
-    margin-left: 35%;
+    margin-left: 30%;
     margin-top: -15%;
     width: 50px;
     height: 50px;
@@ -65,6 +65,9 @@ $cardText: #7b7b7b;
   .pinGreen {
     @extend .pin;
     background-image: csBackgroundSvg('clip2-green.svg');
+  }
+  ion-col{
+    margin:5px !important;
   }
 }
 
@@ -197,5 +200,13 @@ $cardText: #7b7b7b;
   .addButton {
     font-size: 15vw;
     margin: -1vh;
+  }
+}
+.pager{
+  div{
+    background:transparent !important;
+  }
+  ion-slides{
+    height:100% !important;
   }
 }

@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="planner">
-  <!--  DO NOT Delete
+    <!--============= to Delete  =============
     <ion-card class="csSideDateCard">
     <ion-row>
       <ion-col width-20 class="col1" no-padding>
@@ -26,16 +26,22 @@
         <span class="csParagraph">{{ ResponseData.description}}</span>
       </ion-col>
     </ion-row>
-  </ion-card>-->
-
-  <div padding>
-    <h1>{{ResponseData.title}}</h1>
-    <span class="csParagraph">{{ ResponseData.description}}</span>
-  </div>
+  </ion-card>
+============================================-->
+  <ion-card [style.border-color]="ResponseData.plannerTypeColor" class="csCardTopBorder">
+    <ion-card-content>
+      <h1>{{ResponseData.title}}</h1>
+    </ion-card-content>
+    <h1></h1>
+    
+  </ion-card>
 
   <ion-card [style.border-color]="ResponseData.plannerTypeColor" class="csCardTopBorder">
   <ion-list class="csDetailsList">
     <ion-item>
+      <ion-item>
+          <span class="csParagraph">{{ ResponseData.description}}</span>
+      </ion-item>
       <ion-row>
         <ion-col item-left width-20 >
           Start:

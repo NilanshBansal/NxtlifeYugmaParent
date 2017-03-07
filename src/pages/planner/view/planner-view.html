@@ -10,6 +10,20 @@
       Event
     </ion-title>
   </ion-toolbar>
+    <ion-item no-lines icon-left item-right class="csShadow">
+    <h1>
+      <ion-grid>
+        <ion-row>
+          <ion-col width-20>
+            <ion-icon name="quote" [style.color]="ResponseData.plannerTypeColor"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <span [style.color]="ResponseData.plannerTypeColor">{{ResponseData.title}}</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </h1>
+  </ion-item>
 </ion-header>
 <ion-content class="planner">
     <!--============= to Delete  =============
@@ -28,7 +42,34 @@
     </ion-row>
   </ion-card>
 ============================================-->
-  <ion-card [style.border-color]="ResponseData.plannerTypeColor" class="csCardTopBorder">
+<ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="time" [style.color]="ResponseData.plannerTypeColor" item-left> </ion-icon>
+        <b>{{ResponseData.startDate | date}} - {{ResponseData.endDate | date}} </b>
+        <p>{{ResponseData.startTime}} - {{ResponseData.endTime}} </p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="paper" [style.color]="ResponseData.plannerTypeColor" item-left></ion-icon>
+        {{ ResponseData.description}}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="school" [style.color]="ResponseData.plannerTypeColor" item-left> </ion-icon>
+        {{ResponseData.plannerTypeName}}
+        <div *ngIf="ResponseData.plannerTypeId == 2">
+          <p item-right *ngFor=" let a of ResponseData.standards">
+            {{a}}
+          </p>
+        </div>
+      </ion-item>
+      <ion-item *ngIf="ResponseData.location">
+        <ion-icon name="pin" [style.color]="ResponseData.plannerTypeColor" item-left></ion-icon>
+        {{ResponseData.location}}
+      </ion-item>
+    </ion-list>
+  </ion-card>
+ 
+  <!--<ion-card [style.border-color]="ResponseData.plannerTypeColor" class="csCardTopBorder">
     <ion-card-content>
       <h1>{{ResponseData.title}}</h1>
     </ion-card-content>
@@ -90,5 +131,5 @@
        </span>
     </ion-item>
   </ion-list>
-</ion-card>
+</ion-card>-->
 </ion-content>

@@ -210,3 +210,9 @@ $cardText: #7b7b7b;
     height:100% !important;
   }
 }
+.list-md + ion-list ion-list-header {
+    margin-top: -16px;
+    background: transparent;
+    border-bottom: 2px solid #a3a3a3;
+    font-weight:bold;
+}

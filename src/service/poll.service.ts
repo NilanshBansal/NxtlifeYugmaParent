@@ -26,14 +26,43 @@ export class PollService {
     public GetPolls(){
         this.serverUrl = this.configuration.Server;
 		return this.http.get(this.serverUrl,this.options)
-		  .map((res:Response) => res)
-          .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+		.map(this.extractData)
+        .catch(this.handleError);
 	}
 
     public PollVote(body){
         return this.http.post(this.serverUrl,body,this.options)
-		.map((res:Response) => res.json())
-        .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+	      .map(this.extractData)
+          .catch(this.handleError);
     }
+
+ private extractData(res: Response) {
+    if (res.status === 204) { return res; }
+    let body = res.json();
+    return body || { };
+  }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      if (error.status === 0) {
+        errMsg = `${error.status} - "No Internet"`;
+      }
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    return Observable.throw(errMsg);
+  }
+
+  public storeCategories(data) {
+    localStorage.setItem("categories", JSON.stringify(data));
+  }
+
+  public myCategories() {
+    return JSON.parse(localStorage.getItem("categories"));
+  }
 
 }

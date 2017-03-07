@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { SurveyService } from '../../service/survey.service';
 import { NavParams,ToastController } from 'ionic-angular';
+import { Validators , FormGroup ,FormControl , FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'survey-component',
@@ -18,10 +19,19 @@ export class SurveyPage implements OnInit {
   public surveyResult;
   public options = [];
   public OptionId;
+  public surveyResult2 : FormGroup;   
 
   constructor(private _surveyServ : SurveyService ,
               private navparams : NavParams ,
               private _toastCtrl : ToastController) { 
+
+
+                                 
+      //  this.surveyResult2  = new  FormGroup({
+      //      "surveyId" : new FormControl(''),
+      //      "surveyAnswers" : 
+      //          })   
+
 
     this.options = [];
 
@@ -47,13 +57,14 @@ export class SurveyPage implements OnInit {
 // }
 
   
-  SurveyVoting(resid,res){
+  SurveyVoting(resid,questionID,res){
+    console.log('resssSurvey',res);
      this.surveyResult = { 
 
                            "surveyId" : resid,
                            "surveyAnswers":[
                               {
-                                "questionId" : 4,
+                                "questionId" : questionID,
                                 "subOptionIds":[this.OptionId]
                               }
                        ]}
@@ -63,12 +74,14 @@ export class SurveyPage implements OnInit {
   }
 
 
+
+
   enable = true;
 
-  SurveyChoiceClicked(id){
+  SurveyChoiceClicked(id,qid){
     // this.Count += 1;
      this.enable = false;
-     console.log('clicked',id);
+     console.log('clicked',id ,qid);
       this.OptionId = id;
    }
 

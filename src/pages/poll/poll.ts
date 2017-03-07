@@ -2,6 +2,8 @@ import { Component,OnInit } from '@angular/core';
 import { PollService } from '../../service/poll.service';
 import * as _ from 'underscore';
 import { CustomService } from '../../service/custom.service';
+import { FormBuilder , FormGroup , Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'page-about',
@@ -12,28 +14,32 @@ import { CustomService } from '../../service/custom.service';
 export class PollPage implements OnInit {
 
   public datas;
-  public resdata = [];
+  public resdata = [] ;
   public responseData;
   public theItem;
   public allData;
   public currentPage = 1;
+  //public pollVote : FormGroup;
   constructor(private pollServ : PollService,
               private nl : CustomService) {
+
 
    }
 
 public EmptyPolls = false;
 
+
+
   PollFunc(){
     this.nl.showLoader();
     this.pollServ.GetPolls().subscribe((datas) =>
-      {  console.log('emptyPolls',datas);
+      {  console.log('Polls',datas);
         if (datas.status === 204) {
         this.EmptyPolls = true;
     //    this.nl.hideLoader();
-        console.log('emptyPolls',this.EmptyPolls);
+        console.log('Polls',this.EmptyPolls);
       } else{
-      this.resdata = datas.json() ; console.log('data') } this.nl.hideLoader()},
+      this.resdata = datas; console.log('data') } this.nl.hideLoader()},
       //(err) => {console.log('err'); this.nl.hideLoader()},
       () => console.log('Polls',this.resdata)
     )};
@@ -66,6 +72,7 @@ public EmptyPolls = false;
 
 
     PollMulVoting(resid,res){
+      console.log('pollmul res',res);
       this.PollChoiceMultiple();
 
      this.PollResult = {
@@ -82,7 +89,6 @@ public EmptyPolls = false;
    PollChoiceClicked(id){
     // this.Count += 1;
 
-
      this.enable = false;
      console.log('clicked',id);
      this.OptionId = id;
@@ -97,13 +103,13 @@ public EmptyPolls = false;
     public mul_enable = true;
 
     buttonEnable(){
-
-      this.mul_enable = false;
+       this.mul_enable = false;
     }
 
    PollChoiceMultiple(){
+     this.arrayy = [];
      for(let i in this.checkItems){
-         console.log(this.checkItems[i]);
+         console.log('checkItems',this.checkItems[i]);
        if(this.checkItems[i] == true) {
          this.arrayy.push(i);
        }
@@ -121,7 +127,7 @@ public EmptyPolls = false;
                     this.onError(err);
                 });
                 }, 500);
-     }
+  }
 
     onSuccess(res) {
     this.nl.hideLoader();
@@ -137,8 +143,11 @@ public EmptyPolls = false;
         this.nl.onError(err);
     }   
   
+
   ngOnInit() : void{
-      this.PollFunc();
+
+     this.PollFunc();
+  
   }
 
 }

@@ -284,6 +284,20 @@ public title : string = "planner";
   }
 
 
+  public defaultTimelineView = true;
+  public TodayEvents = [];
+  GetPlannerTodayTimeline(){
+
+    this.eventservice.GetTodayTimeline(this.eventMonth).subscribe(
+      data => { this.TodayEvents = data  },
+      err => console.error(err),
+      () => console.log('deaf',this.TodayEvents)
+    )
+
+  //  console.log('todayevents',this.TodayEvents);
+  }
+
+
 loll(data){
   
      data[0].id = data[0].id;
@@ -334,6 +348,7 @@ loll(data){
   activeDayIsOpen: boolean = false;
 
   increment(): void {
+     this.defaultTimelineView = false;
      this.count += 1;
 
     
@@ -358,10 +373,12 @@ loll(data){
 
     console.log('hehehViewDate',this.eventMonth);
     this.AllEvents();
+    this.GetPlannerTodayTimeline();
   }
 
 
   decrement(): void {
+     this.defaultTimelineView = false;
  this.count -= 1;
 
     const subFn: any = {
@@ -385,17 +402,19 @@ public EventsForTimeline = [];
 
     if (isSameMonth(date, this.viewDate)) {
       if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === false) ||
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
         events.length === 0
       ) {
            this.activeDayIsOpen = false;
            this.isCalendarTimeline = false;
            this.NoEvents = true;
            this.clickdate = date ;
+            this.defaultTimelineView = false;
            console.log('DayClicked',this.clickdate);
            console.log('DayClicked',date);
 
       } else {
+        this.defaultTimelineView = false;
         this.isCalendarTimeline = true;
         this.NoEvents = false ;
         this.EventsForTimeline = events;

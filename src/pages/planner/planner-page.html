@@ -38,6 +38,28 @@
     <div class="row text-center">
     </div>
   </div>
+
+
+   <ion-list class="csTimeline-list" *ngIf="defaultTimelineView">
+    <section id="cd-timeline-page">
+      <div class="timeline-row">
+        <span  *ngFor="let b of TodayEvents.dayPlanners">
+          <div class="cd-timeline-content dark" *ngFor="let c of b.events;  let i = index" (click)="eventsTimelineClicked(c.id, i)">
+            <div class="color-col"  [style.border-left-color]="c.plannerTypeColor">
+              <h5 class="timeline-title">{{ c.title }}</h5>
+              <span class="startTime"> {{c.startTime }}   </span>
+             <span class="startTime"> - {{ c.endTime }}</span>
+
+              <span class="startTime3" *ngIf="c.durationDays != 0">[{{ c.durationDays + 1 }} days event]</span>
+              <span class="Timelinelocation">{{ c.location }}</span>
+            </div>
+              </div>
+              </span>
+      </div>
+    </section>
+  </ion-list>
+
+
   <ion-list class="csTimeline-list" *ngIf="isCalendarTimeline">
     <section id="cd-timeline-page">
       <div class="timeline-row">

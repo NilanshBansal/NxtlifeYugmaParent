@@ -12,12 +12,24 @@ import { Configuration } from './app.constants';
 @Injectable()
 export class HomeworkService {
 
-  public serverUrl: string;
+
+    public headers;
+    public options;
+    serverUrl;
+
+   
 
   constructor(private http: CustomHttpService,
               private configuration: Configuration) {
     this.serverUrl = this.configuration.Server;
   }
+
+    getHomeworks(){
+        this.serverUrl = this.configuration.Server;
+        return this.http.get(this.serverUrl + '/homework',this.options)
+         .map((res:Response) => res.json())
+
+     }
 
   public getHomeworkByStandard(standardId, page) {
     return this.http.get(this.serverUrl + "/standard/" + standardId + "/page/" + page)
@@ -51,5 +63,6 @@ export class HomeworkService {
     }
     return Observable.throw(errMsg);
   }
+
 
 }

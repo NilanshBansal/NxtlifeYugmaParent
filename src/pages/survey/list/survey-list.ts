@@ -16,6 +16,7 @@ export class SurveyListPage implements OnInit{
     public onesurveys;
     public allData = [];
     public EmptySurveys : boolean = false;
+    public currentPage = 0;
 
     constructor(private _surveyServ : SurveyService ,
                 private navCtrl : NavController,
@@ -24,8 +25,9 @@ export class SurveyListPage implements OnInit{
     }
 
     getSurveys(){
-        this._surveyServ.getallsurveys()
-            .subscribe( data => { this.allsurveys = data ; console.log('surveys',this.allsurveys);},
+        this.nl.showLoader();
+        this._surveyServ.getallsurveys(1)
+            .subscribe( data => { this.allsurveys = data ; this.nl.hideLoader();  console.log('surveys',this.allsurveys);},
                 () => console.log('allsurveys',this.allsurveys))
     }
 
@@ -46,7 +48,7 @@ export class SurveyListPage implements OnInit{
 
  doRefresh(refresher) {
     setTimeout(() => {
-         this._surveyServ.getallsurveys().subscribe((res) => {
+         this._surveyServ.getallsurveys(1).subscribe((res) => {
                 this.onSuccess(res);
                 refresher.complete();
             }, (err) => {
@@ -71,6 +73,26 @@ export class SurveyListPage implements OnInit{
        this.nl.onError(err);
     }
 
+
+     doInfinite(infiniteScroll) {
+         this.currentPage += 1;
+          setTimeout(() => {
+            this._surveyServ.getallsurveys(this.currentPage).subscribe(response => {
+              if (response.status === 204) {
+                this.currentPage -= 1;
+                infiniteScroll.complete();
+                return;
+              }
+              console.log('response',response);
+              this.allsurveys = this.allsurveys.concat(response);
+             // this.pop();
+              infiniteScroll.complete();
+            }, (err) => {
+              this.currentPage -= 1;
+              infiniteScroll.complete();
+            });
+          }, 1000);
+    }
 
 
     ngOnInit():void{

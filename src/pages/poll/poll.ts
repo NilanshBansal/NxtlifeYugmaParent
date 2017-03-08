@@ -59,16 +59,16 @@ public EmptyPolls = false;
   public PollResult;
   public OptionId;
 
-   PollVoting(resid,res){
-     this.PollResult = {
-       "pollId" : resid,
-       "optionIds" : [this.OptionId]
-     };
-     this.pollServ.PollVote(this.PollResult).subscribe(
-       data => { this.responseData = data ; this.RemoveItem(res); },
-       () => console.log(this.responseData),
-       )
-   }
+  //  PollVoting(resid,res){
+  //    this.PollResult = {
+  //      "pollId" : resid,
+  //      "optionIds" : [this.OptionId]
+  //    };
+  //    this.pollServ.PollVote(this.PollResult).subscribe(
+  //      data => { this.responseData = data ; this.RemoveItem(res); },
+  //      () => console.log(this.responseData),
+  //      )
+  //  }
 
 
     PollMulVoting(resid,res){
@@ -86,11 +86,14 @@ public EmptyPolls = false;
    }
 
 
-   PollChoiceClicked(id){
+   public pollIDD;
+   PollChoiceClicked(id,pollid){
     // this.Count += 1;
 
      this.enable = false;
      console.log('clicked',id);
+     console.log('poll id',pollid);
+     this.pollIDD = pollid;
      this.OptionId = id;
    }
 
@@ -102,7 +105,9 @@ public EmptyPolls = false;
     public enable = true;
     public mul_enable = true;
 
-    buttonEnable(){
+    buttonEnable(id,pollid){
+      console.log('clicked',id);
+     console.log('poll id',pollid);
        this.mul_enable = false;
     }
 
@@ -111,6 +116,10 @@ public EmptyPolls = false;
      for(let i in this.checkItems){
          console.log('checkItems',this.checkItems[i]);
        if(this.checkItems[i] == true) {
+        if(this.pollIDD == this.checkItems[i]){
+          console.log('pollid matched');
+
+        }
          this.arrayy.push(i);
        }
      }

@@ -19,8 +19,8 @@
       <h1> {{ onesurveys.title }} </h1>
     </ion-item>
   </ion-list>
-  <div *ngFor="let a of onesurveys.questions">
-  <ion-card radio-group [(ngModel)]="relationship">
+  <div >
+  <ion-card radio-group [(ngModel)]="relationship" *ngFor="let a of onesurveys.questions">
     
     <ion-card-header >
      <h2>{{ a.questionText }}</h2>
@@ -41,13 +41,13 @@
       </ion-textarea>
     </ion-card-content>
 
-       <button ion-button color="primary" (click)="SurveyVoting(c)" right>submit!</button>
-    
+       
   </ion-card>
-
+<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>submit!</button>
   </div>
  
 
+    
    <!--<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>Done</button>-->
 </ion-content>
 

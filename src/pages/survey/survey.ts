@@ -57,45 +57,58 @@ export class SurveyPage implements OnInit {
 //     this.resdata.splice(index,1);
 // }
 
-  
-  SurveyVoting(resid,questionID,res){
+  relationship = [{}];
+
+
+  SurveyVoting(resid,res){
+
+  //  console.log('relationship',this.relationship);
     console.log('resssSurvey',res);
-    console.log('questionId',questionID)
+   // console.log('questionId',questionID)
+        for(let i=0; i < this.onesurveys.questionLength;i++)
+       {
+          console.log('tip top');
+       }
      this.surveyResult = { 
 
                            "surveyId" : resid,
-                           "surveyAnswers":[
-                             this.initSurveyResult(resid,questionID)
-                    ]}
+                           "surveyAnswers":[{
+                             //this.initSurveyResult(resid,questionID)
+                             
+                             "questionId" : this.QuestionIdd,
+                             "subOptionIds" : [this.OptionId]
+                           }]
+                  }
 
     this._surveyServ.PostSurveys(this.surveyResult)
       .subscribe( data => { this.surveys = data})
 
-      console.log(this.surveyResult);
+      console.log('surveyResult',this.surveyResult);
   }
+
 
   public abc;
   initSurveyResult(resid,questionID){
-          this.abc =    {
-             "questionId" : questionID,
-             "subOptionIds" :[this.OptionId]
-          }                 
-
-        this.surveyResult.surveyAnswers.push(this.abc);
-      //  console.log(this.surveyResult.surveyAnswers);
-
-        //for(let i=0; )
+        for(let i=0; i < this.onesurveys.questionLength;i++)
+       {
+          console.log('tip top');
+       } 
  }
 
-
+public checkItems = {};
 
   enable = true;
-
+ QuestionIdd ;
   SurveyChoiceClicked(id,qid){
+
+    
+
+
     // this.Count += 1;
      this.enable = false;
      console.log('clicked',id ,qid);
       this.OptionId = id;
+      this.QuestionIdd = qid;
    }
 
    toast(){

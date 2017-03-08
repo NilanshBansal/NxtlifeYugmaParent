@@ -20,7 +20,7 @@
     </ion-item>
   </ion-list>
   <div >
-  <ion-card radio-group [(ngModel)]="relationship" *ngFor="let a of onesurveys.questions">
+  <ion-card radio-group  *ngFor="let a of onesurveys.questions; let i=index" [(ngModel)]="relationship">
     
     <ion-card-header >
      <h2>{{ a.questionText }}</h2>
@@ -28,8 +28,8 @@
     <ion-card-content >
       
         <div *ngFor="let d of a.options">
-        <ion-radio *ngIf="a.questionTypeId == 1" ngmodel="choice1" (click)="SurveyChoiceClicked(d.id,a.questionId)"></ion-radio>
-        <ion-checkbox *ngIf="a.questionTypeId == 2" (click)="SurveyChoiceClicked(d.id,a.questionId)"></ion-checkbox>
+        <ion-radio *ngIf="a.questionTypeId == 1"  [(ngModel)]="choice1" (click)="SurveyChoiceClicked(d.id,a.questionId)"></ion-radio>
+        <ion-checkbox *ngIf="a.questionTypeId == 2"  (click)="SurveyChoiceClicked(d.id,a.questionId)"></ion-checkbox>
           <span>{{ d.name }}</span><br/>
      
          </div> 
@@ -41,14 +41,14 @@
       </ion-textarea>
     </ion-card-content>
 
-       
+      <!--<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>submit!</button> -->
   </ion-card>
-<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>submit!</button>
+
   </div>
  
 
     
-   <!--<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>Done</button>-->
+   <button ion-button color="primary" (click)="SurveyVoting(onesurveys.surveyId,c)" right>Done</button>
 </ion-content>
 
 <!--[(ngModel)]-->

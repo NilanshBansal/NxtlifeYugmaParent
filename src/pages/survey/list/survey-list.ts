@@ -16,7 +16,7 @@ export class SurveyListPage implements OnInit{
     public onesurveys;
     public allData = [];
     public EmptySurveys : boolean = false;
-    public currentPage = 0;
+    public currentPage = 1;
 
     constructor(private _surveyServ : SurveyService ,
                 private navCtrl : NavController,

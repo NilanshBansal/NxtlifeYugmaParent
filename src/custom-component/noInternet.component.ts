@@ -9,8 +9,14 @@ declare var someGlobal;
     <ion-header>
       <nl-navbar [title]="title"></nl-navbar>
     </ion-header>
-    <ion-content class="homeBackground csGrayBackground">
-      <h3>You are currently offline</h3>
+    <ion-content class="csGrayBackground">
+        <ion-list class="no-comment">
+        <ion-icon name="cloud"></ion-icon>
+            <br>No Internet Connection
+        </ion-list>
+        <button ion-button color="light" icon-left class="csCenter">
+            <ion-icon name="refresh"></ion-icon>Tap to retry
+        </button>
     </ion-content>
   `
 })

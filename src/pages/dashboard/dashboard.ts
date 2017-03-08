@@ -19,7 +19,12 @@ import { CustomService } from '../../service/custom.service';
 
 @Component({
   selector: 'page-dashboard',
-  templateUrl: 'dashboard.html'
+  templateUrl: 'dashboard.html',
+  styles: [`
+  ion-toolbar div {
+    background:transparent !important;
+}
+  `]
 })
 
 export class Dashboard {

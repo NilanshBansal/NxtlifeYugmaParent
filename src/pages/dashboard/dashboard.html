@@ -48,17 +48,19 @@
 
 
 
-<ion-list class="csEvents">
-      <ion-list-header>
-      Today's Event
-    </ion-list-header>
-  <div *ngFor="let d of data">
-    <ion-card *ngFor="let event of d.events" padding>
+<ion-list class="csEvents" padding>
+  <ion-list-header>
+    Today's Event
+  </ion-list-header>
+  <ion-list *ngFor="let events of planner">
+    <ion-item *ngFor="let event of events.events">
+      <a href="#" (click)="GoToEvent(event.id)" [style.border-left-color]="event.plannerTypeColor">
         <h2>{{event.title}}</h2>
         <p>{{event.startTime}} - {{event.endTime}} <span class="csRight">{{event.location}}</span></p>
-    </ion-card>
-  </div>
+      </a>
+    </ion-item>
   </ion-list>
+</ion-list>
 
  <ion-list>
       <ion-list-header>

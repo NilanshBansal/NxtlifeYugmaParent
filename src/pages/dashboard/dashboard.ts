@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 
 import { PollPage } from '../poll/poll';
@@ -13,30 +13,34 @@ import { PlannerComponent } from '../planner/planner.component';
 import { HomeworkTabs } from '../homework/homeworkTabs';
 import { CircularComponent } from '../circular/circular.component';
 import { SurveyListPage } from '../survey/list/survey-list';
+import { EventModalPage } from '../planner/view/planner-view';
 
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
+import { EventService } from '../../service/planner.service';
 
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html',
   styles: [`
-  ion-toolbar div {
-    background:transparent !important;
-}
+    ion-toolbar div {
+      background:transparent !important;
+    }
   `]
 })
 
 export class Dashboard {
 
   title: string = "Dashboard";
-  public data;
+  public planner;
   public openPoll;
 
   constructor(public menuCtrl: MenuController,
               public configuration: Configuration,
               public cs: ComplaintSuggestion,
               public nl: CustomService,
+              public modalCtrl: ModalController,
+              public eventService: EventService,
               private navCtrl: NavController) {
     this.menuCtrl.enable(true);
     this.configuration.setUrl("dashboard");
@@ -74,13 +78,28 @@ export class Dashboard {
 
   onSuccess(data) {
     this.nl.hideLoader();
-    this.data = data.planner;
+    this.planner = data.planner;
     this.openPoll = data.poll;
-    console.log(this.data)
+    console.log(this.planner)
   }
 
   onError(err) {
     this.nl.onError(err);
+  }
+
+  GoToEvent(eventId) {
+    this.nl.showLoader();
+    this.configuration.setUrl("planner");
+    this.eventService.GetParticularEvent(eventId).subscribe((res) => {
+      this.nl.hideLoader();
+      let modal3 = this.modalCtrl.create(EventModalPage,{
+        eventsss : res
+      });
+      modal3.present();
+    }, (err) => {
+      this.nl.hideLoader();
+      console.log("EE", err);
+    })
   }
 
 }

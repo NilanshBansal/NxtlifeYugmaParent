@@ -88,7 +88,7 @@
     <ion-list-header>
       Survey
     </ion-list-header>
-    <ion-list inset *ngFor="let a of surveys" (click)="goToSurvey()">
+    <ion-list inset *ngFor="let a of surveys" (click)="goToSurvey(a.surveyId)">
       <ion-item>
         <h2><b>{{a.title}}</b></h2>
         <h3>{{a.description}}</h3>

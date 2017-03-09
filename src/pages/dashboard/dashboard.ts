@@ -18,6 +18,7 @@ import { EventModalPage } from '../planner/view/planner-view';
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
 import { EventService } from '../../service/planner.service';
+import { SurveyService } from '../../service/survey.service';
 
 @Component({
   selector: 'page-dashboard',
@@ -41,6 +42,7 @@ export class Dashboard {
               public cs: ComplaintSuggestion,
               public nl: CustomService,
               public appCtrl: App,
+              private surveyService : SurveyService ,
               public modalCtrl: ModalController,
               public eventService: EventService,
               private navCtrl: NavController) {
@@ -112,7 +114,13 @@ export class Dashboard {
 
   goToSurvey(surveyId) {
     this.configuration.setUrl("survey");
-
+    this.surveyService.getOneSurvey(surveyId).subscribe((res) => {
+      this.navCtrl.push(SurveyPage,{
+        objj : res
+      });
+    }, (err) => {
+      console.log("Err", err);
+    });
   }
 
 }

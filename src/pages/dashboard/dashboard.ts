@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, App } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 
 import { PollPage } from '../poll/poll';
@@ -39,6 +39,7 @@ export class Dashboard {
               public configuration: Configuration,
               public cs: ComplaintSuggestion,
               public nl: CustomService,
+              public appCtrl: App,
               public modalCtrl: ModalController,
               public eventService: EventService,
               private navCtrl: NavController) {
@@ -80,7 +81,7 @@ export class Dashboard {
     this.nl.hideLoader();
     this.planner = data.planner;
     this.openPoll = data.poll;
-    console.log(this.planner)
+    console.log(this.openPoll)
   }
 
   onError(err) {
@@ -100,6 +101,11 @@ export class Dashboard {
       this.nl.hideLoader();
       console.log("EE", err);
     })
+  }
+
+  goToPoll1() {
+    this.configuration.setUrl("poll");
+    this.appCtrl.getRootNav().setRoot(PollPage);
   }
 
 }

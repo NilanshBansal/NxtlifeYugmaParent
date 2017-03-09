@@ -48,35 +48,35 @@
 
 
 
-<ion-list class="csEvents" padding>
-  <ion-list-header>
-    Today's Event
-  </ion-list-header>
-  <ion-list *ngFor="let events of planner">
-    <ion-item *ngFor="let event of events.events">
-      <a href="#" (click)="GoToEvent(event.id)" [style.border-left-color]="event.plannerTypeColor">
-        <h2>{{event.title}}</h2>
-        <p>{{event.startTime}} - {{event.endTime}} <span class="csRight">{{event.location}}</span></p>
-      </a>
-    </ion-item>
+  <ion-list class="csEvents" padding>
+    <ion-list-header>
+      Today's Event
+    </ion-list-header>
+    <ion-list *ngFor="let events of planner">
+      <ion-item *ngFor="let event of events.events">
+        <a href="#" (click)="GoToEvent(event.id)" [style.border-left-color]="event.plannerTypeColor">
+          <h2>{{event.title}}</h2>
+          <p>{{event.startTime}} - {{event.endTime}} <span class="csRight">{{event.location}}</span></p>
+        </a>
+      </ion-item>
+    </ion-list>
   </ion-list>
-</ion-list>
 
- <ion-list>
-      <ion-list-header>
+  <ion-list>
+    <ion-list-header>
       Poll
     </ion-list-header>
       <ion-list inset>
-        <ion-item>
-          <h2><b>Survey testin static</b></h2>
-          <h3>Survey Title ans is jsh yrhd</h3>
+        <ion-item *ngFor="let a of openPoll" (click)="goToPoll1()">
+          <h2><b>{{a.question}}</b></h2>
+          <h3>{{a.optionTypeName}}</h3>
           <ion-note>
             <ion-row>
               <ion-col width-50 class="no-padding-l" style="color:#535353;">
-                <ion-icon name="clock"></ion-icon><span>in 23 min</span>
+                <ion-icon name="clock"></ion-icon><span>{{a.createdAt | amDateFormat: 'DD/MM/YYYY'}}</span>
               </ion-col>
               <ion-col width-50 class="no-padding-l" >
-                <ion-icon name="at"></ion-icon><span>school</span>
+                <ion-icon name="at"></ion-icon><span>{{a.typeName}}</span>
               </ion-col>
             </ion-row>
           </ion-note>

@@ -99,14 +99,16 @@ export class Dashboard {
     this.configuration.setUrl("planner");
     this.eventService.GetParticularEvent(eventId).subscribe((res) => {
       this.nl.hideLoader();
-      let modal3 = this.modalCtrl.create(EventModalPage,{
-        eventsss : res
-      });
-      modal3.present();
+      this.openModal(res);
     }, (err) => {
       this.nl.hideLoader();
-      console.log("EE", err);
-    })
+      this.nl.onError(err);
+    });
+  }
+
+  openModal(data) {
+    let modal = this.modalCtrl.create(EventModalPage, { eventsss : data });
+    modal.present();
   }
 
   goToPoll() {
@@ -115,13 +117,15 @@ export class Dashboard {
   }
 
   goToSurvey(surveyId) {
+    this.nl.showLoader();
     this.configuration.setUrl("survey");
     this.surveyService.getOneSurvey(surveyId).subscribe((res) => {
       this.navCtrl.push(SurveyPage,{
         objj : res
       });
     }, (err) => {
-      console.log("Err", err);
+      this.nl.hideLoader();
+      this.nl.onError(err);
     });
   }
 

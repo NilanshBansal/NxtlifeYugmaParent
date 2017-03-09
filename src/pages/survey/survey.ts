@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { SurveyService } from '../../service/survey.service';
 import { NavParams,ToastController , ActionSheetController } from 'ionic-angular';
 import { Validators , FormGroup ,FormControl , FormBuilder } from '@angular/forms';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'survey-component',
@@ -20,13 +21,16 @@ export class SurveyPage implements OnInit {
   public options = [];
   public OptionId;
   public surveyResult2 : FormGroup;   
+  public choice2;
+  choice3;
 
   constructor(private _surveyServ : SurveyService ,
               private navparams : NavParams ,
               private _toastCtrl : ToastController,
               private actionSheetCtrl : ActionSheetController) { 
-
-
+this.onesurveys = this.navparams.get('objj');
+   console.log('onesurveys',this.onesurveys);
+//this.choice2[0] = [];
                                  
       //  this.surveyResult2  = new  FormGroup({
       //      "surveyId" : new FormControl(''),
@@ -35,9 +39,17 @@ export class SurveyPage implements OnInit {
 
 
     this.options = [];
+    this.choice2 = [];
 
-   this.onesurveys = this.navparams.get('objj');
-   console.log('onesurveys',this.onesurveys);
+
+    this.choice3 = [];
+
+   for(let i=0; i < this.onesurveys.questionLength;i++){
+    this.choice2[i]=[];
+    this.choice3[i]=[];
+   }
+
+   console.log('questionlength',this.onesurveys.questionLength);
   }
 
   // getSurveys(){
@@ -57,27 +69,35 @@ export class SurveyPage implements OnInit {
 //     this.resdata.splice(index,1);
 // }
 
-  relationship = [{}];
+  relationship =[{
+    
+  }];
 
+  
+  public arrayy = [];
+ choice1 = [];
 
   SurveyVoting(resid,res){
+console.log(this.choice3);
+ console.log('relationship',this.relationship);
+  console.log('choice2',this.choice2);
 
-  //  console.log('relationship',this.relationship);
     console.log('resssSurvey',res);
+    let surveyAnswers = [];
+    let surveyAnswer;
    // console.log('questionId',questionID)
         for(let i=0; i < this.onesurveys.questionLength;i++)
        {
-          console.log('tip top');
+         surveyAnswer = {};
+         console.log("question Id : ",this.onesurveys.questions[i]['questionId']);
+          surveyAnswer['questionId'] = this.onesurveys.questions[i]['questionId'];
+          surveyAnswer['subOptionIds'] = _.without(this.choice3[i],undefined);
+          surveyAnswers.push(surveyAnswer);
        }
      this.surveyResult = { 
 
                            "surveyId" : resid,
-                           "surveyAnswers":[{
-                             //this.initSurveyResult(resid,questionID)
-                             
-                             "questionId" : this.QuestionIdd,
-                             "subOptionIds" : [this.OptionId]
-                           }]
+                           "surveyAnswers":surveyAnswers
                   }
 
     this._surveyServ.PostSurveys(this.surveyResult)
@@ -86,6 +106,8 @@ export class SurveyPage implements OnInit {
       console.log('surveyResult',this.surveyResult);
   }
 
+
+  
 
   public abc;
   initSurveyResult(resid,questionID){
@@ -99,10 +121,15 @@ public checkItems = {};
 
   enable = true;
  QuestionIdd ;
-  SurveyChoiceClicked(id,qid){
+  SurveyChoiceClicked(i,m,id,qid){
 
-    
-
+    console.log('this.choice2[i][m]',this.choice2[i][m]);
+      if(this.choice2[i][m]){
+        this.choice3[i][m] = this.onesurveys.questions[i].options[m].id;
+      }
+      else{
+        this.choice3[i].splice(m,1);
+      }
 
     // this.Count += 1;
      this.enable = false;

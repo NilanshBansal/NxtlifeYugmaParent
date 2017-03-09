@@ -37,6 +37,7 @@ export class Dashboard {
   public openPoll = [];
   public surveys = [];
   public circular = [];
+  public surveyCount;
 
   constructor(public menuCtrl: MenuController,
               public configuration: Configuration,
@@ -87,6 +88,7 @@ export class Dashboard {
     this.openPoll = data.poll;
     this.surveys = data.survey;
     this.circular = data.circular;
+    this.surveyCount = data.surveyCount;
     console.log(data)
   }
 
@@ -127,6 +129,11 @@ export class Dashboard {
       this.nl.hideLoader();
       this.nl.onError(err);
     });
+  }
+
+  openSuveyList() {
+    this.configuration.setUrl("survey");
+    this.appCtrl.getRootNav().setRoot(SurveyListPage);
   }
 
 }

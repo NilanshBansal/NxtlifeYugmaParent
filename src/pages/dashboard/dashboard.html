@@ -16,7 +16,7 @@
     </ion-list-header>
     <section>
       <div class="timeline-row">
-        <ion-list inset class="cd-timeline-content dark" *ngFor="let a of planner" (click)="GoToEvent(a.id)">
+        <ion-list class="cd-timeline-content dark" *ngFor="let a of planner" (click)="GoToEvent(a.id)">
           <div class="color-col" [style.border-left-color]="a.plannerTypeColor">
             <h5 class="timeline-title"> {{a.title}} </h5>
             <span class="startTime"> {{a.startTime}} </span>
@@ -53,6 +53,7 @@
   <ion-list>
     <ion-list-header *ngIf="surveys.length > 0">
       Survey
+      <span style="float:right" *ngIf="surveyCount > 2" (click)="openSuveyList()">View All ( {{surveyCount}} )</span>
     </ion-list-header>
     <ion-list inset *ngFor="let a of surveys" (click)="goToSurvey(a.surveyId)">
       <ion-item>

@@ -33,9 +33,10 @@ import { SurveyService } from '../../service/survey.service';
 export class Dashboard {
 
   title: string = "Dashboard";
-  public planner;
-  public openPoll;
-  public surveys;
+  public planner = [];
+  public openPoll = [];
+  public surveys = [];
+  public circular = [];
 
   constructor(public menuCtrl: MenuController,
               public configuration: Configuration,
@@ -85,6 +86,7 @@ export class Dashboard {
     this.planner = data.planner;
     this.openPoll = data.poll;
     this.surveys = data.survey;
+    this.circular = data.circular;
     console.log(data)
   }
 

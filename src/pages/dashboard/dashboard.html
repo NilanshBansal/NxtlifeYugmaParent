@@ -3,203 +3,104 @@
 </ion-header>
 
 <ion-content class="homeBackground csGrayBackground">
-   <ion-fab top right edge>
-   <button ion-fab color="cool">
-     <ion-icon  name="create"></ion-icon>
-   </button>
- </ion-fab>
-<!-- <div class="csDashboardOne">
-    <ion-row>
-      <ion-col width-33 class="col1">
-        <button ion-button clear small full>Homeowork</button>
-      </ion-col>
-      <ion-col width-33  class="col2">
-        <button ion-button small full>Planner</button>
-      </ion-col>
-      <ion-col width-33  class="col3">
-        <button ion-button clear small full (click)="openPage(page.poll, 'poll')">
-          Poll <ion-badge class="csCount">{{openPoll}}</ion-badge>
-        </button>
-      </ion-col>
-    </ion-row>
-  </div>
- 
-  <div class="csDashboardTwo" padding>
-    <ion-row class="tiles">
-      <ion-col class="col1">
-        <ion-icon name="bulb"></ion-icon>
-        <br>Suggestions
-      </ion-col>
-      <ion-col>
-        <ion-row class="col2">
-          <ion-col>
-          By Me
-          </ion-col>
-        </ion-row>
-        <ion-row class="col3">
-          <ion-col>
-          For Me
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-  </div>-->
+
+  <ion-fab top right edge>
+    <button ion-fab color="cool">
+      <ion-icon  name="create"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
 
 
-
-
-<ion-list>
-      <ion-list-header>
+  <ion-list *ngIf="planner.length > 0" padding>
+    <ion-list-header>
       Today's Event
     </ion-list-header>
-    <ion-list>
-  <div *ngFor="let d of data">
-    <ion-card *ngFor="let event of d.events" padding>
-        <h2>{{event.title}}</h2>
-        <p>{{event.startTime}} - {{event.endTime}} <span class="csRight">{{event.location}}</span></p>
-    </ion-card>
-  </div>
-    </ion-list>
+    <section>
+      <div class="timeline-row">
+        <ion-list class="cd-timeline-content dark" *ngFor="let a of planner" (click)="GoToEvent(a.id)">
+          <div class="color-col" [style.border-left-color]="a.plannerTypeColor">
+            <h5 class="timeline-title"> {{a.title}} </h5>
+            <span class="startTime"> {{a.startTime}} </span>
+            <span class="startTime"> - {{a.endTime}} </span>
+            <span class="Timelinelocation"> {{a.location}} </span>
+          </div>
+        </ion-list>
+      </div>
+    </section>
   </ion-list>
 
- <ion-list>
-      <ion-list-header>
+  <ion-list>
+    <ion-list-header *ngIf="openPoll.length > 0">
       Poll
+      <span style="float:right" *ngIf="surveyCount > 2" (click)="openPollList()">View All ( {{pollCount}} )</span>
     </ion-list-header>
-      <ion-list inset>
-        <ion-item>
-          <h2><b>Are you aware of picnic plan?</b></h2>
-          <h3>Yes | No | Dont-care</h3>
-          <ion-note>
-            <ion-row>
-              <ion-col width-50 class="no-padding-l" style="color:#535353;">
-                <ion-icon name="clock"></ion-icon><span>in 23 min</span>
-              </ion-col>
-              <ion-col width-50 class="no-padding-l" >
-                <ion-icon name="at"></ion-icon><span>School</span>
-              </ion-col>
-            </ion-row>
-          </ion-note>
-        </ion-item>
-      </ion-list>
+    <ion-list inset *ngFor="let a of openPoll" (click)="goToPoll()">
+      <ion-item>
+        <h2><b>{{a.question}}</b></h2>
+        <h3>{{a.optionTypeName}}</h3>
+        <ion-note>
+          <ion-row>
+            <ion-col width-50 class="no-padding-l" style="color:#535353;">
+              <ion-icon name="clock"></ion-icon><span>{{a.createdAt | amDateFormat: 'DD/MM/YYYY'}}</span>
+            </ion-col>
+            <ion-col width-50 class="no-padding-l" >
+              <ion-icon name="at"></ion-icon><span>{{a.typeName}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-note>
+      </ion-item>
+    </ion-list>
   </ion-list>
   
   <ion-list>
-      <ion-list-header>
+    <ion-list-header *ngIf="surveys.length > 0">
       Survey
+      <span style="float:right" *ngIf="surveyCount > 2" (click)="openSuveyList()">View All ( {{surveyCount}} )</span>
     </ion-list-header>
-      <ion-list inset>
-        <ion-item>
-          <h2><b>How did you first hear about our web site?</b></h2>
-          <h3>Television | Radio | News Paper</h3>
-          <ion-note>
-            <ion-row>
-              <ion-col width-50 class="no-padding-l" style="color:#535353;">
-                <ion-icon name="clock"></ion-icon><span>in 23 min</span>
-              </ion-col>
-              <ion-col width-50 class="no-padding-l" >
-                <ion-icon name="at"></ion-icon><span>school</span>
-              </ion-col>
-            </ion-row>
-          </ion-note>
-        </ion-item>
-        <ion-item>
-          <h2><b>Based upon what you have seen, heard, and experienced, please rank the following brands according to  </b></h2>
-          <h3>Honda__ Toyota__ Mazda__</h3>
-          <ion-note>
-            <ion-row>
-              <ion-col width-50 class="no-padding-l" style="color:#535353;">
-                <ion-icon name="clock"></ion-icon><span>in 23 min</span>
-              </ion-col>
-              <ion-col width-50 class="no-padding-l">
-                <ion-icon name="at"></ion-icon><span>school</span>
-              </ion-col>
-            </ion-row>
-          </ion-note>
-        </ion-item>
-      </ion-list>
+
+    <ion-list inset *ngFor="let a of surveys" (click)="goToSurvey(a.surveyId)">
+      <ion-item>
+        <h2><b>{{a.title}}</b></h2>
+        <h3>{{a.description}}</h3>
+        <ion-note>
+          <ion-row>
+            <ion-col width-50 class="no-padding-l" style="color:#535353;">
+              <ion-icon name="clock"></ion-icon><span>{{a.createdAt | amDateFormat: 'DD/MM/YYYY'}}</span>
+            </ion-col>
+            <ion-col width-50 class="no-padding-l" >
+              <ion-icon name="at"></ion-icon><span>{{a.typeName}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-note>
+      </ion-item>
+    </ion-list>
   </ion-list>
 
-   <ion-list>
-      <ion-list-header>
+  <ion-list>
+    <ion-list-header *ngIf="circular.length > 0">
       Circular
     </ion-list-header>
-      <ion-list inset>
-        <ion-item>
-          <h2><b>Memo for Late coming</b></h2>
-          <h3>Time and discipline are the two important factors which drives a company. The success of any company is the outcome of the efforts that is put down by its team members. Recently it has been found that the employees have started taking the office timings lightly. There has been a sudden increase in the late comers. Every now and then company is finding people coming late to the office.</h3>
-          <ion-note>
-            <ion-row>
-              <ion-col width-50 class="no-padding-l" style="color:#535353;">
-                <ion-icon name="clock"></ion-icon><span>in 1 Hr</span>
-              </ion-col>
-              <ion-col width-50 class="no-padding-l" >
-                <ion-icon name="at"></ion-icon><span>School</span>
-              </ion-col>
-            </ion-row>
-          </ion-note>
-        </ion-item>
-      </ion-list>
+
+    <ion-list inset *ngFor="let a of circular">
+      <ion-item>
+        <h2><b>{{a.title}}</b></h2>
+        <h3>Survey Title ans is jsh yrhd</h3>
+        <ion-note>
+          <ion-row>
+            <ion-col width-50 class="no-padding-l" style="color:#535353;">
+              <ion-icon name="clock"></ion-icon><span>in 23 min</span>
+            </ion-col>
+            <ion-col width-50 class="no-padding-l" >
+              <ion-icon name="at"></ion-icon><span>school</span>
+            </ion-col>
+          </ion-row>
+        </ion-note>
+      </ion-item>
+    </ion-list>
   </ion-list>
- <!--<div class="csDashboardThree" padding>
-    <ion-row class="tiles">
-      <ion-col>
-        <ion-row class="col2">
-          
-        </ion-row>
-        <ion-row class="col3">
-        
-        </ion-row>
-      </ion-col>
-      <ion-col class="col1">
-        ff
-      </ion-col>      
-    </ion-row>
-  </div>-->
-
-
-  <!--<div class="csDashboardFour" padding>
-    <ion-row class="tile1">
-      
-    </ion-row>
-    <ion-row class="tile2">
-      <ion-col class="col2">
-
-      </ion-col>
-      <ion-col class="col3">
-
-      </ion-col>
-    </ion-row>
-  </div>
-</ion-content>-->
-
 </ion-content>
-
-  <!--<ion-footer class="csDashboardNavigator">
-  <ion-toolbar>
-    <ion-row>
-      <ion-col>
-        <ion-icon name="home"></ion-icon>
-        <br>Home
-      </ion-col>
-      <ion-col>
-        <ion-icon name="bulb"></ion-icon>
-        <br>Suggestion
-      </ion-col>
-      <ion-col width-25>
-          <ion-icon class="addButton" ios="ios-add-circle" md="md-add-circle"></ion-icon>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="calendar"></ion-icon>
-        <br>Calendar
-      </ion-col>
-      <ion-col>
-        <ion-icon name="book"></ion-icon>
-        <br>Homework
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-footer>-->
 
 <ion-footer no-border>
   <ion-toolbar color="danger" style="height:135px;padding:0px" class="pager">

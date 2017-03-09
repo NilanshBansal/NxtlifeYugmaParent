@@ -5,6 +5,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Survey</ion-title>
+    
   </ion-navbar>
   </ion-toolbar>
 </ion-header>
@@ -16,21 +17,20 @@
       <h1> {{ onesurveys.title }} </h1>
     </ion-item>
   </ion-list>
-  <ion-card radio-group [(ngModel)]="relationship">
-    <div *ngFor="let a of onesurveys.questions">
+  <div >
+  <ion-card radio-group [(ngModel)]="relationship" *ngFor="let a of onesurveys.questions">
+    
     <ion-card-header >
      <h2>{{ a.questionText }}</h2>
     </ion-card-header>
     <ion-card-content >
-      <div *ngFor="let c of onesurveys.questions"> 
-        <div *ngFor="let d of c.options">
-        <ion-radio *ngIf="c.questionTypeId == 1" ngmodel="choice1" (click)="SurveyChoiceClicked(d.id)"></ion-radio>
-        <ion-checkbox *ngIf="c.questionTypeId == 2" (click)="SurveyChoiceClicked(d.id)"></ion-checkbox>
+      
+        <div *ngFor="let d of a.options">
+        <ion-radio *ngIf="a.questionTypeId == 1" ngmodel="choice1" (click)="SurveyChoiceClicked(d.id,a.questionId)"></ion-radio>
+        <ion-checkbox *ngIf="a.questionTypeId == 2" (click)="SurveyChoiceClicked(d.id,a.questionId)"></ion-checkbox>
           <span>{{ d.name }}</span><br/>
-      </div>
      
-        
-          </div>
+         </div> 
     </ion-card-content>
 
     <ion-card-content *ngIf=" a.questionTypeId == 3">
@@ -39,9 +39,14 @@
       </ion-textarea>
     </ion-card-content>
 
-     <button ion-button color="primary" (click)="SurveyVoting(c.surveyId,c)" right>submit!</button>
-    </div>
+       
   </ion-card>
+<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>submit!</button>
+  </div>
+ 
+
+    
+   <!--<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>Done</button>-->
 </ion-content>
 
 <!--[(ngModel)]-->

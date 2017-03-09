@@ -34,6 +34,13 @@ export class EventService {
 
 	}
 
+	public GetTodayTimeline(Eventmonth){
+		this.serverUrl = this.configuration.Server;
+		return this.http.get(this.serverUrl+'/month/'+ Eventmonth + '/current',this.options)
+		.map((res:Response) => res.json())
+		//.catch(this.handleError);
+	}
+
 	public GetParticularEvent(id){
 
 		this.serverUrl = this.configuration.Server;

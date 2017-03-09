@@ -31,6 +31,7 @@
   <ion-list>
     <ion-list-header *ngIf="openPoll.length > 0">
       Poll
+      <span style="float:right" *ngIf="surveyCount > 2" (click)="openPollList()">View All ( {{pollCount}} )</span>
     </ion-list-header>
     <ion-list inset *ngFor="let a of openPoll" (click)="goToPoll()">
       <ion-item>

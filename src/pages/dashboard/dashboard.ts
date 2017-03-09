@@ -38,6 +38,7 @@ export class Dashboard {
   public surveys = [];
   public circular = [];
   public surveyCount;
+  public pollCount;
 
   constructor(public menuCtrl: MenuController,
               public configuration: Configuration,
@@ -89,6 +90,7 @@ export class Dashboard {
     this.surveys = data.survey;
     this.circular = data.circular;
     this.surveyCount = data.surveyCount;
+    this.pollCount = data.pollCount;
     console.log(data)
   }
 
@@ -134,6 +136,10 @@ export class Dashboard {
   openSuveyList() {
     this.configuration.setUrl("survey");
     this.appCtrl.getRootNav().setRoot(SurveyListPage);
+  }
+
+  openPollList() {
+    this.goToPoll();
   }
 
 }

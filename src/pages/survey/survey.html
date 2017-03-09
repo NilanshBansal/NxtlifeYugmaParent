@@ -1,20 +1,12 @@
 <ion-header>
-  <ion-toolbar color="primary">
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Survey</ion-title>
-    
-  </ion-navbar>
-  </ion-toolbar>
+   <nl-modal-navbar [title]="title"></nl-modal-navbar>
 </ion-header>
 
 <ion-content padding class="csGrayBackground">
    
   <ion-list>
     <ion-item>
-      <h1> {{ onesurveys.title }} </h1>
+      <h2> {{ onesurveys.title }} </h2>
     </ion-item>
   </ion-list>
   <div  *ngFor="let a of onesurveys.questions; let i=index" >
@@ -27,7 +19,7 @@
     <ion-card-content >
       
       <div *ngFor="let d of a.options; let m = index;  "  >
-        <ion-radio *ngIf="a.questionTypeId == 1" value="{{d.id}}" ></ion-radio>
+        <ion-radio *ngIf="a.questionTypeId == 1" value="{{d.id}}" (click)="questionclick(i)"></ion-radio>
         <ion-checkbox *ngIf="a.questionTypeId == 2" [(ngModel)]="choice2[i][m]" (click)="SurveyChoiceClicked(i,m,d.id,a.questionId)"></ion-checkbox>
           <span>{{ d.name }}</span><br/>
          </div> 
@@ -45,7 +37,7 @@
 
   </div>
  
-   <button ion-button color="primary"  (click)="SurveyVoting(onesurveys.surveyId,c)" right>Done</button>
+   <button ion-button color="primary" [disabled]="enablle" (click)="SurveyVoting(onesurveys.surveyId,c)" right>Done</button>
 </ion-content>
 
 <!--[(ngModel)]-->

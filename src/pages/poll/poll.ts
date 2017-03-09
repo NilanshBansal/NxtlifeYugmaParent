@@ -89,7 +89,7 @@ public EmptyPolls = false;
    public pollIDD;
    PollChoiceClicked(id,pollid){
     // this.Count += 1;
-
+    this.buttonEnable(id,pollid);
      this.enable = false;
      console.log('clicked',id);
      console.log('poll id',pollid);

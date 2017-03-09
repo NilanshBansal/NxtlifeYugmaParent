@@ -34,6 +34,7 @@ export class Dashboard {
   title: string = "Dashboard";
   public planner;
   public openPoll;
+  public surveys;
 
   constructor(public menuCtrl: MenuController,
               public configuration: Configuration,
@@ -81,7 +82,8 @@ export class Dashboard {
     this.nl.hideLoader();
     this.planner = data.planner;
     this.openPoll = data.poll;
-    console.log(this.openPoll)
+    this.surveys = data.survey;
+    console.log(data)
   }
 
   onError(err) {
@@ -103,9 +105,14 @@ export class Dashboard {
     })
   }
 
-  goToPoll1() {
+  goToPoll() {
     this.configuration.setUrl("poll");
     this.appCtrl.getRootNav().setRoot(PollPage);
+  }
+
+  goToSurvey(surveyId) {
+    this.configuration.setUrl("survey");
+
   }
 
 }

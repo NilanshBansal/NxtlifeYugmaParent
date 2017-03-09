@@ -10,6 +10,8 @@
     </button>
   </ion-fab>
 
+  <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
+
   <ion-list *ngIf="planner.length > 0" padding>
     <ion-list-header>
       Today's Event

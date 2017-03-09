@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, App } from 'ionic-angular';
+import { NavController, ModalController, App, Events } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 
 import { PollPage } from '../poll/poll';
@@ -39,12 +39,14 @@ export class Dashboard {
   public circular = [];
   public surveyCount;
   public pollCount;
+  public hasData: boolean = false;
 
   constructor(public menuCtrl: MenuController,
               public configuration: Configuration,
               public cs: ComplaintSuggestion,
               public nl: CustomService,
               public appCtrl: App,
+              public events: Events,
               private surveyService : SurveyService ,
               public modalCtrl: ModalController,
               public eventService: EventService,
@@ -75,16 +77,16 @@ export class Dashboard {
   }
 
   getDashboardData() {
-    this.nl.showLoader();
     this.cs.getDashboardData().subscribe((res) => {
       this.onSuccess(res);
     }, (err) => {
       this.onError(err);
+      this.hasData = true;
     });
   }
 
   onSuccess(data) {
-    this.nl.hideLoader();
+    this.hasData = true;
     this.planner = data.planner;
     this.openPoll = data.poll;
     this.surveys = data.survey;
@@ -95,7 +97,10 @@ export class Dashboard {
   }
 
   onError(err) {
-    this.nl.onError(err);
+    if (err == 401 || err == 0) {
+      this.events.publish("session:expired");
+    }
+    this.nl.showToast(err);
   }
 
   GoToEvent(eventId) {

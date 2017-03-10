@@ -28,7 +28,7 @@
         <ion-card style="border-top:3px solid #00bcd4">
           <ion-item>
             <ion-label item-left>{{d.name}}</ion-label>
-            <ion-radio item-right *ngIf="res.optionTypeId == 1" value= "{{ d.id }}" checked (click)="PollChoiceClicked(d.id)"></ion-radio>
+            <ion-radio item-right *ngIf="res.optionTypeId == 1" value= "{{ d.id }}" checked (click)="buttonEnable(i,c)"></ion-radio>
             <ion-checkbox item-right *ngIf="res.optionTypeId == 2" [(ngModel)]="choice2[i][c]" (click)="buttonEnable(i,c)"></ion-checkbox>
           </ion-item>
         </ion-card>

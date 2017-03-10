@@ -22,7 +22,7 @@
       </ion-item>
     </ion-card>
     <ion-card *ngIf="teachers">
-      <ion-item padding>
+      <ion-item>
         <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Teacher</ion-label>
         <custom-select item-content [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId">
@@ -61,7 +61,7 @@
     </ion-card>
     <ion-card>
       <ion-item class="csInProgress">
-        <ion-label>Complaint As Anonymous</ion-label>
+        <ion-label>Anonymous</ion-label>
         <ion-checkbox formControlName="anonymous">
         </ion-checkbox>
       </ion-item>

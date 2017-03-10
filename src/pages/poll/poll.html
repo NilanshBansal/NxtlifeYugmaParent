@@ -38,7 +38,7 @@
         </ion-item>
       </ion-list>
       <ion-list radio-group [(ngModel)]="relationship" *ngFor="let d of res.subOptions">
-        <ion-card style="border-top:3px solid #00bcd4">
+        <ion-card class="csCardBorder">
           <ion-item>
             <ion-label item-left>{{d.name}}</ion-label>
             <ion-radio item-right *ngIf="res.optionTypeId == 1" ngmodel="choice1" checked (click)="PollChoiceClicked(d.id)"></ion-radio>

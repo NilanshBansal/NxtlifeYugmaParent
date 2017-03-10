@@ -23,22 +23,16 @@
 
   <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
 
-  <ion-list *ngIf="dash_data.planner.length > 0" padding>
+  <ion-list *ngIf="dash_data.planner.length > 0">
     <ion-list-header>
       Today's Event
     </ion-list-header>
-    <section>
-      <div class="timeline-row">
-        <ion-list class="cd-timeline-content dark" *ngFor="let a of dash_data.planner" (click)="GoToEvent(a.id)">
-          <div class="color-col" [style.border-left-color]="a.plannerTypeColor">
-            <h5 class="timeline-title"> {{a.title}} </h5>
-            <span class="startTime"> {{a.startTime}} </span>
-            <span class="startTime"> - {{a.endTime}} </span>
-            <span class="Timelinelocation"> {{a.location}} </span>
-          </div>
-        </ion-list>
-      </div>
-    </section>
+    <ion-list>
+      <ion-card *ngFor="let event of dash_data.planner" padding (click)="GoToEvent(event.id)">
+        <h2>{{event.title}}</h2>
+        <p>{{event.startTime}} - {{event.endTime}} <span class="csRight">{{event.location}}</span></p>
+      </ion-card>
+    </ion-list>
   </ion-list>
 
   <ion-list>

@@ -2,9 +2,10 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 
-<ion-content class="csGrayBackground">
-   <ion-refresher (ionRefresh)="doRefresh($survey)">
-      <ion-refresher-content></ion-refresher-content>
+<ion-content padding class="csGrayBackground">
+
+   <ion-refresher (ionRefresh)="doRefresh($event)">
+       <ion-refresher-content></ion-refresher-content>
    </ion-refresher>
 
   <ion-list>
@@ -21,6 +22,14 @@
           </ion-row>
         </ion-note>
       </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item *ngFor="let a of allsurveys; let ii = index" (click)="getParticularSurvey(a.surveyId,ii)"> 
+      <span> {{a.title}} </span>
+      <span>(  {{ a.questionLength}}  ) </span>
+      <h3> {{ a.createdAt | amTimeAgo }}</h3>
     </ion-item>
   </ion-list>
 

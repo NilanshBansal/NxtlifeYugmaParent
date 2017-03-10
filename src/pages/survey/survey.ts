@@ -1,7 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { SurveyService } from '../../service/survey.service';
-import { NavParams,ToastController , ActionSheetController } from 'ionic-angular';
+import { NavParams,ToastController ,NavController , Events,  ActionSheetController ,ViewController} from 'ionic-angular';
 import { Validators , FormGroup ,FormControl , FormBuilder } from '@angular/forms';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'survey-component',
@@ -20,13 +21,23 @@ export class SurveyPage implements OnInit {
   public options = [];
   public OptionId;
   public surveyResult2 : FormGroup;   
+  public choice2;
+ public indxx;
+ public enabllle = [];
+  choice3;
 
   constructor(private _surveyServ : SurveyService ,
               private navparams : NavParams ,
+              private navCtrl : NavController,
               private _toastCtrl : ToastController,
+              private viewCtrl : ViewController,
+              private _event  : Events ,
               private actionSheetCtrl : ActionSheetController) { 
-
-
+this.onesurveys = this.navparams.get('objj');
+ this.indxx = this.navparams.get('indexx');
+   console.log('onesurveys',this.onesurveys);
+   console.log('this.indxx ',this.indxx );
+//this.choice2[0] = [];
                                  
       //  this.surveyResult2  = new  FormGroup({
       //      "surveyId" : new FormControl(''),
@@ -35,9 +46,18 @@ export class SurveyPage implements OnInit {
 
 
     this.options = [];
+    this.choice2 = [];
 
-   this.onesurveys = this.navparams.get('objj');
-   console.log('onesurveys',this.onesurveys);
+
+    this.choice3 = [];
+
+   for(let i=0; i < this.onesurveys.questionLength;i++){
+      this.choice2[i]=[];
+      this.choice3[i]=[];
+      this.enabllle[i]= false;
+   }
+
+   console.log('questionlength',this.onesurveys.questionLength);
   }
 
   // getSurveys(){
@@ -57,50 +77,110 @@ export class SurveyPage implements OnInit {
 //     this.resdata.splice(index,1);
 // }
 
+  relationship =[{
+    
+  }];
+
   
-  SurveyVoting(resid,questionID,res){
+  public arrayy = [];
+ choice1 = [];
+
+  SurveyVoting(resid,res){
+console.log(this.choice3);
+ console.log('relationship',this.relationship);
+  console.log('choice2',this.choice2);
+
     console.log('resssSurvey',res);
-    console.log('questionId',questionID)
+    let surveyAnswers = [];
+    let surveyAnswer;
+   // console.log('questionId',questionID)
+        for(let i=0; i < this.onesurveys.questionLength;i++)
+       {
+         surveyAnswer = {};
+         console.log("question Id : ",this.onesurveys.questions[i]['questionId']);
+          surveyAnswer['questionId'] = this.onesurveys.questions[i]['questionId'];
+          surveyAnswer['subOptionIds'] = _.without(this.choice3[i],undefined);
+          surveyAnswers.push(surveyAnswer);
+       }
      this.surveyResult = { 
 
                            "surveyId" : resid,
-                           "surveyAnswers":[
-                             this.initSurveyResult(resid,questionID)
-                    ]}
+                           "surveyAnswers":surveyAnswers
+                  }
 
     this._surveyServ.PostSurveys(this.surveyResult)
-      .subscribe( data => { this.surveys = data})
+      .subscribe( data => { this.surveys = data;  this.afterSubmitSurvey(); })
 
-      console.log(this.surveyResult);
+      console.log('surveyResult',this.surveyResult);
+  }
+
+
+afterSubmitSurvey(){
+    this.toast();
+    this._event.publish('survey:done', this.indxx);
+    this.viewCtrl.dismiss();
+   // this.viewCtrl.onDidDismiss((data) => {  });
+}
+
+ public enablle = true
+ //public enabllle = [];
+
+  questionclick(i){
+    this.enabllle[i] = true;
+
+    if(this.enabllle.indexOf(false)===-1){
+      this.enablle = false;
+    }else{
+      this.enablle = true;
+    }
+    //if()
   }
 
   public abc;
   initSurveyResult(resid,questionID){
-          this.abc =    {
-             "questionId" : questionID,
-             "subOptionIds" :[this.OptionId]
-          }                 
-
-        this.surveyResult.surveyAnswers.push(this.abc);
-      //  console.log(this.surveyResult.surveyAnswers);
-
-        //for(let i=0; )
+        for(let i=0; i < this.onesurveys.questionLength;i++)
+       {
+          console.log('tip top');
+       } 
  }
 
-
+public checkItems = {};
 
   enable = true;
+  QuestionIdd ;
+  SurveyChoiceClicked(i,m,id,qid){
+   
+    if(!this.choice2[i].includes(true) ){
+        this.enabllle[i] = false;
+    }
+    else{
+      this.enabllle[i] = true;
+    }
 
-  SurveyChoiceClicked(id,qid){
+  if(this.enabllle.indexOf(false) === -1){
+        this.enablle = false;
+      }else{
+        this.enablle = true;
+      }
+
+    console.log('this.choice2[i][m]',this.choice2[i][m]);
+      if(this.choice2[i][m]){
+        this.choice3[i][m] = this.onesurveys.questions[i].options[m].id;
+      }
+      else{
+        this.choice3[i].splice(m,1);
+      }
+
     // this.Count += 1;
      this.enable = false;
      console.log('clicked',id ,qid);
       this.OptionId = id;
+      this.QuestionIdd = qid;
    }
 
    toast(){
       let toaste = this._toastCtrl.create({
-            message: 'Event deleted successfully',
+            message: 'Survey Submitted Successfully',
              duration: 3000
           });
         toaste.present();

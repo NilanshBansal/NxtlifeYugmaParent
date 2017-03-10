@@ -1,6 +1,6 @@
 import { Component , OnInit } from '@angular/core';
 import { SurveyService } from '../../../service/survey.service';
-import { NavController } from 'ionic-angular';
+import { NavController,ModalController,Events } from 'ionic-angular';
 import { SurveyPage } from '../survey';
 import { CustomService } from '../../../service/custom.service';
 
@@ -16,12 +16,23 @@ export class SurveyListPage implements OnInit{
     public onesurveys;
     public allData = [];
     public EmptySurveys : boolean = false;
-    public currentPage = 0;
+    public currentPage = 1;
+    public indexxx;
 
     constructor(private _surveyServ : SurveyService ,
                 private navCtrl : NavController,
-                private nl : CustomService ){
-        this.getSurveys();
+                private nl : CustomService ,
+                private _event : Events , 
+                private modalCtrl : ModalController){
+         this.getSurveys();
+         this._event.subscribe('survey:done',
+                     (data) => {console.log("DSFFDF", data); this.surveyDoneSplice(data);})
+
+         
+    }
+
+    surveyDoneSplice(data){
+        this.allsurveys.splice(data,1);
     }
 
     getSurveys(){
@@ -31,17 +42,22 @@ export class SurveyListPage implements OnInit{
                 () => console.log('allsurveys',this.allsurveys))
     }
 
-    getParticularSurvey(surveyId){
+    getParticularSurvey(surveyId,indexx){
+        console.log('indexx',indexx);
+        this.indexxx = indexx;
         this._surveyServ.getOneSurvey(surveyId)
-        .subscribe( data => { this.onesurveys = data ; this.clickablesurvey(this.onesurveys)},
+        .subscribe( data => { this.onesurveys = data ; this.clickablesurvey(this.onesurveys,indexx)},
               () => console.log('onesurveys',this.onesurveys))
     }
 
-   clickablesurvey(objj){
-       console.log('clickablesurvey');
-       this.navCtrl.push(SurveyPage,{
-           objj : objj
-       });
+   clickablesurvey(objj,indexx){
+    //    console.log('clickablesurvey');
+    //    this.navCtrl.push(SurveyPage,{
+    //        objj : objj
+    //    });
+
+       let modal4 = this.modalCtrl.create(SurveyPage,{ objj : objj , indexx : indexx});
+       modal4.present();
    }
 
 

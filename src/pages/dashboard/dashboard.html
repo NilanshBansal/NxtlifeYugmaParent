@@ -6,8 +6,19 @@
 
   <ion-fab top right edge>
     <button ion-fab color="cool">
-      <ion-icon  name="create"></ion-icon>
+      <ion-icon name="create"></ion-icon>
     </button>
+    <ion-fab-list side="bottom">
+      <button ion-fab (click)="newComplaint()">
+        <ion-icon style="font-size: 35px;" color="header" name="ios-sad-outline"></ion-icon>
+      </button>
+      <button ion-fab (click)="newSuggestion()">
+        <ion-icon style="font-size: 35px;" color="header" name="ios-bulb-outline"></ion-icon>
+      </button>
+      <button ion-fab (click)="newAppreciation()">
+        <ion-icon style="font-size: 35px;" color="header" name="ios-thumbs-up-outline"></ion-icon>
+      </button>
+    </ion-fab-list>
   </ion-fab>
 
   <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
@@ -33,7 +44,7 @@
   <ion-list>
     <ion-list-header *ngIf="openPoll.length > 0">
       Poll
-      <span style="float:right" *ngIf="surveyCount > 2" (click)="openPollList()">View All ( {{pollCount}} )</span>
+      <span style="float:right" *ngIf="pollCount > 2" (click)="openPollList()">View All ( {{pollCount}} )</span>
     </ion-list-header>
     <ion-list inset *ngFor="let a of openPoll" (click)="goToPoll()">
       <ion-item>
@@ -80,10 +91,10 @@
     <ion-list-header *ngIf="circular.length > 0">
       Circular
     </ion-list-header>
-    <ion-list inset *ngFor="let a of circular">
+    <ion-list inset *ngFor="let a of circular"  (click)="goToCircular(a.id)">
       <ion-item>
         <h2><b>{{a.title}}</b></h2>
-        <h3>Survey Title ans is jsh yrhd</h3>
+        <h3>{{a.description}}</h3>
         <ion-note>
           <ion-row>
             <ion-col width-50 class="no-padding-l" style="color:#535353;">

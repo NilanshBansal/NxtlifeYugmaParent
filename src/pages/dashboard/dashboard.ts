@@ -14,6 +14,7 @@ import { HomeworkTabs } from '../homework/homeworkTabs';
 import { CircularComponent } from '../circular/circular.component';
 import { SurveyListPage } from '../survey/list/survey-list';
 import { EventModalPage } from '../planner/view/planner-view';
+import { CircularViewComponent } from '../circular/view/circular-view';
 
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
@@ -129,6 +130,7 @@ export class Dashboard {
     this.nl.showLoader();
     this.configuration.setUrl("survey");
     this.surveyService.getOneSurvey(surveyId).subscribe((res) => {
+      this.nl.hideLoader();
       this.navCtrl.push(SurveyPage,{
         objj : res
       });
@@ -138,6 +140,12 @@ export class Dashboard {
     });
   }
 
+  goToCircular(circularId) {
+    // this.nl.showLoader();
+    this.configuration.setUrl("circular");
+    this.navCtrl.push(CircularViewComponent, { id : circularId });
+  }
+
   openSuveyList() {
     this.configuration.setUrl("survey");
     this.appCtrl.getRootNav().setRoot(SurveyListPage);
@@ -145,6 +153,18 @@ export class Dashboard {
 
   openPollList() {
     this.goToPoll();
+  }
+
+  newComplaint() {
+
+  }
+
+  newSuggestion() {
+
+  }
+
+  newAppreciation() {
+    
   }
 
 }

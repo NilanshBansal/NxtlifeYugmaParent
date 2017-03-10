@@ -37,7 +37,7 @@ public choice2 = [];
     for(let i=0; i< this.pollLength; i++){
        this.choice1[i]=[];
        this.choice2[i]= [];
-       this.enabllle[i] = false;
+     this.enabllle[i] = true;
        
     }
     console.log('this.pollLength',this.pollLength);
@@ -124,12 +124,19 @@ public pollLength;
        this.enabllle[i] = true;
       }
 
-        if(this.enabllle.indexOf(false) === -1){
-        this.enablle = false;
+        if(this.enabllle.indexOf(true) === -1){
+        this.enabllle[i] = true;
       }else{
-        this.enablle = true;
+        this.enabllle[i] = false;
       }
 
+
+        // if(this.choice2[i][c]){
+        //     this.choice1[i][c] = this.resdata[i].subOptions[c].id;
+        //   }
+        //   else{
+        //     this.choice1[i].splice(c,1);
+        //   }
 
         console.log('this.choice2[i][c]',this.choice2[i][c]);
     }

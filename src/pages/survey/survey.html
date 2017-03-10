@@ -1,36 +1,29 @@
 <ion-header>
-  <ion-toolbar color="primary">
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Survey</ion-title>
-    
-  </ion-navbar>
-  </ion-toolbar>
+   <nl-modal-navbar [title]="title"></nl-modal-navbar>
 </ion-header>
 
 <ion-content class="csGrayBackground">
    
   <ion-list>
     <ion-item>
-      <h1> {{ onesurveys.title }} </h1>
+      <h2> {{ onesurveys.title }} </h2>
     </ion-item>
   </ion-list>
-  <div >
-  <ion-card radio-group [(ngModel)]="relationship" *ngFor="let a of onesurveys.questions">
+  <div  *ngFor="let a of onesurveys.questions; let i=index" >
+  <ion-card radio-group [(ngModel)]="choice3[i][0]">
+    
     
     <ion-card-header >
      <h2>{{ a.questionText }}</h2>
     </ion-card-header>
     <ion-card-content >
       
-        <div *ngFor="let d of a.options">
-        <ion-radio *ngIf="a.questionTypeId == 1" ngmodel="choice1" (click)="SurveyChoiceClicked(d.id,a.questionId)"></ion-radio>
-        <ion-checkbox *ngIf="a.questionTypeId == 2" (click)="SurveyChoiceClicked(d.id,a.questionId)"></ion-checkbox>
+      <div *ngFor="let d of a.options; let m = index;  "  >
+        <ion-radio *ngIf="a.questionTypeId == 1" value="{{d.id}}" (click)="questionclick(i)"></ion-radio>
+        <ion-checkbox *ngIf="a.questionTypeId == 2" [(ngModel)]="choice2[i][m]" (click)="SurveyChoiceClicked(i,m,d.id,a.questionId)"></ion-checkbox>
           <span>{{ d.name }}</span><br/>
-     
          </div> 
+
     </ion-card-content>
 
     <ion-card-content *ngIf=" a.questionTypeId == 3">
@@ -39,14 +32,12 @@
       </ion-textarea>
     </ion-card-content>
 
-       
+      <!--<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>submit!</button> -->
   </ion-card>
-<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>submit!</button>
+
   </div>
  
-
-    
-   <!--<button ion-button color="primary" (click)="SurveyVoting(a.surveyId,a.questionId,c)" right>Done</button>-->
+   <button ion-button color="primary" [disabled]="enablle" (click)="SurveyVoting(onesurveys.surveyId,c)" right>Done</button>
 </ion-content>
 
 <!--[(ngModel)]-->

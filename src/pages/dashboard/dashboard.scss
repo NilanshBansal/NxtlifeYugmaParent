@@ -210,9 +210,40 @@ $cardText: #7b7b7b;
     height:100% !important;
   }
 }
+
+.fab {
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  z-index: 0;
+  display: block;
+  overflow: hidden;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 56px;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color, opacity 100ms linear;
+  background-clip: padding-box;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  contain: strict;
+}
+
 .list-md + ion-list ion-list-header {
-    margin-top: -16px;
-    background: transparent;
-    border-bottom: 2px solid #a3a3a3;
-    font-weight:bold;
+  margin-top: -16px;
+  background: transparent;
+  border-bottom: 2px solid #a3a3a3;
+  font-weight:bold;
 }

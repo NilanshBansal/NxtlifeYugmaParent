@@ -105,13 +105,13 @@ export class NewAppreciationModal implements OnInit {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Are you sure you want to submit ?',
       buttons: [{
-        text: 'Submit',
+        text: 'YES',
         icon: 'ios-paper-outline',
         handler: () => {
           this.onSubmit(newSuggestion);
         }
       }, {
-        text: 'Cancel',
+        text: 'CANCEL',
         icon: 'md-close',
         role: 'cancel',
         handler: () => {
@@ -133,6 +133,7 @@ export class NewAppreciationModal implements OnInit {
 
   onSuccess(res) {
     this.nl.hideLoader();
+    this.nl.showToast("Appreciation post successfully")
     this.viewCtrl.dismiss(res);
   }
 

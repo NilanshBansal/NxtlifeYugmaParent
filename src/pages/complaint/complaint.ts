@@ -61,6 +61,7 @@ export class ComplaintPage {
     } else {
       this.showEmptyMsg(false);
       this.allData = res;
+      console.table(res);
     }
     this.nl.hideLoader();
   }

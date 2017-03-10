@@ -24,11 +24,11 @@
       </span>
     </ion-card-header>
     <ion-card-content>
-        <ion-list radio-group [(ngModel)]="relationship" *ngFor="let d of res.subOptions;  let i of index">
+        <ion-list radio-group [(ngModel)]="relationship" *ngFor="let d of res.subOptions;  let i = index">
           <ion-item>
             <ion-label>{{d.name}}</ion-label>
-            <ion-radio *ngIf="res.optionTypeId == 1" ngmodel="choice1" checked (click)="PollChoiceClicked(d.id,res.id)"></ion-radio>
-            <ion-checkbox *ngIf="res.optionTypeId == 2" [(ngModel)]="checkItems[d.id]" (click)="buttonEnable(d.id,res.id)"></ion-checkbox>
+            <ion-radio *ngIf="res.optionTypeId == 1" ngmodel="choice1[i]" checked (click)="PollChoiceClicked(d.id,res.id)"></ion-radio>
+            <ion-checkbox *ngIf="res.optionTypeId == 2"  [(ngModel)]="checkItems[d.id]" (click)="buttonEnable(d.id,res.id)"></ion-checkbox>
             <!-- res.id -->
 
     <ion-card  *ngFor="let res of resdata" style="background: rgba(128, 128, 128, 0.09);border: 2px solid #00bcd4;">

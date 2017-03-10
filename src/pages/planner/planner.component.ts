@@ -92,6 +92,7 @@ public title : string = "planner";
   public value = {};
   public resdata;
   public userID;
+ // public isCalendarTimeline = false;
   //public Eventvalue = {'id':'','start':'','end':'','title':'','actions':''};
 
   constructor(public eventservice: EventService,
@@ -284,17 +285,29 @@ public title : string = "planner";
   }
 
 
+
+
   public defaultTimelineView = true;
   public TodayEvents = [];
   GetPlannerTodayTimeline(){
 
     this.eventservice.GetTodayTimeline(this.eventMonth).subscribe(
-      data => { this.TodayEvents = data  },
+      data => { this.TodayEvents = data ; this.checkTodayTimeLineEmpty(); },
       err => console.error(err),
       () => console.log('deaf',this.TodayEvents)
     )
 
   //  console.log('todayevents',this.TodayEvents);
+  }
+
+ checkTodayTimeLineEmpty(){
+    console.log('dayPlanners',this.TodayEvents['dayPlanners']);
+    console.log('check dayPlanners',this.TodayEvents['dayPlanners'].length == 0);
+    if(this.TodayEvents['dayPlanners'].length == 0){
+      this.defaultTimelineView = false;
+      this.NoEvents = true;
+      
+    }
   }
 
 

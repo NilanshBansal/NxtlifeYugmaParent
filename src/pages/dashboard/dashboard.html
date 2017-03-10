@@ -9,6 +9,7 @@
       <ion-icon name="create"></ion-icon>
     </button>
     <ion-fab-list side="bottom">
+         Complaints
       <button ion-fab (click)="newComplaint(fab)">
         <ion-icon style="font-size: 35px;" color="header" name="ios-sad-outline"></ion-icon>
       </button>
@@ -21,11 +22,11 @@
     </ion-fab-list>
   </ion-fab>
 
-  <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
-<<<<<<< HEAD
+  <ion-spinner class="circle-spinner" style="display: block;margin: auto;margin-top: 30vh;" *ngIf="!hasData"></ion-spinner>
   
-  <ion-list>
-    <ion-list-header *ngIf="planner.length > 0">
+
+  <ion-list *ngIf="dash_data.planner.length > 0">
+    <ion-list-header>
       Today's Event
     </ion-list-header>
     <ion-list inset>
@@ -43,33 +44,16 @@
           </ion-row>
         </ion-note>
       </ion-item>
-=======
-
-  <ion-list *ngIf="dash_data.planner.length > 0">
-    <ion-list-header>
-      Today's Event
-    </ion-list-header>
-    <ion-list>
-      <ion-card *ngFor="let event of dash_data.planner" padding (click)="GoToEvent(event.id)">
-        <h2>{{event.title}}</h2>
-        <p>{{event.startTime}} - {{event.endTime}} <span class="csRight">{{event.location}}</span></p>
-      </ion-card>
->>>>>>> b716aae4814d90b2dde094356f0af70ca1cc0102
     </ion-list>
   </ion-list>
 
   <ion-list>
     <ion-list-header *ngIf="dash_data.openPoll.length > 0">
-      Poll
-      <span style="float:right" *ngIf="dash_data.pollCount > 2" (click)="openPollList()">View All ( {{dash_data.pollCount}} )</span>
+      Poll <ion-badge> {{dash_data.pollCount}} </ion-badge>
+      <button ion-button item-right round small *ngIf="dash_data.pollCount > 2" (click)="openPollList()">View All</button>
     </ion-list-header>
-<<<<<<< HEAD
     <ion-list inset>
-      <ion-item *ngFor="let a of openPoll" (click)="goToPoll()">
-=======
-    <ion-list inset *ngFor="let a of dash_data.openPoll" (click)="goToPoll()">
-      <ion-item>
->>>>>>> b716aae4814d90b2dde094356f0af70ca1cc0102
+      <ion-item *ngFor="let a of dash_data.openPoll" (click)="goToPoll()">
         <h2><b>{{a.question}}</b></h2>
         <h3>{{a.optionTypeName}}</h3>
         <ion-note>
@@ -88,17 +72,11 @@
   
   <ion-list>
     <ion-list-header *ngIf="dash_data.surveys.length > 0">
-      Survey
-      <span style="float:right" *ngIf="dash_data.surveyCount > 2" (click)="openSuveyList()">View All ( {{dash_data.surveyCount}} )</span>
+      Survey   <ion-badge>{{dash_data.surveyCount}}</ion-badge>
+      <button ion-button item-right round small *ngIf="dash_data.surveyCount > 2" (click)="openSuveyList()">View All</button>
     </ion-list-header>
-<<<<<<< HEAD
-
     <ion-list inset>
-      <ion-item *ngFor="let a of surveys" (click)="goToSurvey(a.surveyId)">
-=======
-    <ion-list inset *ngFor="let a of dash_data.surveys" (click)="goToSurvey(a.surveyId)">
-      <ion-item>
->>>>>>> b716aae4814d90b2dde094356f0af70ca1cc0102
+      <ion-item *ngFor="let a of dash_data.surveys" (click)="goToSurvey(a.surveyId)">
         <h2><b>{{a.title}}</b></h2>
         <h3>{{a.description}}</h3>
         <ion-note>
@@ -117,16 +95,10 @@
 
   <ion-list>
     <ion-list-header *ngIf="dash_data.circular.length > 0">
-      Circular
+      Circular <ion-badge> </ion-badge>
     </ion-list-header>
-<<<<<<< HEAD
-
     <ion-list inset>
-      <ion-item *ngFor="let a of circular">
-=======
-    <ion-list inset *ngFor="let a of dash_data.circular"  (click)="goToCircular(a.id)">
-      <ion-item>
->>>>>>> b716aae4814d90b2dde094356f0af70ca1cc0102
+      <ion-item *ngFor="let a of dash_data.circular"  (click)="goToCircular(a.id)">
         <h2><b>{{a.title}}</b></h2>
         <h3>{{a.description}}</h3>
         <ion-note>

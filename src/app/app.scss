@@ -37,6 +37,9 @@ $inherit : inherit;
 .no-padding-b {
   padding-bottom: 0px !important;
 }
+.csBackgroundGray {
+    background: $csBackgroundColor;
+}
 .no-padding-t {
   padding-top: 0px !important;
 }

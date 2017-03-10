@@ -52,9 +52,7 @@ public EmptyPolls = false;
 }
 
 
-  // CheckIndex(res){
-  //    this.RemoveItem(res);
-  // }
+ 
 
   public PollResult;
   public OptionId;

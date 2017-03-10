@@ -16,6 +16,7 @@ import { SurveyListPage } from '../survey/list/survey-list';
 import { EventModalPage } from '../planner/view/planner-view';
 import { CircularViewComponent } from '../circular/view/circular-view';
 import { newComplaintModal } from '../complaint/new/newComplaintModal';
+import { NewAppreciationModal } from '../appreciation/new/appreciation';
 
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
@@ -34,14 +35,29 @@ import { SurveyService } from '../../service/survey.service';
 
 export class Dashboard {
 
-  title: string = "Dashboard";
-  public planner = [];
-  public openPoll = [];
-  public surveys = [];
-  public circular = [];
-  public surveyCount;
-  public pollCount;
+  public title: string = "Dashboard";
   public hasData: boolean = false;
+
+  public dash_data = {
+    planner: [],
+    openPoll: [],
+    surveys: [],
+    circular: [],
+    surveyCount: "",
+    pollCount: ""
+  }
+
+  public page = {
+    complaint: ComplaintPage,
+    suggestion: SuggestionTabs,
+    planner: PlannerComponent,
+    appreciation: AppreciationTabs,
+    rating: StudentRating,
+    poll: PollPage,
+    homework: HomeworkTabs,
+    circular: CircularComponent,
+    survey: SurveyListPage
+  }
 
   constructor(public menuCtrl: MenuController,
               public configuration: Configuration,
@@ -57,28 +73,17 @@ export class Dashboard {
     this.configuration.setUrl("dashboard");
   }
 
-  public page = {
-    complaint: ComplaintPage,
-    suggestion: SuggestionTabs,
-    planner: PlannerComponent,
-    appreciation: AppreciationTabs,
-    rating: StudentRating,
-    poll: PollPage,
-    homework: HomeworkTabs,
-    circular: CircularComponent,
-    survey: SurveyListPage
-  }
-
-  openPage(componentName, urlName) {
+  public openPage(componentName, urlName) {
     this.configuration.setUrl(urlName);
     this.navCtrl.setRoot(componentName);
   }
 
-  ionViewWillEnter() {
+  public ionViewWillEnter() {
     this.getDashboardData();
   }
 
-  getDashboardData() {
+  public getDashboardData() {
+    this.configuration.setUrl("dashboard");
     this.cs.getDashboardData().subscribe((res) => {
       this.onSuccess(res);
     }, (err) => {
@@ -87,25 +92,26 @@ export class Dashboard {
     });
   }
 
-  onSuccess(data) {
+  public onSuccess(data) {
     this.hasData = true;
-    this.planner = data.planner;
-    this.openPoll = data.poll;
-    this.surveys = data.survey;
-    this.circular = data.circular;
-    this.surveyCount = data.surveyCount;
-    this.pollCount = data.pollCount;
-    console.log(data)
+    this.dash_data = {
+      planner: data.planner,
+      openPoll: data.poll,
+      surveys: data.survey,
+      circular: data.circular,
+      surveyCount: data.surveyCount,
+      pollCount : data.pollCount
+    }
   }
 
-  onError(err) {
+  public onError(err) {
     if (err == 401 || err == 0) {
       this.events.publish("session:expired");
     }
     this.nl.showToast(err);
   }
 
-  GoToEvent(eventId) {
+  public GoToEvent(eventId) {
     this.nl.showLoader();
     this.configuration.setUrl("planner");
     this.eventService.GetParticularEvent(eventId).subscribe((res) => {
@@ -117,17 +123,17 @@ export class Dashboard {
     });
   }
 
-  openModal(data) {
+  public openModal(data) {
     let modal = this.modalCtrl.create(EventModalPage, { eventsss : data });
     modal.present();
   }
 
-  goToPoll() {
+  public goToPoll() {
     this.configuration.setUrl("poll");
     this.appCtrl.getRootNav().setRoot(PollPage);
   }
 
-  goToSurvey(surveyId) {
+  public goToSurvey(surveyId) {
     this.nl.showLoader();
     this.configuration.setUrl("survey");
     this.surveyService.getOneSurvey(surveyId).subscribe((res) => {
@@ -141,37 +147,39 @@ export class Dashboard {
     });
   }
 
-  goToCircular(circularId) {
-    // this.nl.showLoader();
+  public goToCircular(circularId) {
     this.configuration.setUrl("circular");
     this.navCtrl.push(CircularViewComponent, { id : circularId });
   }
 
-  openSuveyList() {
+  public openSuveyList() {
     this.configuration.setUrl("survey");
     this.appCtrl.getRootNav().setRoot(SurveyListPage);
   }
 
-  openPollList() {
+  public openPollList() {
     this.goToPoll();
   }
 
-  newComplaint(fab: FabContainer) {
+  public newComplaint(fab: FabContainer) {
     this.configuration.setUrl("complaint");
     fab.close();
     let createNew = this.modalCtrl.create(newComplaintModal);
     createNew.present();
   }
 
-  newSuggestion(fab: FabContainer) {
+  public newSuggestion(fab: FabContainer) {
     this.configuration.setUrl("suggestion");
     fab.close();
     let createNew = this.modalCtrl.create(newComplaintModal);
     createNew.present();
   }
 
-  newAppreciation(fab: FabContainer) {
+  public newAppreciation(fab: FabContainer) {
     fab.close();
+    this.configuration.setUrl("appreciation");
+    let createNew = this.modalCtrl.create(NewAppreciationModal);
+    createNew.present();
   }
 
 }

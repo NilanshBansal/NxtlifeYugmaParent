@@ -174,13 +174,13 @@ export class newComplaintModal implements OnInit {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Are you sure you want to submit ?',
       buttons: [{
-        text: 'Submit',
+        text: 'YES',
         icon: 'ios-paper-outline',
         handler: () => {
           this.saveComplaint(newComplaint);
         }
       }, {
-        text: 'Cancel',
+        text: 'CANCEL',
         icon: 'md-close',
         role: 'cancel',
         handler: () => {

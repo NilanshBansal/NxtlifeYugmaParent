@@ -1,5 +1,5 @@
 <ion-header>
-    <nl-navbar [title]="title"></nl-navbar>
+  <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 
 <ion-content padding class="csGrayBackground">
@@ -8,17 +8,32 @@
        <ion-refresher-content></ion-refresher-content>
    </ion-refresher>
 
+  <ion-list>
+    <ion-item *ngFor="let a of allsurveys" (click)="getParticularSurvey(a.surveyId)">
+      <div class="csIndicator" [style.border-left-color]="'#999'">
+        <h2><b> {{a.title}} </b></h2>
+        <h3>Click to give survey</h3>
+        <ion-note >
+          <ion-row>
+            <ion-col width-50 class="no-padding-l" style="color:#535353;"><ion-icon name="clock"></ion-icon><span>{{ a.createdAt | amTimeAgo }}</span>
+            </ion-col>
+            <ion-col width-50 class="no-padding-l" [style.color] = "'#999'"><ion-icon name="at"></ion-icon><span>{{ a.questionTypeName }}</span>
+            </ion-col>
+          </ion-row>
+        </ion-note>
+      </div>
+    </ion-item>
+  </ion-list>
 
-    <ion-list>
-        <ion-item *ngFor="let a of allsurveys; let ii = index" (click)="getParticularSurvey(a.surveyId,ii)"> 
-            <span> {{a.title}} </span>
-            <span>(  {{ a.questionLength}}  ) </span>
-            <h3> {{ a.createdAt | amTimeAgo }}</h3>
-        </ion-item>
-    </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let a of allsurveys; let ii = index" (click)="getParticularSurvey(a.surveyId,ii)"> 
+      <span> {{a.title}} </span>
+      <span>(  {{ a.questionLength}}  ) </span>
+      <h3> {{ a.createdAt | amTimeAgo }}</h3>
+    </ion-item>
+  </ion-list>
 
-      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
 </ion-content>

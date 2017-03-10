@@ -24,8 +24,10 @@
           <div class="csParagraph"><b>{{res.question}}</b></div>
         </ion-item>
       </ion-list>
+
       <ion-list  *ngFor="let d of res.subOptions; let c=index">
         <ion-card style="border-top:3px solid #00bcd4">
+
           <ion-item>
             <ion-label item-left>{{d.name}}</ion-label>
             <ion-radio item-right *ngIf="res.optionTypeId == 1" value= "{{ d.id }}" checked (click)="buttonEnable(i,c)"></ion-radio>

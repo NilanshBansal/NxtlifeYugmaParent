@@ -148,7 +148,7 @@ ion-toolbar {
     background-color: transparent;
 }
 .csGrayBackground {
-    background: $csBackgroundColor;
+    background: url('../assets/svg/gBoard.svg');
 }
 .csParagraph {
     font-size: 1.4rem;
@@ -248,4 +248,7 @@ button{
 }
 .csCount{
     margin: -7px 0px 0px 2px;
+}
+.csCardBorder{
+    border-top:3px solid $color1;
 }

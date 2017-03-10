@@ -48,6 +48,7 @@ export class ComplaintSuggestion {
   }
 
   public saveComplaint(complaintData): any {
+    this.serverUrl = this.configuration.Server;
     return this.http.post(this.serverUrl, complaintData)
                     .map(this.extractData)
                     .catch(this.handleError);

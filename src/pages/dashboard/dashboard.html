@@ -4,18 +4,18 @@
 
 <ion-content class="homeBackground csGrayBackground">
 
-  <ion-fab top right edge>
+  <ion-fab top right edge #fab>
     <button ion-fab color="cool">
       <ion-icon name="create"></ion-icon>
     </button>
     <ion-fab-list side="bottom">
-      <button ion-fab (click)="newComplaint()">
+      <button ion-fab (click)="newComplaint(fab)">
         <ion-icon style="font-size: 35px;" color="header" name="ios-sad-outline"></ion-icon>
       </button>
-      <button ion-fab (click)="newSuggestion()">
+      <button ion-fab (click)="newSuggestion(fab)">
         <ion-icon style="font-size: 35px;" color="header" name="ios-bulb-outline"></ion-icon>
       </button>
-      <button ion-fab (click)="newAppreciation()">
+      <button ion-fab (click)="newAppreciation(fab)">
         <ion-icon style="font-size: 35px;" color="header" name="ios-thumbs-up-outline"></ion-icon>
       </button>
     </ion-fab-list>

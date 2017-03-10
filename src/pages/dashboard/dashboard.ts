@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, App, Events } from 'ionic-angular';
+import { NavController, ModalController, App, Events, FabContainer } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 
 import { PollPage } from '../poll/poll';
@@ -15,6 +15,7 @@ import { CircularComponent } from '../circular/circular.component';
 import { SurveyListPage } from '../survey/list/survey-list';
 import { EventModalPage } from '../planner/view/planner-view';
 import { CircularViewComponent } from '../circular/view/circular-view';
+import { newComplaintModal } from '../complaint/new/newComplaintModal';
 
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
@@ -155,16 +156,22 @@ export class Dashboard {
     this.goToPoll();
   }
 
-  newComplaint() {
-
+  newComplaint(fab: FabContainer) {
+    this.configuration.setUrl("complaint");
+    fab.close();
+    let createNew = this.modalCtrl.create(newComplaintModal);
+    createNew.present();
   }
 
-  newSuggestion() {
-
+  newSuggestion(fab: FabContainer) {
+    this.configuration.setUrl("suggestion");
+    fab.close();
+    let createNew = this.modalCtrl.create(newComplaintModal);
+    createNew.present();
   }
 
-  newAppreciation() {
-    
+  newAppreciation(fab: FabContainer) {
+    fab.close();
   }
 
 }

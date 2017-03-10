@@ -19,15 +19,29 @@ export class PollPage implements OnInit {
   public theItem;
   public allData;
   public currentPage = 1;
+  public enabllle = [];
   //public pollVote : FormGroup;
   constructor(private pollServ : PollService,
               private nl : CustomService) {
 
 
+              
+
    }
 
 public EmptyPolls = false;
-
+public choice1 = [];
+public choice2 = [];
+  POllLastFunction(){
+    this.GetLengthPoll();
+    for(let i=0; i< this.pollLength; i++){
+       this.choice1[i]=[];
+       this.choice2[i]= [];
+       this.enabllle[i] = false;
+       
+    }
+    console.log('this.pollLength',this.pollLength);
+  }
 
 
   PollFunc(){
@@ -39,10 +53,16 @@ public EmptyPolls = false;
     //    this.nl.hideLoader();
         console.log('Polls',this.EmptyPolls);
       } else{
-      this.resdata = datas; console.log('data') } this.nl.hideLoader()},
+      this.resdata = datas; this.POllLastFunction(); console.log('data') } this.nl.hideLoader()},
       //(err) => {console.log('err'); this.nl.hideLoader()},
       () => console.log('Polls',this.resdata)
     )};
+
+public pollLength;
+  GetLengthPoll(){
+    this.pollLength=this.resdata.length;
+    console.log('pollLength',this.pollLength);
+  }
 
   RemoveItem(theItem) {
     console.log('theItem',theItem);
@@ -56,17 +76,6 @@ public EmptyPolls = false;
 
   public PollResult;
   public OptionId;
-
-  //  PollVoting(resid,res){
-  //    this.PollResult = {
-  //      "pollId" : resid,
-  //      "optionIds" : [this.OptionId]
-  //    };
-  //    this.pollServ.PollVote(this.PollResult).subscribe(
-  //      data => { this.responseData = data ; this.RemoveItem(res); },
-  //      () => console.log(this.responseData),
-  //      )
-  //  }
 
 
     PollMulVoting(resid,res){
@@ -87,7 +96,7 @@ public EmptyPolls = false;
    public pollIDD;
    PollChoiceClicked(id,pollid){
     // this.Count += 1;
-    this.buttonEnable(id,pollid);
+   // this.buttonEnable(id,pollid);
      this.enable = false;
      console.log('clicked',id);
      console.log('poll id',pollid);
@@ -101,12 +110,28 @@ public EmptyPolls = false;
 
     public arrayy = [];
     public enable = true;
-    public mul_enable = true;
+    public enablle = true
 
-    buttonEnable(id,pollid){
-      console.log('clicked',id);
-     console.log('poll id',pollid);
-       this.mul_enable = false;
+    buttonEnable(i,c){
+      console.log('i',i);
+     console.log('c',c);
+       //this.enablle = false;
+
+      if(!this.choice2[i].includes(true) ){
+        this.enabllle[i] = false;
+      }
+      else{
+       this.enabllle[i] = true;
+      }
+
+        if(this.enabllle.indexOf(false) === -1){
+        this.enablle = false;
+      }else{
+        this.enablle = true;
+      }
+
+
+        console.log('this.choice2[i][c]',this.choice2[i][c]);
     }
 
    PollChoiceMultiple(){
@@ -154,7 +179,7 @@ public EmptyPolls = false;
   ngOnInit() : void{
 
      this.PollFunc();
-  
+    // this.POllLastFunction();
   }
 
 }

@@ -17,7 +17,8 @@
     <br>No Record Found
   </ion-list>
   
-    <ion-card  *ngFor="let res of resdata; let i=index" style="background: rgba(128, 128, 128, 0.09);border: 2px solid #00bcd4;">
+    <ion-card  *ngFor="let res of resdata" style="background: rgba(128, 128, 128, 0.09);border: 2px solid #00bcd4;">
+
       <ion-list no-border>
         <ion-item>
           <div class="csParagraph"><b>{{res.question}}</b></div>

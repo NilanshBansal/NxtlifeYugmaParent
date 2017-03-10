@@ -7,15 +7,14 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <div *ngFor="let a of circulars">
-      <ion-item *ngFor="let b of a.dayCirculars" (click)="ranFunc(b.id)">
+    <!--<div *ngFor="let a of circulars">-->
+      <ion-item *ngFor="let b of circulars" (click)="ranFunc(b.id)">
         <div class="csIndicator" [style.border-left-color]="b.circularTypeColor">
           <h2><b>{{b.title}}</b></h2>
-          <span class="csRight">{{ b.start}}</span>
-          <h3>Click to view</h3>
+          <h3>{{b.description}}</h3>
           <ion-note >
             <ion-row>
-              <ion-col width-50 class="no-padding-l" style="color:#535353;"><ion-icon name="clock"></ion-icon><span>{{ a.fullDate | amTimeAgo}}</span>
+              <ion-col width-50 class="no-padding-l" style="color:#535353;"><ion-icon name="clock"></ion-icon><span>{{ b.start | amDateFormat: 'DD/MM/YYYY'}}</span>
               </ion-col>
               <ion-col width-50 class="no-padding-l" [style.color] = "b.circularTypeColor"><ion-icon name="at"></ion-icon><span>{{ b.circularTypeName}}</span>
               </ion-col>
@@ -23,6 +22,6 @@
           </ion-note>
         </div>
       </ion-item>
-    </div>
+    <!--</div>-->
   </ion-list>
 </ion-content>

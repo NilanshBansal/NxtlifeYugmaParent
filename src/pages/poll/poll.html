@@ -1,54 +1,39 @@
 <ion-header>
   <ion-toolbar color="primary">
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Poll</ion-title>
-  </ion-navbar>
+      <ion-title>Poll</ion-title>
+    </ion-navbar>
   </ion-toolbar>
 </ion-header>
 <ion-content class="csGrayBackground">
   <ion-refresher (ionRefresh)="doRefresh($poll)">
-      <ion-refresher-content></ion-refresher-content>
+    <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list class="no-comment" *ngIf="EmptyPolls">
     <ion-icon name="stats"></ion-icon>
     <br>No Record Found
   </ion-list>
-  
-  <!--<ion-card  *ngFor="let res of resdata">
-    <ion-card-header>
-      <span>
+  <ion-card  *ngFor="let res of resdata" class="csBackgroundGray" style="border: 2px solid #00bcd4;">
+    <ion-list no-border>
+      <ion-item>
         <div class="csParagraph"><b>{{res.question}}</b></div>
-      </span>
-    </ion-card-header>
-    <ion-card-content>
-        <ion-list radio-group [(ngModel)]="relationship" *ngFor="let d of res.subOptions;  let i = index">
-          <ion-item>
-            <ion-label>{{d.name}}</ion-label>
-            <ion-radio *ngIf="res.optionTypeId == 1" ngmodel="choice1[i]" checked (click)="PollChoiceClicked(d.id,res.id)"></ion-radio>
-            <ion-checkbox *ngIf="res.optionTypeId == 2"  [(ngModel)]="checkItems[d.id]" (click)="buttonEnable(d.id,res.id)"></ion-checkbox>
-            <!-- res.id -->
-
-    <ion-card  *ngFor="let res of resdata" style="background: rgba(128, 128, 128, 0.09);border: 2px solid #00bcd4;">
-      <ion-list no-border>
+      </ion-item>
+    </ion-list>
+    <ion-list radio-group [(ngModel)]="relationship" *ngFor="let d of res.subOptions">
+      <ion-card class="csCardBorder">
         <ion-item>
-          <div class="csParagraph"><b>{{res.question}}</b></div>
+          <ion-label item-left>{{d.name}}</ion-label>
+          <ion-radio item-right *ngIf="res.optionTypeId == 1" ngmodel="choice1" checked (click)="PollChoiceClicked(d.id)"></ion-radio>
+          <ion-checkbox item-right *ngIf="res.optionTypeId == 2" [(ngModel)]="checkItems[d.id]" (click)="buttonEnable()"></ion-checkbox>
         </ion-item>
-      </ion-list>
-      <ion-list radio-group [(ngModel)]="relationship" *ngFor="let d of res.subOptions">
-        <ion-card class="csCardBorder">
-          <ion-item>
-            <ion-label item-left>{{d.name}}</ion-label>
-            <ion-radio item-right *ngIf="res.optionTypeId == 1" ngmodel="choice1" checked (click)="PollChoiceClicked(d.id)"></ion-radio>
-            <ion-checkbox item-right *ngIf="res.optionTypeId == 2" [(ngModel)]="checkItems[d.id]" (click)="buttonEnable()"></ion-checkbox>
-          </ion-item>
-        </ion-card>
-      </ion-list>
-      <div padding>
-        <button full *ngIf="res.optionTypeId == 1" ion-button color="primary"  [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>
-        <button full *ngIf="res.optionTypeId == 2" ion-button color="primary" [disabled]="mul_enable" (click)="PollMulVoting(res.id,res)">Vote!</button>
+      </ion-card>
+    </ion-list>
+    <div padding>
+      <button full *ngIf="res.optionTypeId == 1" ion-button color="primary" [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>
+      <button full *ngIf="res.optionTypeId == 2" ion-button color="primary" [disabled]="mul_enable" (click)="PollMulVoting(res.id,res)">Vote!</button>
     </div>
   </ion-card>
 </ion-content>

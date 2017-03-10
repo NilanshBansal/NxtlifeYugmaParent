@@ -38,7 +38,7 @@
   <ion-list>
     <ion-list-header *ngIf="dash_data.openPoll.length > 0">
       Poll
-      <span style="float:right" *ngIf="dash_data.pollCount > 2" (click)="openPollList()">View All ( {{pollCount}} )</span>
+      <span style="float:right" *ngIf="dash_data.pollCount > 2" (click)="openPollList()">View All ( {{dash_data.pollCount}} )</span>
     </ion-list-header>
     <ion-list inset *ngFor="let a of dash_data.openPoll" (click)="goToPoll()">
       <ion-item>
@@ -61,7 +61,7 @@
   <ion-list>
     <ion-list-header *ngIf="dash_data.surveys.length > 0">
       Survey
-      <span style="float:right" *ngIf="dash_data.surveyCount > 2" (click)="openSuveyList()">View All ( {{surveyCount}} )</span>
+      <span style="float:right" *ngIf="dash_data.surveyCount > 2" (click)="openSuveyList()">View All ( {{dash_data.surveyCount}} )</span>
     </ion-list-header>
     <ion-list inset *ngFor="let a of dash_data.surveys" (click)="goToSurvey(a.surveyId)">
       <ion-item>

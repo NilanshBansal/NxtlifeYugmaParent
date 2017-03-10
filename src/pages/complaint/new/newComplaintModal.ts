@@ -144,54 +144,62 @@ export class newComplaintModal implements OnInit {
 
   }
 
-  presentActionSheet(newComplaint) {
+  onSubmit() {
+
+    if (this.newComplaint.invalid) {
+      return;
+    }
+
+    let newComplaint = _.extend(this.newComplaint.value, {
+      againstCategoryId: this.newComplaint.value.category.id,
+      studentId: this.newComplaint.value.student.id
+    });
+
+    newComplaint = _.pick(newComplaint, function(value, key, object) {
+      return _.isNumber(value) || _.isString(value);
+    });
+
+    newComplaint.anonymous = this.newComplaint.value.anonymous;
+
+    if (newComplaint.childCategory) {
+      newComplaint.againstCategoryId = newComplaint.childCategory;
+      delete newComplaint.childCategory;
+    }
+
+    this.presentActionsheet(newComplaint);
+
+  }
+
+  presentActionsheet(newComplaint) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Are you sure you want to submit ?',
-      buttons: [
-        {
-          text: 'Submit',
-          icon: 'ios-paper-outline',
-          handler: () => {
-            this.nl.showLoader();
-            this.c.saveComplaint(newComplaint).subscribe((complaint) => {
-              this.nl.hideLoader();
-              this.viewCtrl.dismiss(complaint);
-            }, (err) => {
-              this.onError(err);
-            });
-          }
-        },{
-          text: 'Cancel',
-          icon: 'md-close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+      buttons: [{
+        text: 'Submit',
+        icon: 'ios-paper-outline',
+        handler: () => {
+          this.saveComplaint(newComplaint);
         }
-      ]
+      }, {
+        text: 'Cancel',
+        icon: 'md-close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
     });
     actionSheet.present();
   }
 
-  saveComplaint(){
-    if (this.newComplaint.invalid) {
-      console.log("Complaint invalid")
-    } else {
-
-      let newComplaint = _.extend(this.newComplaint.value, {
-        againstCategoryId: this.newComplaint.value.category.id,
-        studentId: this.newComplaint.value.student.id
-      });
-      newComplaint = _.pick(newComplaint, function(value, key, object) {
-        return _.isNumber(value) || _.isString(value);
-      });
-      newComplaint.anonymous = this.newComplaint.value.anonymous;
-      if (newComplaint.childCategory) {
-        newComplaint.againstCategoryId = newComplaint.childCategory;
-        delete newComplaint.childCategory;
-      }
-      this.presentActionSheet(newComplaint);
-    }
+  saveComplaint(data) {
+    this.nl.showLoader();
+    this.c.saveComplaint(data).subscribe((complaint) => {
+      this.nl.hideLoader();
+      this.viewCtrl.dismiss(complaint);
+      this.nl.showToast(this.nl.getHeaderText() + " created successfully");
+    }, (err) => {
+      this.onError(err);
+    });
   }
 
 }

@@ -2,7 +2,7 @@
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content class="newComplaint csGrayBackground">
-  <form name="newcomplaint" [formGroup]="newComplaint" (ngSubmit)="saveComplaint()" novalidate>
+  <form name="newcomplaint" [formGroup]="newComplaint" (ngSubmit)="onSubmit()" novalidate>
     <ion-card>
       <ion-item>
         <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>

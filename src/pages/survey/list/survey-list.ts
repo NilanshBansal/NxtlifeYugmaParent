@@ -38,7 +38,16 @@ export class SurveyListPage implements OnInit{
     getSurveys(){
         this.nl.showLoader();
         this._surveyServ.getallsurveys(1)
-            .subscribe( data => { this.allsurveys = data ; this.nl.hideLoader();  console.log('surveys',this.allsurveys);},
+            .subscribe( data => {
+                if (data.status === 204) {
+                    this.EmptySurveys = true;
+                } else {
+                 this.allsurveys = data ; 
+                 this.EmptySurveys = false;
+                  console.log('surveys',this.allsurveys);
+                }
+                 this.nl.hideLoader(); 
+            },
                 () => console.log('allsurveys',this.allsurveys))
     }
 

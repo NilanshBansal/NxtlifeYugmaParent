@@ -5,7 +5,7 @@
   <ion-card>
     <ion-item>
       <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
-      <ion-label>Child Name</ion-label>
+      <ion-label>Student Name</ion-label>
       <custom-select item-content [(ngModel)]="child" (ngModelChange)="selectChild($event)">
         <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
       </custom-select>

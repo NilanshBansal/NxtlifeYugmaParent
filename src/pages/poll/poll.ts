@@ -19,15 +19,29 @@ export class PollPage implements OnInit {
   public theItem;
   public allData;
   public currentPage = 1;
+  public enabllle = [];
   //public pollVote : FormGroup;
   constructor(private pollServ : PollService,
               private nl : CustomService) {
 
 
+              
+
    }
 
 public EmptyPolls = false;
-
+public choice1 = [];
+public choice2 = [];
+  POllLastFunction(){
+    this.GetLengthPoll();
+    for(let i=0; i< this.pollLength; i++){
+       this.choice1[i]=[];
+       this.choice2[i]= [];
+     this.enabllle[i] = true;
+       
+    }
+    console.log('this.pollLength',this.pollLength);
+  }
 
 
   PollFunc(){
@@ -39,48 +53,41 @@ public EmptyPolls = false;
     //    this.nl.hideLoader();
         console.log('Polls',this.EmptyPolls);
       } else{
-      this.resdata = datas; console.log('data') } this.nl.hideLoader()},
+      this.resdata = datas; this.POllLastFunction(); console.log('data') } this.nl.hideLoader()},
       //(err) => {console.log('err'); this.nl.hideLoader()},
       () => console.log('Polls',this.resdata)
     )};
 
+public pollLength;
+  GetLengthPoll(){
+    this.pollLength=this.resdata.length;
+    console.log('pollLength',this.pollLength);
+  }
+
   RemoveItem(theItem) {
-    console.log('theItem',theItem);
-    let index = this.resdata.indexOf(theItem);
-    console.log('index',index);
-    this.resdata.splice(index,1);
+   // console.log('theItem',theItem);
+   // let index = this.resdata.indexOf(theItem);
+   // console.log('index',index);
+    this.resdata.splice(theItem,1);
 }
 
 
-  // CheckIndex(res){
-  //    this.RemoveItem(res);
-  // }
+ 
 
   public PollResult;
   public OptionId;
 
-  //  PollVoting(resid,res){
-  //    this.PollResult = {
-  //      "pollId" : resid,
-  //      "optionIds" : [this.OptionId]
-  //    };
-  //    this.pollServ.PollVote(this.PollResult).subscribe(
-  //      data => { this.responseData = data ; this.RemoveItem(res); },
-  //      () => console.log(this.responseData),
-  //      )
-  //  }
-
-
-    PollMulVoting(resid,res){
+  public resID;
+    PollMulVoting(resid,i,res){
       console.log('pollmul res',res);
-      this.PollChoiceMultiple();
-
+      
+      this.resID = resid;
      this.PollResult = {
-       "pollId" : resid,
-       "optionIds" : this.arrayy
+       "pollId" : this.resID,
+       "optionIds" : _.without(this.choice1[i],undefined)
      };
      this.pollServ.PollVote(this.PollResult).subscribe(
-       data => { this.responseData = data ; this.RemoveItem(res); },
+       data => { this.responseData = data ; this.RemoveItem(i); },
        () => console.log(this.responseData),
        )
    }
@@ -89,7 +96,7 @@ public EmptyPolls = false;
    public pollIDD;
    PollChoiceClicked(id,pollid){
     // this.Count += 1;
-    this.buttonEnable(id,pollid);
+   // this.buttonEnable(id,pollid);
      this.enable = false;
      console.log('clicked',id);
      console.log('poll id',pollid);
@@ -103,28 +110,82 @@ public EmptyPolls = false;
 
     public arrayy = [];
     public enable = true;
-    public mul_enable = true;
+    public enablle = true
 
-    buttonEnable(id,pollid){
-      console.log('clicked',id);
-     console.log('poll id',pollid);
-       this.mul_enable = false;
+    buttonEnable(i,c,id,pollid){
+      console.log('i',i);
+     console.log('c',c);
+       //this.enablle = false;
+//   this.pollIDD = pollid;
+//this.OptionId = id;
+
+
+
+    //  this.PollChoiceMultiple();
+
+      if(!this.choice2[i].includes(true) ){
+        this.enabllle[i] = true;
+      }
+      else{
+       this.enabllle[i] = false;
+      }
+
+      //   if(this.enabllle.indexOf(true) === -1){
+      //   this.enabllle[i] = true;
+      // }else{
+      //   this.enabllle[i] = false;
+      // }
+
+
+        if(this.choice2[i][c]){
+            this.choice1[i][c] = this.resdata[i].subOptions[c].id;
+          }
+          else{
+            this.choice1[i].splice(c,1);
+          }
+
+        console.log('this.choice2[i][c]',this.choice2[i][c]);
+      //   console.log('this.choice2[i][c]',this.choice2[i][c]);
+
+        // if(this.choice2[i][c] == true)
+        // {
+        //   this.arrayy.push(this.resdata[i].subOptions[c].id);
+        //   console.log(this.arrayy);
+        // }
+        // else{
+        //   this.arrayy.pop();
+        // }
     }
 
-   PollChoiceMultiple(){
-     this.arrayy = [];
-     for(let i in this.checkItems){
-         console.log('checkItems',this.checkItems[i]);
-       if(this.checkItems[i] == true) {
-        if(this.pollIDD == this.checkItems[i]){
-          console.log('pollid matched');
 
-        }
-         this.arrayy.push(i);
-       }
-     }
-    console.log(this.arrayy);
-  }
+ public counntt =0 ;
+    singleChoice(i,c,did,pollid){
+
+      this.enabllle[i] = false;
+    //   this.resID = pollid;
+    //   if(  this.counntt == 0){
+    //   this.arrayy.push(did);
+    // }
+    // else{
+    //   this.arrayy.pop();
+    //   this.arrayy.push(did);
+    // }
+
+    }
+  //  PollChoiceMultiple(){
+  //    this.arrayy = [];
+  //    for(let i in this.checkItems){
+  //        console.log('checkItems',this.checkItems[i]);
+  //      if(this.checkItems[i] == true) {
+  //       if(this.pollIDD == this.checkItems[i]){
+  //         console.log('pollid matched');
+
+  //       }
+  //        this.arrayy.push(i);
+  //      }
+  //    }
+  //   console.log(this.arrayy);
+  // }
 
   doRefresh(refresher) {
             setTimeout(() => {
@@ -156,7 +217,7 @@ public EmptyPolls = false;
   ngOnInit() : void{
 
      this.PollFunc();
-  
+    // this.POllLastFunction();
   }
 
 }

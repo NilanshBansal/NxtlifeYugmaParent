@@ -9,15 +9,17 @@
       <ion-icon name="create"></ion-icon>
     </button>
     <ion-fab-list side="bottom">
-         Complaints
-      <button ion-fab (click)="newComplaint(fab)">
-        <ion-icon style="font-size: 35px;" color="header" name="ios-sad-outline"></ion-icon>
+         <ion-badge class="csAddFab1" (click)="newComplaint(fab)">Complaint</ion-badge>
+      <button color="primary" ion-fab (click)="newComplaint(fab)">
+        <ion-icon style="font-size: 35px;" name="ios-sad-outline"></ion-icon>
       </button>
-      <button ion-fab (click)="newSuggestion(fab)">
-        <ion-icon style="font-size: 35px;" color="header" name="ios-bulb-outline"></ion-icon>
+      <ion-badge color="fab" class="csAddFab2" (click)="newSuggestion(fab)">Suggestion</ion-badge>
+      <button ion-fab color="fab" (click)="newSuggestion(fab)">
+        <ion-icon style="font-size: 35px;" name="ios-bulb-outline"></ion-icon>
       </button>
-      <button ion-fab (click)="newAppreciation(fab)">
-        <ion-icon style="font-size: 35px;" color="header" name="ios-thumbs-up-outline"></ion-icon>
+      <ion-badge color="danger" class="csAddFab3" (click)="newAppreciation(fab)">Appreciation</ion-badge>
+      <button ion-fab color="danger" (click)="newAppreciation(fab)">
+        <ion-icon style="font-size: 35px;" name="ios-thumbs-up-outline"></ion-icon>
       </button>
     </ion-fab-list>
   </ion-fab>
@@ -50,7 +52,6 @@
   <ion-list>
     <ion-list-header *ngIf="dash_data.openPoll.length > 0">
       Poll <ion-badge> {{dash_data.pollCount}} </ion-badge>
-      <button ion-button item-right round small *ngIf="dash_data.pollCount > 2" (click)="openPollList()">View All</button>
     </ion-list-header>
     <ion-list inset>
       <ion-item *ngFor="let a of dash_data.openPoll" (click)="goToPoll()">
@@ -67,13 +68,13 @@
           </ion-row>
         </ion-note>
       </ion-item>
+    <button ion-button class="csRight" round small *ngIf="dash_data.pollCount > 2" (click)="openPollList()">View All</button>
     </ion-list>
   </ion-list>
   
   <ion-list>
     <ion-list-header *ngIf="dash_data.surveys.length > 0">
       Survey   <ion-badge>{{dash_data.surveyCount}}</ion-badge>
-      <button ion-button item-right round small *ngIf="dash_data.surveyCount > 2" (click)="openSuveyList()">View All</button>
     </ion-list-header>
     <ion-list inset>
       <ion-item *ngFor="let a of dash_data.surveys" (click)="goToSurvey(a.surveyId)">
@@ -90,6 +91,7 @@
           </ion-row>
         </ion-note>
       </ion-item>
+       <button class="csRight" ion-button item-right round small *ngIf="dash_data.surveyCount > 2" (click)="openSuveyList()">View All</button>
     </ion-list>
   </ion-list>
 

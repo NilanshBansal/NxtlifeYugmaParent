@@ -37,7 +37,7 @@ export class Configuration {
     }
   }
 
-  public Server: string = "https://yugma-ut.appspot-preview.com";
+  public Server: string = "https://yugmatesting01.appspot-preview.com";
 
   public ComplaintUrl(): string {
     return this.Server + "/parent/" + this.getParentId() + "/";
@@ -45,31 +45,31 @@ export class Configuration {
 
   setUrl(url) {
     this.cs.setHeaderText(url);
-    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/" + url;
+    this.Server = "https://yugmatesting01.appspot-preview.com/parent/" + this.getParentId() + "/" + url;
 
   }
 
   setUrlForStudentSuggestions(url) {
-    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/suggestion/" + url;
+    this.Server = "https://yugmatesting01.appspot-preview.com/parent/" + this.getParentId() + "/suggestion/" + url;
   }
 
   setUrlForSuggestion() {
-    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/suggestion";
+    this.Server = "https://yugmatesting01.appspot-preview.com/parent/" + this.getParentId() + "/suggestion";
   }
 
   setUrlForStudentAppreciations(url) {
-    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/appreciation/" + url;
+    this.Server = "https://yugmatesting01.appspot-preview.com/parent/" + this.getParentId() + "/appreciation/" + url;
   }
 
   setUrlForAppreciations() {
-    this.Server = "https://yugma-ut.appspot-preview.com/parent/" + this.getParentId() + "/appreciation";
+    this.Server = "https://yugmatesting01.appspot-preview.com/parent/" + this.getParentId() + "/appreciation";
   }
 
   tokenUpdate(tokenId) {
     const notificationToken = {
       notificationToken: tokenId
     }
-    return this.http.put("https://yugma-ut.appspot-preview.com/parent/" + this.getParentId(), notificationToken)
+    return this.http.put("https://yugmatesting01.appspot-preview.com/parent/" + this.getParentId(), notificationToken)
                     .map((res: Response) => { return res; })
                     .catch((error: any) => Observable.throw(error || 'server error'));
   }

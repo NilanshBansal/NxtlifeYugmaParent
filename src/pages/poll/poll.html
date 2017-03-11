@@ -30,15 +30,15 @@
 
           <ion-item>
             <ion-label item-left>{{d.name}}</ion-label>
-            <ion-radio item-right *ngIf="res.optionTypeId == 1" value= "{{ d.id }}" checked (click)="buttonEnable(i,c)"></ion-radio>
-            <ion-checkbox item-right *ngIf="res.optionTypeId == 2" [(ngModel)]="choice2[i][c]" (click)="buttonEnable(i,c)"></ion-checkbox>
+            <ion-radio item-right *ngIf="res.optionTypeId == 1" value= "{{ d.id }}"  checked (click)="singleChoice(i,c,d.id,res.id)"></ion-radio>
+            <ion-checkbox item-right *ngIf="res.optionTypeId == 2" [(ngModel)]="choice2[i][c]" (click)="buttonEnable(i,c,d.id,res.id)"></ion-checkbox>
           </ion-item>
         </ion-card>
       </ion-list>
-
+<!---->
       <div padding>
         <!--<button full *ngIf="res.optionTypeId == 1" ion-button color="primary"  [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>-->
-         <button full ion-button color="primary" [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,res)">Vote!</button>
+         <button full ion-button color="primary" [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
     </div>
 
   </ion-card>

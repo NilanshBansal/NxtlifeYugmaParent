@@ -30,7 +30,7 @@ export class MyApp extends UserSessionManage {
   @ViewChild(Nav) nav: Nav;
   public selectedPage;
   pages: Array<{title: string, component: any, icon: any, url: string}>;
-  account: Array<{title: string, component: any, icon: any}>;
+  account: Array<{title: string, icon: any}>;
 
   constructor(public platform: Platform,
               public authService: AuthService,
@@ -58,6 +58,10 @@ export class MyApp extends UserSessionManage {
     this.nav.setRoot(page.component);
   }
 
+  sessionDestroy(page) {
+    this.logout();
+  }
+
   sidebarConfig() {
     this.pages = [
       { title: 'Home', component: Dashboard, icon: 'ios-home-outline', url: 'dashboard' },
@@ -72,7 +76,7 @@ export class MyApp extends UserSessionManage {
       { title: 'Student Rating', component: StudentRating, icon: 'ios-pulse-outline', url: 'student-profile' },
     ];
     this.account = [
-      { title: 'Account', component: AccountPage, icon: 'ios-contact-outline' }
+      { title: 'Logout', icon: 'md-exit' }
     ];
   }
 

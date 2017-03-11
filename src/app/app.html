@@ -16,6 +16,10 @@
         <ion-icon item-left [name]="p.icon"></ion-icon>
         {{p.title}}
       </button>
+      <button class="csStrip" ion-item menuClose [class.csSelected]="selectedPage == p.title" *ngFor="let p of account" (click)="sessionDestroy(p)">
+        <ion-icon item-left [name]="p.icon"></ion-icon>
+        {{p.title}}
+      </button>
     </ion-list>
   </ion-content>
 

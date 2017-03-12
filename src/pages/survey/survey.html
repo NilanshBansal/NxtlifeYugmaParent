@@ -2,12 +2,14 @@
   <nl-modal-navbar [title]="title"></nl-modal-navbar>
   <ion-item class="csShadow" no-lines>
     <h2> {{ onesurveys.title }} </h2>
+    <p class="csParagraph">{{ onesurveys.description }}</p>
   </ion-item>
 </ion-header>
 <ion-content class="csGrayBackground">
   <ion-card class="csBackgroundGray" radio-group [(ngModel)]="choice3[i][0]" *ngFor="let a of onesurveys.questions; let i=index">
       <ion-item >
-        <ion-icon color="primary" item-left name="ios-list-box"></ion-icon>
+        <ion-icon *ngIf="a.questionTypeName == 'Single Choice'" color="primary" item-left name="checkmark"></ion-icon>
+        <ion-icon *ngIf="a.questionTypeName == 'Multiple Choice'" color="primary" item-left name="done-all"></ion-icon>
         <span class="csParagraph"><b>{{ a.questionText }}</b></span>
       </ion-item>
     <ion-card-content>

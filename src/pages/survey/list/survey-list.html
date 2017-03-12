@@ -9,25 +9,21 @@
     <ion-item *ngFor="let a of allsurveys; let ii = index" (click)="getParticularSurvey(a.surveyId,ii)">
       <div class="csIndicator" [style.border-left-color]="'#11ae22'">
         <h2><b> {{a.title}} </b></h2>
-        <h3>Click to give survey</h3>
         <ion-note>
           <ion-row>
             <ion-col width-50 class="no-padding-l" style="color:#535353;">
-              <ion-icon name="clock"></ion-icon><span>{{ a.createdAt | amTimeAgo }}</span>
+              <ion-icon name="apps"></ion-icon><span>{{ a.questionLength }} Question</span>
             </ion-col>
-            <ion-col width-50 class="no-padding-l" [style.color]="'#999'">
-              <ion-icon name="at"></ion-icon><span>{{ a.questionTypeName }}</span>
-<!--=======
-            <ion-col width-50 class="no-padding-l" [style.color] = "'#999'"><ion-icon name="at"></ion-icon><span>{{ a.typeName }}</span>
+            <ion-col width-50 class="no-padding-l">
+              <ion-icon name="at"></ion-icon><span>{{ a.typeName }}</span>
             </ion-col>
-            
           </ion-row>
           <ion-row>
-             <ion-col width-50 class="no-padding-l" [style.color] = "'#a9f'"><ion-icon name="help-circle"></ion-icon><span>question : {{ a.questionLength }}</span>
+            <ion-col width-50 class="no-padding-l" style="color:#535353;">
+              <ion-icon name="clock"></ion-icon><span>Created: {{ a.createdAt | amTimeAgo }}</span>
             </ion-col>
-
-            <ion-col width-50 class="no-padding-l" [style.color] = "'#9ef'"><ion-icon name="ios-eye"></ion-icon><span>expires on {{ a.expiredAt }}</span>
->>>>>>> 00902303e906da4cca50b58bc644fe40f1a84745-->
+            <ion-col width-50 class="no-padding-l" style="color:#535353;">
+              <ion-icon name="clock"></ion-icon><span>Expirers on: {{ a.expiredAt }}</span>
             </ion-col>
           </ion-row>
         </ion-note>

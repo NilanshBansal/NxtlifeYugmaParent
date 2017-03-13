@@ -1,47 +1,40 @@
 <ion-header>
   <ion-toolbar color="primary">
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Poll</ion-title>
-  </ion-navbar>
+      <ion-title>Poll</ion-title>
+    </ion-navbar>
   </ion-toolbar>
 </ion-header>
 <ion-content class="csGrayBackground">
   <ion-refresher (ionRefresh)="doRefresh($poll)">
-      <ion-refresher-content></ion-refresher-content>
+    <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list class="no-comment" *ngIf="EmptyPolls">
     <ion-icon name="stats"></ion-icon>
     <br>No Record Found
   </ion-list>
-  <div *ngFor="let res of resdata ; let i=index" style="background: rgba(128, 128, 128, 0.09);border: 2px solid #00bcd4;">
-    <ion-card radio-group [(ngModel)]="choice1[i][0]">
-
-      <ion-list no-border>
+  <ion-card class="csBackgroundGray" radio-group [(ngModel)]="choice1[i][0]" *ngFor="let res of resdata ; let i=index" style="border: 2px solid #00bcd4;">
+    <ion-list no-border>
+      <ion-item>
+        <ion-icon *ngIf="res.questionTypeName == 'Single Choice'" color="primary" item-left name="checkmark"></ion-icon>
+        <ion-icon *ngIf="res.questionTypeName == 'Multiple Choice'" color="primary" item-left name="done-all"></ion-icon>
+        <div class="csParagraph"><b>{{res.question}}</b></div>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngFor="let d of res.subOptions; let c=index">
+      <ion-card style="border-top:3px solid #00bcd4">
         <ion-item>
-          <div class="csParagraph"><b>{{res.question}}</b></div>
+          <ion-label item-left>{{d.name}}</ion-label>
+          <ion-radio item-right *ngIf="res.optionTypeId == 1" value="{{ d.id }}" checked (click)="singleChoice(i,c,d.id,res.id)"></ion-radio>
+          <ion-checkbox item-right *ngIf="res.optionTypeId == 2" [(ngModel)]="choice2[i][c]" (click)="buttonEnable(i,c,d.id,res.id)"></ion-checkbox>
         </ion-item>
-      </ion-list>
-
-      <ion-list  *ngFor="let d of res.subOptions; let c=index">
-        <ion-card style="border-top:3px solid #00bcd4">
-
-          <ion-item>
-            <ion-label item-left>{{d.name}}</ion-label>
-            <ion-radio item-right *ngIf="res.optionTypeId == 1" value= "{{ d.id }}"  checked (click)="singleChoice(i,c,d.id,res.id)"></ion-radio>
-            <ion-checkbox item-right *ngIf="res.optionTypeId == 2" [(ngModel)]="choice2[i][c]" (click)="buttonEnable(i,c,d.id,res.id)"></ion-checkbox>
-          </ion-item>
-        </ion-card>
-      </ion-list>
-<!---->
-      <div padding>
-        <!--<button full *ngIf="res.optionTypeId == 1" ion-button color="primary"  [disabled]="enable" (click)="PollVoting(res.id,res)">Vote!</button>-->
-         <button full ion-button color="primary" [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
+      </ion-card>
+    </ion-list>
+    <div padding>
+      <button full ion-button color="primary" [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
     </div>
-
   </ion-card>
-  </div>
- 
 </ion-content>

@@ -40,6 +40,9 @@ Date:    21/12/2016
     @extend .csWhiteText;
     background-image: csBackgroundSvg('gBoard.svg');
 }
+.csBackgroundGray {
+    background: $csBackgroundColor;
+}
 .csCircle {
     border-radius: 100%;
     border: 3px solid #fff;

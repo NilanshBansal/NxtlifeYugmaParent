@@ -1,36 +1,18 @@
 <ion-content class="csLoginScreen">
-  <img src="http://www.srgs.co.in/wp-content/themes/kidszone/images/logo.png">
-  <form [formGroup]="loginForm" class="marginTop csTransparent"*ngIf="!showOtp" novalidate>
-    <ion-item>
-      <ion-icon name="phone-portrait" class="csInput csInputIcon" item-left></ion-icon>
-      <ion-label stacked>Enter Mobile Number</ion-label>
-      <ion-input maxlength="10" formControlName="mobileNo" type="tel"  class="letter-space" text-center autofocus> </ion-input>
-    </ion-item>
-    <button item-right icon-left type="button" (click)="getOtp()" ion-button class="csCenter csButtonList" round>
-      <ion-icon name="checkmark" class="csBigIcon"></ion-icon>
-        Login
-     </button>
-  </form>
-
-  <form name="loginVerifyForm" novalidate *ngIf="showOtp">
-    <ion-item round>
-      <ion-icon name="lock" class="csInput csInputIcon" item-left></ion-icon>
-      <ion-label stacked>Enter OTP</ion-label>
-      <ion-input class="letter-space" [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="otp" maxlength="5" text-center autofocus></ion-input>
-    </ion-item>
-    <button type="button" (click)="verifyOtp()" item-right icon-left color="secondary" ion-button class="csCenter csButtonList" round>
-      <ion-icon name="checkmark"></ion-icon>
-        VERIFY
-     </button>
-    <div class="csButtonSet">
-      <button item-right icon-left ion-button class="csCenter csButtonList" (click)="resendOtp()" round>
-        <ion-icon name="refresh"></ion-icon>
-          RESEND OTP
-      </button>
-      <button type="button" item-right icon-left ion-button class="csCenter" (click)="updateNo()" round>
-        <ion-icon name="phone-landscape" ></ion-icon>
-          Update Number
-      </button>
-    </div>
+  <form (ngSubmit)="login()" novalidate>
+    <ion-list class="letter-space">
+      <img src="assets/images/logo.png" class="csLogo csLogo-CornerStone" />
+      <ion-item>
+        <ion-icon name="person" color="primary" item-left></ion-icon>
+        <ion-label stacked>Username</ion-label>
+        <ion-input type="text" name="username" [(ngModel)]="username" class="csFontColor1 csBold" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="md-unlock" color="primary" item-left></ion-icon>
+        <ion-label stacked>Password</ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="password" class="csFontColor1 csBold" ></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button full type="submit">Login</button>
   </form>
 </ion-content>

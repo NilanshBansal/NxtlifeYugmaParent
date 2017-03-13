@@ -10,7 +10,7 @@ import { ParentInfo } from '../../../service/parentInfo';
 
 export class PassedHomework {
 
-  public title : string = 'Homework';
+  public title : string = 'Assignment';
   public homework = [];
   public students;
   public child;

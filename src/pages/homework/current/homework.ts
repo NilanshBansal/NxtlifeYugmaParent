@@ -10,7 +10,7 @@ import { ParentInfo } from '../../../service/parentInfo';
 
 export class CurrentHomework implements OnInit {
 
-  public title : string = 'Homework';
+  public title : string = 'Assignment';
   public homework = [];
   public students;
   public child;

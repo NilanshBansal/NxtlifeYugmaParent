@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class AuthService {
 
-  private actionUrl: string = "https://yugma-ut.appspot-preview.com";
+  private actionUrl: string = "https://yugmatesting01.appspot-preview.com";
   public header;
 
   constructor(private http: CustomHttpService,

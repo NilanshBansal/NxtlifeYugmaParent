@@ -123,29 +123,39 @@ export class newComplaintModal implements OnInit {
   }
 
   setCategory(category) {
-
-    if (category && category.depth === 1 && category.childCategory.length === 0) {
-      this.newComplaint.addControl('againstEmployeeId', new FormControl('', [Validators.required]));
-
-      if (this.newComplaint.contains("childCategory")) {
-        this.newComplaint.removeControl("childCategory");
+    if (category && category.depth === 0) {
+      this.removeChildCategoryControl();
+      this.removeEmployeeControl();
+    } else {
+      if (category && category.depth === 1 && category.childCategory.length === 0) {
+        this.newComplaint.addControl('againstEmployeeId', new FormControl('', [Validators.required]));
+        this.removeChildCategoryControl();
+        this.getTeachers();
+      } else if(category) {
+        if (!this.newComplaint.contains("childCategory")) {
+          this.newComplaint.addControl('childCategory', new FormControl('', [Validators.required]));
+        }
+        this.removeEmployeeControl();
+        this.getChildCategory(category.id);
       }
-
-      delete this.childCategories;
-      this.getTeachers();
-    } else if (category) {
-      if (!this.newComplaint.contains("childCategory")) {
-        this.newComplaint.addControl('childCategory', new FormControl('', [Validators.required]));
-      }
-      this.newComplaint.removeControl("againstEmployeeId");
-      delete this.teachers;
-      this.getChildCategory(category.id);
     }
-
   }
 
-  onSubmit() {
+  removeChildCategoryControl() {
+    if (this.newComplaint.contains("childCategory")) {
+      this.newComplaint.removeControl("childCategory");
+      delete this.childCategories;
+    }
+  }
 
+  removeEmployeeControl() {
+    if (this.newComplaint.contains("againstEmployeeId")) {
+      this.newComplaint.removeControl("againstEmployeeId");
+      delete this.teachers;
+    }
+  } 
+
+  onSubmit() {
     if (this.newComplaint.invalid) {
       return;
     }

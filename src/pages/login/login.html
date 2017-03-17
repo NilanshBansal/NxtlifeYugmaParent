@@ -4,7 +4,7 @@
     <ion-item>
       <ion-icon name="phone-portrait" class="csInput csInputIcon" item-left></ion-icon>
       <ion-label stacked>Enter Mobile Number</ion-label>
-      <ion-input maxlength="10" formControlName="mobileNo" type="tel"  class="letter-space" text-center autofocus> </ion-input>
+      <ion-input maxlength="10" formControlName="mobileNo" type="tel" placeholder="ENTER PHONE NUMBER"  class="letter-space" text-center autofocus> </ion-input>
     </ion-item>
     <button item-right icon-left type="button" (click)="getOtp()" ion-button class="csCenter csButtonList" round>
       <ion-icon name="checkmark" class="csBigIcon"></ion-icon>
@@ -16,7 +16,7 @@
     <ion-item round>
       <ion-icon name="lock" class="csInput csInputIcon" item-left></ion-icon>
       <ion-label stacked>Enter OTP</ion-label>
-      <ion-input class="letter-space" [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="otp" maxlength="5" text-center autofocus></ion-input>
+      <ion-input class="letter-space" placeholder="ENTER OTP" [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="otp" maxlength="5" text-center autofocus></ion-input>
     </ion-item>
     <button type="button" (click)="verifyOtp()" item-right icon-left color="secondary" ion-button class="csCenter csButtonList" round>
       <ion-icon name="checkmark"></ion-icon>

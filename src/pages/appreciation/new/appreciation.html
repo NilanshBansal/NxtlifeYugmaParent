@@ -24,7 +24,7 @@
     <ion-card>
       <ion-item class="csTransparent">
         <ion-label stacked>Title</ion-label>
-        <ion-textarea rows="2" class="csInput-title" formControlName="title" maxlength="50"></ion-textarea>
+        <ion-textarea rows="2" class="csInput-title" formControlName="title" maxlength="50" placeholder="ENTER TITLE"></ion-textarea>
       </ion-item>
       <ion-badge class="csFiftyLimit"><span>{{50 - newSuggestion.value.title.length}}</span></ion-badge>
     </ion-card>
@@ -32,7 +32,7 @@
       <ion-item class="csTransparent">
         <ion-label stacked>Description</ion-label>
         <ion-textarea class="csInput-title" rows="5" formControlName="description"
-          maxlength="200"></ion-textarea>
+          maxlength="200" placeholder="ENTER DESCRIPTION"></ion-textarea>
       </ion-item>
       <ion-badge class="csFiftyLimit"><span>{{200 - newSuggestion.value.description.length}}</span></ion-badge>
     </ion-card>

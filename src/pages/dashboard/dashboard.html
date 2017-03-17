@@ -32,7 +32,7 @@
       Today's Event
     </ion-list-header>
     <ion-list inset>
-      <ion-item *ngFor="let a of planner" (click)="GoToEvent(a.id)">
+      <ion-item *ngFor="let a of dash_data.planner" (click)="GoToEvent(a.id)">
         <h2><b>{{a.title}} </b></h2>
         <!--<h3>lkkkkkkkkk</h3>-->
         <ion-note>

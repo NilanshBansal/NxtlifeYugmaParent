@@ -55,6 +55,14 @@ $inherit : inherit;
   background-repeat: no-repeat;
 }
 
+// Custom Navbar Style
+ion-navbar.toolbar.toolbar-ios-primary.statusbar-padding {
+  padding-top: 20px;
+}
+
+ion-toolbar.toolbar.toolbar-ios.toolbar-ios-primary {
+  padding-top: 20px;
+}
 
 /*Corner Stone THeme */
 .csLightText{

@@ -20,6 +20,8 @@ export class PollPage implements OnInit {
   public allData;
   public currentPage = 1;
   public enabllle = [];
+  public title: string = "poll";
+  
   //public pollVote : FormGroup;
   constructor(private pollServ : PollService,
               private nl : CustomService) {

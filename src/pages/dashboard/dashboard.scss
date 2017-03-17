@@ -247,19 +247,38 @@ $cardText: #7b7b7b;
   border-bottom: 2px solid #a3a3a3;
   font-weight:bold;
 }
-.csAddFab1{
+
+.csAddFab1.badge-ios{
+  margin-top:30px;
+  position: absolute;
+  margin-left: -65pt;
+  font-weight:bold;
+}
+.csAddFab2.badge-ios{
   margin-top: 30px;
+  position: absolute;
+  margin-left: -70pt;
+  font-weight:bold;
+}
+.csAddFab3.badge-ios{
+  margin-top: 30px;
+  position: absolute;
+  margin-left: -75pt;
+  font-weight:bold;
+}
+.csAddFab1.badge-md{
+  margin-top:30px;
   position: absolute;
   margin-left: -55pt;
   font-weight:bold;
 }
-.csAddFab2{
+.csAddFab2.badge-md{
   margin-top: 100px;
   position: absolute;
   margin-left: -60pt;
   font-weight:bold;
 }
-.csAddFab3{
+.csAddFab3.badge-md{
   margin-top: 173px;
   position: absolute;
   margin-left: -60pt;

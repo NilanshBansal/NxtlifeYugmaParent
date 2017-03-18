@@ -223,8 +223,8 @@ button{
 .csBigIcon{
     font-size: 2.2em;
 }
-.tabs-ios-primary .tab-button[aria-selected=true], .tabs-ios-primary .tab-button[aria-selected=true] .tab-button-icon,
-.tabs-md-primary .tab-button[aria-selected=true], .tabs-md-primary .tab-button[aria-selected=true] .tab-button-icon{
+.tabs-ios-primary .tab-button[aria-selected=true], .tabs-ios-primary .tab-button[aria-selected=true],
+.tabs-md-primary .tab-button[aria-selected=true], .tabs-md-primary .tab-button[aria-selected=true]{
     color: #fff;
     font-weight:bold;
     border-top: white solid;

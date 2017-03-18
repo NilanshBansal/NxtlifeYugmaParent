@@ -236,8 +236,9 @@ button{
     margin-left:5px;
 }
 .select-icon{
-    float: right;
-    margin-top: -17px;
+    right: 10px;
+    position: fixed;
+    top: 17px;
 }
 .select-text{
     margin-right: 15px;
@@ -254,4 +255,7 @@ button{
 }
 .csCardBorder{
     border-top:3px solid $color1;
+}
+.csPreText{
+      white-space: pre-wrap;
 }

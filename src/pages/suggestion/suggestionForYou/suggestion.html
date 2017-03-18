@@ -18,6 +18,11 @@
         <b><ion-icon name="time" color="primary"></ion-icon></b> {{suggestion.createdAt | amDateFormat: 'LL'}}
       </div>
     </ion-item>
+    <ion-item>
+      <div item-right>
+        From {{suggestion.employeeName}}
+      </div>
+    </ion-item>
   </ion-card>
   <ion-list class="no-comment" *ngIf="EmptyComplaints">
   <ion-icon name="bulb"></ion-icon>

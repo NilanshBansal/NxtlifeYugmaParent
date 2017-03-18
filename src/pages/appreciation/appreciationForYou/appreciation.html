@@ -19,6 +19,11 @@
           <b><ion-icon name="time" style="margin-top: 1px;" color="primary"></ion-icon></b> {{appreciation.createdAt | amDateFormat: 'LL'}}
         </div>
     </ion-item>
+    <ion-item>
+      <div item-right>
+        From {{appreciation.employeeName}}
+      </div>
+    </ion-item>
   </ion-card>
   <ion-list class="no-comment" *ngIf="EmptyComplaints">
       <ion-icon name="thumbs-up"></ion-icon>

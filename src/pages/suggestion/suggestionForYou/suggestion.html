@@ -5,23 +5,24 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let suggestion of allData" class="csCardTopBorder" >
-    <ion-item >
-      <div class="csParagraph"><b>{{suggestion.title}}</b></div>
-      <div class="csParagraph">{{suggestion.description}}</div>
-    </ion-item>
+  <ion-card *ngFor="let suggestion of allData" class="csCardTopBorder">
     <ion-item>
-      <div item-left>
-       <b><ion-icon name="body" color="primary"></ion-icon></b> {{suggestion.studentName}}
-      </div>
-      <div item-right>
-        <b><ion-icon name="time" color="primary"></ion-icon></b> {{suggestion.createdAt | amDateFormat: 'LL'}}
-      </div>
+      <ion-avatar item-left>
+        <ion-icon name="ios-happy" color="primary" style="font-size:2.5em;" text-center></ion-icon>
+      </ion-avatar>
+      <h2><b>{{suggestion.studentName}}</b><span class="csRight"><ion-icon name="school"></ion-icon> {{ suggestion.standardName }}</span></h2>
+      <p>{{suggestion.createdAt | amDateFormat: 'LL'}}</p>
     </ion-item>
+    <hr>
+    <ion-card-content>
+      <b>{{suggestion.title}}</b>
+      <p>{{suggestion.description}}</p>
+      <span class="csRight">From,</span><br><span class="csRight"><b>{{ suggestion.employeeName }}</b></span>
+    </ion-card-content>
   </ion-card>
   <ion-list class="no-comment" *ngIf="EmptyComplaints">
-  <ion-icon name="bulb"></ion-icon>
-      <br>NO RECORD FOUND
+    <ion-icon name="bulb"></ion-icon>
+    <br>NO RECORD FOUND
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

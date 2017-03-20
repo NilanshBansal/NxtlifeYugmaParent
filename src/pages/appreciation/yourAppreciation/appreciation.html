@@ -12,17 +12,18 @@
   </ion-fab>
   <ion-card *ngFor="let data of allData" class="csCardTopBorder">
     <ion-item>
-      <div class="csParagraph"><b>{{data.title}}</b></div>
-      <div class="csParagraph">{{data.description}}</div>
+      <ion-avatar item-left>
+        <ion-icon name="ios-happy" color="primary" style="font-size:2.5em;" text-center></ion-icon>
+      </ion-avatar>
+      <h2><b>{{data.teacherName}}</b><span class="csRight"><ion-icon name="school"></ion-icon> {{ data.standardName }}</span></h2>
+      <p>{{data.createdAt | amDateFormat: 'LL'}}</p>
     </ion-item>
-    <ion-item>
-      <div item-left>
-        <b><ion-icon name="body" color="primary"></ion-icon></b> {{data.studentName}}
-      </div>
-      <div item-right>
-        <b><ion-icon name="time-md" style="margin-top: 1px;" color="primary"></ion-icon></b> {{data.createdAt | amDateFormat: 'LL'}}
-      </div>
-    </ion-item>
+    <hr>
+    <ion-card-content>
+      <b>{{data.title}}</b>
+      <p>{{data.description}}</p>
+      <span class="csRight">From,</span><br><span class="csRight"><b>{{ data.studentName }}</b></span>
+    </ion-card-content>
   </ion-card>
   <ion-list class="no-comment" *ngIf="EmptyAppreciations">
     <ion-icon name="thumbs-up"></ion-icon>

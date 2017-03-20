@@ -174,6 +174,12 @@ ion-toolbar {
 .item-ios{
     font-size:1.4rem !important;
 }
+.csFiftyLimit{
+    top: -18px;
+    position: relative;
+    margin-right:5px;
+    float:right;
+}
 //Student Rating (Management)
 .csRating{
     ion-item{
@@ -272,7 +278,7 @@ button{
     border-bottom-color: #00bcd4 !important;
     box-shadow: inset 0 -1px 0 0 #00bcd4 !important;
 }
-.item-ios.item-block .item-inner{
-        border-bottom-color: #00bcd4 !important;
-    box-shadow: inset 0 -1px 0 0 #00bcd4 !important;
-}
+// .item-ios.item-block .item-inner{
+//         border-bottom-color: #00bcd4 !important;
+//     box-shadow: inset 0 -1px 0 0 #00bcd4 !important;
+// }

@@ -266,19 +266,45 @@ button{
       white-space: pre-wrap;
 }
 // SCSS for Colored input box in ios
-.item-ios.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
-    border-bottom-color: #f53d3d !important;
-    box-shadow: inset 0 -1px 0 0 #f53d3d !important;
-}
-.item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
-    border-bottom-color: #32db64 !important;
-    box-shadow: inset 0 -1px 0 0 #32db64 !important;
-}
-.item-ios.item-input.input-has-focus.item-inner{
-    border-bottom-color: #00bcd4 !important;
-    box-shadow: inset 0 -1px 0 0 #00bcd4 !important;
-}
-// .item-ios.item-block .item-inner{
-//         border-bottom-color: #00bcd4 !important;
+// .item-ios.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+//     border-bottom-color: #f53d3d !important;
+//     box-shadow: inset 0 -1px 0 0 #f53d3d !important;
+// }
+// .item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+//     border-bottom-color: #32db64 !important;
+//     box-shadow: inset 0 -1px 0 0 #32db64 !important;
+// }
+// .item-ios.item-input.input-has-focus.item-inner{
+//     border-bottom-color: #00bcd4 !important;
 //     box-shadow: inset 0 -1px 0 0 #00bcd4 !important;
 // }
+.csDateCard{
+    .csDateCardStandard{
+        float:right;
+        margin-top:5px;
+        margin-right:10px;
+    }
+  .csDate{
+    height: 60px;
+    width: 60px;
+    background: white;
+    float: left;
+    margin: 0 10px 5px 0;
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 1px 2px 3px grey;
+    .csDateNumber{
+      text-align:center;
+      margin-top:5px;
+      font-size:25px;
+    }
+    .csDateMonth{
+      text-align: center;
+      background: #e8b2b8;
+      font-weight: bold;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      color: white;
+    }
+  }
+}

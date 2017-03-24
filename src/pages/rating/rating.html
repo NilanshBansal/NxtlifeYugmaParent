@@ -3,7 +3,7 @@
 </ion-header>
 <ion-content class="csGrayBackground csRating">
   <ion-card>
-    <ion-item>
+    <ion-item *ngIf="students.length > 1">
       <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
       <ion-label>Child Name</ion-label>
       <custom-select item-content [(ngModel)]="child" (ngModelChange)="selectChild($event)">

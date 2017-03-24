@@ -27,9 +27,10 @@ export class CircularComponent implements OnInit{
 
 
     AllCirculars(){
+        this.nl.showLoader();
         this.circserv.getAllCirculars()
-        .subscribe( response => { this.circulars = response;},
-                    err => console.error(err),
+        .subscribe( response => { this.nl.hideLoader();this.circulars = response;},
+                    err => {this.nl.hideLoader();console.error(err);},
                     () => console.log('circular response', this.circulars)
         )
     }

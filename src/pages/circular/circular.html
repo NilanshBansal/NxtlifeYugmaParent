@@ -24,4 +24,8 @@
       </ion-item>
     <!--</div>-->
   </ion-list>
+  <ion-list class="no-comment" *ngIf="circulars === null">
+    <ion-icon name="happy"></ion-icon>
+    <br>NO RECORD FOUND
+  </ion-list>
 </ion-content>

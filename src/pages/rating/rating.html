@@ -11,7 +11,7 @@
       </custom-select>
     </ion-item>
   </ion-card>
-  <div *ngIf="studentInfo">
+  <!--<div *ngIf="studentInfo">
     <ion-slides pager autopla="100" effect="cube" loop paginationType="bullets" parallax>
       <ion-slide *ngFor="let sp of studentInfo">
         <ion-card>
@@ -32,6 +32,25 @@
         </ion-card>
       </ion-slide>
     </ion-slides>
+  </div>-->
+    <div *ngIf="studentInfo">
+    <ion-card *ngFor="let sp of studentInfo">
+      <ion-grid>
+        <ion-row>
+          <ion-col width-20>
+            <ion-icon class="csStarIcon" name="star-half"></ion-icon>
+          </ion-col>
+          <ion-col width-80>
+            <ion-row class="center title">
+                <p >{{sp.responsibility}}</p>
+            </ion-row>
+            <ion-row class="stars">
+                <rating [(ngModel)]="sp.ratingIndex" max="5" readOnly="true"></rating>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
   </div>
   <ion-list class="no-comment" *ngIf="emptyMessage">
     <ion-icon name="star-half"></ion-icon>

@@ -42,6 +42,7 @@
       </ion-item>
     </ion-card>
     <ion-card>
+      <ion-list>
       <ion-item class="csTransparent">
         <ion-label stacked>Title</ion-label>
         <ion-textarea rows="2"  formControlName="title" maxlength="50" placeholder="ENTER TITLE"> </ion-textarea>
@@ -49,6 +50,7 @@
       <ion-badge class="csFiftyLimit">
         <span>{{50 - newComplaint.value.title.length}}</span>
       </ion-badge>
+      </ion-list>
     </ion-card>
     <ion-card>
       <ion-item class="csTransparent">

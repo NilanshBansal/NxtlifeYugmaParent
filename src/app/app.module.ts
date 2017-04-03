@@ -63,6 +63,7 @@ import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';
 import { CircularService } from '../service/circular.servce';
 import { SurveyService } from '../service/survey.service';
+import { MessageService } from '../service/message.service';
 
 @NgModule({
   declarations: [
@@ -156,6 +157,7 @@ import { SurveyService } from '../service/survey.service';
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,
+              MessageService,
               { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
               { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
                 return new CustomHttpService(backend, defaultOptions);

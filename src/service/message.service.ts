@@ -28,7 +28,6 @@ export class MessageService {
   }
 
   private handleError(error: Response | any) {
-    console.log("Err", error)
     let errMsg: string;
     if (error instanceof Response) {
       errMsg = `${error.status} - ${error.ok || ''}`;

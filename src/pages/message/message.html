@@ -2,5 +2,8 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 <ion-content class="complaint-list csGrayBackground">
-  <h3>Messaging Page</h3>
+  <ion-list class="no-comment" *ngIf="emptyMessages">
+    <ion-icon name="ios-chatbubbles-outline"></ion-icon>
+    <br>NO RECORD FOUND
+  </ion-list>
 </ion-content>

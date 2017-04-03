@@ -33,6 +33,7 @@ import { PassedHomework } from '../pages/homework/passed/homework';
 import { CircularComponent } from '../pages/circular/circular.component';
 import { CircularViewComponent } from '../pages/circular/view/circular-view';
 import { SurveyListPage } from '../pages/survey/list/survey-list';
+import { MessagePage } from '../pages/message/message';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -102,7 +103,8 @@ import { SurveyService } from '../service/survey.service';
     SurveyListPage,
     CustomSelect,
     ViewComponent,
-    NoInternet
+    NoInternet,
+    MessagePage
   ],
   imports: [
     MomentModule,
@@ -149,7 +151,8 @@ import { SurveyService } from '../service/survey.service';
     CircularViewComponent,
     CustomSelect,
     ViewComponent,
-    NoInternet
+    NoInternet,
+    MessagePage
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,

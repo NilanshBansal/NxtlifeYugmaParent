@@ -28,11 +28,10 @@ export class MessageService {
   }
 
   private handleError(error: Response | any) {
+    console.log("Err", error)
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      errMsg = `${error.status} - ${error.ok || ''}`;
       if (error.status === 0) {
         errMsg = `${error.status} - "No Internet"`;
       }

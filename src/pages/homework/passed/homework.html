@@ -11,17 +11,23 @@
       </custom-select>
     </ion-item>
   </ion-card>
-  <ion-card *ngFor="let a of homework" class="csCardTopBorder" [style.border-color]="a.subjectColor">
-    <ion-item>
-      <div class="csParagraph"><b>{{a.subjectName}}</b><span item-right class="csGrayText"> ({{a.employeeName}})</span></div>
-      <div class="csParagraph">{{a.description}}</div>
-    </ion-item>
+  <ion-card class="csDateCard" *ngFor="let a of homework">
+    <ion-card-content>
+      <div class="csDate">
+        <div class="csDateNumber">30</div>
+        <div class="csDateMonth" [style.background-color]="a.subjectColor">March</div>
+      </div>
+      <div>
+        <b>{{a.subjectName}}</b>
+        <p>{{a.description}}</p>
+      </div>
+    </ion-card-content>
     <ion-item>
       <div item-left>
-        <b class="csParagraph">  <ion-icon name="school" color="primary"></ion-icon><span class="csGrayText"> {{a.standardName}}</span></b>
+        <b>Created by:</b><br>{{ a.employeeName }}
       </div>
       <div item-right>
-        <b class="csParagraph"> <ion-icon name="create" color="primary"></ion-icon><span class="csGrayText"> {{a.dueDate | amDateFormat: 'DD/MM/YYYY'}}</span></b>
+        <b>Due Date:</b><br>{{a.dueDate | date:'mediumDate'}}
       </div>
     </ion-item>
   </ion-card>

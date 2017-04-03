@@ -11,7 +11,10 @@ import { Notification } from '../../custom-component/notification.component';
 
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  styles:[`ion-footer{
+    margin-bottom:15px;
+  }`]
 })
 
 export class LoginPage extends Notification implements OnInit {

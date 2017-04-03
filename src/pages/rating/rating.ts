@@ -6,7 +6,23 @@ import { ParentInfo } from '../../service/parentInfo';
 @Component({
   selector: 'student-rating',
   templateUrl: 'rating.html',
-  styles:[`.csStarIcon{font-size: 70px;padding: 15px;;color: #00bcd4;} .center{text-align:center;} .title{height:80px;padding: 30px;} .stars{height:50px}
+  styles:[`
+  ion-slides{
+    position:relative !important;
+  }
+  .csStarIcon {
+    font-size: 125px;
+  }
+  ion-badge{
+    font-size:30px;
+  }
+  .csRatingText{
+        font-weight: bold;
+    font-size: 1.6rem;
+  }
+  rating{
+        margin-left: -15%;
+  }
 `]
 })
 

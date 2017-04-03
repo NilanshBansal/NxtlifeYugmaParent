@@ -1,10 +1,10 @@
 <ion-content class="csLoginScreen">
-  <img src="http://www.srgs.co.in/wp-content/themes/kidszone/images/logo.png">
+  <img src="assets/images/logo.png">
   <form [formGroup]="loginForm" class="marginTop csTransparent"*ngIf="!showOtp" novalidate>
     <ion-item>
       <ion-icon name="phone-portrait" class="csInput csInputIcon" item-left></ion-icon>
       <ion-label stacked>Enter Mobile Number</ion-label>
-      <ion-input maxlength="10" formControlName="mobileNo" type="tel"  class="letter-space" text-center autofocus> </ion-input>
+      <ion-input maxlength="10" formControlName="mobileNo" type="tel" class="letter-space" text-center autofocus> </ion-input>
     </ion-item>
     <button item-right icon-left type="button" (click)="getOtp()" ion-button class="csCenter csButtonList" round>
       <ion-icon name="checkmark" class="csBigIcon"></ion-icon>
@@ -34,3 +34,6 @@
     </div>
   </form>
 </ion-content>
+<ion-footer text-center>
+  Powered by <img src="assets/images/yugma.png" width="20px"/><b>Yugma</b>
+</ion-footer>

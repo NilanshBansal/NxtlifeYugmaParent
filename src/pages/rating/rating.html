@@ -11,7 +11,29 @@
       </custom-select>
     </ion-item>
   </ion-card>
-  <div *ngIf="studentInfo">
+  <!--<div *ngIf="studentInfo">
+    <ion-slides pager autopla="100" effect="cube" loop paginationType="bullets" parallax>
+      <ion-slide *ngFor="let sp of studentInfo">
+        <ion-card>
+          <ion-card-header>
+            <ion-icon class="csStarIcon" style="color:#FFDF00" text-center name="star-half"></ion-icon>
+            <br>
+            <b text-center class="csPreText">{{sp.responsibility}}</b>
+          </ion-card-header>
+          <ion-card-content>
+            <p>
+              <ion-badge> {{ sp.ratingIndex }}/5 </ion-badge>
+            </p>
+            <ion-card class="csBackgroundGray">
+              <rating [(ngModel)]="sp.ratingIndex" max="5" style="color:#FFDF00" text-center readOnly="true"></rating>
+            </ion-card>
+            <h1 color="primary" text-center>POOR</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>-->
+    <div *ngIf="studentInfo">
     <ion-card *ngFor="let sp of studentInfo">
       <ion-grid>
         <ion-row>
@@ -31,7 +53,7 @@
     </ion-card>
   </div>
   <ion-list class="no-comment" *ngIf="emptyMessage">
-      <ion-icon name="star-half"></ion-icon>
-      <br>NO RECORD FOUND
+    <ion-icon name="star-half"></ion-icon>
+    <br>NO RECORD FOUND
   </ion-list>
 </ion-content>

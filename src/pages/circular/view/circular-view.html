@@ -4,6 +4,30 @@
 </ion-header>
 <ion-content class="csGrayBackground">
   <ion-card class="csCardTopBorder" [style.border-color]="onecirc.circularTypeColor">
+
+     <ion-item>
+        <!--<div item-right style="margin-top: -15px;">
+            <h3><ion-icon name="time"></ion-icon> {{onecirc.start | date:'mediumDate'}}</h3>
+        </div>  -->
+      <div item-left>
+        <ion-icon style="font-size:3.2em" color="primary" name="ios-person"></ion-icon>
+      </div>
+        <div>
+        <b class="csParagraph">{{  onecirc.employeeName }}</b><br><p> {{onecirc.start | date:'mediumDate'}}</p>
+        </div>    
+    </ion-item>   
+    <ion-card-content>
+      <div class="csParagraph"><b>{{onecirc.title }} </b></div>
+      <p class="csParagraph">{{onecirc.description}}</p>
+    </ion-card-content>
+
+    <ion-item *ngIf="onecirc.circularTypeName =='Class' ">
+      <b>Audience: </b> |<span *ngFor="let a of onecirc.standards">
+      <span> {{ a }} |</span>
+      </span>
+    </ion-item>
+  </ion-card>    
+  <!--<ion-card class="csCardTopBorder" [style.border-color]="onecirc.circularTypeColor">
     <ion-item>
       <div class="csParagraph" text-center><b>{{onecirc.title }} </b></div>
       <div class="csParagraph">Dear Parents,<p><p>{{onecirc.description}}</div>
@@ -19,5 +43,5 @@
     <ion-item *ngIf="onecirc.circularTypeName=='Class'">
       <b>Class:</b> | <span *ngFor="let a of onecirc.standards"><span> {{ a }} | </span> </span>
     </ion-item>
-  </ion-card>
+  </ion-card>-->
 </ion-content>

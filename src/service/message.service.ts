@@ -28,6 +28,13 @@ export class MessageService {
                     .catch(this.handleError);
   }
 
+  public saveMessage(data) {
+    this.serverUrl = this.configuration.Server;
+    return this.http.post(this.serverUrl,data)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     if (res.status === 204) { return res; }
     let body = res.json();

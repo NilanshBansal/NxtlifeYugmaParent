@@ -16,6 +16,7 @@ export class MessagePage {
 
   public title: string = "Messaging";
   public emptyMessages: boolean = false;
+  public allData = [];
 
   constructor(public messageService: MessageService,
               public modalCtrl: ModalController,
@@ -30,6 +31,7 @@ export class MessagePage {
       if (res.status === 204) {
         this.emptyMessages = true;
       } else {
+        this.allData = res;
         this.emptyMessages = false;
       }
       this.nl.hideLoader();
@@ -45,6 +47,12 @@ export class MessagePage {
 
   public createNew() {
     let createNew = this.modalCtrl.create(NewMessagePage);
+    createNew.onDidDismiss((newData) => {
+      if (!newData) { return; }
+      if (!this.allData) { this.allData = []; }
+      this.emptyMessages = false;
+      this.allData.unshift(newData);
+    });
     createNew.present();
   }
 

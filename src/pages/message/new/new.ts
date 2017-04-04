@@ -29,6 +29,7 @@ export class NewMessagePage {
   constructor(public formBuilder: FormBuilder,
               public messageService: MessageService,
               public nl: CustomService,
+              public viewCtrl: ViewController,
               public parentInfo: ParentInfo,
               public actionSheetCtrl: ActionSheetController) {
     this.loadForm();
@@ -43,9 +44,7 @@ export class NewMessagePage {
 
   public loadForm() {
     this.newMessage = this.formBuilder.group({
-      student: ['', Validators.required],
-      category: ['', Validators.required],
-      childCategory: ['', Validators.required],
+      categoryId: ['', Validators.required],
       againstEmployeeId: ['', Validators.required],
       title: ['', [Validators.required, Validators.maxLength(50)]],
       message: ['', [Validators.required, Validators.maxLength(200)]]
@@ -75,17 +74,42 @@ export class NewMessagePage {
     this.nl.onError(err);
   }
 
-  public setCategory(category) {
-    console.log("SASASA", category);
-    if (category.id === 1) {
-      this.teachers = true;
-    } else {
-      this.teachers = false;
-    }
+  public setCategory(categoryId) {
+    this.teachers = true;
   }
 
-  public onSubmit() {
-    console.log(this.newMessage.value)
+  public presentActionsheet() {let actionSheet = this.actionSheetCtrl.create({
+      title: 'Are you sure you want to submit ?',
+      buttons: [{
+        text: 'YES',
+        icon: 'ios-paper-outline',
+        handler: () => {
+          this.saveMessage();
+        }
+      }, {
+        text: 'CANCEL',
+        icon: 'md-close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    actionSheet.present();console.log(this.newMessage.value)
+  }
+
+  saveMessage() {
+    this.nl.showLoader();
+    this.messageService.saveMessage(this.newMessage.value).subscribe((res) => {
+      console.log("res", res);
+      this.nl.hideLoader();
+      this.viewCtrl.dismiss();
+      this.nl.showToast("Message sent successfully");
+    },(err) => {
+      this.viewCtrl.dismiss();
+      console.log(err);
+      this.nl.onError(err);
+    })
   }
 
 }

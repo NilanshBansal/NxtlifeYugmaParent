@@ -16,7 +16,7 @@
       <ion-item>
         <ion-icon name="sad" item-left large color="primary"></ion-icon>
         <ion-label color="primary">Select Category</ion-label>
-        <custom-select item-content [(ngModel)]="category" formControlName="category" (ngModelChange)="setCategory(category)">
+        <custom-select item-content formControlName="category" (ngModelChange)="setCategory($event)">
           <ion-option *ngFor="let category of categories" [value]="category">{{category.name}}</ion-option>
         </custom-select>
       </ion-item>
@@ -24,9 +24,9 @@
     <ion-card *ngIf="teachers">
       <ion-item>
         <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
-        <ion-label color="primary">Teacher</ion-label>
+        <ion-label color="primary">Select Teacher</ion-label>
         <custom-select item-content [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId">
-          <ion-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">{{teacher.teacherName}} ({{teacher.subject}})</ion-option>
+          <ion-option *ngFor="let teacher of categories[0].teachers" [value]="teacher.teacherId">{{teacher.teacherName}} ({{teacher.subject}})</ion-option>
         </custom-select>
       </ion-item>
     </ion-card>
@@ -45,7 +45,7 @@
       <ion-list>
       <ion-item class="csTransparent">
         <ion-label stacked>Title</ion-label>
-        <ion-textarea rows="2"  formControlName="title" maxlength="50" placeholder="ENTER TITLE"> </ion-textarea>
+        <ion-textarea rows="2"  formControlName="title" maxlength="50" placeholder="Type here"> </ion-textarea>
       </ion-item>
       <ion-badge class="csFiftyLimit">
         <span>{{50 - newMessage.value.title.length}}</span>
@@ -54,19 +54,12 @@
     </ion-card>
     <ion-card>
       <ion-item class="csTransparent">
-        <ion-label stacked>Description</ion-label>
-        <ion-textarea rows="5" formControlName="description" maxlength="200" placeholder="ENTER DESCRIPTION"></ion-textarea>
+        <ion-label stacked>Message</ion-label>
+        <ion-textarea rows="5" formControlName="message" maxlength="200" placeholder="Type here"></ion-textarea>
       </ion-item>
       <ion-badge class="csFiftyLimit">
-        <span>{{200 - newMessage.value.description.length}}</span>
+        <span>{{200 - newMessage.value.message.length}}</span>
       </ion-badge>
-    </ion-card>
-    <ion-card>
-      <ion-item class="csInProgress">
-        <ion-label>Anonymous</ion-label>
-        <ion-checkbox formControlName="anonymous">
-        </ion-checkbox>
-      </ion-item>
     </ion-card>
     <div padding>
       <button ion-button full type="submit" [disabled]="newMessage.invalid">Submit</button>

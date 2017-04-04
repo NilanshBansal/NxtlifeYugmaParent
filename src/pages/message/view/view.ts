@@ -18,15 +18,25 @@ export class ViewMessagePage {
   public messages = 0;
   commentForm: FormGroup;
   notPost = true;
+  id;
 
-  constructor(private navParams: NavParams) {
+  constructor(private navParams: NavParams,
+              private messageService: MessageService) {
     this.commentForm = new FormGroup({
-      comment: new FormControl('', [Validators.required])
+      message: new FormControl('', [Validators.required])
     });
   }
 
   ionViewWillEnter() {
     this.messages = this.navParams.get('message');
+    this.id = this.navParams.get("id");
+  }
+
+  public postMessage() {
+    console.log(this.commentForm.value)
+    this.messageService.postMessage(this.id, this.commentForm.value).subscribe((res) => {
+
+    })
   }
 
 }

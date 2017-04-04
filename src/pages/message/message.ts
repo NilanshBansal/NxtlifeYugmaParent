@@ -58,7 +58,7 @@ export class MessagePage {
   }
 
   public openViewModal(id, message) {
-    let viewModal = this.modalCtrl.create(ViewMessagePage, {message: message});
+    let viewModal = this.modalCtrl.create(ViewMessagePage, {id: id, message: message});
     viewModal.present();
   }
 

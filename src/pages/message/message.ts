@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalController } from 'ionic-angular';
+
+import { NewMessagePage } from './new/new';
 
 // import service
 import { CustomService } from '../../service/custom.service';
@@ -15,6 +18,7 @@ export class MessagePage {
   public emptyMessages: boolean = false;
 
   constructor(public messageService: MessageService,
+              public modalCtrl: ModalController,
               public nl: CustomService) {
 
   }
@@ -37,6 +41,11 @@ export class MessagePage {
 
   public onError(err) {
     this.nl.onError(err);
+  }
+
+  public createNew() {
+    let createNew = this.modalCtrl.create(NewMessagePage);
+    createNew.present();
   }
 
 }

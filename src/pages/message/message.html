@@ -2,6 +2,9 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 <ion-content class="complaint-list csGrayBackground">
+  <ion-fab top right edge>
+    <button ion-fab (click)="createNew()" color="cool"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
   <ion-list class="no-comment" *ngIf="emptyMessages">
     <ion-icon name="ios-chatbubbles-outline"></ion-icon>
     <br>NO RECORD FOUND

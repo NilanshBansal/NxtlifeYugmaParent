@@ -21,6 +21,13 @@ export class MessageService {
                     .catch(this.handleError);
   }
 
+  public getCategories(standardId) {
+    this.serverUrl = this.configuration.Server;
+    return this.http.get(this.serverUrl + "/category/" + standardId)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     if (res.status === 204) { return res; }
     let body = res.json();

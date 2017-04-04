@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ViewController, ToastController, ActionSheetController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../../service/custom.service';
@@ -15,4 +15,18 @@ import { ParentInfo } from '../../../service/parentInfo';
 export class ViewMessagePage {
 
   public headerTitle: string = "Messages";
+  public messages = 0;
+  commentForm: FormGroup;
+  notPost = true;
+
+  constructor(private navParams: NavParams) {
+    this.commentForm = new FormGroup({
+      comment: new FormControl('', [Validators.required])
+    });
+  }
+
+  ionViewWillEnter() {
+    this.messages = this.navParams.get('message');
+  }
+
 }

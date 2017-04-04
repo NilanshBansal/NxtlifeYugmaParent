@@ -6,7 +6,7 @@
     <button ion-fab (click)="createNew()" color="cool"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item *ngFor="let a of allData; let i = index" (click)="openViewModal()">
+    <ion-item *ngFor="let a of allData; let i = index" (click)="openViewModal(a.id, a.messages)">
       <ion-row>{{a.title}}</ion-row>
       <ion-row>
       {{a.createdAt | amDateFormat: 'LL'}}

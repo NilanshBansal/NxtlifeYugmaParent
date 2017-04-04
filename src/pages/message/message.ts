@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 
 import { NewMessagePage } from './new/new';
+import { ViewMessagePage } from './view/view';
 
 // import service
 import { CustomService } from '../../service/custom.service';
@@ -54,6 +55,11 @@ export class MessagePage {
       this.allData.unshift(newData);
     });
     createNew.present();
+  }
+
+  public openViewModal() {
+    let viewModal = this.modalCtrl.create(ViewMessagePage);
+    viewModal.present();
   }
 
 }

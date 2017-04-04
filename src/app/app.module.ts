@@ -40,6 +40,7 @@ import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
 import { ViewComponent } from '../pages/complaint/view/viewComplaintModal';
 import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 import { NewMessagePage } from '../pages/message/new/new';
+import { ViewMessagePage } from '../pages/message/view/view';
 
 // import custom component
 import { ListView } from '../custom-component/list/listview.component';
@@ -107,7 +108,8 @@ import { MessageService } from '../service/message.service';
     ViewComponent,
     NoInternet,
     MessagePage,
-    NewMessagePage
+    NewMessagePage,
+    ViewMessagePage
   ],
   imports: [
     MomentModule,
@@ -156,7 +158,8 @@ import { MessageService } from '../service/message.service';
     ViewComponent,
     NoInternet,
     MessagePage,
-    NewMessagePage
+    NewMessagePage,
+    ViewMessagePage
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,

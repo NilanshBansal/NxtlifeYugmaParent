@@ -6,8 +6,14 @@
     <button ion-fab (click)="createNew()" color="cool"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item *ngFor="let a of allData; let i = index">
-      {{a.title}} - {{a.message}}
+    <ion-item *ngFor="let a of allData; let i = index" (click)="openViewModal()">
+      <ion-row>{{a.title}}</ion-row>
+      <ion-row>
+      {{a.createdAt | amDateFormat: 'LL'}}
+      </ion-row>
+      <ion-row>
+      Closed Date: {{a.closedOn| amDateFormat: 'LL'}}
+      </ion-row>
     </ion-item>
   </ion-list>
   <ion-list class="no-comment" *ngIf="emptyMessages">

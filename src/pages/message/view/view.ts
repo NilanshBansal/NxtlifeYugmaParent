@@ -15,16 +15,19 @@ import { ParentInfo } from '../../../service/parentInfo';
 export class ViewMessagePage {
 
   public headerTitle: string = "Messages";
-  public messages = 0;
+  public messages = [];
   commentForm: FormGroup;
   notPost = true;
   id;
+  userId;
 
   constructor(private navParams: NavParams,
+              private nl: CustomService,
               private messageService: MessageService) {
     this.commentForm = new FormGroup({
       message: new FormControl('', [Validators.required])
     });
+    this.userId = localStorage.getItem("id");
   }
 
   ionViewWillEnter() {
@@ -33,10 +36,22 @@ export class ViewMessagePage {
   }
 
   public postMessage() {
-    console.log(this.commentForm.value)
+    console.log(this.commentForm.value);
+    this.notPost = false;
     this.messageService.postMessage(this.id, this.commentForm.value).subscribe((res) => {
-
-    })
+      this.notPost = true;
+      this.messages.push({
+        createdAt: new Date(),
+        employeeName: null,
+        message: this.commentForm.value.message,
+        parentId: localStorage.getItem("id")
+      });
+      this.commentForm.reset();
+    }, (err) => {
+      this.nl.errMessage();
+      this.notPost = true;
+      this.commentForm.reset();
+    });
   }
 
 }

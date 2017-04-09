@@ -14,7 +14,13 @@ import { Notification } from '../../custom-component/notification.component';
   templateUrl: 'login.html',
   styles:[`ion-footer{
     margin-bottom:15px;
-  }`]
+  }
+  .footer-md::before {
+    top: 0px !important;
+    bottom: auto;
+    height: 0px !important;
+    background-position: 0 0;
+}`]
 })
 
 export class LoginPage extends Notification implements OnInit {

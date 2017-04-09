@@ -5,7 +5,25 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let suggestion of allData" class="csCardTopBorder">
+  <div *ngFor="let data of allData">
+    <ion-badge class="csAppBadge csCenter">{{data.employeeUsername}}</ion-badge>
+    <ion-card class="csAppCard">
+      <ion-item class="csAppContent">
+        <div class="csAppImageBlock">
+          <img class="csAppImg" src="http://www.american.edu/uploads/profiles/large/chris_palmer_profile_11.jpg">
+        </div>
+        <div style="margin:5px">
+          <b class="csParagraph">{{data.title}}</b>
+          <p class="csParagraph">{{data.description}}</p>
+        </div>
+      </ion-item>
+      <ion-item class="csAppFooter">
+        <div item-left color="light">{{data.createdAt | amDateFormat: 'LL'}}</div>
+        <ion-badge item-right>{{ data.studentName }}</ion-badge>
+      </ion-item>
+    </ion-card>
+  </div>
+  <!--<ion-card *ngFor="let suggestion of allData" class="csCardTopBorder">
     <ion-item>
       <ion-avatar item-left>
         <ion-icon name="ios-happy" color="primary" style="font-size:2.5em;" text-center></ion-icon>
@@ -19,7 +37,7 @@
       <p>{{suggestion.description}}</p>
       <span class="csRight">From: {{ suggestion.employeeUsername }}</span>
     </ion-card-content>
-  </ion-card>
+  </ion-card>-->
   <ion-list class="no-comment" *ngIf="EmptyComplaints">
     <ion-icon name="bulb"></ion-icon>
     <br>NO RECORD FOUND

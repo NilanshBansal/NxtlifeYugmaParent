@@ -1,20 +1,20 @@
 <ion-header>
   <nl-modal-navbar [title]="title"></nl-modal-navbar>
   <ion-item class="csShadow" no-lines>
-    <h2> {{ onesurveys.title }} </h2>
+    <b> {{ onesurveys.title }} </b>
     <p class="csParagraph">{{ onesurveys.description }}</p>
   </ion-item>
 </ion-header>
 <ion-content class="csGrayBackground">
-  <ion-card class="csBackgroundGray" radio-group [(ngModel)]="choice3[i][0]" *ngFor="let a of onesurveys.questions; let i=index">
-      <ion-item >
+  <ion-card class="csPollCard" radio-group [(ngModel)]="choice3[i][0]" *ngFor="let a of onesurveys.questions; let i=index">
+      <ion-item>
         <ion-icon *ngIf="a.questionTypeName == 'Single Choice'" color="primary" item-left name="checkmark"></ion-icon>
         <ion-icon *ngIf="a.questionTypeName == 'Multiple Choice'" color="primary" item-left name="done-all"></ion-icon>
         <span class="csParagraph"><b>{{ a.questionText }}</b></span>
       </ion-item>
     <ion-card-content>
       <ion-list *ngFor="let d of a.options; let m = index;">
-        <ion-card>
+        <ion-card class="csSelectOption">
           <ion-item>
             <ion-radio *ngIf="a.questionTypeId == 1" value="{{d.id}}" (click)="questionclick(i)"></ion-radio>
             <ion-checkbox *ngIf="a.questionTypeId == 2" [(ngModel)]="choice2[i][m]" (click)="SurveyChoiceClicked(i,m,d.id,a.questionId)"></ion-checkbox>

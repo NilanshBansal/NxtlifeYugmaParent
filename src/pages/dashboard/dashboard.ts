@@ -35,7 +35,7 @@ import { SurveyService } from '../../service/survey.service';
 
 export class Dashboard {
 
-  public title: string = "Dashboard";
+  public title: string = "FORMATIVE FEEDBACK";
   public hasData: boolean = false;
 
   public dash_data = {

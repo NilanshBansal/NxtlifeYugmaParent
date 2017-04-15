@@ -1,15 +1,13 @@
 <ion-header>
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
-
 <ion-content class="homeBackground csGrayBackground">
-
   <ion-fab top right edge #fab>
     <button ion-fab color="cool">
       <ion-icon name="create"></ion-icon>
     </button>
     <ion-fab-list side="bottom">
-         <ion-badge class="csAddFab1" (click)="newComplaint(fab)">Complaint</ion-badge>
+      <ion-badge class="csAddFab1" (click)="newComplaint(fab)">Complaint</ion-badge>
       <button color="primary" ion-fab (click)="newComplaint(fab)">
         <ion-icon style="font-size: 35px;" name="ios-sad-outline"></ion-icon>
       </button>
@@ -23,10 +21,7 @@
       </button>
     </ion-fab-list>
   </ion-fab>
-
   <ion-spinner class="circle-spinner" style="display: block;margin: auto;margin-top: 30vh;" *ngIf="!hasData"></ion-spinner>
-  
-
   <ion-list *ngIf="dash_data.planner.length > 0">
     <ion-list-header>
       Today's Event
@@ -40,7 +35,7 @@
             <ion-col width-50 class="no-padding-l" style="color:#535353;">
               <ion-icon name="clock"></ion-icon><span>{{a.startTime}} - {{a.endTime}} </span>
             </ion-col>
-            <ion-col width-50 class="no-padding-l" >
+            <ion-col width-50 class="no-padding-l">
               <ion-icon name="at"></ion-icon><span>{{a.location}}</span>
             </ion-col>
           </ion-row>
@@ -48,10 +43,10 @@
       </ion-item>
     </ion-list>
   </ion-list>
-
   <ion-list>
     <ion-list-header *ngIf="dash_data.openPoll.length > 0">
-      Poll <ion-badge> {{dash_data.pollCount}} </ion-badge>
+      Poll
+      <ion-badge> {{dash_data.pollCount}} </ion-badge>
     </ion-list-header>
     <ion-list inset>
       <ion-item *ngFor="let a of dash_data.openPoll" (click)="goToPoll()">
@@ -62,19 +57,19 @@
             <ion-col width-50 class="no-padding-l" style="color:#535353;">
               <ion-icon name="clock"></ion-icon><span>{{a.createdAt | amDateFormat: 'DD/MM/YYYY'}}</span>
             </ion-col>
-            <ion-col width-50 class="no-padding-l" >
+            <ion-col width-50 class="no-padding-l">
               <ion-icon name="at"></ion-icon><span>{{a.typeName}}</span>
             </ion-col>
           </ion-row>
         </ion-note>
       </ion-item>
-    <button ion-button class="csRight" round small *ngIf="dash_data.pollCount > 2" (click)="openPollList()">View All</button>
+      <button ion-button class="csRight" round small *ngIf="dash_data.pollCount > 2" (click)="openPollList()">View All</button>
     </ion-list>
   </ion-list>
-  
   <ion-list>
     <ion-list-header *ngIf="dash_data.surveys.length > 0">
-      Survey   <ion-badge>{{dash_data.surveyCount}}</ion-badge>
+      Survey
+      <ion-badge>{{dash_data.surveyCount}}</ion-badge>
     </ion-list-header>
     <ion-list inset>
       <ion-item *ngFor="let a of dash_data.surveys" (click)="goToSurvey(a.surveyId)">
@@ -85,22 +80,21 @@
             <ion-col width-50 class="no-padding-l" style="color:#535353;">
               <ion-icon name="clock"></ion-icon><span>{{a.createdAt | amDateFormat: 'DD/MM/YYYY'}}</span>
             </ion-col>
-            <ion-col width-50 class="no-padding-l" >
+            <ion-col width-50 class="no-padding-l">
               <ion-icon name="at"></ion-icon><span>{{a.typeName}}</span>
             </ion-col>
           </ion-row>
         </ion-note>
       </ion-item>
-       <button class="csRight" ion-button item-right round small *ngIf="dash_data.surveyCount > 2" (click)="openSuveyList()">View All</button>
+      <button class="csRight" ion-button item-right round small *ngIf="dash_data.surveyCount > 2" (click)="openSuveyList()">View All</button>
     </ion-list>
   </ion-list>
-
   <ion-list>
     <ion-list-header *ngIf="dash_data.circular.length > 0">
       Circular
     </ion-list-header>
     <ion-list inset>
-      <ion-item *ngFor="let a of dash_data.circular"  (click)="goToCircular(a.id)">
+      <ion-item *ngFor="let a of dash_data.circular" (click)="goToCircular(a.id)">
         <h2><b>{{a.title}}</b></h2>
         <h3>{{a.description}}</h3>
         <ion-note>
@@ -108,7 +102,7 @@
             <ion-col width-50 class="no-padding-l" style="color:#535353;">
               <ion-icon name="clock"></ion-icon><span>in 23 min</span>
             </ion-col>
-            <ion-col width-50 class="no-padding-l" >
+            <ion-col width-50 class="no-padding-l">
               <ion-icon name="at"></ion-icon><span>school</span>
             </ion-col>
           </ion-row>
@@ -117,73 +111,72 @@
     </ion-list>
   </ion-list>
 </ion-content>
-
 <ion-footer no-border>
   <ion-toolbar color="danger" style="height:135px;padding:0px" class="pager">
     <ion-slides pager>
-    <ion-slide>
-      <ion-grid class="home-tabs bullitinBoard">
-        <ion-row>
-          <ion-col class="greenCard" (click)="openPage(page.complaint, 'complaint')">
-            <div class="pinYellow"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
+      <ion-slide>
+        <ion-grid class="home-tabs bullitinBoard">
+          <ion-row>
+            <ion-col class="greenCard" (click)="openPage(page.complaint, 'complaint')">
+              <div class="pinYellow"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
               <ion-icon name="ios-bulb-outline"></ion-icon>
               <p text-center>Complaints</p>
-          </ion-col>
-          <ion-col  class="blueCard" (click)="openPage(page.suggestion, 'suggestion')">
-            <div class="pinGreen"><img src="assets/svg/clip2.svg" width="50px" height="50px" /></div>
+            </ion-col>
+            <ion-col class="blueCard" (click)="openPage(page.suggestion, 'suggestion')">
+              <div class="pinGreen"><img src="assets/svg/clip2.svg" width="50px" height="50px" /></div>
               <ion-icon class="my-icon" name="ios-sad-outline"></ion-icon>
               <p>Suggestions</p>
-          </ion-col>
-          <ion-col  class="peachCard" (click)="openPage(page.planner, 'planner')">
-            <div class="pinYellow"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
+            </ion-col>
+            <ion-col class="peachCard" (click)="openPage(page.planner, 'planner')">
+              <div class="pinYellow"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
               <ion-icon class="my-icon" name="ios-stats-outline"></ion-icon>
               <p text-center>Calendar</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-slide>
-    <ion-slide>
-      <ion-grid class="home-tabs bullitinBoard">
-        <ion-row>
-          <ion-col width-33 class="peachCard" (click)="openPage(page.survey, 'survey')">
-            <div class="pinGreen"><img src="assets/svg/clip2.svg" width="50px" height="50px" /></div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide>
+        <ion-grid class="home-tabs bullitinBoard">
+          <ion-row>
+            <ion-col width-33 class="peachCard" (click)="openPage(page.survey, 'survey')">
+              <div class="pinGreen"><img src="assets/svg/clip2.svg" width="50px" height="50px" /></div>
               <ion-icon class="my-icon" name="ios-analytics-outline"></ion-icon>
               <p>Survey</p>
-          </ion-col>
-          <ion-col class="greenCard" (click)="openPage(page.appreciation, 'appreciation')">
-            <div class="pinYellow"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
+            </ion-col>
+            <ion-col class="greenCard" (click)="openPage(page.appreciation, 'appreciation')">
+              <div class="pinYellow"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
               <ion-icon class="my-icon" name="ios-thumbs-up-outline"></ion-icon>
               <p>Appreciations</p>
-          </ion-col>
-          <ion-col  class="blueCard" (click)="openPage(page.rating, 'student-profile')">
-            <div class="pinGreen"><img src="assets/svg/clip2.svg" width="50px" height="50px" /></div>
+            </ion-col>
+            <ion-col class="blueCard" (click)="openPage(page.rating, 'student-profile')">
+              <div class="pinGreen"><img src="assets/svg/clip2.svg" width="50px" height="50px" /></div>
               <ion-icon class="my-icon" name="ios-pulse-outline"></ion-icon>
               <p>Student Rating</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-slide>
-    <ion-slide>
-      <ion-grid class="home-tabs bullitinBoard">
-        <ion-row>
-          <ion-col class="peachCard" (click)="openPage(page.poll, 'poll')">
-            <div class="pinGreen"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide>
+        <ion-grid class="home-tabs bullitinBoard">
+          <ion-row>
+            <ion-col class="peachCard" (click)="openPage(page.poll, 'poll')">
+              <div class="pinGreen"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
               <ion-icon class="my-icon" name="ios-stats-outline"></ion-icon>
               <p>Poll</p>
-          </ion-col>
-          <ion-col  class="greenCard" (click)="openPage(page.homework, 'homework')">
-            <div class="pinYellow"><img src="assets/svg/clip2.svg" width="50px" height="50px" /></div>
+            </ion-col>
+            <ion-col class="greenCard" (click)="openPage(page.homework, 'homework')">
+              <div class="pinYellow"><img src="assets/svg/clip2.svg" width="50px" height="50px" /></div>
               <ion-icon class="my-icon" name="ios-book-outline"></ion-icon>
               <p>Homework</p>
-          </ion-col>
-          <ion-col  class="blueCard" (click)="openPage(page.circular, 'circular')">
-            <div class="pinGreen"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
+            </ion-col>
+            <ion-col class="blueCard" (click)="openPage(page.circular, 'circular')">
+              <div class="pinGreen"><img src="assets/svg/clip2-green.svg" width="50px" height="50px" /></div>
               <ion-icon class="my-icon" name="ios-paper-outline"></ion-icon>
               <p>Circular</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-slide>
-  </ion-slides>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+    </ion-slides>
   </ion-toolbar>
 </ion-footer>

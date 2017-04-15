@@ -2,69 +2,66 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
- <ion-card class="csProfileCard">
-    <div class="csCenter csProfileHeader" style="">
+  <ion-card class="csProfileCard">
+    <div class="csCenter csProfileHeader">
       <div class="csAccBgImg">
         <br>
-          <img class="csAccImg csCenter" src="http://open4profit.com/images/f2.jpg">
-          <div class="csAccName" text-center>{{name}}</div>
-          <span class="csGrayText" text-center *ngIf="nickName">({{nickName}})</span>
+        <img class="csAccImg csCenter" src="http://open4profit.com/images/f2.jpg">
+        <div class="csAccName" text-center>{{name}}</div>
+        <span class="csGrayText" text-center *ngIf="nickName">({{nickName}})</span>
       </div>
     </div>
-<ion-list>
-  <ion-card class="csProfileCardDetails">
-    <ion-item>
-    <ion-avatar item-left>
-      <ion-icon class="csProfileIcon" name="finger-print"></ion-icon>
-    </ion-avatar>
-    <span class="csProfileTitle">ID</span>
-    <h2>{{id}}</h2>
-    </ion-item>
-  </ion-card>  
-  <ion-card class="csProfileCardDetails">
-    <ion-item>
-    <ion-avatar item-left>
-      <ion-icon class="csProfileIcon" name="unlock"></ion-icon>
-    </ion-avatar>
-    <span class="csProfileTitle">Password</span>
-    <h2>*********</h2>
-    </ion-item>
-  </ion-card>   
-  <ion-card class="csProfileCardDetails" *ngIf="emailID">
-    <ion-item>
-    <ion-avatar item-left>
-      <ion-icon class="csProfileIcon" name="unlock"></ion-icon>
-    </ion-avatar>
-    <span class="csProfileTitle">E-mail ID</span>
-    <h2>{{emailID}}</h2>
-    </ion-item>
-  </ion-card>    
-  <ion-card class="csProfileCardDetails" *ngIf="contactNo">
-    <ion-item>
-    <ion-avatar item-left>
-      <ion-icon class="csProfileIcon" name="unlock"></ion-icon>
-    </ion-avatar>
-    <span class="csProfileTitle">Mobile No.</span>
-    <h2>{{contactNo}}</h2>
-    </ion-item>
-  </ion-card>    
-</ion-list>
-<div padding>
-  <button ion-button icon-left color="color1" full type="button" (click)="logoutActionSheet()">
+    <ion-list>
+      <ion-card class="csProfileCardDetails">
+        <ion-item>
+          <ion-avatar item-left>
+            <ion-icon class="csProfileIcon" name="finger-print"></ion-icon>
+          </ion-avatar>
+          <span class="csProfileTitle">ID</span>
+          <h2>{{id}}</h2>
+        </ion-item>
+      </ion-card>
+      <ion-card class="csProfileCardDetails">
+        <ion-item>
+          <ion-avatar item-left>
+            <ion-icon class="csProfileIcon" name="unlock"></ion-icon>
+          </ion-avatar>
+          <span class="csProfileTitle">Password</span>
+          <h2>*********</h2>
+        </ion-item>
+      </ion-card>
+      <ion-card class="csProfileCardDetails" *ngIf="emailID">
+        <ion-item>
+          <ion-avatar item-left>
+            <ion-icon class="csProfileIcon" name="unlock"></ion-icon>
+          </ion-avatar>
+          <span class="csProfileTitle">E-mail ID</span>
+          <h2>{{emailID}}</h2>
+        </ion-item>
+      </ion-card>
+      <ion-card class="csProfileCardDetails" *ngIf="contactNo">
+        <ion-item>
+          <ion-avatar item-left>
+            <ion-icon class="csProfileIcon" name="unlock"></ion-icon>
+          </ion-avatar>
+          <span class="csProfileTitle">Mobile No.</span>
+          <h2>{{contactNo}}</h2>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+    <div padding>
+      <button ion-button icon-left color="primary" full type="button" (click)="logoutActionSheet()">
       <ion-icon name="power"></ion-icon>
       <b>Logout</b>
   </button>
-</div>
+    </div>
   </ion-card>
 
- <ion-card class="csProfileCard">
+  <ion-card class="csProfileCard">
     <div class="csCenter csProfileHeader" style="height:40px !important">
-      <div class="csAccBgImg">
-        <br>
-          <!--<img class="csAccImg csCenter" src="http://open4profit.com/images/f2.jpg">-->
-          <div class="csAccName" text-center>Children</div>
-          <!--<span class="csGrayText" text-center *ngIf="nickName">({{nickName}})</span>-->
-      </div>
+    
+        <div class="csAccName csPadding5" text-center>Children</div>
+     
     </div>
     <ion-grid>
       <ion-item>
@@ -82,67 +79,5 @@
         </ion-row>
       </ion-item>
     </ion-grid>
- </ion-card>
-
-  <!--<ion-list>
-    <ion-list-header>
-      Profile
-    </ion-list-header>
-    <ion-card>
-      <ion-item>
-        <ion-icon name="person" class="csFontColor1" item-left> </ion-icon>
-        <h2 color="primary">Name</h2>
-        <b>{{name}}</b> <span class="csGrayText" *ngIf="nickName">({{nickName}})</span>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-icon name="finger-print" class="csFontColor1" item-left> </ion-icon>
-        <h2 color="primary">ID</h2>
-        <b>{{id}}</b>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="unlock" class="csFontColor1" item-left> </ion-icon>
-        <h2 color="primary">Password</h2>
-        <b>*********</b>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item *ngIf="emailID">
-        <ion-icon name="mail" class="csFontColor1" item-left> </ion-icon>
-        <h2 color="primary">E-mail</h2>
-        <b>{{emailID}}</b>
-      </ion-item>
-      <ion-item *ngIf="contactNo">
-        <ion-icon name="phone-portrait" class="csFontColor1" item-left> </ion-icon>
-        <h2 color="primary">Mobile Number</h2>
-        <b>{{contactNo}}</b>
-      </ion-item>
-    </ion-card>
-    <ion-list-header>
-      Students
-    </ion-list-header>
-    <ion-grid>
-      <ion-item>
-        <ion-row>
-          <ion-col width-30 class="csFontColor1">Name</ion-col>
-          <ion-col width-30 class="csFontColor1">Class</ion-col>
-          <ion-col width-40 class="csFontColor1">Teacher</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item *ngFor="let a of students">
-        <ion-row>
-          <ion-col width-30> {{a.name}}</ion-col>
-          <ion-col width-30>{{a.standardName}}</ion-col>
-          <ion-col width-40>{{a.classTeacher}}</ion-col>
-        </ion-row>
-      </ion-item>
-    </ion-grid>
-    <div padding>
-      <button ion-button icon-left color="color1" full type="button" (click)="logoutActionSheet()">
-      <ion-icon name="power"></ion-icon>
-      <b>Logout</b>
-    </button>
-    </div>
-  </ion-list>-->
+  </ion-card>
 </ion-content>

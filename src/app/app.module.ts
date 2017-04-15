@@ -33,11 +33,14 @@ import { PassedHomework } from '../pages/homework/passed/homework';
 import { CircularComponent } from '../pages/circular/circular.component';
 import { CircularViewComponent } from '../pages/circular/view/circular-view';
 import { SurveyListPage } from '../pages/survey/list/survey-list';
+import { MessagePage } from '../pages/message/message';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
 import { ViewComponent } from '../pages/complaint/view/viewComplaintModal';
 import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
+import { NewMessagePage } from '../pages/message/new/new';
+import { ViewMessagePage } from '../pages/message/view/view';
 
 // import custom component
 import { ListView } from '../custom-component/list/listview.component';
@@ -62,6 +65,7 @@ import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';
 import { CircularService } from '../service/circular.servce';
 import { SurveyService } from '../service/survey.service';
+import { MessageService } from '../service/message.service';
 
 @NgModule({
   declarations: [
@@ -102,7 +106,10 @@ import { SurveyService } from '../service/survey.service';
     SurveyListPage,
     CustomSelect,
     ViewComponent,
-    NoInternet
+    NoInternet,
+    MessagePage,
+    NewMessagePage,
+    ViewMessagePage
   ],
   imports: [
     MomentModule,
@@ -149,10 +156,14 @@ import { SurveyService } from '../service/survey.service';
     CircularViewComponent,
     CustomSelect,
     ViewComponent,
-    NoInternet
+    NoInternet,
+    MessagePage,
+    NewMessagePage,
+    ViewMessagePage
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,
+              MessageService,
               { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
               { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
                 return new CustomHttpService(backend, defaultOptions);

@@ -1,0 +1,28 @@
+<ion-header>
+  <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
+</ion-header>
+<ion-content id="chat" class="csChatBox">
+  <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.employeeName === null}" no-margin>
+    <div class="csMyComment">
+      <h3>{{ m.message }}</h3>
+    </div>
+    <div class="csCommentTime">{{m.employeeNickName}}{{m.parentName}} {{ m.createdAt | amCalendar }}</div>
+  </div>
+  <ion-spinner class="loader" name="dots" *ngIf="!notPost"></ion-spinner>
+</ion-content>
+<ion-footer keyboard-attach class="bar-stable" #commentBtn>
+  <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postMessage()" novalidate>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-80>
+          <ion-textarea rows="2" class="csCommentInput" type="text" formControlName="message" placeholder="Write message..."></ion-textarea>
+        </ion-col>
+        <ion-col>
+          <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
+            <ion-icon name="md-send" role="img"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

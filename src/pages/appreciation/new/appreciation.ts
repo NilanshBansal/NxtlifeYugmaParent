@@ -97,29 +97,8 @@ export class NewAppreciationModal implements OnInit {
     } else {
       let a = this.newSuggestion.value.studentId.id;
       this.newSuggestion.value.studentId = a;
-      this.presentActionSheet(this.newSuggestion.value);
+      this.onSubmit(this.newSuggestion.value);
     }
-  }
-
-  presentActionSheet(newSuggestion) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Are you sure you want to submit ?',
-      buttons: [{
-        text: 'YES',
-        icon: 'ios-paper-outline',
-        handler: () => {
-          this.onSubmit(newSuggestion);
-        }
-      }, {
-        text: 'CANCEL',
-        icon: 'md-close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    actionSheet.present();
   }
 
   onSubmit(newSuggestion) {

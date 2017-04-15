@@ -1,0 +1,57 @@
+<ion-header>
+  <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
+</ion-header>
+<ion-content class="complaint-list csGrayBackground">
+  <form name="newMessage" [formGroup]="newMessage" (ngSubmit)="presentActionsheet()" novalidate>
+    <ion-card>
+      <ion-item>
+        <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
+        <ion-label color="primary">Child Name</ion-label>
+        <custom-select item-content [(ngModel)]="student" [ngModelOptions]="{standalone: true}" (ngModelChange)="selectChild($event)">
+          <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
+        </custom-select>
+      </ion-item>
+    </ion-card>
+    <ion-card *ngIf="standardId">
+      <ion-item>
+        <ion-icon name="sad" item-left large color="primary"></ion-icon>
+        <ion-label color="primary">Select Category</ion-label>
+        <custom-select item-content formControlName="categoryId" (ngModelChange)="setCategory($event)">
+          <ion-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-option>
+        </custom-select>
+      </ion-item>
+    </ion-card>
+    <ion-card *ngIf="teachers">
+      <ion-item>
+        <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
+        <ion-label color="primary">Select Teacher</ion-label>
+        <custom-select item-content [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId">
+          <ion-option *ngFor="let teacher of categories[0].teachers" [value]="teacher.teacherId">{{teacher.teacherName}} ({{teacher.subject}})</ion-option>
+        </custom-select>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-list>
+      <ion-item class="csTransparent">
+        <ion-label stacked>Title</ion-label>
+        <ion-textarea rows="2"  formControlName="title" maxlength="50" placeholder="Type here"> </ion-textarea>
+      </ion-item>
+      <ion-badge class="csFiftyLimit">
+        <span>{{50 - newMessage.value.title.length}}</span>
+      </ion-badge>
+      </ion-list>
+    </ion-card>
+    <ion-card>
+      <ion-item class="csTransparent">
+        <ion-label stacked>Message</ion-label>
+        <ion-textarea rows="5" formControlName="message" maxlength="200" placeholder="Type here"></ion-textarea>
+      </ion-item>
+      <ion-badge class="csFiftyLimit">
+        <span>{{200 - newMessage.value.message.length}}</span>
+      </ion-badge>
+    </ion-card>
+    <div padding>
+      <button ion-button full type="submit" [disabled]="newMessage.invalid">Submit</button>
+    </div>
+  </form>
+</ion-content>

@@ -10,8 +10,7 @@
     <br>NO RECORD FOUND
   </ion-list>
 <div *ngFor="let res of resdata ; let i=index">
-  <!--<ion-badge  class="csAppBadge csCenter">{{res.employeeName}}</ion-badge>-->
-  <ion-card [style.border-color]="res.optionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'" style="border-radius: 25px;border:2px solid" class="csBackgroundGray" radio-group [(ngModel)]="choice1[i][0]" >
+  <ion-card [style.border-color]="res.optionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'" class="csPollCard csBackgroundGray" radio-group [(ngModel)]="choice1[i][0]" >
     <ion-list no-border>
       <ion-item [style.background]="res.optionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'">
         <ion-icon *ngIf="res.optionTypeName == 'Single Choice'" color="dark" item-left name="checkmark"></ion-icon>
@@ -28,21 +27,15 @@
         </ion-item>
       </ion-card>
     </ion-list>
-    <!--<div>
-      <span style="margin:15px;float:left">Start at: 23/4/2017</span>
-      <span style="margin:15px;float:right">Expire at: 23/4/2017</span><br>
-      <span style="margin:15px;float:left">By: {{res.employeeUsername}}</span>
-      <span style="margin:15px;float:right">Audience: School</span>      
-    </div>-->
     <div padding>
-      <button  style="border-radius:20px" full ion-button color="primary" [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
+      <button  class="csPollButton" full ion-button [style.background]="res.optionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'" [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
     </div>
     <ion-item [style.background]="res.optionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'">
     <div>
-      <span style="margin:15px;float:left;margin-bottom:0px;margin-top:0px"><b>Start: </b>21/4/2017</span>
-      <span style="margin:15px;float:right;margin-bottom:0px;margin-top:0px"><b>End: </b>{{res.expiredAt}}</span><br>
-      <span style="margin:15px;float:left;margin-bottom:0px"><b>By:</b> {{res.employeeUsername}}</span>
-      <span style="margin:15px;float:right;margin-bottom:0px"><b>Audience:</b> {{res.typeName}}</span>      
+      <span class="csPollFooter1 csPollFooter" style=""><b>Start: </b>21/4/2017</span>
+      <span class="csPollFooter2 csPollFooter" style=""><b>End: </b>{{res.expiredAt}}</span><br>
+      <span class="csPollFooter3 csPollFooter" style=""><b>By:</b> {{res.employeeUsername}}</span>
+      <span class="csPollFooter4 csPollFooter" style=""><b>Audience:</b> {{res.typeName}}</span>      
     </div>
     </ion-item>
   </ion-card>

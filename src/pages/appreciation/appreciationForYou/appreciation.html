@@ -23,22 +23,6 @@
       </ion-item>
     </ion-card>
   </div>
-
-  <!--<ion-card *ngFor="let appreciation of allData" class="csCardTopBorder">
-    <ion-item>
-      <ion-avatar item-left>
-        <ion-icon name="ios-happy" color="primary" style="font-size:2.5em;" text-center></ion-icon>
-      </ion-avatar>
-      <h2><b>{{appreciation.studentName}}</b></h2>
-      <p>{{appreciation.createdAt | amDateFormat: 'LL'}}</p>
-    </ion-item>
-    <hr>
-    <ion-card-content>
-      <b>{{appreciation.title}}</b>
-      <p>{{appreciation.description}}</p>
-      <span class="csRight">From: {{ appreciation.employeeUsername }}</span>
-    </ion-card-content>
-  </ion-card>-->
   <ion-list class="no-comment" *ngIf="EmptyComplaints">
     <ion-icon name="thumbs-up"></ion-icon>
     <br>NO RECORD FOUND

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ViewController, NavParams, Content } from 'ionic-angular';
+import { ViewController, NavParams, Content, ToastController } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../../service/custom.service';
@@ -25,6 +25,7 @@ export class ViewMessagePage {
 
   constructor(private navParams: NavParams,
               private nl: CustomService,
+              public toastCtrl: ToastController,
               public commonService: CommonService,
               private messageService: MessageService) {
     this.initForm();
@@ -58,9 +59,23 @@ export class ViewMessagePage {
             return;
           }
           that.messages.push(message);
-          that.content.scrollToBottom(300);
+          that.showToastMessage();
        });
     });
+  }
+
+  public showToastMessage() {
+    let toast = this.toastCtrl.create({
+      message: 'New Message Received.',
+      position: 'bottom',
+      duration: 5000,
+      closeButtonText: 'VIEW',
+      showCloseButton: true
+    });
+    toast.onDidDismiss(() => {
+      this.content.scrollToBottom(300);
+    });
+    toast.present();
   }
 
   public postMessage() {

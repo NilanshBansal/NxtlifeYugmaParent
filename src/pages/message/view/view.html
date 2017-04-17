@@ -2,7 +2,7 @@
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content id="chat" class="csChatBox">
-  <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}" no-margin>
+  <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.parentId != null}" no-margin>
     <div class="csMyComment">
       <h3>{{ m.message }}</h3>
     </div>

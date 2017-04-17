@@ -58,7 +58,7 @@ export class ViewMessagePage {
             return;
           }
           that.messages.push(message);
-          this.content.scrollToBottom(300);
+          that.content.scrollToBottom(300);
        });
     });
   }

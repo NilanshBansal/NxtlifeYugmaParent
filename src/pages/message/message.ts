@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ModalController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { ModalController, AlertController, ToastController, Content } from 'ionic-angular';
 
 import { NewMessagePage } from './new/new';
 import { ViewMessagePage } from './view/view';
@@ -7,6 +7,7 @@ import { ViewMessagePage } from './view/view';
 // import service
 import { CustomService } from '../../service/custom.service';
 import { MessageService } from '../../service/message.service';
+import { CommonService } from '../../service/common.service'; 
 
 @Component({
   selector: 'message',
@@ -19,18 +20,51 @@ export class MessagePage {
   public emptyMessages: boolean = false;
   public allData = [];
   public currentPage: number = 1;
+  @ViewChild(Content) content: Content;
 
   constructor(public messageService: MessageService,
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
+              public toastCtrl: ToastController,
+              public commonService: CommonService,
               public nl: CustomService) {
+    this.sockJsConnection();
+  }
 
+  public sockJsConnection() {
+    let stompClient = this.commonService.getSockJs();
+    let id = this.commonService.getData('id');
+    let url = '/parent/'+ id +'/conversation';
+    let that = this;
+    stompClient.connect({}, function (frame) {
+      stompClient.subscribe(url, function (greeting) {
+        let message = JSON.parse(greeting.body);
+        if (!message) {
+          return;
+        }
+        that.allData.unshift(message);
+        that.showToastMessage();
+      });
+    });
+  }
+
+  public showToastMessage() {
+    let toast = this.toastCtrl.create({
+      message: 'New Message Received.',
+      position: 'bottom',
+      duration: 5000,
+      closeButtonText: 'VIEW',
+      showCloseButton: true
+    });
+    toast.onDidDismiss(() => {
+      this.content.scrollToTop();
+    });
+    toast.present();
   }
 
   ionViewWillEnter() {
     this.nl.showLoader();
     this.messageService.getAllMessages(1).subscribe((res) => {
-      console.log("QQQ", res);
       if (res.status === 204) {
         this.emptyMessages = true;
       } else {
@@ -39,7 +73,6 @@ export class MessagePage {
       }
       this.nl.hideLoader();
     }, (err) => {
-      console.log("err", err);
       this.onError(err);
     })
   }

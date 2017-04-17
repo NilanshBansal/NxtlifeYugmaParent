@@ -6,7 +6,10 @@ import { NavParams,Events} from 'ionic-angular';
 @Component({
 
     selector : 'circular-view',
-    templateUrl : 'circular-view.html'
+    templateUrl : 'circular-view.html',
+    styles: [`
+
+    `]
 })
 
 

@@ -9,19 +9,19 @@
     <ion-fab-list side="bottom">
       <ion-badge class="csAddFab1" (click)="newComplaint(fab)">Complaint</ion-badge>
       <button color="primary" ion-fab (click)="newComplaint(fab)">
-        <ion-icon style="font-size: 35px;" name="ios-sad-outline"></ion-icon>
+        <ion-icon class="csFont35"  name="ios-sad-outline"></ion-icon>
       </button>
       <ion-badge color="fab" class="csAddFab2" (click)="newSuggestion(fab)">Suggestion</ion-badge>
       <button ion-fab color="fab" (click)="newSuggestion(fab)">
-        <ion-icon style="font-size: 35px;" name="ios-bulb-outline"></ion-icon>
+        <ion-icon class="csFont35" name="ios-bulb-outline"></ion-icon>
       </button>
       <ion-badge color="danger" class="csAddFab3" (click)="newAppreciation(fab)">Appreciation</ion-badge>
       <button ion-fab color="danger" (click)="newAppreciation(fab)">
-        <ion-icon style="font-size: 35px;" name="ios-thumbs-up-outline"></ion-icon>
+        <ion-icon class="csFont35" name="ios-thumbs-up-outline"></ion-icon>
       </button>
     </ion-fab-list>
   </ion-fab>
-  <ion-spinner class="circle-spinner" style="display: block;margin: auto;margin-top: 30vh;" *ngIf="!hasData"></ion-spinner>
+  <ion-spinner class="circle-spinner csCenter" style="margin-top: 30vh;" *ngIf="!hasData"></ion-spinner>
   <ion-list *ngIf="dash_data.planner.length > 0">
     <ion-list-header>
       Today's Event
@@ -29,7 +29,6 @@
     <ion-list inset>
       <ion-item *ngFor="let a of dash_data.planner" (click)="GoToEvent(a.id)">
         <h2><b>{{a.title}} </b></h2>
-        <!--<h3>lkkkkkkkkk</h3>-->
         <ion-note>
           <ion-row>
             <ion-col width-50 class="no-padding-l" style="color:#535353;">

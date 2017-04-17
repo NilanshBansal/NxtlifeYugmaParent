@@ -9,15 +9,25 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item *ngFor="let a of allData; let i = index" (click)="openViewModal(a.id, a.messages)">
-      <ion-row>{{a.title}}</ion-row>
-      <ion-row>
-      {{a.createdAt | amDateFormat: 'LL'}}
-      </ion-row>
-      <ion-row *ngIf="a.closedOn">
-      Closed Date: {{a.closedOn| amDateFormat: 'LL'}}
-      </ion-row>
-    </ion-item>
+    <ion-item-sliding *ngFor="let a of allData; let i = index" class="new-list" #slidingItem>
+      <a ion-item detail-push detail-none href="#" (click)="openViewModal(a.id, a.messages)">
+        <ion-row>{{a.title}}</ion-row>
+        <ion-row>{{a.againstEmployeeName}}</ion-row>
+        <ion-row>{{a.categoryName}}</ion-row>
+        <ion-row>
+        {{a.createdAt | amDateFormat: 'LL'}}
+        </ion-row>
+        <ion-row *ngIf="a.closedOn">
+        Closed Date: {{a.closedOn| amDateFormat: 'LL'}}
+        </ion-row>
+      </a>
+      <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="presentConfirm(a.id)">
+          <ion-icon name="md-close" class="csBigIcon"></ion-icon>
+          Close
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
   <ion-list class="no-comment" *ngIf="emptyMessages">
     <ion-icon name="ios-chatbubbles-outline"></ion-icon>

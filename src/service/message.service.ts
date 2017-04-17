@@ -42,6 +42,13 @@ export class MessageService {
                     .catch(this.handleError);
   }
 
+  public closeConversation(id) {
+    this.serverUrl = this.configuration.Server;
+    return this.http.put(this.serverUrl + "/" + id, {})
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     if (res.status === 204) { return res; }
     let body = res.json();

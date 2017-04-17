@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from 'ionic-angular';
+import { ModalController, AlertController } from 'ionic-angular';
 
 import { NewMessagePage } from './new/new';
 import { ViewMessagePage } from './view/view';
@@ -22,6 +22,7 @@ export class MessagePage {
 
   constructor(public messageService: MessageService,
               public modalCtrl: ModalController,
+              public alertCtrl: AlertController,
               public nl: CustomService) {
 
   }
@@ -101,6 +102,36 @@ export class MessagePage {
       this.currentPage -= 1;
       this.onError(err);
     });
+  }
+
+  public presentConfirm(conversationId) {
+    let alert = this.alertCtrl.create({
+      title: 'Close this conversation?',
+      buttons: [{
+        text: 'Keep',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }, {
+        text: 'Delete',
+        handler: () => {
+          this.closeConversation(conversationId);
+        } 
+      }]
+    });
+    alert.present();
+  }
+
+  public closeConversation(conversationId) {
+    this.nl.showLoader();
+    this.messageService.closeConversation(conversationId).subscribe((res) => {
+      console.log("res", res);
+      this.nl.hideLoader();
+      this.nl.showToast("Conversation successfully closed");
+    }, (err) => {
+      this.nl.onError(err);
+    })
   }
 
 }

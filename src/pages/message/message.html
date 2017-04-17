@@ -14,7 +14,7 @@
       <ion-row>
       {{a.createdAt | amDateFormat: 'LL'}}
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="a.closedOn">
       Closed Date: {{a.closedOn| amDateFormat: 'LL'}}
       </ion-row>
     </ion-item>

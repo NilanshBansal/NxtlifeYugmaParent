@@ -51,7 +51,7 @@ export class MessageService {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      errMsg = `${error.status} - ${error.ok || ''}`;
+      errMsg = `${error.status} - ${error.statusText || ''}`;
       if (error.status === 0) {
         errMsg = `${error.status} - "No Internet"`;
       }

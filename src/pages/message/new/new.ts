@@ -101,13 +101,11 @@ export class NewMessagePage {
   saveMessage() {
     this.nl.showLoader();
     this.messageService.saveMessage(this.newMessage.value).subscribe((res) => {
-      console.log("res", res);
       this.nl.hideLoader();
-      this.viewCtrl.dismiss();
+      this.viewCtrl.dismiss(res);
       this.nl.showToast("Message sent successfully");
     },(err) => {
       this.viewCtrl.dismiss();
-      console.log(err);
       this.nl.onError(err);
     })
   }

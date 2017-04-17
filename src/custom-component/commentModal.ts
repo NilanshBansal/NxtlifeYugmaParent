@@ -17,7 +17,6 @@ import { CustomService } from '../service/custom.service';
     <ion-icon name="chatbubbles"></ion-icon>
     <br>NO COMMENT
   </ion-list>
-  <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
   <div class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId == userId}" no-margin>
     <div class="csMyComment">
       <h3>{{ m.comment }}</h3>
@@ -54,7 +53,6 @@ export class CommentModal {
   comments: any[];
   emptyComments = false;
   complaintId: number;
-  hasData = false;
   notPost = true;
   data;
 
@@ -120,7 +118,7 @@ export class CommentModal {
     } else {
       this.notPost = false;
       this.emptyComments = false;
-      this.c.postComment(this.complaintId, this.commentForm.value).subscribe((res) => {
+      this.c.postComment(this.data.id, this.commentForm.value).subscribe((res) => {
         this.notPost = true;
         if (!this.comments) { this.comments = []; }
         this.comments.push({

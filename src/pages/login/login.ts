@@ -20,6 +20,9 @@ import { Notification } from '../../custom-component/notification.component';
     bottom: auto;
     height: 0px !important;
     background-position: 0 0;
+}
+.csHeadingText{
+  font-size:20px;
 }`]
 })
 

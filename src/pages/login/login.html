@@ -1,6 +1,9 @@
 <ion-content class="csLoginScreen">
   <img class="csCenter" style="margin-top: 20px;margin-bottom: 20px;width: 100px;" src="http://cornerstone.pk/wp-content/uploads/2016/07/css.png">
-  <form [formGroup]="loginForm" class="marginTop csTransparent"*ngIf="!showOtp" novalidate>
+  <ion-item class="csTransparent">
+    <div text-center class="csHeadingText"> <span color="primary">Parent Login</span></div>
+  </ion-item>
+  <form [formGroup]="loginForm" class="marginTop csTransparent" *ngIf="!showOtp" novalidate>
     <ion-item>
       <ion-icon name="phone-portrait" class="csInput csInputIcon" item-left></ion-icon>
       <ion-label stacked>Enter Mobile Number</ion-label>
@@ -11,14 +14,15 @@
         Login
      </button>
   </form>
-
   <form name="loginVerifyForm" novalidate *ngIf="showOtp">
     <ion-item round>
       <ion-icon name="lock" class="csInput csInputIcon" item-left></ion-icon>
       <ion-label stacked>Enter OTP</ion-label>
-      <ion-input class="letter-space" [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="otp" maxlength="5" text-center autofocus></ion-input>
+      <ion-input class="letter-space" [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="otp" maxlength="5" text-center
+        autofocus></ion-input>
     </ion-item>
-    <button type="button" (click)="verifyOtp()" item-right icon-left color="secondary" ion-button class="csCenter csButtonList" round>
+    <button type="button" (click)="verifyOtp()" item-right icon-left color="secondary" ion-button class="csCenter csButtonList"
+      round>
       <ion-icon name="checkmark"></ion-icon>
         VERIFY
      </button>

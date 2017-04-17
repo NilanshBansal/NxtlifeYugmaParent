@@ -18,6 +18,7 @@ export class MessagePage {
   public title: string = "Messaging";
   public emptyMessages: boolean = false;
   public allData = [];
+  public currentPage: number = 1;
 
   constructor(public messageService: MessageService,
               public modalCtrl: ModalController,
@@ -27,7 +28,7 @@ export class MessagePage {
 
   ionViewWillEnter() {
     this.nl.showLoader();
-    this.messageService.getAllMessages().subscribe((res) => {
+    this.messageService.getAllMessages(1).subscribe((res) => {
       console.log("QQQ", res);
       if (res.status === 204) {
         this.emptyMessages = true;
@@ -60,6 +61,23 @@ export class MessagePage {
   public openViewModal(id, message) {
     let viewModal = this.modalCtrl.create(ViewMessagePage, {id: id, message: message});
     viewModal.present();
+  }
+
+  public doRefresh(refresher) {
+    setTimeout(() => {
+      this.messageService.getAllMessages(1).subscribe((res) => {
+        if (res.status === 204) {
+          this.emptyMessages = true;
+        } else {
+          this.allData = res;
+          this.emptyMessages = false;
+        }
+        refresher.complete();
+      }, (err) => {
+        refresher.complete();
+        this.onError(err);
+      });
+    }, 500);
   }
 
 }

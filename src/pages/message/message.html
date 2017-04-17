@@ -5,6 +5,9 @@
   <ion-fab top right edge>
     <button ion-fab (click)="createNew()" color="cool"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <ion-item *ngFor="let a of allData; let i = index" (click)="openViewModal(a.id, a.messages)">
       <ion-row>{{a.title}}</ion-row>

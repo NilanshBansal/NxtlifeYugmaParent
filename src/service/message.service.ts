@@ -14,9 +14,9 @@ export class MessageService {
 
   }
 
-  public getAllMessages() {
+  public getAllMessages(pageNo) {
     this.serverUrl = this.configuration.Server;
-    return this.http.get(this.serverUrl)
+    return this.http.get(this.serverUrl + "/page/" + pageNo)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

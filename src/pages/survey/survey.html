@@ -6,10 +6,10 @@
   </ion-item>
 </ion-header>
 <ion-content class="csGrayBackground">
-  <ion-card class="csPollCard" radio-group [(ngModel)]="choice3[i][0]" *ngFor="let a of onesurveys.questions; let i=index">
+  <ion-card radio-group [(ngModel)]="choice3[i][0]" *ngFor="let a of onesurveys.questions; let i=index">
       <ion-item [style.background]="a.questionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'">
-        <ion-icon *ngIf="a.questionTypeName == 'Single Choice'" color="primary" item-left name="checkmark"></ion-icon>
-        <ion-icon *ngIf="a.questionTypeName == 'Multiple Choice'" color="primary" item-left name="done-all"></ion-icon>
+        <ion-icon *ngIf="a.questionTypeName == 'Single Choice'" item-left name="checkmark"></ion-icon>
+        <ion-icon *ngIf="a.questionTypeName == 'Multiple Choice'" item-left name="done-all"></ion-icon>
         <span class="csParagraph"><b>{{ a.questionText }}</b></span>
       </ion-item>
     <ion-card-content>

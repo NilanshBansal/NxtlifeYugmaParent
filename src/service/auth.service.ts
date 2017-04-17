@@ -3,16 +3,20 @@ import { Response } from '@angular/http';
 import { ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { CustomHttpService } from './default.header.service';
+import { Configuration } from './app.constants';
+
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
 
-  private actionUrl: string = "https://yugma-testing.appspot.com";
+  private actionUrl: string;
   public header;
 
   constructor(private http: CustomHttpService,
+              public config: Configuration,
               private toastCtrl: ToastController) {
+    this.actionUrl = this.config.url;
   }
 
   public hasLogin: boolean = false;

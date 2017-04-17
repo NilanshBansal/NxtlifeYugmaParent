@@ -9,8 +9,19 @@ export class Configuration {
 
   public headers;
   public options;
-  public baseUrl: string = "https://yugma-testing.appspot.com";
-  public Server: string = "https://yugma-testing.appspot.com";
+
+  // public url: string = "https://yugma-testing.appspot.com";
+  // public baseUrl: string = "https://yugma-testing.appspot.com";
+  // public Server: string = "https://yugma-testing.appspot.com";
+
+  public url: string = "https://yugma.ind-cloud.everdata.com/school";
+  public baseUrl: string = "https://yugma.ind-cloud.everdata.com/school";
+  public Server: string = "https://yugma.ind-cloud.everdata.com/school";
+
+  // public url: string = "https://school-yugma.appspot.com";
+  // public baseUrl: string = "https://school-yugma.appspot.com";
+  // public Server: string = "https://school-yugma.appspot.com";
+
 
   constructor(public http: CustomHttpService,
               public cs: CustomService) {

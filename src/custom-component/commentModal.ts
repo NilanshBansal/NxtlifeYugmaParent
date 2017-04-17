@@ -14,10 +14,9 @@ import { CustomService } from '../service/custom.service';
 </ion-header>
 <ion-content id="chat" class="csChatBox">
   <ion-list class="no-comment" *ngIf="emptyComments">
-      <ion-icon name="chatbubbles"></ion-icon>
+    <ion-icon name="chatbubbles"></ion-icon>
     <br>NO COMMENT
   </ion-list>
-  <ion-spinner class="circle-spinner" *ngIf="!hasData"></ion-spinner>
   <div class="message-box csTransparent" *ngFor="let m of comments" [ngClass]="{'mine': m.parentId == userId}" no-margin>
     <div class="csMyComment">
       <h3>{{ m.comment }}</h3>
@@ -35,8 +34,8 @@ import { CustomService } from '../service/custom.service';
         </ion-col>
         <ion-col>
           <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
-                <ion-icon name="md-send" role="img"></ion-icon>
-              </button>
+            <ion-icon name="md-send" role="img"></ion-icon>
+          </button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -45,7 +44,7 @@ import { CustomService } from '../service/custom.service';
   `
 })
 
-export class CommentModal implements OnInit {
+export class CommentModal {
 
   @Input() complaint;
 
@@ -54,8 +53,8 @@ export class CommentModal implements OnInit {
   comments: any[];
   emptyComments = false;
   complaintId: number;
-  hasData = false;
   notPost = true;
+  data;
 
   title = "COMMENTS";
 
@@ -71,18 +70,25 @@ export class CommentModal implements OnInit {
               private renderer: Renderer,
               private elementRef: ElementRef,
               private toastCtrl: ToastController) {
-    this.userId = localStorage.getItem("id");
+    this.initForm();
+    this.getData();
   }
 
-  ngOnInit() {
-    let complaint = this.navParams.get('complaint');
-    this.complaintId = complaint.id;
-    console.log(complaint)
-    this.loadComments();
+  initForm() {
     this.commentForm = new FormGroup({
       comment: new FormControl('', [Validators.required])
     });
-    if (complaint.statusId === 4 || complaint.statusId === 6) {
+  }
+
+  getData() {
+    this.userId = localStorage.getItem("id");
+    this.comments = this.navParams.get("comments");
+    this.data = this.navParams.get("data");
+  }
+
+  ionViewDidEnter() {
+    this.content.scrollToBottom();
+    if (this.data.statusId === 4 || this.data.statusId === 6) {
       this.renderer.setElementStyle(this.el.nativeElement, "visibility", 'hidden');
       this.showToastMessage();
     }
@@ -101,25 +107,6 @@ export class CommentModal implements OnInit {
     toast.present();
   }
 
-  scrollToBottom(){
-    this.content.scrollTo(0, 700, 200);
-  }
-
-  loadComments() {
-    this.c.getComments(this.complaintId).subscribe((response) => {
-      if (response.status === 204) {
-        this.hasData = true;
-        this.emptyComments = true;
-        this.comments = [];
-      } else {
-        this.hasData = true;
-        this.emptyComments = false;
-        this.comments = response;
-        this.scrollToBottom();
-      }
-    });
-  }
-
   dismiss() {
     this.viewCtrl.dismiss();
   }
@@ -131,7 +118,7 @@ export class CommentModal implements OnInit {
     } else {
       this.notPost = false;
       this.emptyComments = false;
-      this.c.postComment(this.complaintId, this.commentForm.value).subscribe((res) => {
+      this.c.postComment(this.data.id, this.commentForm.value).subscribe((res) => {
         this.notPost = true;
         if (!this.comments) { this.comments = []; }
         this.comments.push({
@@ -141,6 +128,7 @@ export class CommentModal implements OnInit {
           parentId: localStorage.getItem("id")
         });
         this.commentForm.reset();
+        this.content.scrollToBottom();
       }, (err) => {
         this.nl.errMessage();
         this.notPost = true;

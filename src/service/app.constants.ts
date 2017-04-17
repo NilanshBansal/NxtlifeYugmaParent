@@ -9,8 +9,19 @@ export class Configuration {
 
   public headers;
   public options;
-  public baseUrl: string = "https://yugma-testing.appspot.com";
-  public Server: string = "https://yugma-testing.appspot.com";
+
+  // public url: string = "https://yugma-testing.appspot.com";
+  // public baseUrl: string = "https://yugma-testing.appspot.com";
+  // public Server: string = "https://yugma-testing.appspot.com";
+
+  public url: string = "https://yugma.ind-cloud.everdata.com";
+  public baseUrl: string = "https://yugma.ind-cloud.everdata.com";
+  public Server: string = "https://yugma.ind-cloud.everdata.com";
+
+  // public url: string = "https://school-yugma.appspot.com";
+  // public baseUrl: string = "https://school-yugma.appspot.com";
+  // public Server: string = "https://school-yugma.appspot.com";
+
 
   constructor(public http: CustomHttpService,
               public cs: CustomService) {
@@ -43,29 +54,29 @@ export class Configuration {
     return this.Server + "/parent/" + this.getParentId() + "/";
   }
 
-  setUrl(url) {
+  public setUrl(url) {
     this.cs.setHeaderText(url);
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/" + url;
 
   }
 
-  setUrlForStudentSuggestions(url) {
+  public setUrlForStudentSuggestions(url) {
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/suggestion/" + url;
   }
 
-  setUrlForSuggestion() {
+  public setUrlForSuggestion() {
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/suggestion";
   }
 
-  setUrlForStudentAppreciations(url) {
+  public setUrlForStudentAppreciations(url) {
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/appreciation/" + url;
   }
 
-  setUrlForAppreciations() {
+  public setUrlForAppreciations() {
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/appreciation";
   }
 
-  tokenUpdate(tokenId) {
+  public tokenUpdate(tokenId) {
     const notificationToken = {
       notificationToken: tokenId
     }

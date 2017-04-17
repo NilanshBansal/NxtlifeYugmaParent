@@ -14,9 +14,9 @@ export class MessageService {
 
   }
 
-  public getAllMessages() {
+  public getAllMessages(pageNo) {
     this.serverUrl = this.configuration.Server;
-    return this.http.get(this.serverUrl)
+    return this.http.get(this.serverUrl + "/page/" + pageNo)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
@@ -42,6 +42,13 @@ export class MessageService {
                     .catch(this.handleError);
   }
 
+  public closeConversation(id) {
+    this.serverUrl = this.configuration.Server;
+    return this.http.put(this.serverUrl + "/" + id, {})
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     if (res.status === 204) { return res; }
     let body = res.json();
@@ -51,7 +58,7 @@ export class MessageService {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      errMsg = `${error.status} - ${error.ok || ''}`;
+      errMsg = `${error.status} - ${error.statusText || ''}`;
       if (error.status === 0) {
         errMsg = `${error.status} - "No Internet"`;
       }

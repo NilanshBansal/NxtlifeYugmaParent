@@ -5,7 +5,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 function getToken(): any {
-  return localStorage.getItem('access_token') || '';
+  let token = localStorage.getItem('access_token');
+  let header;
+  if (!token) {
+    header = 'Basic Zm9vQ2xpZW50SWRQYXNzd29yZDpzZWNyZXQ=';
+  } else {
+    header = 'Bearer '+ localStorage.getItem('access_token') || '';
+  }
+  return header;
 }
 
 @Injectable()
@@ -13,7 +20,7 @@ export class CustomHttpService extends Http {
   constructor (backend: XHRBackend, options: RequestOptions) {
     options.headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${getToken()}`,
+      'Authorization': `${getToken()}`,
     });
     super(backend, options);
   }
@@ -25,10 +32,10 @@ export class CustomHttpService extends Http {
         options = { headers: new Headers() };
       }
       options.headers.set('Content-Type', 'application/json');
-      options.headers.set('Authorization', `Bearer ${getToken()}`);
+      options.headers.set('Authorization', `${getToken()}`);
     } else {
       url.headers.set('Content-Type', 'application/json');
-      url.headers.set('Authorization', `Bearer ${getToken()}`);
+      url.headers.set('Authorization', `${getToken()}`);
     }
     return super.request(url, options);
   }

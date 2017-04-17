@@ -80,4 +80,27 @@ export class MessagePage {
     }, 500);
   }
 
+  public doInfinite(infiniteScroll) {
+    this.currentPage += 1;
+    setTimeout(() => {
+      this.loadMoreData(infiniteScroll);
+    }, 500);
+  }
+
+  public loadMoreData(infiniteScroll) {
+    this.messageService.getAllMessages(this.currentPage).subscribe((response) => {
+      if (response.status === 204) {
+        this.currentPage -= 1;
+        infiniteScroll.complete();
+        return;
+      }
+      infiniteScroll.complete();
+      this.allData = this.allData.concat(response);
+    }, (err) => {
+      infiniteScroll.complete();
+      this.currentPage -= 1;
+      this.onError(err);
+    });
+  }
+
 }

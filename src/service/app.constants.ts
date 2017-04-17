@@ -54,29 +54,29 @@ export class Configuration {
     return this.Server + "/parent/" + this.getParentId() + "/";
   }
 
-  setUrl(url) {
+  public setUrl(url) {
     this.cs.setHeaderText(url);
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/" + url;
 
   }
 
-  setUrlForStudentSuggestions(url) {
+  public setUrlForStudentSuggestions(url) {
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/suggestion/" + url;
   }
 
-  setUrlForSuggestion() {
+  public setUrlForSuggestion() {
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/suggestion";
   }
 
-  setUrlForStudentAppreciations(url) {
+  public setUrlForStudentAppreciations(url) {
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/appreciation/" + url;
   }
 
-  setUrlForAppreciations() {
+  public setUrlForAppreciations() {
     this.Server = this.baseUrl + "/parent/" + this.getParentId() + "/appreciation";
   }
 
-  tokenUpdate(tokenId) {
+  public tokenUpdate(tokenId) {
     const notificationToken = {
       notificationToken: tokenId
     }

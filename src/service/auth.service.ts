@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   public verifyOtp(data) {
-    return this.http.post(this.actionUrl + "/login", data)
+    return this.http.post(this.actionUrl + "/oauth/token?grant_type=password&username="+data.username+"&password="+data.password, {})
                     .map(this.extractData)
                     .catch(this.handleError);
   }

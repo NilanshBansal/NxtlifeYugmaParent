@@ -3,6 +3,7 @@ import { ModalController, AlertController, ToastController, Content } from 'ioni
 
 import { NewMessagePage } from './new/new';
 import { ViewMessagePage } from './view/view';
+import { ItemSliding } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../service/custom.service';
@@ -144,7 +145,7 @@ export class MessagePage {
     });
   }
 
-  public presentConfirm(conversationId) {
+  public presentConfirm(slidingItem: ItemSliding, conversationId) {
     let alert = this.alertCtrl.create({
       title: 'Close this conversation?',
       buttons: [{
@@ -154,8 +155,9 @@ export class MessagePage {
           console.log('Cancel clicked');
         }
       }, {
-        text: 'Delete',
+        text: 'Close it',
         handler: () => {
+          slidingItem.close();
           this.closeConversation(conversationId);
         } 
       }]

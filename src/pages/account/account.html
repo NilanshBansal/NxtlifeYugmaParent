@@ -2,6 +2,9 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
+  <ion-avatar>
+    <img [src]="base64Image" width="100" height="100" (click)="openImageActionSheet()" style="border: 1px solid;border-radius: 50%;">
+  </ion-avatar>
   <ion-list>
     <ion-list-header>
       Profile

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController, Events } from 'ionic-angular';
+import { Camera } from '@ionic-native/camera';
+import { Transfer , TransferObject } from  '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+import { AuthService } from '../../service/auth.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'page-account',
@@ -15,9 +20,15 @@ export class AccountPage {
   nickname: string;
   students;
   title = "Account";
+  public base64Image : string = "assets/images/user.png";
+  public ImageFile;
 
-  constructor(public navCtrl: NavController,
+  constructor(public file: File,
+              public camera: Camera,
+              public transfer: Transfer,
+              public navCtrl: NavController,
               public events: Events,
+              public appService: AuthService,
               private actionSheetCtrl: ActionSheetController,) {
   }
 
@@ -46,6 +57,63 @@ export class AccountPage {
       },{
         text: 'Cancel',
         icon: 'md-close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    actionSheet.present();
+  }
+
+  public openGallery() {
+    this.camera.getPicture({
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }).then((imagedata)=> {
+      this.base64Image = 'data:image/jpeg;base64,' + imagedata;
+      this.ImageFile = imagedata;
+      this.appService.uploadPic(this.base64Image);
+    },(err) => {
+    });
+  }
+
+  public openCamera() {
+    this.camera.getPicture({
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth : 1000,
+      targetHeight : 1000,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }).then((imagedata) => {
+      this.base64Image = 'data:image/jpeg;base64,' + imagedata;
+      this.ImageFile = imagedata;
+      this.appService.uploadPic(this.base64Image); 
+    },(err) => {
+    });
+  }
+
+  public openImageActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Choose Album',
+      buttons: [{
+        text: 'Delete Photo',
+        role: 'destructive',
+        handler: () => {
+          this.base64Image = "assets/images/user.png";
+        }
+      }, {
+        text: 'Take Photo',
+        handler: () => {
+          this.openCamera();
+        }
+      }, {
+        text: 'Choose Photo',
+        handler: () => {
+          this.openGallery();
+        }
+      }, {
+        text: 'Cancel',
         role: 'cancel',
         handler: () => {
           console.log('Cancel clicked');

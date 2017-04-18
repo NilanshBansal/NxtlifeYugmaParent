@@ -6,6 +6,10 @@ import { CalendarDateFormatter, CalendarEventTitle, CalendarModule } from 'angul
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { RequestOptions, XHRBackend } from '@angular/http';
 import { CustomHttpService } from '../service/default.header.service';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
 
 // import component
 import { LoginPage } from '../pages/login/login';
@@ -164,7 +168,7 @@ import { CommonService } from '../service/common.service';
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,
-              MessageService, CommonService,
+              MessageService, CommonService, Camera, File, Transfer, FileChooser,
               { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
               { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
                 return new CustomHttpService(backend, defaultOptions);

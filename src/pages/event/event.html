@@ -9,10 +9,10 @@
 <ion-content class="csGrayBackground has-header" >
   <ion-spinner *ngIf="eventSource.length===0" class="csCenter" style="margin-top: 55vh;position:absolute;margin-left:45vw"></ion-spinner>
   <template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
-     <ion-list class="no-event" style="margin-top:10px" *ngIf="!hasEvents && eventSource.length!=0">
-    <ion-icon name="calendar"></ion-icon>
-    <br>No Event
-  </ion-list>   
+    <ion-list class="no-event" style="margin-top:10px" *ngIf="!hasEvents && eventSource.length!=0">
+      <ion-icon name="calendar"></ion-icon>
+      <br>No Event
+    </ion-list>   
     <section>
       <div class="timeline-row">     
         <div class="cd-timeline-content dark" *ngFor="let a of selectedDate.events; let i = index" (click)="openViewEventModal(a.id, i)">

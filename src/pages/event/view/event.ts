@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController, ViewController, ActionSheetController } from 'ionic-angular';
-import { EventService } from '../../../service/event.service';
-import { Configuration } from '../../../service/app.constants';
-import { CustomService } from '../../../service/custom.service';
-import { EditEvent } from '../edit/edit';
+import { NavParams } from 'ionic-angular';
 
 @Component({
 	selector: 'event-view',
@@ -18,13 +14,7 @@ export class ViewEvent implements OnInit {
 	public canEdit;
 	public title: string = "View Event";
 
-	constructor(public viewCtrl: ViewController,
-							public modalCtrl: ModalController,
-							public nl: CustomService,
-							public eventService: EventService,
-							public navParams: NavParams,
-							public con: Configuration,
-							public actionSheetCtrl: ActionSheetController) {
+	constructor(public navParams: NavParams) {
 	}
 
 	ngOnInit() {

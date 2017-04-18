@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { MyApp } from './app.component';
-import { CalendarDateFormatter, CalendarEventTitle, CalendarModule } from 'angular-calendar';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { RequestOptions, XHRBackend } from '@angular/http';
 import { CustomHttpService } from '../service/default.header.service';
@@ -120,8 +119,7 @@ import { EventService } from '../service/event.service';
     MomentModule,
     Ionic2RatingModule,
     NgCalendarModule,
-    IonicModule.forRoot(MyApp),
-    CalendarModule
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -168,7 +166,7 @@ import { EventService } from '../service/event.service';
     TimelinePage
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
-              EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,
+              EventService, PollService, HomeworkService, CircularService, SurveyService,
               MessageService, CommonService, Camera, File, Transfer, FileChooser, EventService,
               { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
                 return new CustomHttpService(backend, defaultOptions);

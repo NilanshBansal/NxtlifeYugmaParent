@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../../service/event.service';
-import { LoadingController, ModalController} from 'ionic-angular';
+import { ModalController} from 'ionic-angular';
 import { CustomService } from '../../../service/custom.service';
 import { ViewEvent } from '../view/event';
 
@@ -23,6 +23,7 @@ export class TimelinePage implements OnInit {
   public timeline = [];
   public title = "Timeline";
   public currentPage = 1;
+  public EmptyEvent:boolean = false;
 
   constructor(public eventService : EventService,
               private nl : CustomService,
@@ -36,7 +37,9 @@ export class TimelinePage implements OnInit {
     this.eventService.GetEventsTimeLine(this.currentPage).subscribe((res) => {
       if (res.status === 204) {
         console.log("No Events");
+        this.EmptyEvent = true;
       } else {
+        this.EmptyEvent = false;
         this.timeline = res;
       }
     }, (err) => {

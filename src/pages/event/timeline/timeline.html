@@ -23,6 +23,10 @@
       </div>
     </ion-card>
   </section>
+  <ion-list class="no-comment" *ngIf="EmptyEvent">
+    <ion-icon name="happy"></ion-icon>
+    <br>NO RECORD FOUND
+  </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

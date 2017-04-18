@@ -11,14 +11,19 @@
   <ion-spinner class="loader" name="dots" *ngIf="!notPost"></ion-spinner>
 </ion-content>
 <ion-footer keyboard-attach class="bar-stable" #commentBtn>
-  <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postMessage()" novalidate>
+  <form class="comment-box" [formGroup]="commentForm" novalidate>
     <ion-grid>
       <ion-row>
+        <ion-col>
+          <button ion-button item-right clear icon-only (click)="openImageActionSheet()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-col>
         <ion-col width-80>
           <ion-textarea rows="2" class="csCommentInput" type="text" formControlName="message" placeholder="Write message..."></ion-textarea>
         </ion-col>
         <ion-col>
-          <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
+          <button class="csCommentSend" color="primary" ion-button icon-only item-right type="button" (click)="postMessage()" [disabled]="commentForm.invalid || !notPost">
             <ion-icon name="md-send" role="img"></ion-icon>
           </button>
         </ion-col>

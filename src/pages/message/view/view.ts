@@ -1,12 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ViewController, NavParams, Content, ToastController } from 'ionic-angular';
+import { ViewController, NavParams, Content, ToastController, ActionSheetController } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../../service/custom.service';
 import { MessageService } from '../../../service/message.service';
 import { ParentInfo } from '../../../service/parentInfo';
 import { CommonService } from '../../../service/common.service'; 
+import { AuthService } from '../../../service/auth.service';
+import { Camera } from '@ionic-native/camera';
+import { Transfer , TransferObject } from  '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'view-message',
@@ -20,10 +25,17 @@ export class ViewMessagePage {
   commentForm: FormGroup;
   notPost = true;
   id;
+  public base64Image : string;
+  public ImageFile;
 
   @ViewChild(Content) content: Content;
 
-  constructor(private navParams: NavParams,
+  constructor(public file: File,
+              public camera: Camera,
+              public transfer: Transfer,
+              public appService: AuthService,
+              public actionSheetCtrl: ActionSheetController,
+              private navParams: NavParams,
               private nl: CustomService,
               public toastCtrl: ToastController,
               public commonService: CommonService,
@@ -95,6 +107,81 @@ export class ViewMessagePage {
       this.notPost = true;
       this.commentForm.reset();
     });
+  }
+
+  public openImageActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Choose Album',
+      buttons: [{
+        text: 'Camera',
+        icon: 'camera',
+        handler: () => {
+          this.openCamera();
+        }
+      }, {
+        text: 'Photo & Video Library',
+        icon:  'image',
+        handler: () => {
+          this.openGallery();
+        }
+      }, {
+        text: 'Document',
+        icon: 'document',
+        handler: () => {
+          this.openDocument();
+        }
+      }, {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    actionSheet.present();
+  }
+
+  public openGallery() {
+    this.camera.getPicture({
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }).then((imagedata)=> {
+      this.base64Image = 'data:image/jpeg;base64,' + imagedata;
+      
+      this.appService.uploadPic(this.base64Image).then((res) => {
+        
+      })
+    },(err) => {
+    });
+  }
+
+  public openCamera() {
+    this.camera.getPicture({
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth : 1000,
+      targetHeight : 1000,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+    }).then((imagedata) => {
+      this.base64Image = 'data:image/jpeg;base64,' + imagedata;
+      this.ImageFile = imagedata;
+      this.notPost = false;
+      this.messages.push({
+        image: this.base64Image,
+        createdAt: new Date(),
+        employeeName: localStorage.getItem("id"),
+        parentName: null
+      });
+      this.appService.uploadPic(this.base64Image).then((res) => {
+        this.notPost = true;
+      });
+    },(err) => {
+      // this.nl.showToast("Camera not open");
+    });
+  }
+
+  openDocument() {
+    
   }
 
 }

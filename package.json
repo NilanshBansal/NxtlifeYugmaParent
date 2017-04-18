@@ -39,7 +39,10 @@
     "@ionic-native/file": "^3.4.4",
     "@ionic-native/file-chooser": "^3.4.4",
     "@ionic-native/transfer": "^3.4.4",
-    "@ionic-native/camera": "^3.4.4"
+    "@ionic-native/camera": "^3.4.4",
+    "ionic2-calendar": "^0.2.4",
+    "typings": "1.3.1",
+    "intl": "^1.2.5"
   },
   "devDependencies": {
     "@ionic/app-scripts": "1.0.0",

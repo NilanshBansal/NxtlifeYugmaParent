@@ -98,7 +98,7 @@ export class ViewMessagePage {
         createdAt: new Date(),
         employeeId: null,
         message: this.commentForm.value.message,
-        parentId: localStorage.getItem("id")
+        parentName: localStorage.getItem("name")
       });
       this.commentForm.reset();
       this.content.scrollToBottom(300);

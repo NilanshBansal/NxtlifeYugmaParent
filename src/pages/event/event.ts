@@ -15,6 +15,7 @@ import * as moment from 'moment';
     item-inner{
       border-left: 3px solid green !important;
     }
+    
   `]
 })
 

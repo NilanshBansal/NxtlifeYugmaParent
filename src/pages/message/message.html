@@ -10,7 +10,7 @@
   </ion-refresher>
   <ion-list>
     <ion-item-sliding *ngFor="let a of allData; let i = index" class="new-list" #slidingItem>
-      <a ion-item detail-push detail-none href="#" (click)="openViewModal(a.id, a.messages)">
+      <a ion-item detail-push detail-none href="#" (click)="openViewModal(a.id)">
         <ion-row>{{a.title}}</ion-row>
         <ion-row>{{a.againstEmployeeName}}</ion-row>
         <ion-row>{{a.categoryName}}</ion-row>

@@ -73,6 +73,7 @@ import { CircularService } from '../service/circular.servce';
 import { SurveyService } from '../service/survey.service';
 import { MessageService } from '../service/message.service';
 import { CommonService } from '../service/common.service';
+import { EventNewService } from '../service/event.service';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,7 @@ import { CommonService } from '../service/common.service';
     MessagePage,
     NewMessagePage,
     ViewMessagePage,
-    EventComponent
+    EventComponent,
   ],
   imports: [
     MomentModule,
@@ -173,7 +174,7 @@ import { CommonService } from '../service/common.service';
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,
-              MessageService, CommonService, Camera, File, Transfer, FileChooser,
+              MessageService, CommonService, Camera, File, Transfer, FileChooser, EventNewService,
               { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
               { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
                 return new CustomHttpService(backend, defaultOptions);

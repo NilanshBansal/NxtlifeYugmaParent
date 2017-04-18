@@ -34,7 +34,12 @@
     "rxjs": "5.0.0-beta.12",
     "sw-toolbox": "3.4.0",
     "underscore": "^1.8.3",
-    "zone.js": "0.6.21"
+    "zone.js": "0.6.21",
+    "@ionic-native/core": "3.1.0",
+    "@ionic-native/file": "^3.4.4",
+    "@ionic-native/file-chooser": "^3.4.4",
+    "@ionic-native/transfer": "^3.4.4",
+    "@ionic-native/camera": "^3.4.4"
   },
   "devDependencies": {
     "@ionic/app-scripts": "1.0.0",

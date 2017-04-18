@@ -28,9 +28,9 @@ export class MessageService {
                     .catch(this.handleError);
   }
 
-  public getMessage(id) {
+  public getMessage(id, pageNo) {
     this.serverUrl = this.configuration.Server;
-    return this.http.get(this.serverUrl + "/" + id + "/page/1")
+    return this.http.get(this.serverUrl + "/" + id + "/page/" + pageNo)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

@@ -27,6 +27,7 @@ export class ViewMessagePage {
   id;
   public base64Image : string;
   public ImageFile;
+  currentPage = 1;
 
   @ViewChild(Content) content: Content;
 
@@ -56,8 +57,9 @@ export class ViewMessagePage {
   }
 
   public getData() { 
-    this.messages = this.navParams.get('message');
+    this.messages = this.navParams.get('message').reverse();
     this.id = this.navParams.get("id");
+    console.log(this.messages)
   }
 
   public sockJsConnection() {
@@ -147,9 +149,7 @@ export class ViewMessagePage {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     }).then((imagedata)=> {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
-      
       this.appService.uploadPic(this.base64Image).then((res) => {
-        
       })
     },(err) => {
     });
@@ -176,12 +176,26 @@ export class ViewMessagePage {
         this.notPost = true;
       });
     },(err) => {
-      // this.nl.showToast("Camera not open");
     });
   }
 
   openDocument() {
     
+  }
+
+  public onPullOldMessages(refresher) {
+    this.currentPage += 1;
+    this.messageService.getMessage(this.id, this.currentPage).subscribe((res) => {
+      refresher.complete();
+      if (res.status === 204) {
+        return;
+      }
+      this.messages = res.reverse().concat(this.messages);
+    }, (err) => {
+      refresher.complete();
+      this.currentPage -= 1;
+      this.nl.showToast("Something went wrong");
+    });
   }
 
 }

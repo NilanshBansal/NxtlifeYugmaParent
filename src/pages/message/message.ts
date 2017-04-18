@@ -94,7 +94,7 @@ export class MessagePage {
 
   public openViewModal(id) {
     this.nl.showLoader();
-    this.messageService.getMessage(id).subscribe((res) => {
+    this.messageService.getMessage(id, 1).subscribe((res) => {
       this.nl.hideLoader();
       let message = res;
       let viewModal = this.modalCtrl.create(ViewMessagePage, {id: id, message: message});

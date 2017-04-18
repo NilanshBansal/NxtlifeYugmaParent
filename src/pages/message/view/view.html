@@ -2,6 +2,9 @@
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content id="chat" class="csChatBox">
+  <ion-refresher (ionRefresh)="onPullOldMessages($event)">
+    <ion-refresher-content></ion-refresher-content>
+   </ion-refresher> 
   <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}" no-margin>
     <div class="csMyComment">
       <h3>{{ m.message }}</h3>

@@ -10,7 +10,8 @@
     "emulate:before": "build",
     "deploy:before": "build",
     "build:before": "build",
-    "run:before": "build"
+    "run:before": "build",
+    "postinstall": "typings install"
   },
   "dependencies": {
     "@angular/common": "2.2.1",
@@ -24,7 +25,6 @@
     "@angular/platform-server": "2.2.1",
     "@ionic/storage": "1.1.6",
     "@types/underscore": "^1.7.33",
-    "angular-calendar": "^0.4.0",
     "angular2-moment": "^1.0.0-beta.rc.1",
     "ionic-angular": "2.0.1",
     "ionic-native": "2.2.3",

@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
-import { EventService } from '../../service/planner.service';
+import { EventNewService } from '../../service/event.service';
 import { CustomService } from '../../service/custom.service';
-// import { AddEvent } from './add/add';
-// import { ViewEvent } from './view/view';
-// import { TimelinePage } from './timeline/timeline';
+import { ViewEvent } from './view/event';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 
@@ -38,7 +36,7 @@ export class EventComponent {
 
   constructor(private nl: CustomService,
               public modalCtrl: ModalController,
-              private eventService: EventService) {
+              private eventService: EventNewService) {
   }
 
   onViewTitleChanged(title) {
@@ -87,6 +85,7 @@ export class EventComponent {
 
   getAllEvents(eventMonth) {
     this.eventService.GetEvents(eventMonth).subscribe((res) => {
+      console.log(res)
       if (res.status == 204) {
         this.eventSource.length = 1;
       } else {
@@ -123,56 +122,34 @@ export class EventComponent {
     return date < current;
   }
 
-  // addNewEvent() {
-  //   this._eventSource = _.clone(this.eventSource);
-  //   let newEventModal = this.modalCtrl.create(AddEvent, { clickdate: this.sel_date });
-  //   newEventModal.onDidDismiss((val) => {
-  //     if (!val) { return; }
-  //     this._eventSource.push({
-  //       id: val.id,
-  //       startTime: moment(val.start).toDate(),
-  //       endTime: moment(val.end).toDate(),
-  //       title: val.title,
-  //       allDay: false,
-  //       location: val.location,
-  //       time1: val.startTime,
-  //       time2: val.endTime,
-  //       color: val.color,
-  //       durationDays: val.durationDays
-  //     });
-  //     this.eventSource = this._eventSource;
-  //   });
-  //   newEventModal.present();
-  // }
+  openViewEventModal(eventId, index) {
+    this._eventSource = _.clone(this.eventSource);
+    this.sel_index = index;
+    this.nl.showLoader();
+    this.eventService.getEvent(eventId).subscribe((res) => {
+      this.onSuccess(res, eventId);
+    }, (err) => {
+      this.onError(err);
+    });
+  }
 
-  // openViewEventModal(eventId, index) {
-  //   this._eventSource = _.clone(this.eventSource);
-  //   this.sel_index = index;
-  //   this.nl.showLoader();
-  //   this.eventService.GetParticularEvent(eventId).subscribe((res) => {
-  //     this.onSuccess(res, eventId);
-  //   }, (err) => {
-  //     this.onError(err);
-  //   });
-  // }
-
-  // onSuccess(data, eventId) {
-  //   this.nl.hideLoader();
-  //   let viewModal = this.modalCtrl.create(ViewEvent, {eventId: eventId, event: data, canEdit: this.canCreateNewEvent});
-  //   viewModal.onDidDismiss((newVal, deletedEventId) => {
-  //     if (!newVal) { return; }
-  //     let hasDelete;
-  //     if (newVal != "" && !deletedEventId) {
-  //       hasDelete = this.findAndDelete(newVal.id);
-  //       this.editEvent(newVal);
-  //     } 
-  //     if (deletedEventId) {
-  //       hasDelete = this.findAndDelete(deletedEventId);
-  //       this.rebuildArray();
-  //     }
-  //   });
-  //   viewModal.present();
-  // }
+  onSuccess(data, eventId) {
+    this.nl.hideLoader();
+    let viewModal = this.modalCtrl.create(ViewEvent, {eventId: eventId, event: data, canEdit: this.canCreateNewEvent});
+    viewModal.onDidDismiss((newVal, deletedEventId) => {
+      if (!newVal) { return; }
+      let hasDelete;
+      if (newVal != "" && !deletedEventId) {
+        hasDelete = this.findAndDelete(newVal.id);
+        this.editEvent(newVal);
+      } 
+      if (deletedEventId) {
+        hasDelete = this.findAndDelete(deletedEventId);
+        this.rebuildArray();
+      }
+    });
+    viewModal.present();
+  }
 
   findAndDelete(_eventId) {
     let flag = false;

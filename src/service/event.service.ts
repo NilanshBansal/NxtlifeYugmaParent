@@ -22,8 +22,15 @@ export class EventNewService {
 		this.serverUrl = this.configuration.Server;
 		return this.http.get(this.serverUrl + '/month/' + Eventmonth)
 			              .map(this.extractData)
-                    .catch(this.handleError)
+                    .catch(this.handleError);
 	}
+
+  public getEvent(eventId) {
+    this.serverUrl = this.configuration.Server;
+		return this.http.get(this.serverUrl + '/' + eventId)
+			              .map(this.extractData)
+                    .catch(this.handleError);
+  }
 
   private extractData(res: Response) {
     if (res.status === 204) { return res; }

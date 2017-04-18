@@ -3,6 +3,7 @@ import { ModalController } from 'ionic-angular';
 import { EventNewService } from '../../service/event.service';
 import { CustomService } from '../../service/custom.service';
 import { ViewEvent } from './view/event';
+import { TimelinePage } from './timeline/timeline';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 
@@ -186,14 +187,14 @@ export class EventComponent {
     this.nl.onError(err);
   }
 
-  // openTimelineModal() {
-  //   this._eventSource = _.clone(this.eventSource);
-  //   let timelineModal = this.modalCtrl.create(TimelinePage);
-  //   timelineModal.onDidDismiss((newVal, deletedEventId) => {
-  //     this.eventSource = [];
-  //     this.getAllEvents(this.currentDate);
-  //   });
-  //   timelineModal.present();
-  // }
+  openTimelineModal() {
+    this._eventSource = _.clone(this.eventSource);
+    let timelineModal = this.modalCtrl.create(TimelinePage);
+    timelineModal.onDidDismiss((newVal, deletedEventId) => {
+      this.eventSource = [];
+      this.getAllEvents(this.currentDate);
+    });
+    timelineModal.present();
+  }
 
 }

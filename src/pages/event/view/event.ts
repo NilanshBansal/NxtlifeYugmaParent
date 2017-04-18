@@ -30,7 +30,8 @@ export class ViewEvent implements OnInit {
 	ngOnInit() {
 		this.eventId = this.navParams.get('eventId');
 		this.event = this.navParams.get('event');
-    console.log(this.event)
+    console.log(this.event);
+		// this.event["createdAt"] = ("0" + (new Date(this.event.createdAt).getDate())).slice(-2)
 	}
 
 }

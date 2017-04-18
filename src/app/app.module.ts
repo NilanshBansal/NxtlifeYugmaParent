@@ -48,6 +48,7 @@ import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 import { NewMessagePage } from '../pages/message/new/new';
 import { ViewMessagePage } from '../pages/message/view/view';
 import { ViewEvent } from '../pages/event/view/event';
+import { TimelinePage } from '../pages/event/timeline/timeline';
 
 // import custom component
 import { ListView } from '../custom-component/list/listview.component';
@@ -120,7 +121,8 @@ import { EventNewService } from '../service/event.service';
     NewMessagePage,
     ViewMessagePage,
     EventComponent,
-    ViewEvent
+    ViewEvent,
+    TimelinePage
   ],
   imports: [
     MomentModule,
@@ -173,7 +175,8 @@ import { EventNewService } from '../service/event.service';
     NewMessagePage,
     ViewMessagePage,
     EventComponent,
-    ViewEvent
+    ViewEvent,
+    TimelinePage
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,

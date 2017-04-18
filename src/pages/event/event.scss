@@ -1,9 +1,12 @@
 $calBackground: #f0f0f0;
 // Event highlight
 
+calendar {
+
 ion-slides {
   position: relative !important;
 } 
+}
 
 
 td.monthview-primary-with-event {

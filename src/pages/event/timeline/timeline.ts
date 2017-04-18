@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventNewService } from '../../../service/event.service';
+import { EventService } from '../../../service/event.service';
 import { LoadingController, ModalController} from 'ionic-angular';
 import { CustomService } from '../../../service/custom.service';
 import { ViewEvent } from '../view/event';
@@ -24,7 +24,7 @@ export class TimelinePage implements OnInit {
   public title = "Timeline";
   public currentPage = 1;
 
-  constructor(public eventService : EventNewService,
+  constructor(public eventService : EventService,
               private nl : CustomService,
               public modalCtrl : ModalController) { }
 

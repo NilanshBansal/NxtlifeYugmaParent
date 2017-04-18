@@ -24,10 +24,6 @@ import { YourAppreciation } from '../pages/appreciation/yourAppreciation/appreci
 import { ComplaintPage } from '../pages/complaint/complaint';
 import { ReportIssuePage} from '../pages/reportIssue/reportIssue';
 import { SurveyPage} from '../pages/survey/survey';
-import { PlannerComponent } from '../pages/planner/planner.component';
-import { EventModalPage } from '../pages/planner/view/planner-view';
-import { CalendarTimelinePage } from '../pages/planner/timeline/planner-timeline';
-import { CustomDateFormatter } from '../pages/planner/customDateFormatter';
 import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestion';
 import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
@@ -68,14 +64,13 @@ import { Configuration } from '../service/app.constants';
 import { ParentInfo } from '../service/parentInfo';
 import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/custom.service';
-import { EventService } from '../service/planner.service';
 import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';
 import { CircularService } from '../service/circular.servce';
 import { SurveyService } from '../service/survey.service';
 import { MessageService } from '../service/message.service';
 import { CommonService } from '../service/common.service';
-import { EventNewService } from '../service/event.service';
+import { EventService } from '../service/event.service';
 
 @NgModule({
   declarations: [
@@ -103,9 +98,6 @@ import { EventNewService } from '../service/event.service';
     ListViewSatisfiedButton,
     ModalNavbarComponent,
     CommentModal,
-    PlannerComponent,
-    EventModalPage,
-    CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
     HomeworkTabs,
@@ -157,9 +149,6 @@ import { EventNewService } from '../service/event.service';
     ListViewSatisfiedButton,
     ModalNavbarComponent,
     CommentModal,
-    PlannerComponent,
-    EventModalPage,
-    CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
     SurveyListPage,
@@ -180,8 +169,7 @@ import { EventNewService } from '../service/event.service';
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,
-              MessageService, CommonService, Camera, File, Transfer, FileChooser, EventNewService,
-              { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
+              MessageService, CommonService, Camera, File, Transfer, FileChooser, EventService,
               { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
                 return new CustomHttpService(backend, defaultOptions);
               }, deps: [XHRBackend, RequestOptions]}]

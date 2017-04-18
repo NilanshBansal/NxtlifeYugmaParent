@@ -9,7 +9,6 @@ import { PollPage } from '../pages/poll/poll';
 import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';
 import { ComplaintPage } from '../pages/complaint/complaint';
-import { PlannerComponent } from '../pages/planner/planner.component';
 import { StudentRating } from '../pages/rating/rating';
 import { AccountPage } from '../pages/account/account';
 import { HomeworkTabs } from '../pages/homework/homeworkTabs';
@@ -67,7 +66,6 @@ export class MyApp extends UserSessionManage {
       { title: 'Suggestions', component: SuggestionTabs, icon: 'ios-bulb-outline', url: 'suggestion' },
       { title: 'Appreciations', component: AppreciationTabs, icon: 'ios-thumbs-up-outline', url: 'appreciation' },
       { title: 'Messaging', component: MessagePage, icon: 'ios-chatbubbles-outline', url: 'conversation' },
-      { title: 'Calendar',component: PlannerComponent , icon: 'ios-calendar-outline', url: 'planner'},
       { title: 'Events',component: EventComponent , icon: 'ios-calendar-outline', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },
       { title: 'Survey', component: SurveyListPage, icon: 'ios-analytics-outline', url: 'survey' },

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
-import { EventNewService } from '../../service/event.service';
+import { EventService } from '../../service/event.service';
 import { CustomService } from '../../service/custom.service';
 import { ViewEvent } from './view/event';
 import { TimelinePage } from './timeline/timeline';
@@ -37,7 +37,7 @@ export class EventComponent {
 
   constructor(private nl: CustomService,
               public modalCtrl: ModalController,
-              private eventService: EventNewService) {
+              private eventService: EventService) {
   }
 
   onViewTitleChanged(title) {

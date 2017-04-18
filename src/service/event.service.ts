@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class EventNewService {
+export class EventService {
 
   public serverUrl: string;
 

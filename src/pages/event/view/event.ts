@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController, ViewController, ActionSheetController } from 'ionic-angular';
-import { EventService } from '../../../service/planner.service';
+import { EventService } from '../../../service/event.service';
 import { Configuration } from '../../../service/app.constants';
 import { CustomService } from '../../../service/custom.service';
 import { EditEvent } from '../edit/edit';

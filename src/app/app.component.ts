@@ -16,6 +16,7 @@ import { HomeworkTabs } from '../pages/homework/homeworkTabs';
 import { CircularComponent } from '../pages/circular/circular.component';
 import { UserSessionManage } from '../custom-component/user.session.manage';
 import { MessagePage } from '../pages/message/message';
+import { EventComponent } from '../pages/event/event';
 
 // import service
 import { AuthService } from '../service/auth.service';
@@ -67,6 +68,7 @@ export class MyApp extends UserSessionManage {
       { title: 'Appreciations', component: AppreciationTabs, icon: 'ios-thumbs-up-outline', url: 'appreciation' },
       { title: 'Messaging', component: MessagePage, icon: 'ios-chatbubbles-outline', url: 'conversation' },
       { title: 'Calendar',component: PlannerComponent , icon: 'ios-calendar-outline', url: 'planner'},
+      { title: 'Events',component: EventComponent , icon: 'ios-calendar-outline', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },
       { title: 'Survey', component: SurveyListPage, icon: 'ios-analytics-outline', url: 'survey' },
       { title: 'Homework' , component : HomeworkTabs , icon : 'ios-book-outline' , url : 'homework' },

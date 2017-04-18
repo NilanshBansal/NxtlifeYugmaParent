@@ -10,6 +10,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
+import { NgCalendarModule  } from 'ionic2-calendar';
 
 // import component
 import { LoginPage } from '../pages/login/login';
@@ -38,6 +39,7 @@ import { CircularComponent } from '../pages/circular/circular.component';
 import { CircularViewComponent } from '../pages/circular/view/circular-view';
 import { SurveyListPage } from '../pages/survey/list/survey-list';
 import { MessagePage } from '../pages/message/message';
+import { EventComponent } from '../pages/event/event';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -114,11 +116,13 @@ import { CommonService } from '../service/common.service';
     NoInternet,
     MessagePage,
     NewMessagePage,
-    ViewMessagePage
+    ViewMessagePage,
+    EventComponent
   ],
   imports: [
     MomentModule,
     Ionic2RatingModule,
+    NgCalendarModule,
     IonicModule.forRoot(MyApp),
     CalendarModule
   ],
@@ -164,7 +168,8 @@ import { CommonService } from '../service/common.service';
     NoInternet,
     MessagePage,
     NewMessagePage,
-    ViewMessagePage
+    ViewMessagePage,
+    EventComponent
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,

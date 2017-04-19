@@ -6,7 +6,7 @@
     <ion-card>
       <ion-item>
         <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
-        <ion-label color="primary">Child Name</ion-label>
+        <ion-label color="primary"><b>Child Name</b></ion-label>
         <custom-select item-content [(ngModel)]="student" [ngModelOptions]="{standalone: true}" (ngModelChange)="selectChild($event)">
           <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
         </custom-select>
@@ -15,7 +15,7 @@
     <ion-card *ngIf="standardId">
       <ion-item>
         <ion-icon name="sad" item-left large color="primary"></ion-icon>
-        <ion-label color="primary">Select Category</ion-label>
+        <ion-label color="primary"><b>Select Category</b></ion-label>
         <custom-select item-content formControlName="categoryId" (ngModelChange)="setCategory($event)">
           <ion-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-option>
         </custom-select>
@@ -24,7 +24,7 @@
     <ion-card *ngIf="teachers">
       <ion-item>
         <ion-icon name="ios-person-outline" item-left large color="primary"></ion-icon>
-        <ion-label color="primary">Select Teacher</ion-label>
+        <ion-label color="primary"><b>Select Teacher</b></ion-label>
         <custom-select item-content [(ngModel)]="againstEmployeeId" formControlName="againstEmployeeId">
           <ion-option *ngFor="let teacher of categories[0].teachers" [value]="teacher.teacherId">{{teacher.teacherName}} ({{teacher.subject}})</ion-option>
         </custom-select>
@@ -33,7 +33,7 @@
     <ion-card>
       <ion-list>
       <ion-item class="csTransparent">
-        <ion-label stacked>Title</ion-label>
+        <ion-label><b>Title</b></ion-label>
         <ion-textarea rows="2"  formControlName="title" maxlength="50" placeholder="Type here"> </ion-textarea>
       </ion-item>
       <ion-badge class="csFiftyLimit">
@@ -43,7 +43,7 @@
     </ion-card>
     <ion-card>
       <ion-item class="csTransparent">
-        <ion-label stacked>Message</ion-label>
+        <ion-label><b>Message</b></ion-label>
         <ion-textarea rows="5" formControlName="message" maxlength="200" placeholder="Type here"></ion-textarea>
       </ion-item>
       <ion-badge class="csFiftyLimit">

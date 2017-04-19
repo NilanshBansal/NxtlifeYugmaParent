@@ -8,7 +8,12 @@ import * as _ from 'underscore';
 
 @Component({
   selector: 'page-account',
-  templateUrl: 'account.html'
+  templateUrl: 'account.html',
+  styles: [`
+    ion-slides{
+    position:relative !important;
+  }
+  `]
 })
 
 export class AccountPage {

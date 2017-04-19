@@ -18,7 +18,7 @@
   box-shadow: 0px 2px 2px rgba(71, 71, 71, 0.39);
   display: inline-block;
   margin-top: 13px;
-  border-radius: 0px 10px 0px 10px;
+  border-radius: 10px;
   padding: 0px 10px 0px 10px;
   margin-bottom: 5px;
   // height: 35px;
@@ -54,10 +54,6 @@
 
 }
 
-.message-box {
-  width: 80% !important;
-}
-
 .csMyComment{
   @extend .csMyCommentBox;
   // display:inline-block;
@@ -79,13 +75,14 @@
 .csCommentInput{
   padding-left: 15px;
   background:white;
-  border-radius: 35px 0px 35px 35px;
+  border-radius: 10px;
   display: -webkit-box;
   box-shadow: 0px 0px 1px grey;
 }
 
 .csCommentSend{
   border-radius:100%;
+  position: absolute;
   width: 70% !important;
   margin-top:5px;
   ion-icon{

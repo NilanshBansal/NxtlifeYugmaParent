@@ -49,11 +49,6 @@ export class EventComponent {
     this.currentDate = event.getFullYear() + "-" + (event.getMonth() + 1);
   }
 
-  createNewEvent() {
-    console.log("CCCC ", this.currentDate)
-    this.getAllEvents(this.currentDate);
-  }
-
   onRangeChanged(ev: { startTime: Date, endTime: Date }) {
     var eventMonth = this.currentDate;
     this.eventSource = [];

@@ -1,24 +1,33 @@
-import { NavController } from 'ionic-angular/index';
-import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { Component } from '@angular/core';
+import { ModalController } from 'ionic-angular';
 import { EventService } from '../../service/event.service';
+import { CustomService } from '../../service/custom.service';
+import * as moment from 'moment';
 
 @Component({
-  templateUrl: "foodmenu.html"
+  selector: 'foodmenu',
+  templateUrl: 'foodmenu.html',
+  styles: [`
+    item-inner{
+      border-left: 3px solid green !important;
+    }
+  `]
 })
 
 export class FoodMenu {
 
-  eventSource;
-  viewTitle;
-  title: string = "FoodMenu";
+  public eventSource = [];
+  public viewTitle;
+  public currentDate;
+  public hasEvents;
 
-  isToday: boolean;
   calendar = {
     mode: 'month',
     currentDate: new Date()
-  };
+  }
 
-  constructor(private navController: NavController,
+  constructor(private nl: CustomService,
+              public modalCtrl: ModalController,
               private foodmenu: EventService) {
   }
 
@@ -26,48 +35,49 @@ export class FoodMenu {
     this.viewTitle = title;
   }
 
-  onEventSelected(event) {
-    console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title);
-  }
-
-  changeMode(mode) {
-    this.calendar.mode = mode;
-  }
-
-  today() {
-    this.calendar.currentDate = new Date();
-  }
-
   onTimeSelected(ev) {
-    console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
-      (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
+    this.hasEvents = ev.events !== undefined && ev.events.length !== 0;
+    this.currentDate = ev.selectedTime.getFullYear() + "-" + (ev.selectedTime.getMonth() + 1);
   }
 
-  onCurrentDateChanged(event: Date) {
-    var today = new Date();
-    today.setHours(0, 0, 0, 0);
-    event.setHours(0, 0, 0, 0);
-    this.isToday = today.getTime() === event.getTime();
-    console.log("AAAAA", this.today);
-    this.getFoodMenu();
+  onCurrentDateChanged(event:Date) {
+    this.currentDate = event.getFullYear() + "-" + (event.getMonth() + 1);
   }
 
-  onRangeChanged(ev) {
-    console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
+  onRangeChanged(ev: { startTime: Date, endTime: Date }) {
+    var eventMonth = this.currentDate;
+    this.eventSource = [];
+    this.getFoodMenu(eventMonth);
   }
 
-  getFoodMenu() {
-    console.log("AAAA");
-    this.foodmenu.getFoodMenu().subscribe((res) => {
-      console.log("RES", res);
+  getFoodMenu(eventMonth) {
+    this.foodmenu.GetEvents(eventMonth).subscribe((res) => {
+      if (res.status == 204) {
+        this.eventSource.length = 1;
+      } else {
+        this.buildArray(res);
+      }
     }, (err) => {
-      console.log("err", err)
-    })
+      this.eventSource.length = 1;
+      this.nl.errMessage();
+    });
   }
 
-  markDisabled = (date: Date) => {
-    var current = new Date();
-    current.setHours(0, 0, 0);
-    return date < current;
-  };
+  buildArray(data) {
+    let tmp = [];
+    data.forEach((val, index) => {
+      tmp.push({
+        id: val.id,
+        startTime: moment(val.start).toDate(),
+        endTime: moment(val.start).toDate(),
+        title: val.lunchFood,
+        lunchFoodUrl: val.lunchFoodUrl,
+        allDay: false,
+        breakfastFoodUrl: val.breakfastFoodUrl,
+        breakfastFood: val.breakfastFood
+      });
+    });
+    this.eventSource = tmp;
+  }
+
 }

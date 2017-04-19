@@ -46,14 +46,6 @@ export class EventService {
                     .catch(this.handleError);
 	}
 
-  public getFoodMenu(){
-		this.serverUrl = this.configuration.url;
-    let id = localStorage.getItem('id');
-		return this.http.get(this.serverUrl + '/parent/' + id + "/food-menu/month/2017-04")
-                    .map(this.extractData)
-                    .catch(this.handleError);
-	}
-
   private extractData(res: Response) {
     if (res.status === 204) { return res; }
     let body = res.json();

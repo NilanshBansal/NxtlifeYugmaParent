@@ -27,7 +27,7 @@
           </ion-note>
         </div>
       </a>
-      <ion-item-options side="right">
+      <ion-item-options side="right" *ngIf="!a.isClosed">
         <button ion-button color="secondary" (click)="presentConfirm(slidingItem, a.id)">
           <ion-icon name="md-close" class="csBigIcon"></ion-icon>
           Close

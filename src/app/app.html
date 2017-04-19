@@ -1,23 +1,23 @@
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar color="primary">
-    <ion-item class="csHeader noBorder-item">
-      <ion-avatar item-left>
-        <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png">
-      </ion-avatar>
-      <b>{{name}}</b>
-    </ion-item>
-    </ion-toolbar>
+  <ion-header class="csProfileHeader">
+    <div class="csAccBgImg" style="height:160px">
+    <div class="csCenter csProfileHeader">
+      <div class="csAccBgImg">
+        <br><img src="https://s-media-cache-ak0.pinimg.com/736x/27/73/8b/27738b3e152b6ba412535ed24efffd3f.jpg" class="csAccImg csCenter">
+        <div class="csAccName" text-center>{{name}}</div>
+      </div>
+    </div>
+    </div>
   </ion-header>
 
   <ion-content class="csBlueColor">
     <ion-list no-lines>
       <button class="csStrip" [class.csSelected]="selectedPage == p.title"  menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        <ion-icon item-left [name]="p.icon"></ion-icon>
+        <img item-left style="width:30px"  [src]="p.icon">
         {{p.title}}
       </button>
       <button class="csStrip" ion-item menuClose [class.csSelected]="selectedPage == p.title" *ngFor="let p of account" (click)="openPage(p)">
-        <ion-icon item-left [name]="p.icon"></ion-icon>
+        <img item-left style="width:30px"  [src]="p.icon">
         {{p.title}}
       </button>
     </ion-list>

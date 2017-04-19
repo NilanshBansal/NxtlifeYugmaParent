@@ -54,10 +54,6 @@
 
 }
 
-.message-box {
-  width: 80% !important;
-}
-
 .csMyComment{
   @extend .csMyCommentBox;
   // display:inline-block;
@@ -86,6 +82,7 @@
 
 .csCommentSend{
   border-radius:100%;
+  position: absolute;
   width: 70% !important;
   margin-top:5px;
   ion-icon{

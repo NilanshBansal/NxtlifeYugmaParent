@@ -25,7 +25,7 @@ export class AccountPage {
   nickname: string;
   students;
   title = "Account";
-  public base64Image : string = "assets/images/user.png";
+  public base64Image : string = "http://open4profit.com/images/f2.jpg";
   public ImageFile;
 
   constructor(public file: File,

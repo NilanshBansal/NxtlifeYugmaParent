@@ -9,7 +9,7 @@
           <div class="csCenter csProfileHeader">
             <div class="csAccBgImg">
               <br>
-              <img class="csAccImg csCenter" src="http://open4profit.com/images/f2.jpg">
+              <img [src]="base64Image" (click)="openImageActionSheet()" class="csAccImg csCenter">
               <div class="csAccName" text-center>{{name}}<br>
                 <span class="csWhiteText" text-center *ngIf="nickName">({{nickName}})</span>
               </div>

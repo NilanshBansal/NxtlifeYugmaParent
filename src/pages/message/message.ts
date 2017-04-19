@@ -3,6 +3,7 @@ import { ModalController, AlertController, ToastController, Content } from 'ioni
 
 import { NewMessagePage } from './new/new';
 import { ViewMessagePage } from './view/view';
+import { ItemSliding } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../service/custom.service';
@@ -92,9 +93,16 @@ export class MessagePage {
     createNew.present();
   }
 
-  public openViewModal(id, message) {
-    let viewModal = this.modalCtrl.create(ViewMessagePage, {id: id, message: message});
-    viewModal.present();
+  public openViewModal(id) {
+    this.nl.showLoader();
+    this.messageService.getMessage(id, 1).subscribe((res) => {
+      this.nl.hideLoader();
+      let message = res;
+      let viewModal = this.modalCtrl.create(ViewMessagePage, {id: id, message: message});
+      viewModal.present();
+    }, (err) => {
+      this.nl.onError(err);
+    });
   }
 
   public doRefresh(refresher) {
@@ -137,7 +145,7 @@ export class MessagePage {
     });
   }
 
-  public presentConfirm(conversationId) {
+  public presentConfirm(slidingItem: ItemSliding, conversationId) {
     let alert = this.alertCtrl.create({
       title: 'Close this conversation?',
       buttons: [{
@@ -147,8 +155,9 @@ export class MessagePage {
           console.log('Cancel clicked');
         }
       }, {
-        text: 'Delete',
+        text: 'Close it',
         handler: () => {
+          slidingItem.close();
           this.closeConversation(conversationId);
         } 
       }]

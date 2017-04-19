@@ -4,6 +4,9 @@ import { ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { CustomHttpService } from './default.header.service';
 import { Configuration } from './app.constants';
+import { Transfer , TransferObject } from  '@ionic-native/transfer';
+import { CommonService } from './common.service';
+import * as _ from 'underscore';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -15,6 +18,8 @@ export class AuthService {
 
   constructor(private http: CustomHttpService,
               public config: Configuration,
+              private transfer : Transfer,
+              private commonService: CommonService,
               private toastCtrl: ToastController) {
     this.actionUrl = this.config.url;
   }
@@ -54,6 +59,34 @@ export class AuthService {
     localStorage.setItem("contactNo", parent.contactNo);
     localStorage.setItem("students", JSON.stringify(parent.students));
     localStorage.setItem("nickName", parent.nickName);
+  }
+
+  uploadPic(image) {
+    let access_token = this.commonService.getData('access_token');
+    const fileTransfer: TransferObject = this.transfer.create();
+    let filename = _.uniqueId() + ".jpg";
+    let options = {
+      fileKey: 'file',
+      fileName: filename,
+      mimeType: 'image/jpeg',
+      chunkedMode: false,
+      headers: {
+        'Authorization': access_token
+      },
+      params: {
+        "file": filename
+      }
+    };
+
+    let id = localStorage.getItem('id');
+    alert(image)
+  
+    return fileTransfer.upload(image, this.actionUrl + "/parent/" + id + "/picture", options, false).then((result: any) => {
+      alert("AAAAAAAAAA " + result);
+      return result;
+    }).catch((error: any) => {
+      alert("BBBBB " + error);
+    }); 
   }
 
   private extractData(res: Response) {

@@ -28,6 +28,13 @@ export class MessageService {
                     .catch(this.handleError);
   }
 
+  public getMessage(id, pageNo) {
+    this.serverUrl = this.configuration.Server;
+    return this.http.get(this.serverUrl + "/" + id + "/page/" + pageNo)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   public saveMessage(data) {
     this.serverUrl = this.configuration.Server;
     return this.http.post(this.serverUrl,data)

@@ -3,6 +3,8 @@ import { HomeworkService } from '../../../service/homework.service';
 import { CustomService } from '../../../service/custom.service';
 import { ParentInfo } from '../../../service/parentInfo';
 
+import * as _ from 'underscore';
+
 @Component({
   selector: 'passed-homework',
   templateUrl: 'homework.html'
@@ -50,6 +52,9 @@ export class PassedHomework {
     } else {
       this.showEmptyMsg(false);
       this.homework = res;
+      _.forEach(this.homework, (data) => {
+        data.createdAt = ("0" + (new Date(data.createdAt).getDate())).slice(-2);
+      });
     }
     this.nl.hideLoader();
   }

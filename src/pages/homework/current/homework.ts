@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeworkService } from '../../../service/homework.service';
 import { CustomService } from '../../../service/custom.service';
 import { ParentInfo } from '../../../service/parentInfo';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'current-homework',
@@ -51,7 +52,11 @@ export class CurrentHomework implements OnInit {
     } else {
       this.showEmptyMsg(false);
       this.homework = res;
+      _.forEach(this.homework, (data) => {
+        data.createdAt = ("0" + (new Date(data.createdAt).getDate())).slice(-2);
+      });
     }
+    console.log(this.homework)
     this.nl.hideLoader();
   }
 

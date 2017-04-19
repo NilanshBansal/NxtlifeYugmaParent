@@ -2,25 +2,38 @@
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content id="chat" class="csChatBox">
+  <ion-refresher (ionRefresh)="onPullOldMessages($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.employeeName === null}" no-margin>
-    <div class="csMyComment">
-      <h3>{{ m.message }}</h3>
-    </div>
-    <div class="csCommentTime">
-      {{m.employeeNickName}}{{m.parentName}} {{ m.createdAt | amCalendar }}
+    <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}" no-margin>
+      <div class="csRight">
+        <img class="csChatImage" src="http://footage.framepool.com/shotimg/608711393-dibujo-papel-escolar-aula-de-clases.jpg">
+      </div>
+      <div class="csMyComment">
+        <h3>{{ m.message }}</h3>
+      </div>
+      <div class="csCommentTime">
+        <span *ngIf="m.parentName === null">{{m.employeeNickName}}</span> {{ m.createdAt | amCalendar }}
+      </div>
     </div>
   </div>
-  <ion-spinner class="loader" name="dots" *ngIf="!notPost"></ion-spinner>
+    <ion-spinner class="loader" name="dots" *ngIf="!notPost"></ion-spinner>
 </ion-content>
 <ion-footer keyboard-attach class="bar-stable" #commentBtn>
-  <form class="comment-box" [formGroup]="commentForm" (ngSubmit)="postMessage()" novalidate>
+  <form class="comment-box" [formGroup]="commentForm" novalidate>
     <ion-grid>
       <ion-row>
+        <ion-col>
+          <button ion-button item-right clear icon-only (click)="openImageActionSheet()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-col>
         <ion-col width-80>
           <ion-textarea rows="2" class="csCommentInput" type="text" formControlName="message" placeholder="Write message..."></ion-textarea>
         </ion-col>
         <ion-col>
-          <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
+          <button class="csCommentSend" color="primary" ion-button icon-only item-right type="button" (click)="postMessage()" [disabled]="commentForm.invalid || !notPost">
             <ion-icon name="md-send" role="img"></ion-icon>
           </button>
         </ion-col>

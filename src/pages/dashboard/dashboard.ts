@@ -9,18 +9,18 @@ import { StudentRating} from '../rating/rating';
 import { SurveyPage} from '../survey/survey';
 import { ComplaintPage} from '../complaint/complaint';
 import { Configuration } from '../../service/app.constants';
-import { PlannerComponent } from '../planner/planner.component';
+import { EventComponent } from '../event/event';
 import { HomeworkTabs } from '../homework/homeworkTabs';
 import { CircularComponent } from '../circular/circular.component';
 import { SurveyListPage } from '../survey/list/survey-list';
-import { EventModalPage } from '../planner/view/planner-view';
+import { ViewEvent } from '../event/view/event';
 import { CircularViewComponent } from '../circular/view/circular-view';
 import { newComplaintModal } from '../complaint/new/newComplaintModal';
 import { NewAppreciationModal } from '../appreciation/new/appreciation';
 
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
-import { EventService } from '../../service/planner.service';
+import { EventService } from '../../service/event.service';
 import { SurveyService } from '../../service/survey.service';
 
 @Component({
@@ -50,7 +50,7 @@ export class Dashboard {
   public page = {
     complaint: ComplaintPage,
     suggestion: SuggestionTabs,
-    planner: PlannerComponent,
+    planner: EventComponent,
     appreciation: AppreciationTabs,
     rating: StudentRating,
     poll: PollPage,
@@ -124,7 +124,7 @@ export class Dashboard {
   }
 
   public openModal(data) {
-    let modal = this.modalCtrl.create(EventModalPage, { eventsss : data });
+    let modal = this.modalCtrl.create(ViewEvent, { eventsss : data });
     modal.present();
   }
 

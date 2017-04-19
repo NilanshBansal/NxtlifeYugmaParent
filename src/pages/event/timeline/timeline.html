@@ -1,0 +1,33 @@
+<ion-header>
+  <nl-modal-navbar [title]="title" [complaint]=""></nl-modal-navbar>
+</ion-header>
+<ion-content class="csGrayBackground">
+  <ion-spinner *ngIf="timeline.length == 0" class="csCenter" style="margin-top: 50vh;position:absolute;margin-left:50vw"> </ion-spinner>
+  <section id="cd-timeline">
+    <ion-card class="timeline-row" *ngFor="let t of timeline">
+      <div class="cd-timeline-block">
+        <div class="cd-timeline-picture dark">
+          <span>{{t.fullDate}}</span>
+        </div>
+      </div>
+      <div *ngFor="let event of t.events">
+        <div class="cd-timeline-content dark">
+          <div class="color-col" [style.border-left-color]="event.plannerTypeColor" (click)="onTimelineClick(event.id)">
+            <h5 class="timeline-title">{{event.title}}</h5>
+            <span class="startTime">{{event.startTime}} </span>
+            <span class="startTime">- {{event.endTime}} </span>
+            <span class="startTime3" *ngIf="event.durationDays != 0">[{{event.durationDays + 1}} days event]</span>
+            <span class="Timelinelocation"> {{ event.location }} </span>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+  </section>
+  <ion-list class="no-comment" *ngIf="EmptyEvent">
+    <ion-icon name="happy"></ion-icon>
+    <br>NO RECORD FOUND
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

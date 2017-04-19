@@ -2,10 +2,14 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { MyApp } from './app.component';
-import { CalendarDateFormatter, CalendarEventTitle, CalendarModule } from 'angular-calendar';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { RequestOptions, XHRBackend } from '@angular/http';
 import { CustomHttpService } from '../service/default.header.service';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { NgCalendarModule  } from 'ionic2-calendar';
 
 // import component
 import { LoginPage } from '../pages/login/login';
@@ -19,10 +23,6 @@ import { YourAppreciation } from '../pages/appreciation/yourAppreciation/appreci
 import { ComplaintPage } from '../pages/complaint/complaint';
 import { ReportIssuePage} from '../pages/reportIssue/reportIssue';
 import { SurveyPage} from '../pages/survey/survey';
-import { PlannerComponent } from '../pages/planner/planner.component';
-import { EventModalPage } from '../pages/planner/view/planner-view';
-import { CalendarTimelinePage } from '../pages/planner/timeline/planner-timeline';
-import { CustomDateFormatter } from '../pages/planner/customDateFormatter';
 import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestion';
 import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
@@ -34,6 +34,8 @@ import { CircularComponent } from '../pages/circular/circular.component';
 import { CircularViewComponent } from '../pages/circular/view/circular-view';
 import { SurveyListPage } from '../pages/survey/list/survey-list';
 import { MessagePage } from '../pages/message/message';
+import { EventComponent } from '../pages/event/event';
+import { FoodMenu } from '../pages/foodmenu/foodmenu';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -41,6 +43,8 @@ import { ViewComponent } from '../pages/complaint/view/viewComplaintModal';
 import { NewAppreciationModal } from '../pages/appreciation/new/appreciation';
 import { NewMessagePage } from '../pages/message/new/new';
 import { ViewMessagePage } from '../pages/message/view/view';
+import { ViewEvent } from '../pages/event/view/event';
+import { TimelinePage } from '../pages/event/timeline/timeline';
 
 // import custom component
 import { ListView } from '../custom-component/list/listview.component';
@@ -60,13 +64,13 @@ import { Configuration } from '../service/app.constants';
 import { ParentInfo } from '../service/parentInfo';
 import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/custom.service';
-import { EventService } from '../service/planner.service';
 import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';
 import { CircularService } from '../service/circular.servce';
 import { SurveyService } from '../service/survey.service';
 import { MessageService } from '../service/message.service';
 import { CommonService } from '../service/common.service';
+import { EventService } from '../service/event.service';
 
 @NgModule({
   declarations: [
@@ -94,9 +98,6 @@ import { CommonService } from '../service/common.service';
     ListViewSatisfiedButton,
     ModalNavbarComponent,
     CommentModal,
-    PlannerComponent,
-    EventModalPage,
-    CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
     HomeworkTabs,
@@ -110,13 +111,17 @@ import { CommonService } from '../service/common.service';
     NoInternet,
     MessagePage,
     NewMessagePage,
-    ViewMessagePage
+    ViewMessagePage,
+    EventComponent,
+    ViewEvent,
+    TimelinePage,
+    FoodMenu
   ],
   imports: [
     MomentModule,
     Ionic2RatingModule,
-    IonicModule.forRoot(MyApp),
-    CalendarModule
+    NgCalendarModule,
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -144,9 +149,6 @@ import { CommonService } from '../service/common.service';
     ListViewSatisfiedButton,
     ModalNavbarComponent,
     CommentModal,
-    PlannerComponent,
-    EventModalPage,
-    CalendarTimelinePage,
     NewAppreciationModal,
     StudentRating,
     SurveyListPage,
@@ -160,12 +162,15 @@ import { CommonService } from '../service/common.service';
     NoInternet,
     MessagePage,
     NewMessagePage,
-    ViewMessagePage
+    ViewMessagePage,
+    EventComponent,
+    ViewEvent,
+    TimelinePage,
+    FoodMenu
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
-              EventService, CalendarEventTitle, PollService, HomeworkService, CircularService, SurveyService,
-              MessageService, CommonService,
-              { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
+              EventService, PollService, HomeworkService, CircularService, SurveyService,
+              MessageService, CommonService, Camera, File, Transfer, FileChooser, EventService,
               { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
                 return new CustomHttpService(backend, defaultOptions);
               }, deps: [XHRBackend, RequestOptions]}]

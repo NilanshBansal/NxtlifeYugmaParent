@@ -11,15 +11,14 @@
   <ion-list>
     <ion-item-sliding *ngFor="let a of allData; let i = index" class="new-list" #slidingItem>
       <a ion-item detail-push detail-none href="#" (click)="openViewModal(a.id, a.messages)">
-        <ion-row>{{a.title}}</ion-row>
-        <ion-row>{{a.againstEmployeeName}}</ion-row>
-        <ion-row>{{a.categoryName}}</ion-row>
+        <h2><b>{{a.title}}</b></h2>
+        <h3>{{a.againstEmployeeName}} <span class="csRight"><ion-icon name="at"></ion-icon><span>{{a.categoryName}}</span> </span></h3>
+        <ion-note>
         <ion-row>
-        {{a.createdAt | amDateFormat: 'LL'}}
+        Created at: {{a.createdAt | amDateFormat: 'LL'}}
+        <span *ngIf="a.closedOn" item-right><ion-icon name="clock"></ion-icon><span>Close Date: {{a.closedOn| amDateFormat: 'LL'}}</span> </span>
         </ion-row>
-        <ion-row *ngIf="a.closedOn">
-        Closed Date: {{a.closedOn| amDateFormat: 'LL'}}
-        </ion-row>
+        </ion-note>
       </a>
       <ion-item-options side="right">
         <button ion-button color="secondary" (click)="presentConfirm(a.id)">

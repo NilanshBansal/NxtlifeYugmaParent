@@ -16,6 +16,7 @@ import { CircularComponent } from '../pages/circular/circular.component';
 import { UserSessionManage } from '../custom-component/user.session.manage';
 import { MessagePage } from '../pages/message/message';
 import { EventComponent } from '../pages/event/event';
+import { FoodMenu } from '../pages/foodmenu/foodmenu'; 
 
 // import service
 import { AuthService } from '../service/auth.service';
@@ -69,6 +70,7 @@ export class MyApp extends UserSessionManage {
       { title: 'Events',component: EventComponent , icon: 'ios-calendar-outline', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'ios-stats-outline', url: 'poll' },
       { title: 'Survey', component: SurveyListPage, icon: 'ios-analytics-outline', url: 'survey' },
+      { title: 'FoodMenu', component: FoodMenu, icon: 'ios-pizza-outline', url: 'food-menu'}, 
       { title: 'Homework' , component : HomeworkTabs , icon : 'ios-book-outline' , url : 'homework' },
       { title: 'Circular',component : CircularComponent , icon : 'ios-paper-outline' , url : 'circular' },
       { title: 'Student Rating', component: StudentRating, icon: 'ios-pulse-outline', url: 'student-profile' },

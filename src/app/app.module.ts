@@ -35,6 +35,7 @@ import { CircularViewComponent } from '../pages/circular/view/circular-view';
 import { SurveyListPage } from '../pages/survey/list/survey-list';
 import { MessagePage } from '../pages/message/message';
 import { EventComponent } from '../pages/event/event';
+import { FoodMenu } from '../pages/foodmenu/foodmenu';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -113,7 +114,8 @@ import { EventService } from '../service/event.service';
     ViewMessagePage,
     EventComponent,
     ViewEvent,
-    TimelinePage
+    TimelinePage,
+    FoodMenu
   ],
   imports: [
     MomentModule,
@@ -163,7 +165,8 @@ import { EventService } from '../service/event.service';
     ViewMessagePage,
     EventComponent,
     ViewEvent,
-    TimelinePage
+    TimelinePage,
+    FoodMenu
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, PollService, HomeworkService, CircularService, SurveyService,

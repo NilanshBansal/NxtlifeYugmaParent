@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Events } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { Transfer , TransferObject } from  '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
@@ -20,7 +20,7 @@ export class AccountPage {
   nickname: string;
   students;
   title = "Account";
-  public base64Image : string = "assets/images/user.png";
+  public base64Image : string = "http://open4profit.com/images/f2.jpg";
   public ImageFile;
 
   constructor(public file: File,
@@ -28,8 +28,7 @@ export class AccountPage {
               public transfer: Transfer,
               public navCtrl: NavController,
               public events: Events,
-              public appService: AuthService,
-              private actionSheetCtrl: ActionSheetController,) {
+              public appService: AuthService) {
   }
 
   ionViewWillEnter() {
@@ -43,27 +42,6 @@ export class AccountPage {
 
   logout() {
     this.events.publish('user:logout');
-  }
-
-  logoutActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Are you sure you want to logout ?',
-      buttons: [{
-        text: 'Submit',
-        icon: 'ios-paper-outline',
-        handler: () => {
-          this.logout();
-        }
-      },{
-        text: 'Cancel',
-        icon: 'md-close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    actionSheet.present();
   }
 
   public openGallery() {

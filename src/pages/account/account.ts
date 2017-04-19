@@ -20,7 +20,7 @@ export class AccountPage {
   nickname: string;
   students;
   title = "Account";
-  public base64Image : string = "http://open4profit.com/images/f2.jpg";
+  public base64Image : string;
   public ImageFile;
 
   constructor(public file: File,
@@ -39,6 +39,13 @@ export class AccountPage {
     this.id = localStorage.getItem("id");
     this.nickname = localStorage.getItem("nickname");
     this.students = JSON.parse(localStorage.getItem("students"));
+    let picTimestamp = localStorage.getItem("picTimestamp");
+    let fileUrl = localStorage.getItem("fileUrl");
+    if (picTimestamp === null) {
+      this.base64Image = "http://open4profit.com/images/f2.jpg";
+    } else {
+      this.base64Image = fileUrl + "/" + picTimestamp;
+    }
   }
 
   logout() {

@@ -15,6 +15,8 @@ export class AuthService {
 
   private actionUrl: string;
   public header;
+  id;
+  access_token;
 
   constructor(private http: CustomHttpService,
               public config: Configuration,
@@ -28,6 +30,8 @@ export class AuthService {
 
   isLoggedIn() {
     if (localStorage.getItem("access_token")) {
+      this.access_token = localStorage.getItem("access_token");
+      this.id = localStorage.getItem("id");
       return !this.hasLogin;
     } else {
       return this.hasLogin;
@@ -59,10 +63,12 @@ export class AuthService {
     localStorage.setItem("contactNo", parent.contactNo);
     localStorage.setItem("students", JSON.stringify(parent.students));
     localStorage.setItem("nickName", parent.nickName);
+    localStorage.setItem("fileUrl", parent.fileUrl);
+    localStorage.setItem("picOriginalName", parent.picOriginalName);
+    localStorage.setItem("picTimestamp", parent.picTimestamp);
   }
 
   uploadPic(image) {
-    let access_token = this.commonService.getData('access_token');
     const fileTransfer: TransferObject = this.transfer.create();
     let filename = _.uniqueId() + ".jpg";
     let options = {
@@ -71,21 +77,19 @@ export class AuthService {
       mimeType: 'image/jpeg',
       chunkedMode: false,
       headers: {
-        'Authorization': access_token
+        'Content-Type': undefined,
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
       },
       params: {
         "file": filename
       }
-    };
+    }; 
 
-    let id = localStorage.getItem('id');
-    alert(image)
-  
-    return fileTransfer.upload(image, this.actionUrl + "/parent/" + id + "/picture", options, false).then((result: any) => {
-      alert("AAAAAAAAAA " + result);
+    return fileTransfer.upload(image, this.actionUrl + "/parent/" + this.id + "/picture", options, false).then((result: any) => {
+      // alert(result);
       return result;
     }).catch((error: any) => {
-      alert("BBBBB " + error);
+      alert("err"+ error);
     }); 
   }
 

@@ -6,6 +6,9 @@
     <ion-refresher-content></ion-refresher-content>
    </ion-refresher> 
   <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}" no-margin>
+    <div class="csRight">
+      <img class="csChatImage"src="http://footage.framepool.com/shotimg/608711393-dibujo-papel-escolar-aula-de-clases.jpg">
+    </div>
     <div class="csMyComment">
       <h3>{{ m.message }}</h3>
     </div>

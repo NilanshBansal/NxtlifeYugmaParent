@@ -10,21 +10,24 @@
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-  <ion-card *ngFor="let data of allData" class="csCardTopBorder">
-    <ion-item>
-      <ion-avatar item-left text-center>
-        <ion-icon name="ios-person" color="primary" style="font-size:3.5em;" text-center></ion-icon>
-      </ion-avatar>
-      <h2><b>{{data.teacherName}}</b></h2>
-      <p>{{data.createdAt | amDateFormat: 'LL'}}</p>
-    </ion-item>
-    <hr>
-    <ion-card-content>
-      <b>{{data.title}}</b>
-      <p>{{data.description}}</p>
-      <span class="csRight">From: {{ data.studentName }}</span>
-    </ion-card-content>
-  </ion-card>
+  <div *ngFor="let data of allData">
+    <ion-badge class="csAppBadge csCenter">{{data.teacherName}}</ion-badge>
+    <ion-card class="csAppCard">
+      <ion-item class="csAppContent">
+        <div class="csAppImageBlock">
+          <img class="csAppImg" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS3et-wuRVjdMsc-CUmHR5NQ2bDl5Lpqku0pJ4bo42sqZxg-pDP2g">
+        </div>
+        <div style="margin:5px">
+          <b class="csParagraph">{{data.title}}</b>
+          <p class="csParagraph">{{data.description}}</p>
+        </div>
+      </ion-item>
+      <ion-item class="csAppFooter">
+        <div item-left color="light">{{data.createdAt | amDateFormat: 'LL'}}</div>
+        <ion-badge item-right>{{ data.studentName }}</ion-badge>
+      </ion-item>
+    </ion-card>
+  </div>
   <ion-list class="no-comment" *ngIf="EmptyAppreciations">
     <ion-icon name="thumbs-up"></ion-icon>
     <br>NO RECORD FOUND

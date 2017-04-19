@@ -7,14 +7,14 @@
   </ion-refresher>
   <ion-list>
     <ion-item *ngFor="let a of allsurveys; let ii = index" (click)="getParticularSurvey(a.surveyId,ii)">
-      <div class="csIndicator" [style.border-left-color]="'#11ae22'">
+      <div class="csIndicator" [style.border-left-color]="a.typeName == 'Class' ? '#27ae60' : '#f1c40f'">
         <h2><b> {{a.title}} </b></h2>
         <ion-note>
           <ion-row>
             <ion-col width-50 class="no-padding-l" style="color:#535353;">
               <ion-icon name="apps"></ion-icon><span>{{ a.questionLength }} Question</span>
             </ion-col>
-            <ion-col width-50 class="no-padding-l">
+            <ion-col width-50 class="no-padding-l" [style.color]="a.typeName == 'Class' ? '#27ae60' : '#f1c40f'">
               <ion-icon name="at"></ion-icon><span>{{ a.typeName }}</span>
             </ion-col>
           </ion-row>

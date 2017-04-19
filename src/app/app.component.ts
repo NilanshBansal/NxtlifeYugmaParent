@@ -33,6 +33,7 @@ export class MyApp extends UserSessionManage {
   public selectedPage;
   pages: Array<{title: string, component: any, icon: any, url: string}>;
   account: Array<{title: string, component: any, icon: any}>;
+  userImage;
 
   constructor(public platform: Platform,
               public authService: AuthService,
@@ -77,6 +78,9 @@ export class MyApp extends UserSessionManage {
     this.account = [
       { title: 'Account', component: AccountPage, icon: 'https://cdn4.iconfinder.com/data/icons/free-large-boss-icon-set/512/Caucasian_boss.png' }
     ];
+    let picTimestamp = localStorage.getItem("picTimestamp");
+    let fileUrl = localStorage.getItem("fileUrl");
+    this.userImage = fileUrl + "/" + picTimestamp;
   }
 
 }

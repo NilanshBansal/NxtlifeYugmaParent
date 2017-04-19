@@ -1,4 +1,33 @@
+.csSelectOption{
+    border-top: 2px solid #747574;
+    border-radius: 20px;
+}
 .csPollCard{
-    background: $csBackgroundColor !important;
-    border: 2px solid #00bcd4;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+}
+.csPollFooter{
+    margin:15px;
+    margin-bottom:0px;
+}
+.csPollFooter1{
+    float:left;
+    margin-top:0px;
+}
+.csPollFooter2{
+    float:right;
+    margin-top:0px;
+}
+.csPollFooter3{
+    float:left;
+}
+.csPollFooter4{
+   
+   float:right;
+  
+}
+.csPollButton{
+    border-radius:20px;
+    color:black;
+    font-weight:bold
 }

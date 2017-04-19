@@ -146,7 +146,9 @@ div {
     .item-inner {
     border-bottom: 0px !important;
     }   
-  height: 150px !important;
+  height: 230px !important; //150 in case of white item
+    display: block; //remove it
+  position: relative; //remove it
   .item-ios.item-block .item-inner {
     padding-right: 8px;
     border-bottom: 0px solid #c8c7cc !important;
@@ -171,4 +173,32 @@ div {
     .item-inner{
         border:0px !important;
     }
+}
+
+.csAvatarImage{
+  width: 100px;
+    border-radius: 100%;
+    height: 100px;
+    border: 3px solid white;
+}
+
+.csFont24{
+  font-size:24px;
+}
+
+.csPaddingWhite{
+  padding-top:40px;
+  color:white;
+}
+
+.csVieCompBtn{
+  background:white;
+  border:solid 1px;
+}
+
+.csFont12{
+  font-size:12px;
+}
+.csColorDim{
+  color:#d3d8e0;
 }

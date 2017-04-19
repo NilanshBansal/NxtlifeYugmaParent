@@ -3,45 +3,26 @@
   </nl-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
-  <ion-card class="csCardTopBorder" [style.border-color]="onecirc.circularTypeColor">
-
-     <ion-item>
-        <!--<div item-right style="margin-top: -15px;">
-            <h3><ion-icon name="time"></ion-icon> {{onecirc.start | date:'mediumDate'}}</h3>
-        </div>  -->
-      <div item-left>
-        <ion-icon style="font-size:3.2em" color="primary" name="ios-person"></ion-icon>
-      </div>
-        <div>
-        <b class="csParagraph">{{  onecirc.employeeName }}</b><br><p> {{onecirc.start | date:'mediumDate'}}</p>
-        </div>    
-    </ion-item>   
+  <img class="csAppImg csOnCardImage csCenter" src="https://www.fnbmichigan.com/gallery/thumb/2_2_milobinski_tamara_1-17_1484074084_t.jpg">
+  <ion-card class="csCardInImage">
+    <div class="csBottomShadow">
+    <div text-center>
+      <b>{{  onecirc.employeeName }}</b>
+    </div>
+    <p text-center>
+      {{onecirc.start | date:'mediumDate'}}
+    </p>
+    </div>
     <ion-card-content>
       <div class="csParagraph"><b>{{onecirc.title }} </b></div>
       <p class="csParagraph">{{onecirc.description}}</p>
     </ion-card-content>
-
-    <ion-item *ngIf="onecirc.circularTypeName =='Class' ">
+  </ion-card>
+  <ion-card *ngIf="onecirc.circularTypeName =='Class' ">
+    <ion-item>
       <b>Audience: </b> |<span *ngFor="let a of onecirc.standards">
       <span> {{ a }} |</span>
       </span>
     </ion-item>
-  </ion-card>    
-  <!--<ion-card class="csCardTopBorder" [style.border-color]="onecirc.circularTypeColor">
-    <ion-item>
-      <div class="csParagraph" text-center><b>{{onecirc.title }} </b></div>
-      <div class="csParagraph">Dear Parents,<p><p>{{onecirc.description}}</div>
-    </ion-item>
-    <ion-item>
-      <div item-left>
-        <b class="csParagraph">{{ onecirc.employeeName }}</b><br>Principal
-      </div>
-      <div item-right>
-        <b class="csParagraph">Created at</b><br> {{onecirc.createdAt | date:'mediumDate'}}
-      </div>
-    </ion-item>
-    <ion-item *ngIf="onecirc.circularTypeName=='Class'">
-      <b>Class:</b> | <span *ngFor="let a of onecirc.standards"><span> {{ a }} | </span> </span>
-    </ion-item>
-  </ion-card>-->
+  </ion-card>
 </ion-content>

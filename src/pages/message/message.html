@@ -11,15 +11,21 @@
   <ion-list>
     <ion-item-sliding *ngFor="let a of allData; let i = index" class="new-list" #slidingItem>
       <a ion-item detail-push detail-none href="#" (click)="openViewModal(a.id)">
-        <ion-row>{{a.title}}</ion-row>
-        <ion-row>{{a.againstEmployeeName}}</ion-row>
-        <ion-row>{{a.categoryName}}</ion-row>
-        <ion-row>
-        {{a.createdAt | amDateFormat: 'LL'}}
-        </ion-row>
-        <ion-row *ngIf="a.closedOn">
-        Closed Date: {{a.closedOn| amDateFormat: 'LL'}}
-        </ion-row>
+        <div class="csIndicator" [style.border-left-color]="'red'">
+          <h2><b> {{a.title}} </b></h2>
+          <ion-row>{{a.againstEmployeeName}}</ion-row>
+          <ion-row>{{a.categoryName}}</ion-row>
+          <ion-note>
+            <ion-row>
+              <ion-col width-50 class="no-padding-l" style="color:#535353;">
+                <ion-icon name="clock"></ion-icon><span>Created at: {{a.createdAt | amDateFormat: 'LL'}}</span>
+              </ion-col>
+              <ion-col width-50 class="no-padding-l" style="color:#535353;" *ngIf="a.closedOn">
+                <ion-icon name="clock"></ion-icon><span>Expirers on: {{a.closedOn| amDateFormat: 'LL'}}</span>
+              </ion-col>
+            </ion-row>
+          </ion-note>
+        </div>
       </a>
       <ion-item-options side="right">
         <button ion-button color="secondary" (click)="presentConfirm(slidingItem, a.id)">

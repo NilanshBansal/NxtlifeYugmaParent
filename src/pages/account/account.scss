@@ -30,10 +30,11 @@
 }
 ///////////////// Card styles ///////////////
 .csAccImg{
-    width: 80px;
-    height: 80px;
+    width: 80px !important;
+    height: 80px !important;
     border-radius: 100%;
     margin-top:10px;
+    border:3px solid white;
 }
 .csAccName{
     font-size: 2rem;

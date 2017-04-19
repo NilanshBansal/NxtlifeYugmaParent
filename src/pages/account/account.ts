@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events } from 'ionic-angular';
+import { NavController, Events, ActionSheetController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { Transfer , TransferObject } from  '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
@@ -28,7 +28,8 @@ export class AccountPage {
               public transfer: Transfer,
               public navCtrl: NavController,
               public events: Events,
-              public appService: AuthService) {
+              public appService: AuthService,
+              public actionSheetCtrl: ActionSheetController) {
   }
 
   ionViewWillEnter() {

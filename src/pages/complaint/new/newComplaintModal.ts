@@ -76,6 +76,8 @@ export class newComplaintModal implements OnInit {
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child
+      this.selectChild(this.child);
+      this.newComplaint.removeControl("student");
     }
     this.nl.showToast("All fields are required to submit form");
   }
@@ -159,6 +161,12 @@ export class newComplaintModal implements OnInit {
 
     if (this.newComplaint.invalid) {
       return;
+    }
+
+    if (typeof(this.newComplaint.value.student) == 'undefined') {
+      this.newComplaint.value["student"] = {
+        id: this.child.id
+      }
     }
 
     let newComplaint = _.extend(this.newComplaint.value, {

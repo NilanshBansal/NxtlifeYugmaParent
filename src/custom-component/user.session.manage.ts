@@ -4,12 +4,14 @@ import { LoginPage } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { AuthService } from '../service/auth.service';
 import { NetworkService } from '../service/network.service';
+import { AccountPage } from '../pages/account/account';
 
 export class UserSessionManage {
 
   public name: string;
   public selectedPage:string;
   public rootPage: any;
+  public userImage;
 
   constructor(public events: Events,
               public menu: MenuController,
@@ -20,6 +22,7 @@ export class UserSessionManage {
     this.handleEvents();
     this.networkService.checkNetworkStatus();
     this.hasLoggedIn();
+    this.imageUpdate(null);
   }
 
   public handleEvents() {
@@ -37,6 +40,9 @@ export class UserSessionManage {
     });
     this.events.subscribe("online", () => {
       this.online();
+    });
+    this.events.subscribe("user:image", (image) => {
+      this.imageUpdate(image);
     });
   }
 
@@ -98,6 +104,25 @@ export class UserSessionManage {
 
   public loadUser() {
     this.name = localStorage.getItem("name");
+  }
+
+  public imageUpdate(image) {
+    let picTimestamp = localStorage.getItem("picTimestamp");
+    let fileUrl = localStorage.getItem("fileUrl");
+    if (image != null) {
+      this.userImage = image;
+    } else {
+      if (picTimestamp === null) {
+        this.userImage = "http://open4profit.com/images/f2.jpg";
+      } else {
+        this.userImage = fileUrl + "/" + picTimestamp;
+      }
+    }
+  }
+
+  public openAccountPage() {
+    this.menu.close();
+    this.appCtrl.getRootNav().setRoot(AccountPage);
   }
 
   public getUserInfo() {

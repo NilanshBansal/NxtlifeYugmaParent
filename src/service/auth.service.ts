@@ -31,7 +31,6 @@ export class AuthService {
   isLoggedIn() {
     if (localStorage.getItem("access_token")) {
       this.access_token = localStorage.getItem("access_token");
-      this.id = localStorage.getItem("id");
       return !this.hasLogin;
     } else {
       return this.hasLogin;
@@ -70,6 +69,8 @@ export class AuthService {
 
   uploadPic(image) {
     const fileTransfer: TransferObject = this.transfer.create();
+    this.id = localStorage.getItem("id");
+    this.access_token = 'Bearer ' + localStorage.getItem('access_token');
     let filename = _.uniqueId() + ".jpg";
     let options = {
       fileKey: 'file',
@@ -78,19 +79,20 @@ export class AuthService {
       chunkedMode: false,
       headers: {
         'Content-Type': undefined,
-        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+        'Authorization': this.access_token
       },
       params: {
         "file": filename
       }
     }; 
 
-    return fileTransfer.upload(image, this.actionUrl + "/parent/" + this.id + "/picture", options, false).then((result: any) => {
-      // alert(result);
-      return result;
-    }).catch((error: any) => {
-      alert("err"+ error);
-    }); 
+    return fileTransfer.upload(image, this.actionUrl + "/parent/" + this.id + "/picture", options, false)
+                       .then((result: any) => {
+                         // alert(result);
+                         return result;
+                       }).catch((error: any) => {
+                         alert("err" + JSON.stringify(error));
+                       }); 
   }
 
   private extractData(res: Response) {

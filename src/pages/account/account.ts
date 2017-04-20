@@ -4,6 +4,7 @@ import { Camera } from '@ionic-native/camera';
 import { Transfer , TransferObject } from  '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { AuthService } from '../../service/auth.service';
+import { CustomService } from '../../service/custom.service';
 import * as _ from 'underscore';
 
 @Component({
@@ -27,12 +28,14 @@ export class AccountPage {
   title = "Account";
   public base64Image : string;
   public ImageFile;
+  public showLoader: boolean = false;
 
   constructor(public file: File,
               public camera: Camera,
               public transfer: Transfer,
               public navCtrl: NavController,
               public events: Events,
+              public nl: CustomService,
               public appService: AuthService,
               public actionSheetCtrl: ActionSheetController) {
   }
@@ -64,7 +67,14 @@ export class AccountPage {
     }).then((imagedata)=> {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
       this.ImageFile = imagedata;
-      this.appService.uploadPic(this.base64Image);
+      this.showLoader = true;
+      this.appService.uploadPic(this.base64Image).then((res) => {
+        this.showLoader = false;
+        this.events.publish("user:image", this.base64Image);
+      }, (err) => {
+        this.showLoader = false;
+        this.nl.errMessage();
+      });
     },(err) => {
     });
   }
@@ -79,7 +89,14 @@ export class AccountPage {
     }).then((imagedata) => {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
       this.ImageFile = imagedata;
-      this.appService.uploadPic(this.base64Image); 
+      this.showLoader = true;
+      this.appService.uploadPic(this.base64Image).then((res) => {
+        this.showLoader = false;
+        this.events.publish("user:image", this.base64Image);
+      }, (err) => {
+        this.showLoader = false;
+        this.nl.errMessage();
+      });
     },(err) => {
     });
   }

@@ -74,6 +74,8 @@ export class NewAppreciationModal implements OnInit {
     if (this.students.length === 1) {
       this.nl.showLoader();
       this.child = this.students[0];  // Auto select for one child
+      this.selectChild(this.child);
+      this.newSuggestion.removeControl("studentId");
     }
     this.nl.showToast("All fields are mandatory to send appreciation");
   }
@@ -95,6 +97,11 @@ export class NewAppreciationModal implements OnInit {
     if (this.newSuggestion.invalid) {
       console.log("Suggestion invalid")
     } else {
+      if (typeof(this.newSuggestion.value.student) == 'undefined') {
+        this.newSuggestion.value["studentId"] = {
+          id: this.child.id
+        }
+      }
       let a = this.newSuggestion.value.studentId.id;
       this.newSuggestion.value.studentId = a;
       this.onSubmit(this.newSuggestion.value);

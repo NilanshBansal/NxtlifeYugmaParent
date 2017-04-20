@@ -193,13 +193,9 @@ export class EditComplaintStatusAndComment {
   openCommentModal(complaint) {
     this.nl.showLoader();
     this.c.getComments(complaint.id).subscribe((response) => {
-      if (response.status === 204) {
-        this.onSuccess("")
-      } else {
-        this.nl.hideLoader();
-        let Comment = this.modalCtrl.create(CommentModal, {comments: response, data: complaint});
-        Comment.present();
-      }
+      this.nl.hideLoader();
+      let Comment = this.modalCtrl.create(CommentModal, {comments: response, data: complaint});
+      Comment.present();
     }, (err) => {
       this.nl.onError(err);
     });

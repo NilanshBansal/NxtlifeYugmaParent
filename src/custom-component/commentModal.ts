@@ -82,7 +82,12 @@ export class CommentModal {
 
   getData() {
     this.userId = localStorage.getItem("id");
-    this.comments = this.navParams.get("comments");
+    let data = this.navParams.get("comments");
+    if (data.status === 204) {
+      this.emptyComments = true;
+    } else {
+      this.comments = data;
+    }
     this.data = this.navParams.get("data");
   }
 
@@ -99,10 +104,8 @@ export class CommentModal {
       message: "You can't comment on it any more, may be your complaint status is closed or satisfied",
       showCloseButton: true,
       closeButtonText: "Ok",
+      duration: 5000,
       dismissOnPageChange: true
-    });
-    toast.onDidDismiss(() => {
-      toast.dismiss();
     });
     toast.present();
   }

@@ -33,7 +33,7 @@
           </ion-row>
         </ion-note>
       </div>
-       <button class="csPadding15" ion-button round item-right (click)="presentConfirm(a.id)">
+       <button class="csPadding15" ion-button round item-right (click)="presentConfirm(slidingItem, a.id)" *ngIf="!a.isClosed">
           <ion-icon class="csFont20"  name="trash"></ion-icon> 
         </button>
     </ion-item>

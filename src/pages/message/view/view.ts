@@ -15,7 +15,9 @@ import * as _ from 'underscore';
 
 @Component({
   selector: 'view-message',
-  templateUrl: 'view.html'
+  templateUrl: 'view.html',
+  styles: [`
+`]
 })
 
 export class ViewMessagePage {

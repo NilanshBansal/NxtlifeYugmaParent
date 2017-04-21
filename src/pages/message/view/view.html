@@ -1,23 +1,34 @@
 <ion-header>
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
-<ion-content id="chat" class="csChatBox">
-    <ion-refresher (ionRefresh)="onPullOldMessages($event)">
-    <ion-refresher-content></ion-refresher-content>
-   </ion-refresher>
-  <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}" no-margin>
-
-    <div class="csRight">
-      <!--<img class="csChatImage"src="http://footage.framepool.com/shotimg/608711393-dibujo-papel-escolar-aula-de-clases.jpg">-->
-    </div>
+<!--<ion-content id="chat" class="csChatBox csGrayBackground">
+  <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.employeeName === null}" no-margin>
     <div class="csMyComment">
       <h3>{{ m.message }}</h3>
+      <ion-avatar *ngIf="m.image">
+        <img [src]="m.image" width="100" height="100" style="border: 1px solid;border-radius: 50%;">
+      </ion-avatar>
     </div>
-    <div class="csCommentTime">
-      <span *ngIf="m.parentName === null">{{m.employeeNickName}}</span> {{ m.createdAt | amCalendar }}
-    </div>
+    <img class="csChatImage avt" *ngIf="m.employeeName != null" src="http://footage.framepool.com/shotimg/608711393-dibujo-papel-escolar-aula-de-clases.jpg">
+    <div class="csCommentTime">{{m.employeeNickName}}{{m.parentName}} {{ m.createdAt | amCalendar }}</div>
   </div>
   <ion-spinner class="loader" name="dots" *ngIf="!notPost"></ion-spinner>
+</ion-content>-->
+<ion-content  id="chat" class="csBackgroundGray">
+  <ion-refresher (ionRefresh)="onPullOldMessages($event)">
+    <ion-refresher-content></ion-refresher-content>
+   </ion-refresher>
+  <div *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}">
+    <div class="chatAlign size">
+      <img class="image" *ngIf="m.parentName === null" src="http://footage.framepool.com/shotimg/608711393-dibujo-papel-escolar-aula-de-clases.jpg">
+      <div class="message">
+        <div class="msgText">
+        {{ m.message }}
+        </div>
+        <div class="messageDetails">{{m.employeeName}} {{ m.createdAt | amCalendar }}</div>
+      </div>
+    </div>
+  </div>
 </ion-content>
 <ion-footer keyboard-attach class="bar-stable csFooterColor" #commentBtn>
   <form class="comment-box" [formGroup]="commentForm" novalidate>

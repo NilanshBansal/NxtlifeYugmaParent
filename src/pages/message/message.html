@@ -9,8 +9,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item-sliding *ngFor="let a of allData; let i = index" class="new-list" #slidingItem>
-      <a ion-item detail-push detail-none [style.border-color]="a.categoryColor" href="#" (click)="openViewModal(a.id, a.messages)">
+    <ion-item *ngFor="let a of allData; let i = index" class="new-list">
+      <div class="csListMargin" ion-item detail-push detail-none [style.border-left-color]="a.categoryColor" href="#" (click)="openViewModal(a.id, a.messages)">
         <h2><b>{{a.title}}</b></h2>
         <ion-row>
           <ion-col width-50 [style.color]="a.categoryColor">
@@ -21,25 +21,22 @@
           </ion-col>
           <ion-col width-50 class="csRight" *ngIf="a.againstEmployeeName">
             <h3>
-              <ion-icon name="person"> </ion-icon>
+              <ion-icon color="primary" name="person"> </ion-icon>
               {{ a.againstEmployeeName }}
             </h3>
           </ion-col>
         </ion-row>
         <ion-note>
           <ion-row class="csGrayText">
-            Created at: {{a.createdAt | amDateFormat: 'LL'}}
-            <span *ngIf="a.closedOn" item-right><ion-icon name="clock"></ion-icon> <span> Close Date: {{a.closedOn| amDateFormat: 'LL'}}</span>            </span>
+            <ion-icon name="clock"></ion-icon>  {{a.createdAt | amDateFormat: 'LL'}}
+            <span *ngIf="a.closedOn"> - {{a.closedOn| amDateFormat: 'LL'}}           </span>
           </ion-row>
         </ion-note>
-      </a>
-      <ion-item-options side="right" *ngIf="!a.isClosed">
-        <button ion-button color="danger" (click)="presentConfirm(slidingItem, a.id)">
-          <ion-icon name="md-close" class="csBigIcon"></ion-icon>
-          Close
+      </div>
+       <button class="csPadding15" ion-button round item-right (click)="presentConfirm(slidingItem, a.id)" *ngIf="!a.isClosed">
+          <ion-icon class="csFont20"  name="trash"></ion-icon> 
         </button>
-      </ion-item-options>
-    </ion-item-sliding>
+    </ion-item>
   </ion-list>
   <ion-list class="no-comment" *ngIf="emptyMessages">
     <ion-icon name="ios-chatbubbles-outline"></ion-icon>

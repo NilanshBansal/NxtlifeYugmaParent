@@ -33,9 +33,10 @@ import { CustomService } from '../service/custom.service';
           <ion-textarea rows="2" class="csCommentInput" type="text" formControlName="comment" placeholder=" Write comment..."></ion-textarea>
         </ion-col>
         <ion-col>
-          <button class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
+          <button style="width: 50px !important;" class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
             <ion-icon name="md-send" role="img"></ion-icon>
           </button>
+          
         </ion-col>
       </ion-row>
     </ion-grid>

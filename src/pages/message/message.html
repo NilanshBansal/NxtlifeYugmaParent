@@ -15,13 +15,13 @@
         <ion-row>
           <ion-col width-50 [style.color]="a.categoryColor">
             <h3>
-              <ion-icon name="at"> </ion-icon>
+              <ion-icon name="at"></ion-icon>
               {{a.categoryName}}
             </h3>
           </ion-col>
           <ion-col width-50 class="csRight" *ngIf="a.againstEmployeeName">
             <h3>
-              <ion-icon color="primary" name="person"> </ion-icon>
+              <ion-icon color="primary" name="person"></ion-icon>
               {{ a.againstEmployeeName }}
             </h3>
           </ion-col>
@@ -29,13 +29,13 @@
         <ion-note>
           <ion-row class="csGrayText">
             <ion-icon name="clock"></ion-icon>  {{a.createdAt | amDateFormat: 'LL'}}
-            <span *ngIf="a.closedOn"> - {{a.closedOn| amDateFormat: 'LL'}}           </span>
+            <span *ngIf="a.closedOn"> - {{a.closedOn| amDateFormat: 'LL'}}</span>
           </ion-row>
         </ion-note>
       </div>
-       <button class="csPadding15" ion-button round item-right (click)="presentConfirm(slidingItem, a.id)" *ngIf="!a.isClosed">
-          <ion-icon class="csFont20"  name="trash"></ion-icon> 
-        </button>
+      <button class="csPadding15" ion-button round outline item-right (click)="presentConfirm(a.id)" *ngIf="!a.isClosed">
+        Close
+      </button>
     </ion-item>
   </ion-list>
   <ion-list class="no-comment" *ngIf="emptyMessages">

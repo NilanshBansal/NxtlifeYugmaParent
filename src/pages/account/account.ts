@@ -63,7 +63,9 @@ export class AccountPage {
   public openGallery() {
     this.camera.getPicture({
       destinationType: this.camera.DestinationType.DATA_URL,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      quality: 30
     }).then((imagedata)=> {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
       this.ImageFile = imagedata;
@@ -85,7 +87,10 @@ export class AccountPage {
       targetWidth : 1000,
       targetHeight : 1000,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      allowEdit: true,
+      quality: 30
     }).then((imagedata) => {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
       this.ImageFile = imagedata;

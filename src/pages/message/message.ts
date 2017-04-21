@@ -163,12 +163,13 @@ export class MessagePage {
     alert.present();
   }
 
-  public closeConversation(conversationId) {
+  public closeConversation(conversation) {
     this.nl.showLoader();
-    this.messageService.closeConversation(conversationId).subscribe((res) => {
+    this.messageService.closeConversation(conversation.id).subscribe((res) => {
       console.log("res", res);
       this.nl.hideLoader();
       this.nl.showToast("Conversation successfully closed");
+      conversation.isClosed = true;
     }, (err) => {
       this.nl.onError(err);
     })

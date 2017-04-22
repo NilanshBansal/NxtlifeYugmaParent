@@ -30,6 +30,7 @@ export class ViewMessagePage {
   public base64Image : string;
   public ImageFile;
   currentPage = 1;
+  userImage;
 
   @ViewChild(Content) content: Content;
 
@@ -56,12 +57,12 @@ export class ViewMessagePage {
     this.commentForm = new FormGroup({
       message: new FormControl('', [Validators.required])
     });
+    this.userImage = localStorage.getItem('fileUrl') + "/";
   }
 
   public getData() { 
     this.messages = this.navParams.get('message').reverse();
     this.id = this.navParams.get("id");
-    console.log(this.messages)
   }
 
   public sockJsConnection() {

@@ -20,7 +20,7 @@
    </ion-refresher>
   <div *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}">
     <div class="chatAlign size">
-      <img class="image" *ngIf="m.parentName === null" src="http://footage.framepool.com/shotimg/608711393-dibujo-papel-escolar-aula-de-clases.jpg">
+      <img class="image" *ngIf="m.parentName === null" [src]="userImage + m.employeePicTimestamp">
       <div class="message">
         <div class="msgText">
         {{ m.message }}

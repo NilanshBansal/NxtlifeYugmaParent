@@ -116,7 +116,6 @@ export class AuthService {
 
     return fileTransfer.upload(image, this.actionUrl + "/parent/" + this.id + "/student/" + studentId + "/picture", options, false)
                        .then((result: any) => {
-                         alert("suc"+ result);
                          return result;
                        }).catch((error: any) => {
                          alert("err" + JSON.stringify(error));

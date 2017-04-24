@@ -67,7 +67,7 @@
           <div class="csCenter csProfileHeader">
             <div class="csAccBgImg">
               <br>
-              <img class="csAccImg csCenter" [src]="studentImage + a.picTimestamp" (click)="openimage(a)" >
+              <img class="csAccImg csCenter" [src]="a.baseUrl + a.picTimestamp" (click)="openimage(a)" >
               <div class="csAccName" text-center>{{a.name}}</div>
             </div>
           </div>

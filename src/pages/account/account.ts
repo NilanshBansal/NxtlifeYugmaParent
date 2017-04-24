@@ -27,9 +27,7 @@ export class AccountPage {
   students;
   title = "Account";
   public base64Image : string;
-  public ImageFile;
   public showLoader: boolean = false;
-  studentImage = localStorage.getItem('fileUrl') + "/";
   public imagePath: string = localStorage.getItem('fileUrl') + "/";
   public basePath = localStorage.getItem('fileUrl') + "/";
   public userImage: string = localStorage.getItem("picTimestamp");
@@ -52,6 +50,10 @@ export class AccountPage {
     this.id = localStorage.getItem("id");
     this.nickname = localStorage.getItem("nickname");
     this.students = JSON.parse(localStorage.getItem("students"));
+    this.students.forEach((val, index) => {
+      val["baseUrl"] = this.basePath
+    });
+    console.log(this.students)
   }
 
   logout() {
@@ -66,7 +68,8 @@ export class AccountPage {
       quality: 30
     }).then((imagedata)=> {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
-      this.ImageFile = imagedata;
+      this.basePath = 'data:image/jpeg;base64,';
+      this.userImage = imagedata;
       this.showLoader = true;
       this.appService.uploadPic(this.base64Image).then((res) => {
         this.showLoader = false;
@@ -147,12 +150,12 @@ export class AccountPage {
       }, {
         text: 'Take Photo',
         handler: () => {
-          this.openCameraForStudent(data.id);
+          this.openCameraForStudent(data);
         }
       }, {
         text: 'Choose Photo',
         handler: () => {
-          // this.openGallery(data.id);
+          this.openGalleryForStudent(data);
         }
       }, {
         text: 'Cancel',
@@ -165,7 +168,7 @@ export class AccountPage {
     actionSheet.present();
   }
 
-  public openCameraForStudent(studentId) {
+  public openCameraForStudent(student) {
     this.camera.getPicture({
       destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth : 1000,
@@ -177,33 +180,36 @@ export class AccountPage {
       quality: 30
     }).then((imagedata) => {
       let image = 'data:image/jpeg;base64,' + imagedata;
-      this.appService.uploadStudentPic(image, studentId).then((res) => {
-        this.showSuccess(res);
+      student.baseUrl = 'data:image/jpeg;base64,';
+      student.picTimestamp = imagedata;
+      this.appService.uploadStudentPic(image, student.id).then((res) => {
       }, (err) => {
         this.showLoader = false;
         this.nl.errMessage();
-        this.showAlert(err);
       });
     },(err) => {
     });
   }
 
-  showAlert(err) {
-    let alert = this.alertCtrl.create({
-      title: 'Image Upload Info',
-      subTitle: err,
-      buttons: ['OK']
+  public openGalleryForStudent(student) {
+    this.camera.getPicture({
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      quality: 30
+    }).then((imagedata)=> {
+      let image = 'data:image/jpeg;base64,' + imagedata;
+      student.baseUrl = 'data:image/jpeg;base64,';
+      student.picTimestamp = imagedata;
+      this.appService.uploadStudentPic(image, student.id).then((res) => {
+        this.showLoader = false;
+        this.events.publish("user:image", this.base64Image);
+      }, (err) => {
+        this.showLoader = false;
+        this.nl.errMessage();
+      });
+    },(err) => {
     });
-    alert.present();
-  }
-
-  showSuccess(res) {
-    let alert = this.alertCtrl.create({
-      title: 'Success',
-      subTitle: res,
-      buttons: ['OK']
-    });
-    alert.present();
   }
 
 }

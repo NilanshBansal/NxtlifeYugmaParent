@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events, ActionSheetController } from 'ionic-angular';
+import { NavController, Events, ActionSheetController, AlertController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { Transfer , TransferObject } from  '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
@@ -29,6 +29,9 @@ export class AccountPage {
   public base64Image : string;
   public ImageFile;
   public showLoader: boolean = false;
+  studentImage = localStorage.getItem('fileUrl') + "/";
+  public imagePath: string = localStorage.getItem('fileUrl') + "/";
+  public userImage: string = localStorage.getItem("picTimestamp");
 
   constructor(public file: File,
               public camera: Camera,
@@ -36,6 +39,7 @@ export class AccountPage {
               public navCtrl: NavController,
               public events: Events,
               public nl: CustomService,
+              public alertCtrl: AlertController,
               public appService: AuthService,
               public actionSheetCtrl: ActionSheetController) {
   }
@@ -47,13 +51,6 @@ export class AccountPage {
     this.id = localStorage.getItem("id");
     this.nickname = localStorage.getItem("nickname");
     this.students = JSON.parse(localStorage.getItem("students"));
-    let picTimestamp = localStorage.getItem("picTimestamp");
-    let fileUrl = localStorage.getItem("fileUrl");
-    if (picTimestamp === null) {
-      this.base64Image = "http://open4profit.com/images/f2.jpg";
-    } else {
-      this.base64Image = fileUrl + "/" + picTimestamp;
-    }
   }
 
   logout() {
@@ -134,6 +131,77 @@ export class AccountPage {
       }]
     });
     actionSheet.present();
+  }
+
+  public openimage(data) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Choose Album',
+      buttons: [{
+        text: 'Delete Photo',
+        role: 'destructive',
+        handler: () => {
+          this.base64Image = "assets/images/user.png";
+        }
+      }, {
+        text: 'Take Photo',
+        handler: () => {
+          this.openCameraForStudent(data.id);
+        }
+      }, {
+        text: 'Choose Photo',
+        handler: () => {
+          // this.openGallery(data.id);
+        }
+      }, {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    actionSheet.present();
+  }
+
+  public openCameraForStudent(studentId) {
+    this.camera.getPicture({
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth : 1000,
+      targetHeight : 1000,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      allowEdit: true,
+      quality: 30
+    }).then((imagedata) => {
+      let image = 'data:image/jpeg;base64,' + imagedata;
+      this.appService.uploadStudentPic(image, studentId).then((res) => {
+        this.showSuccess(res);
+      }, (err) => {
+        this.showLoader = false;
+        this.nl.errMessage();
+        this.showAlert(err);
+      });
+    },(err) => {
+    });
+  }
+
+  showAlert(err) {
+    let alert = this.alertCtrl.create({
+      title: 'Image Upload Info',
+      subTitle: err,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  showSuccess(res) {
+    let alert = this.alertCtrl.create({
+      title: 'Success',
+      subTitle: res,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

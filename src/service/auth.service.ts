@@ -95,6 +95,35 @@ export class AuthService {
                        }); 
   }
 
+  public uploadStudentPic(image, studentId) {
+    const fileTransfer: TransferObject = this.transfer.create();
+    this.id = localStorage.getItem("id");
+    this.access_token = 'Bearer ' + localStorage.getItem('access_token');
+    let filename = _.uniqueId() + ".jpg";
+    let options = {
+      fileKey: 'file',
+      fileName: filename,
+      mimeType: 'image/jpeg',
+      chunkedMode: false,
+      headers: {
+        'Content-Type': undefined,
+        'Authorization': this.access_token
+      },
+      params: {
+        "file": filename
+      }
+    }; 
+
+    return fileTransfer.upload(image, this.actionUrl + "/parent/" + this.id + "/student/" + studentId + "/picture", options, false)
+                       .then((result: any) => {
+                         alert("suc"+ result);
+                         return result;
+                       }).catch((error: any) => {
+                         alert("err" + JSON.stringify(error));
+                         return error;
+                       }); 
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body || { };

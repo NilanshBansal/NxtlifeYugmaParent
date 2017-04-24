@@ -9,7 +9,7 @@
           <div class="csCenter csProfileHeader">
             <div class="csAccBgImg">
               <br>
-              <img [src]="base64Image" (click)="openImageActionSheet()" class="csAccImg csCenter">
+              <img [src]="imagePath + userImage" (click)="openImageActionSheet()" class="csAccImg csCenter">
               <ion-spinner *ngIf="showLoader"></ion-spinner>
               <div class="csAccName" text-center>{{name}}<br>
                 <span class="csWhiteText" text-center *ngIf="nickName">({{nickName}})</span>
@@ -67,7 +67,7 @@
           <div class="csCenter csProfileHeader">
             <div class="csAccBgImg">
               <br>
-              <img class="csAccImg csCenter" src="https://dfcs.georgia.gov/sites/dfcs.georgia.gov/files/styles/rotator_box/public/rotator/report-child-abuse-slide.jpg?itok=9kgCp7lN">
+              <img class="csAccImg csCenter" [src]="studentImage + a.picTimestamp" (click)="openimage(a)" >
               <div class="csAccName" text-center>{{a.name}}</div>
             </div>
           </div>

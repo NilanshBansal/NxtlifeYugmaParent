@@ -108,7 +108,7 @@ export class AccountPage {
     });
   }
 
-  public openImageActionSheet() {
+  public openImageActionSheet(data) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Choose Album',
       buttons: [{
@@ -120,42 +120,20 @@ export class AccountPage {
       }, {
         text: 'Take Photo',
         handler: () => {
-          this.openCamera();
+          if (data) {
+            this.openCameraForStudent(data);
+          } else {
+            this.openCamera();
+          }
         }
       }, {
         text: 'Choose Photo',
         handler: () => {
-          this.openGallery();
-        }
-      }, {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    actionSheet.present();
-  }
-
-  public openimage(data) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Choose Album',
-      buttons: [{
-        text: 'Delete Photo',
-        role: 'destructive',
-        handler: () => {
-          this.base64Image = "assets/images/user.png";
-        }
-      }, {
-        text: 'Take Photo',
-        handler: () => {
-          this.openCameraForStudent(data);
-        }
-      }, {
-        text: 'Choose Photo',
-        handler: () => {
-          this.openGalleryForStudent(data);
+          if (data) {
+            this.openGalleryForStudent(data);
+          } else {
+            this.openGallery();
+          }
         }
       }, {
         text: 'Cancel',

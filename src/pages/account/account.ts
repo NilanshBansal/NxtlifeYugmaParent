@@ -31,6 +31,7 @@ export class AccountPage {
   public showLoader: boolean = false;
   studentImage = localStorage.getItem('fileUrl') + "/";
   public imagePath: string = localStorage.getItem('fileUrl') + "/";
+  public basePath = localStorage.getItem('fileUrl') + "/";
   public userImage: string = localStorage.getItem("picTimestamp");
 
   constructor(public file: File,
@@ -90,7 +91,8 @@ export class AccountPage {
       quality: 30
     }).then((imagedata) => {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
-      this.ImageFile = imagedata;
+      this.basePath = 'data:image/jpeg;base64,';
+      this.userImage = imagedata;
       this.showLoader = true;
       this.appService.uploadPic(this.base64Image).then((res) => {
         this.showLoader = false;

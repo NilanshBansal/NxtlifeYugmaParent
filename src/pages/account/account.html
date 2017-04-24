@@ -9,7 +9,7 @@
           <div class="csCenter csProfileHeader">
             <div class="csAccBgImg">
               <br>
-              <img [src]="imagePath + userImage" (click)="openImageActionSheet()" class="csAccImg csCenter">
+              <img [src]="basePath + userImage" (click)="openImageActionSheet()" class="csAccImg csCenter">
               <ion-spinner *ngIf="showLoader"></ion-spinner>
               <div class="csAccName" text-center>{{name}}<br>
                 <span class="csWhiteText" text-center *ngIf="nickName">({{nickName}})</span>

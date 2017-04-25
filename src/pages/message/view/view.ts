@@ -22,7 +22,7 @@ import * as _ from 'underscore';
 
 export class ViewMessagePage {
 
-  public headerTitle: string = "Messages";
+  public headerTitle: string;
   public messages = [];
   commentForm: FormGroup;
   notPost = true;
@@ -62,9 +62,11 @@ export class ViewMessagePage {
   }
 
   public getData() { 
-    this.messages = this.navParams.get('message').reverse();
-    this.id = this.navParams.get("id");
-    this.isClosed = this.navParams.get("isClosed");
+    this.messages = this.navParams.get('messages').reverse();
+    let conversation = this.navParams.get("conversation");
+    this.id = conversation.id;
+    this.isClosed = conversation.isClosed;
+    this.headerTitle = conversation.title;
     if (this.isClosed) {
       this.showToastMessage();
     }

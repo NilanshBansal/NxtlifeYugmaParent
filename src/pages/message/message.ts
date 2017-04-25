@@ -107,7 +107,7 @@ export class MessagePage {
     this.nl.showLoader();
     this.messageService.getMessage(message.id, 1).subscribe((res) => {
       this.nl.hideLoader();
-      let viewModal = this.modalCtrl.create(ViewMessagePage, {id: message.id, message: res, isClosed: message.isClosed});
+      let viewModal = this.modalCtrl.create(ViewMessagePage, {id: message.id, messages: res, conversation: message});
       viewModal.present();
     }, (err) => {
       this.nl.onError(err);

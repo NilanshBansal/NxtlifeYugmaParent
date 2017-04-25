@@ -10,6 +10,9 @@ import * as _ from 'underscore';
 
 import 'rxjs/add/operator/toPromise';
 
+declare const SockJS;
+declare const Stomp;
+
 @Injectable()
 export class AuthService {
 
@@ -29,12 +32,21 @@ export class AuthService {
   public hasLogin: boolean = false;
 
   isLoggedIn() {
-    if (localStorage.getItem("access_token")) {
-      this.access_token = localStorage.getItem("access_token");
+    let access_token = localStorage.getItem("access_token");
+    if (access_token) {
+      this.access_token = access_token;
+      this.getSockJs();
       return !this.hasLogin;
     } else {
       return this.hasLogin;
     }
+  }
+
+  public getSockJs() {
+    let access_token = localStorage.getItem('access_token');
+    let url = this.actionUrl + '/parent/nxtlife-websocket?access_token=' + access_token;
+    var socket = new SockJS(url);
+    return Stomp.over(socket);
   }
 
   public getUser(phoneNo: number) {

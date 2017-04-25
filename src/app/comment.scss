@@ -33,16 +33,17 @@
 }
 
 .message-box {
-  width: 80% !important;
+  width: 100% !important;
 }
 
 .message-box.mine{
-  width: 80% !important;
+  width: 100% !important;
   float:right;
   .csMyComment{
     @extend .csMyCommentBox;
     float: right;
     background: #beffbb;
+    margin-left: 10%;
   }
   .csCommentTime{
     color: #676666;
@@ -58,7 +59,8 @@
   @extend .csMyCommentBox;
   // display:inline-block;
   background: white;
-  margin-left: 5px;
+  margin-right:10%;
+  margin-left:5px;
 }
 
 

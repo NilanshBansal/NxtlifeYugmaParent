@@ -92,12 +92,11 @@ export class MessagePage {
     createNew.present();
   }
 
-  public openViewModal(id) {
+  public openViewModal(message) {
     this.nl.showLoader();
-    this.messageService.getMessage(id, 1).subscribe((res) => {
+    this.messageService.getMessage(message.id, 1).subscribe((res) => {
       this.nl.hideLoader();
-      let message = res;
-      let viewModal = this.modalCtrl.create(ViewMessagePage, {id: id, message: message});
+      let viewModal = this.modalCtrl.create(ViewMessagePage, {id: message.id, message: res, isClosed: message.isClosed});
       viewModal.present();
     }, (err) => {
       this.nl.onError(err);

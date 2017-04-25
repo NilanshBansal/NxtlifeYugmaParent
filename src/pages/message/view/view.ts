@@ -31,6 +31,7 @@ export class ViewMessagePage {
   public ImageFile;
   currentPage = 1;
   userImage;
+  isClosed: boolean = false;
 
   @ViewChild(Content) content: Content;
 
@@ -63,6 +64,20 @@ export class ViewMessagePage {
   public getData() { 
     this.messages = this.navParams.get('message').reverse();
     this.id = this.navParams.get("id");
+    this.isClosed = this.navParams.get("isClosed");
+    if (this.isClosed) {
+      this.showToastMessage();
+    }
+  }
+
+  showToastMessage() {
+    let toast = this.toastCtrl.create({
+      message: "Message status is closed, you can't send new message",
+      showCloseButton: true,
+      closeButtonText: "Ok",
+      duration: 5000
+    });
+    toast.present();
   }
 
   public sockJsConnection() {
@@ -70,29 +85,15 @@ export class ViewMessagePage {
     let url = '/parent/conversation/'+ this.id +'/message';
     let that = this;
     stompClient.connect({}, function (frame) {
-       stompClient.subscribe(url, function (greeting) {
-          let message = JSON.parse(greeting.body);
-          if (!message) {
-            return;
-          }
-          that.messages.push(message);
-          that.showToastMessage();
-       });
+      stompClient.subscribe(url, function (greeting) {
+        let message = JSON.parse(greeting.body);
+        if (!message) {
+          return;
+        }
+        that.messages.push(message);
+        that.nl.showToast("New Message Received.");
+      });
     });
-  }
-
-  public showToastMessage() {
-    let toast = this.toastCtrl.create({
-      message: 'New Message Received.',
-      position: 'bottom',
-      duration: 5000,
-      closeButtonText: 'VIEW',
-      showCloseButton: true
-    });
-    toast.onDidDismiss(() => {
-      this.content.scrollToBottom(300);
-    });
-    toast.present();
   }
 
   public postMessage() {

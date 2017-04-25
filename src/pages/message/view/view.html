@@ -30,7 +30,7 @@
     </div>
   </div>
 </ion-content>
-<ion-footer keyboard-attach class="bar-stable csFooterColor" #commentBtn>
+<ion-footer keyboard-attach class="bar-stable csFooterColor" #commentBtn *ngIf="!isClosed">
   <form class="comment-box" [formGroup]="commentForm" novalidate>
     <ion-grid>
       <ion-row>

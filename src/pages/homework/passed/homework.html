@@ -14,8 +14,8 @@
   <ion-card class="csDateCard" *ngFor="let a of homework">
     <ion-card-content>
       <div class="csDate">
-        <div class="csDateNumber">{{a.createdAt}}</div>
-        <div class="csDateMonth" [style.background-color]="a.subjectColor">March</div>
+        <div class="csDateNumber">{{a.dueDate}}</div>
+        <div class="csDateMonth" [style.background-color]="a.subjectColor">{{a.dueMonth}}</div>
       </div>
       <div>
         <b>{{a.subjectName}}</b>
@@ -27,7 +27,7 @@
         <b>Created by:</b><br>{{ a.employeeName }}
       </div>
       <div item-right>
-        <b>Due Date:</b><br>{{a.dueDate | amDateFormat: 'DD/MM/YYYY'}}
+        <b>Create Date:</b><br>{{a.createdAt | amDateFormat: 'DD/MM/YYYY'}}
       </div>
     </ion-item>
   </ion-card>

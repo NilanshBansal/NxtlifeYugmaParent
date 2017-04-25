@@ -2,36 +2,44 @@
   <nl-modal-navbar [title]="title" [complaint]="event"></nl-modal-navbar>
 </ion-header>
 <ion-content class="planner csGrayBackground">
-  <ion-item no-lines class="csShadow " >
-<div class="csEventCard">
-  <div class="csDate csCenter">
-    <div class="csDateNumber">30</div>
-    <div class="csDateMonth" [style.background-color]="event.plannerTypeColor">March</div>
-  </div>
-</div>
-<div>
-  <b>{{event.title}}</b>
-  <p>{{event.description}}</p>
-</div>
-  </ion-item>  
+  <ion-card>
+    <ion-item no-lines>
+      <div class="csEventCard">
+        <div class="csDate csCenter">
+          <div class="csDateNumber">30</div>
+          <div class="csDateMonth" [style.background-color]="event.plannerTypeColor">March</div>
+        </div>
+      </div>
+      <div text-center>
+        <br>
+        <b>{{event.title}}</b>
+        <p class="csParagraph">{{ event.description}}</p>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <div text-center>
+      <ion-icon class="csCalIcon" name="time" [style.color]="event.plannerTypeColor"> </ion-icon>
+      <br>
+      <b>{{event.startDate | date}} - {{event.endDate | date}} </b>
+      <p>{{event.startTime}} - {{event.endTime}} </p>
+    </div>
+  </ion-card>
+  <ion-card>
     <ion-list no-lines>
-      <ion-item>
-        <ion-icon name="time" [style.color]="event.plannerTypeColor" item-left> </ion-icon>
-        <b>{{event.startDate | amDateFormat:'LL'}} - {{event.endDate | amDateFormat:'LL'}} </b>
-        <p>{{event.startTime}} - {{event.endTime}} </p>
-      </ion-item>
       <ion-item>
         <ion-icon name="school" [style.color]="event.plannerTypeColor" item-left> </ion-icon>
         <span item-left>Type:</span><span item-right>{{event.plannerTypeName}}</span>
         <div *ngIf="event.plannerTypeId == 2">
           <p item-right *ngFor=" let a of event.standards">
-           <span item-left>Audience: </span><span item-right> {{a}}</span>
+            <span item-left>Audience: </span><span item-right> {{a}}</span>
           </p>
         </div>
       </ion-item>
       <ion-item *ngIf="event.location">
         <ion-icon name="pin" [style.color]="event.plannerTypeColor" item-left></ion-icon>
-       <span item-left>Location: </span><span item-right>{{event.location}}</span>
+        <span item-left>Location: </span><span item-right>{{event.location}}</span>
       </ion-item>
     </ion-list>
+  </ion-card>
 </ion-content>

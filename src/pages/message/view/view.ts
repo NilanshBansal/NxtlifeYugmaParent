@@ -66,7 +66,7 @@ export class ViewMessagePage {
   }
 
   public sockJsConnection() {
-    let stompClient = this.commonService.getSockJs();
+    let stompClient = this.appService.getSockJs();
     let url = '/parent/conversation/'+ this.id +'/message';
     let that = this;
     stompClient.connect({}, function (frame) {

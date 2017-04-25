@@ -7,7 +7,7 @@ import { ViewMessagePage } from './view/view';
 // import service
 import { CustomService } from '../../service/custom.service';
 import { MessageService } from '../../service/message.service';
-import { CommonService } from '../../service/common.service'; 
+import { AuthService } from '../../service/auth.service'; 
 
 @Component({
   selector: 'message',
@@ -26,14 +26,14 @@ export class MessagePage {
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
               public toastCtrl: ToastController,
-              public commonService: CommonService,
+              public commonService: AuthService,
               public nl: CustomService) {
     this.sockJsConnection();
   }
 
   public sockJsConnection() {
     let stompClient = this.commonService.getSockJs();
-    let id = this.commonService.getData('id');
+    let id = localStorage.getItem('id');
     let url = '/parent/'+ id +'/conversation';
     let that = this;
     stompClient.connect({}, function (frame) {

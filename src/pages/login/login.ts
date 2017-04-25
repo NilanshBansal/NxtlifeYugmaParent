@@ -32,6 +32,8 @@ export class LoginPage extends Notification implements OnInit {
   loading;
   loginForm: FormGroup;
   showOtp: boolean = false;
+  username;
+  password;
 
   constructor(public navCtrl: NavController,
               public authService: AuthService,
@@ -47,6 +49,19 @@ export class LoginPage extends Notification implements OnInit {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       mobileNo: ['', Validators.compose([Validators.minLength(10), Validators.required])]
+    });
+  }
+
+  login() {
+    let data = {
+      username: this.username,
+      password: this.password
+    }
+    this.showLoader('Authenticating...');
+    this.authService.verifyOtp(data).subscribe((res) => {
+      this.otpVerifySuccessfully(res);
+    }, (err) => {
+      this.otpVarifyFailed(err);
     });
   }
 

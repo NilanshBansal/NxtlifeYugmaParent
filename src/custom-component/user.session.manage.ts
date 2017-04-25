@@ -57,6 +57,13 @@ export class UserSessionManage {
     this.loadUser();
     this.menu.close();
     this.appCtrl.getRootNav().setRoot(Dashboard);
+    this.imageUpdate(null);
+  }
+
+  public imageUpdate(image) {
+    let picTimestamp = localStorage.getItem("picTimestamp");
+    let fileUrl = localStorage.getItem("fileUrl");
+    this.userImage = fileUrl + "/" + picTimestamp;
   }
 
   public logout() {

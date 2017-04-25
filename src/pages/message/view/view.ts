@@ -152,7 +152,7 @@ export class ViewMessagePage {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     }).then((imagedata)=> {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
-      this.appService.uploadPic(this.base64Image).then((res) => {
+      this.appService.uploadPic(this.base64Image, null).then((res) => {
       })
     },(err) => {
     });
@@ -175,7 +175,7 @@ export class ViewMessagePage {
         employeeName: localStorage.getItem("id"),
         parentName: null
       });
-      this.appService.uploadPic(this.base64Image).then((res) => {
+      this.appService.uploadPic(this.base64Image, null).then((res) => {
         this.notPost = true;
       });
     },(err) => {

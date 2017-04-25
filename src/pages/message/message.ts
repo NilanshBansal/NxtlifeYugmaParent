@@ -7,7 +7,8 @@ import { ViewMessagePage } from './view/view';
 // import service
 import { CustomService } from '../../service/custom.service';
 import { MessageService } from '../../service/message.service';
-import { AuthService } from '../../service/auth.service'; 
+import { AuthService } from '../../service/auth.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'message',
@@ -64,17 +65,27 @@ export class MessagePage {
 
   ionViewWillEnter() {
     this.nl.showLoader();
-    this.messageService.getAllMessages(1).subscribe((res) => {
+    this.messageService.getAllMessages(1)
+    .subscribe((res) => {
       if (res.status === 204) {
         this.emptyMessages = true;
       } else {
-        this.allData = res;
-        this.emptyMessages = false;
+        this.buildData(res);
       }
       this.nl.hideLoader();
     }, (err) => {
       this.onError(err);
     })
+  }
+
+  public buildData(data) {
+    this.allData = data;
+    this.emptyMessages = false;
+    _.forEach(this.allData, (val, index) => {
+      if (val.againstEmployeeName == null) {
+        val.againstEmployeeName = val.firstMessage.employeeName
+      }
+    });
   }
 
   public onError(err) {
@@ -109,8 +120,7 @@ export class MessagePage {
         if (res.status === 204) {
           this.emptyMessages = true;
         } else {
-          this.allData = res;
-          this.emptyMessages = false;
+          this.buildData(res);
         }
         refresher.complete();
       }, (err) => {
@@ -134,8 +144,15 @@ export class MessagePage {
         infiniteScroll.complete();
         return;
       }
+      let data = [];
+      data = response;
+      _.forEach(data, (val, index) => {
+        if (val.againstEmployeeName == null) {
+          val.againstEmployeeName = val.firstMessage.employeeName
+        }
+      });
+      this.allData = this.allData.concat(data);
       infiniteScroll.complete();
-      this.allData = this.allData.concat(response);
     }, (err) => {
       infiniteScroll.complete();
       this.currentPage -= 1;

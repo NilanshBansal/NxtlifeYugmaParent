@@ -3,7 +3,7 @@
 </ion-header>
 <ion-content class="complaint-list csGrayBackground">
   <form name="newMessage" [formGroup]="newMessage" (ngSubmit)="presentActionsheet()" novalidate>
-    <ion-card>
+    <ion-card *ngIf="students.length > 1">
       <ion-item>
         <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
         <ion-label color="primary"><b>Child Name</b></ion-label>

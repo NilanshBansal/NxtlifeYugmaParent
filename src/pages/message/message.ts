@@ -3,12 +3,12 @@ import { ModalController, AlertController, ToastController, Content } from 'ioni
 
 import { NewMessagePage } from './new/new';
 import { ViewMessagePage } from './view/view';
-import { ItemSliding } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../service/custom.service';
 import { MessageService } from '../../service/message.service';
-import { CommonService } from '../../service/common.service'; 
+import { AuthService } from '../../service/auth.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'message',
@@ -27,14 +27,14 @@ export class MessagePage {
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
               public toastCtrl: ToastController,
-              public commonService: CommonService,
+              public commonService: AuthService,
               public nl: CustomService) {
     this.sockJsConnection();
   }
 
   public sockJsConnection() {
     let stompClient = this.commonService.getSockJs();
-    let id = this.commonService.getData('id');
+    let id = localStorage.getItem('id');
     let url = '/parent/'+ id +'/conversation';
     let that = this;
     stompClient.connect({}, function (frame) {
@@ -65,17 +65,27 @@ export class MessagePage {
 
   ionViewWillEnter() {
     this.nl.showLoader();
-    this.messageService.getAllMessages(1).subscribe((res) => {
+    this.messageService.getAllMessages(1)
+    .subscribe((res) => {
       if (res.status === 204) {
         this.emptyMessages = true;
       } else {
-        this.allData = res;
-        this.emptyMessages = false;
+        this.buildData(res);
       }
       this.nl.hideLoader();
     }, (err) => {
       this.onError(err);
     })
+  }
+
+  public buildData(data) {
+    this.allData = data;
+    this.emptyMessages = false;
+    _.forEach(this.allData, (val, index) => {
+      if (val.againstEmployeeName == null) {
+        val.againstEmployeeName = val.firstMessage.employeeName
+      }
+    });
   }
 
   public onError(err) {
@@ -93,12 +103,11 @@ export class MessagePage {
     createNew.present();
   }
 
-  public openViewModal(id) {
+  public openViewModal(message) {
     this.nl.showLoader();
-    this.messageService.getMessage(id, 1).subscribe((res) => {
+    this.messageService.getMessage(message.id, 1).subscribe((res) => {
       this.nl.hideLoader();
-      let message = res;
-      let viewModal = this.modalCtrl.create(ViewMessagePage, {id: id, message: message});
+      let viewModal = this.modalCtrl.create(ViewMessagePage, {id: message.id, messages: res, conversation: message});
       viewModal.present();
     }, (err) => {
       this.nl.onError(err);
@@ -111,8 +120,7 @@ export class MessagePage {
         if (res.status === 204) {
           this.emptyMessages = true;
         } else {
-          this.allData = res;
-          this.emptyMessages = false;
+          this.buildData(res);
         }
         refresher.complete();
       }, (err) => {
@@ -136,8 +144,15 @@ export class MessagePage {
         infiniteScroll.complete();
         return;
       }
+      let data = [];
+      data = response;
+      _.forEach(data, (val, index) => {
+        if (val.againstEmployeeName == null) {
+          val.againstEmployeeName = val.firstMessage.employeeName
+        }
+      });
+      this.allData = this.allData.concat(data);
       infiniteScroll.complete();
-      this.allData = this.allData.concat(response);
     }, (err) => {
       infiniteScroll.complete();
       this.currentPage -= 1;
@@ -145,7 +160,7 @@ export class MessagePage {
     });
   }
 
-  public presentConfirm(slidingItem: ItemSliding, conversationId) {
+  public presentConfirm(conversationId) {
     let alert = this.alertCtrl.create({
       title: 'Close this conversation?',
       buttons: [{
@@ -157,7 +172,6 @@ export class MessagePage {
       }, {
         text: 'Close it',
         handler: () => {
-          slidingItem.close();
           this.closeConversation(conversationId);
         } 
       }]
@@ -165,12 +179,13 @@ export class MessagePage {
     alert.present();
   }
 
-  public closeConversation(conversationId) {
+  public closeConversation(conversation) {
     this.nl.showLoader();
-    this.messageService.closeConversation(conversationId).subscribe((res) => {
+    this.messageService.closeConversation(conversation.id).subscribe((res) => {
       console.log("res", res);
       this.nl.hideLoader();
       this.nl.showToast("Conversation successfully closed");
+      conversation.isClosed = true;
     }, (err) => {
       this.nl.onError(err);
     })

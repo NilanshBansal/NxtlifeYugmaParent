@@ -3,13 +3,13 @@
 </ion-header>
 <ion-content class="csGrayBackground">
   <div>
-    <ion-slides pager autopla="100" effect="cube" paginationType="bullets" parallax>
+    <ion-slides pager autopla="100" paginationType="bullets" parallax>
       <ion-slide>
         <ion-card class="csProfileCard">
           <div class="csCenter csProfileHeader">
             <div class="csAccBgImg">
               <br>
-              <img [src]="base64Image" (click)="openImageActionSheet()" class="csAccImg csCenter">
+              <img [src]="basePath + userImage" (click)="openImageActionSheet()" class="csAccImg csCenter">
               <ion-spinner *ngIf="showLoader"></ion-spinner>
               <div class="csAccName" text-center>{{name}}<br>
                 <span class="csWhiteText" text-center *ngIf="nickName">({{nickName}})</span>
@@ -67,7 +67,7 @@
           <div class="csCenter csProfileHeader">
             <div class="csAccBgImg">
               <br>
-              <img class="csAccImg csCenter" src="https://dfcs.georgia.gov/sites/dfcs.georgia.gov/files/styles/rotator_box/public/rotator/report-child-abuse-slide.jpg?itok=9kgCp7lN">
+              <img class="csAccImg csCenter" [src]="a.baseUrl + a.picTimestamp" (click)="openImageActionSheet(a)" >
               <div class="csAccName" text-center>{{a.name}}</div>
             </div>
           </div>
@@ -100,12 +100,6 @@
               </ion-item>
             </ion-card>
           </ion-list>
-          <div padding>
-            <button ion-button icon-left color="primary" full type="button" (click)="logoutActionSheet()">
-              <ion-icon name="power"></ion-icon>
-              <b>Logout</b>
-          </button>
-          </div>
         </ion-card>
       </ion-slide>
     </ion-slides>

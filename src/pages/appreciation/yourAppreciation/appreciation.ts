@@ -21,6 +21,7 @@ export class YourAppreciation {
 
   // used in event
   public master: string = "appreciation";
+  public baseUrl: string;
 
   allData;
   currentPage = 1;
@@ -33,6 +34,7 @@ export class YourAppreciation {
   }
 
   ionViewWillEnter() {
+    this.baseUrl = localStorage.getItem("fileUrl") + "/";
     this.con.setUrlForAppreciations();
   }
 

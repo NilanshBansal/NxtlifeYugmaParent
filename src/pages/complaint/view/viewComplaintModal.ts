@@ -18,6 +18,7 @@ export class ViewComponent extends EditComplaintStatusAndComment implements OnIn
 
   complaint;
   title: string;
+  baseUrl: string;
 
   constructor(public modalCtrl: ModalController,
               public nl: CustomService,
@@ -30,6 +31,7 @@ export class ViewComponent extends EditComplaintStatusAndComment implements OnIn
   }
 
   ngOnInit() {
+    this.baseUrl = localStorage.getItem("fileUrl") + "/";
     this.title = "VIEW " + this.nl.getHeaderText();
     this.complaint = this.navParams.get('viewData');
   }

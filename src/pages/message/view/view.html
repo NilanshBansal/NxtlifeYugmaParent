@@ -2,16 +2,33 @@
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content id="chat" class="csChatBox csGrayBackground">
+  <ion-list>
+    <div *ngIf="show">
+      Create Date: {{conversation.createdAt | amDateFormat: 'DD/MM/YYYY' }}<br/>
+      Name: {{conversation.againstEmployeeName}}<br/>
+      Category: {{conversation.categoryName}}<br/>
+      Title: {{conversation.title}}<br/>
+      <div>Status: {{conversation.isClosed ? "Closed" : "Open"}}</div><br/>
+      <div *ngIf="conversation.closedOn">Closed Date: {{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</div>
+    </div>
+    <button ion-button clear (click)="show = !show">
+      <span *ngIf="show">Show</span>
+      <span *ngIf="!show">Hide</span>
+    </button>
+  </ion-list>
+  <ion-refresher (ionRefresh)="onPullOldMessages($event)">
+    <ion-refresher-content></ion-refresher-content>
+   </ion-refresher>
   <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}" no-margin>
     <div class="csMyComment">
       <h3>{{ m.message }}</h3>
     </div>
     <!--<img class="csChatImage avt" *ngIf="m.parentName != null" src="http://footage.framepool.com/shotimg/608711393-dibujo-papel-escolar-aula-de-clases.jpg">-->
-    <div class="csCommentTime">{{m.employeeNickName}}{{m.parentName}} {{ m.createdAt | amCalendar }}</div>
+    <div class="csCommentTime">{{m.employeeName}} {{ m.createdAt | amCalendar }}</div>
   </div>
   <ion-spinner class="loader" name="dots" *ngIf="!notPost"></ion-spinner>
 </ion-content>
-<ion-footer keyboard-attach class="bar-stable csFooterColor" #commentBtn>
+<ion-footer keyboard-attach class="bar-stable csFooterColor" #commentBtn *ngIf="!isClosed">
   <form class="comment-box" [formGroup]="commentForm" novalidate>
     <ion-grid>
       <ion-row>

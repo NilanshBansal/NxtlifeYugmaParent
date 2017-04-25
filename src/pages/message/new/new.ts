@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ViewController, ToastController, ActionSheetController } from 'ionic-angular';
 
@@ -12,7 +12,7 @@ import { ParentInfo } from '../../../service/parentInfo';
   templateUrl: 'new.html'
 })
 
-export class NewMessagePage {
+export class NewMessagePage implements OnInit {
 
   public headerTitle: string = "New Message";
   newMessage: FormGroup;
@@ -35,10 +35,11 @@ export class NewMessagePage {
     this.loadForm();
   }
 
-  ionViewWillEnter() {
+  ngOnInit() { 
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child
+      this.selectChild(this.child);
     }
   }
 

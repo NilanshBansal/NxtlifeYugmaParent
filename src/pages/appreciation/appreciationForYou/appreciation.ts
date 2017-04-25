@@ -21,6 +21,7 @@ export class AppreciationForYou extends ComplaintPage {
 
   // used in event
   public master: string = "appreciation";
+  public baseUrl: string;
 
   constructor(public nl: CustomService,
               public con: Configuration,
@@ -32,6 +33,7 @@ export class AppreciationForYou extends ComplaintPage {
   }
 
   ionViewWillEnter() {
+    this.baseUrl = localStorage.getItem("fileUrl") + "/";
     this.con.setUrlForStudentAppreciations("for-student");
   }
 

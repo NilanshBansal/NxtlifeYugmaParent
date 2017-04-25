@@ -19,6 +19,8 @@ export class PassedHomework {
   public currentPage = 1;
   public standardId;
   public NoHomework = false;
+  monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
   constructor(private hw : HomeworkService,
               public parentInfo: ParentInfo,
               public nl: CustomService) {
@@ -53,7 +55,8 @@ export class PassedHomework {
       this.showEmptyMsg(false);
       this.homework = res;
       _.forEach(this.homework, (data) => {
-        data.createdAt = ("0" + (new Date(data.createdAt).getDate())).slice(-2);
+        data.dueMonth = this.monthNames[(new Date(data.dueDate)).getMonth()];
+        data.dueDate = ("0" + (new Date(data.dueDate).getDate())).slice(-2);
       });
     }
     this.nl.hideLoader();

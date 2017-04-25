@@ -10,6 +10,9 @@ import * as _ from 'underscore';
 
 import 'rxjs/add/operator/toPromise';
 
+declare const SockJS;
+declare const Stomp;
+
 @Injectable()
 export class AuthService {
 
@@ -29,12 +32,21 @@ export class AuthService {
   public hasLogin: boolean = false;
 
   isLoggedIn() {
-    if (localStorage.getItem("access_token")) {
-      this.access_token = localStorage.getItem("access_token");
+    let access_token = localStorage.getItem("access_token");
+    if (access_token) {
+      this.access_token = access_token;
+      this.getSockJs();
       return !this.hasLogin;
     } else {
       return this.hasLogin;
     }
+  }
+
+  public getSockJs() {
+    let access_token = localStorage.getItem('access_token');
+    let url = this.actionUrl + '/parent/nxtlife-websocket?access_token=' + access_token;
+    var socket = new SockJS(url);
+    return Stomp.over(socket);
   }
 
   public getUser(phoneNo: number) {
@@ -67,7 +79,7 @@ export class AuthService {
     localStorage.setItem("picTimestamp", parent.picTimestamp);
   }
 
-  uploadPic(image) {
+  uploadPic(image, studentId) {
     const fileTransfer: TransferObject = this.transfer.create();
     this.id = localStorage.getItem("id");
     this.access_token = 'Bearer ' + localStorage.getItem('access_token');
@@ -86,7 +98,15 @@ export class AuthService {
       }
     }; 
 
-    return fileTransfer.upload(image, this.actionUrl + "/parent/" + this.id + "/picture", options, false)
+    let url;
+
+    if (studentId) {
+      url = this.actionUrl + "/parent/" + this.id + "/student/" + studentId + "/picture";
+    } else {
+      url = this.actionUrl + "/parent/" + this.id + "/picture";
+    }
+
+    return fileTransfer.upload(image, url, options, false)
                        .then((result: any) => {
                          // alert(result);
                          return result;

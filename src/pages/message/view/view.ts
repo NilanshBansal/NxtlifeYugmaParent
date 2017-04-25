@@ -22,7 +22,7 @@ import * as _ from 'underscore';
 
 export class ViewMessagePage {
 
-  public headerTitle: string = "Messages";
+  public headerTitle: string;
   public messages = [];
   commentForm: FormGroup;
   notPost = true;
@@ -30,6 +30,10 @@ export class ViewMessagePage {
   public base64Image : string;
   public ImageFile;
   currentPage = 1;
+  userImage;
+  isClosed: boolean = false;
+  conversation;
+  show = true;
 
   @ViewChild(Content) content: Content;
 
@@ -56,42 +60,44 @@ export class ViewMessagePage {
     this.commentForm = new FormGroup({
       message: new FormControl('', [Validators.required])
     });
+    this.userImage = localStorage.getItem('fileUrl') + "/";
   }
 
   public getData() { 
-    this.messages = this.navParams.get('message').reverse();
-    this.id = this.navParams.get("id");
-    console.log(this.messages)
+    this.messages = this.navParams.get('messages').reverse();
+    this.conversation = this.navParams.get("conversation");
+    this.id = this.conversation.id;
+    this.isClosed = this.conversation.isClosed;
+    this.headerTitle = this.conversation.title;
+    if (this.isClosed) {
+      this.showToastMessage();
+    }
+  }
+
+  showToastMessage() {
+    let toast = this.toastCtrl.create({
+      message: "Message status is closed, you can't send new message",
+      showCloseButton: true,
+      closeButtonText: "Ok",
+      duration: 5000
+    });
+    toast.present();
   }
 
   public sockJsConnection() {
-    let stompClient = this.commonService.getSockJs();
+    let stompClient = this.appService.getSockJs();
     let url = '/parent/conversation/'+ this.id +'/message';
     let that = this;
     stompClient.connect({}, function (frame) {
-       stompClient.subscribe(url, function (greeting) {
-          let message = JSON.parse(greeting.body);
-          if (!message) {
-            return;
-          }
-          that.messages.push(message);
-          that.showToastMessage();
-       });
+      stompClient.subscribe(url, function (greeting) {
+        let message = JSON.parse(greeting.body);
+        if (!message) {
+          return;
+        }
+        that.messages.push(message);
+        that.nl.showToast("New Message Received.");
+      });
     });
-  }
-
-  public showToastMessage() {
-    let toast = this.toastCtrl.create({
-      message: 'New Message Received.',
-      position: 'bottom',
-      duration: 5000,
-      closeButtonText: 'VIEW',
-      showCloseButton: true
-    });
-    toast.onDidDismiss(() => {
-      this.content.scrollToBottom(300);
-    });
-    toast.present();
   }
 
   public postMessage() {
@@ -151,7 +157,7 @@ export class ViewMessagePage {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     }).then((imagedata)=> {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
-      this.appService.uploadPic(this.base64Image).then((res) => {
+      this.appService.uploadPic(this.base64Image, null).then((res) => {
       })
     },(err) => {
     });
@@ -174,7 +180,7 @@ export class ViewMessagePage {
         employeeName: localStorage.getItem("id"),
         parentName: null
       });
-      this.appService.uploadPic(this.base64Image).then((res) => {
+      this.appService.uploadPic(this.base64Image, null).then((res) => {
         this.notPost = true;
       });
     },(err) => {

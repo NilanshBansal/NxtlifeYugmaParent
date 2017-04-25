@@ -11,16 +11,16 @@
   </div>
     <ion-row>
       <ion-col text-center width-33 class="csPaddingWhite">
-        <span class="csFont24">34</span> <br>Comments
+        <span class="csFont24">{{complaint.commentCount}}</span> <br>Comments
         </ion-col>
       <ion-col>
         <div (click)="parentInfo()" tappable style="padding-top:5px">
-          <img name="contact" class="csAvatarImage csCenter" src="http://storinka.com.ua/wp-content/uploads/2016/06/igra-s-rebenkom.jpg">
+          <img name="contact" class="csAvatarImage csCenter" [src]="baseUrl + complaint.studentPicUrl">
         </div>
       </ion-col>
       <ion-col  width-33 text-center class="csPaddingWhite">
-        <span class="csRight"  *ngIf="complaint.priorityName"><span class="csFont24" >{{complaint.priorityName}}</span> <br>Priority</span>
-        <span class="csRight"  *ngIf!="complaint.priorityName"><span class="csFont24" >Priority</span><br>Not Assigned</span>
+        <span class="csRight" *ngIf="complaint.priorityName"><span class="csFont24" >{{complaint.priorityName}}</span> <br>Priority</span>
+        <span class="csRight" *ngIf="complaint.anonymous"><span class="csFont24">Anonymous</span></span>
         </ion-col>
     </ion-row>
     <div text-center class="csWhiteText "><b style="font-size:20px">{{complaint.studentName}}</b>

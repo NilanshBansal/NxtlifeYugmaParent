@@ -32,6 +32,8 @@ export class ViewMessagePage {
   currentPage = 1;
   userImage;
   isClosed: boolean = false;
+  conversation;
+  show = true;
 
   @ViewChild(Content) content: Content;
 
@@ -63,10 +65,10 @@ export class ViewMessagePage {
 
   public getData() { 
     this.messages = this.navParams.get('messages').reverse();
-    let conversation = this.navParams.get("conversation");
-    this.id = conversation.id;
-    this.isClosed = conversation.isClosed;
-    this.headerTitle = conversation.title;
+    this.conversation = this.navParams.get("conversation");
+    this.id = this.conversation.id;
+    this.isClosed = this.conversation.isClosed;
+    this.headerTitle = this.conversation.title;
     if (this.isClosed) {
       this.showToastMessage();
     }

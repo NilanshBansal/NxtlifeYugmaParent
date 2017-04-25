@@ -15,6 +15,20 @@
   <ion-spinner class="loader" name="dots" *ngIf="!notPost"></ion-spinner>
 </ion-content>-->
 <ion-content  id="chat" class="csBackgroundGray">
+  <ion-list>
+    <div *ngIf="show">
+      Create Date: {{conversation.createdAt | amDateFormat: 'DD/MM/YYYY' }}<br/>
+      Name: {{conversation.againstEmployeeName}}<br/>
+      Category: {{conversation.categoryName}}<br/>
+      Title: {{conversation.title}}<br/>
+      <div>Status: {{conversation.isClosed ? "Closed" : "Open"}}</div><br/>
+      <div *ngIf="conversation.closedOn">Closed Date: {{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</div>
+    </div>
+    <button ion-button clear (click)="show = !show">
+      <span *ngIf="show">Show</span>
+      <span *ngIf="!show">Hide</span>
+    </button>
+  </ion-list>
   <ion-refresher (ionRefresh)="onPullOldMessages($event)">
     <ion-refresher-content></ion-refresher-content>
    </ion-refresher>

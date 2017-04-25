@@ -27,7 +27,7 @@
         <b>Created by:</b><br>{{ a.employeeName }}
       </div>
       <div item-right>
-        <b>Due Date:</b><br>{{a.dueDate | date:'mediumDate'}}
+        <b>Due Date:</b><br>{{a.dueDate | amDateFormat: 'DD/MM/YYYY'}}
       </div>
     </ion-item>
   </ion-card>

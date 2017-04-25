@@ -10,7 +10,7 @@
     <ion-card class="csAppCard">
       <ion-item class="csAppContent">
         <div class="csAppImageBlock">
-          <img class="csAppImg" src="http://www.american.edu/uploads/profiles/large/chris_palmer_profile_11.jpg">
+          <img class="csAppImg" [src]="baseUrl + data.employeePicUrl">
         </div>
         <div style="margin:5px">
           <b class="csParagraph">{{data.title}}</b>

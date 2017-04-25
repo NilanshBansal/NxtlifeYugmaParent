@@ -20,7 +20,14 @@
       </ion-col>
       <ion-col  width-33 text-center class="csPaddingWhite">
         <span class="csRight" *ngIf="complaint.priorityName"><span class="csFont24" >{{complaint.priorityName}}</span> <br>Priority</span>
-        <span class="csRight" *ngIf="complaint.anonymous"><span class="csFont24">Anonymous</span></span>
+        <span class="csRight" *ngIf="complaint.anonymous">
+          <img src="assets/images/mask.png" width="60px">
+          <br>Anonymous
+        </span>
+        <span class="csRight" *ngIf="!complaint.anonymous">
+          <span class="csFont24"><ion-icon name="person"></ion-icon></span>
+          <br>Identical
+        </span>        
         </ion-col>
     </ion-row>
     <div text-center class="csWhiteText "><b style="font-size:20px">{{complaint.studentName}}</b>

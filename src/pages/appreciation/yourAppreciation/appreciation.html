@@ -15,7 +15,7 @@
     <ion-card class="csAppCard">
       <ion-item class="csAppContent">
         <div class="csAppImageBlock">
-          <img class="csAppImg" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS3et-wuRVjdMsc-CUmHR5NQ2bDl5Lpqku0pJ4bo42sqZxg-pDP2g">
+          <img class="csAppImg" [src]="baseUrl + data.studentPicUrl">
         </div>
         <div style="margin:5px">
           <b class="csParagraph">{{data.title}}</b>

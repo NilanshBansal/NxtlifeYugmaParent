@@ -25,7 +25,7 @@
     </ion-row>
     <div text-center class="csWhiteText "><b style="font-size:20px">{{complaint.studentName}}</b>
       <br>Against {{complaint.againstCategoryName}}
-      <p class="csColorDim" >{{complaint.createdAt | amDateFormat: 'DD/MM/YYYY'}}<span *ngIf="complaint.closedOn "> - {{complaint.closedOn | amDateFormat: 'DD/MM/YYYY'}} </span> </p>
+      <div>{{complaint.createdAt | amDateFormat: 'DD/MM/YYYY'}}<span *ngIf="complaint.closedOn "> - {{complaint.closedOn | amDateFormat: 'DD/MM/YYYY'}} </span> </div>
     </div>
     <!-- starting buttons-->
     <ion-row>

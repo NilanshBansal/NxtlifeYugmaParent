@@ -2,20 +2,44 @@
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content id="chat" class="csChatBox csGrayBackground">
-  <ion-list>
-    <div *ngIf="show">
-      Create Date: {{conversation.createdAt | amDateFormat: 'DD/MM/YYYY' }}<br/>
-      Name: {{conversation.againstEmployeeName}}<br/>
-      Category: {{conversation.categoryName}}<br/>
-      Title: {{conversation.title}}<br/>
-      <div>Status: {{conversation.isClosed ? "Closed" : "Open"}}</div><br/>
-      <div *ngIf="conversation.closedOn">Closed Date: {{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</div>
+ 
+    <div class="csShadow" *ngIf="show">    
+      <ion-item no-lines text-center>
+        <b class="csParagraph" >{{conversation.title}}</b>
+      </ion-item>  
+      <ion-item>
+        <ion-icon name="person" class="icon-color2" item-left></ion-icon>
+        <b>Name:</b>
+        <span item-right>{{conversation.againstEmployeeName}}</span>
+      </ion-item>            
+      <ion-item>
+        <ion-icon name="apps" class="icon-color4" item-left></ion-icon>
+        <b>Category:</b>
+        <span item-right>{{conversation.categoryName}}</span>
+      </ion-item>   
+      <ion-item>
+        <ion-icon name="barcode" class="icon-color5" item-left></ion-icon>
+        <b>Status: </b>
+        <span item-right>{{conversation.isClosed ? "Closed" : "Open"}}</span>
+      </ion-item>   
+      <ion-item>
+        <ion-icon name="clock" class="icon-color1" item-left></ion-icon>
+        <b>Created Date:</b>
+        <span item-right>{{conversation.createdAt | amDateFormat: 'DD/MM/YYYY' }}</span>
+      </ion-item>
+      <ion-item *ngIf="conversation.closedOn" no-lines>
+        <ion-icon name="clock" class="icon-color3" item-left></ion-icon>
+        <b>Closed Date:</b>
+        <span item-right>{{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</span>
+      </ion-item>              
     </div>
-    <button ion-button clear (click)="show = !show">
-      <span *ngIf="show">Show</span>
-      <span *ngIf="!show">Hide</span>
+    <button ion-button clear full (click)="show = !show" icon-left>
+       <ion-icon *ngIf="show" name="eye-off"></ion-icon>
+       <ion-icon *ngIf="!show" name="eye"></ion-icon>
+      <span *ngIf="show">Hide Details</span>
+      <span *ngIf="!show">Show Details</span>
     </button>
-  </ion-list>
+ 
   <ion-refresher (ionRefresh)="onPullOldMessages($event)">
     <ion-refresher-content></ion-refresher-content>
    </ion-refresher>

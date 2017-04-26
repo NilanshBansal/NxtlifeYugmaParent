@@ -26,9 +26,9 @@
           checked="false"></ion-checkbox>
         <ion-radio *ngIf="res.optionTypeId == 1" checked="false" value="{{ d.id }}" (click)="singleChoice(i,c,d.id,res.id)"></ion-radio>
       </ion-item>
-      <div padding>
-        <button full ion-button [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
-      </div>
+    <div class="csButtonPadding">
+        <button block ion-button [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
+    </div>
       <ion-item class="csAppFooter csParagraph">
         <div item-left><b>Created at:</b> {{res.createdAt | amDateFormat: 'LL'}}</div>
         <div item-right><b>Closed on:</b> {{res.expiredAt}}</div>

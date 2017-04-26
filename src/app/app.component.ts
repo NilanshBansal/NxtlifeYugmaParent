@@ -6,7 +6,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { SurveyListPage } from '../pages/survey/list/survey-list';
 import { PollPage } from '../pages/poll/poll';
-import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';
 import { ComplaintPage } from '../pages/complaint/complaint';
 import { StudentRating } from '../pages/rating/rating';
@@ -66,7 +65,6 @@ export class MyApp extends UserSessionManage {
     this.pages = [
       { title: 'Home', component: Dashboard, icon: 'assets/icon/home.png', url: 'dashboard' },
       { title: 'Complaints', component: ComplaintPage, icon: 'assets/icon/complaint.png', url: 'complaint' },
-      { title: 'Suggestions', component: SuggestionTabs, icon: 'assets/icon/suggestion.png', url: 'suggestion' },
       { title: 'Appreciations', component: AppreciationTabs, icon: 'assets/icon/appreciation.png', url: 'appreciation' },
       { title: 'Messaging', component: MessagePage, icon: 'assets/icon/message.png', url: 'conversation' },
       { title: 'Events',component: EventComponent , icon: 'assets/icon/event.png', url: 'planner'},

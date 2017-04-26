@@ -23,9 +23,6 @@ import { YourAppreciation } from '../pages/appreciation/yourAppreciation/appreci
 import { ComplaintPage } from '../pages/complaint/complaint';
 import { ReportIssuePage} from '../pages/reportIssue/reportIssue';
 import { SurveyPage} from '../pages/survey/survey';
-import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
-import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestion';
-import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 import { StudentRating } from '../pages/rating/rating';
 import { HomeworkTabs } from '../pages/homework/homeworkTabs';
 import { CurrentHomework } from '../pages/homework/current/homework';
@@ -79,9 +76,6 @@ import { EventService } from '../service/event.service';
     LoginPage,
     PollPage,
     AccountPage,
-    SuggestionTabs,
-    YourSuggestion,
-    SuggestionForYou,
     AppreciationTabs,
     AppreciationForYou,
     YourAppreciation,
@@ -130,9 +124,6 @@ import { EventService } from '../service/event.service';
     LoginPage,
     PollPage,
     AccountPage,
-    SuggestionTabs,
-    YourSuggestion,
-    SuggestionForYou,
     AppreciationTabs,
     AppreciationForYou,
     YourAppreciation,

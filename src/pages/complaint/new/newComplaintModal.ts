@@ -44,10 +44,6 @@ export class newComplaintModal implements OnInit {
 
   }
 
-  complaint = {
-    anonymous: false
-  }
-
   selectChild(student) {
     if (student) {
       this.studentId = student.id;
@@ -88,8 +84,7 @@ export class newComplaintModal implements OnInit {
       category: ['', Validators.required],
       childCategory: ['', Validators.required],
       title: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.maxLength(200)]],
-      anonymous: [false]
+      description: ['', [Validators.required, Validators.maxLength(200)]]
     });
   }
 
@@ -176,8 +171,6 @@ export class newComplaintModal implements OnInit {
     newComplaint = _.pick(newComplaint, function(value, key, object) {
       return _.isNumber(value) || _.isString(value);
     });
-
-    newComplaint.anonymous = this.newComplaint.value.anonymous;
 
     if (newComplaint.childCategory) {
       newComplaint.againstCategoryId = newComplaint.childCategory;

@@ -9,34 +9,31 @@
     <ion-icon name="stats"></ion-icon>
     <br>NO RECORD FOUND
   </ion-list>
-<div *ngFor="let res of resdata ; let i=index">
-  <ion-card [style.border-color]="res.optionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'" class=" csBackgroundGray" radio-group [(ngModel)]="choice1[i][0]" >
-    <ion-list no-border>
-      <ion-item [style.background]="res.optionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'">
-        <ion-icon *ngIf="res.optionTypeName == 'Single Choice'" color="dark" item-left name="checkmark"></ion-icon>
-        <ion-icon *ngIf="res.optionTypeName == 'Multiple Choice'" color="dark" item-left name="done-all"></ion-icon>
-        <div class="csParagraph" color="light"><b>{{res.question}}</b></div>
+  <div *ngFor="let res of resdata ; let i=index">
+    <ion-badge class="csAppBadge csCenter">{{res.employeeName}}</ion-badge>
+    <ion-card class="csAppCard">
+      <ion-item class="csAppContent">
+        <div class="csAppImageBlock">
+          <img class="csAppImg" src="http://storage.theobserver.ca/v1/dynamic_resize/sws_path/suns-prod-images/1297845044765_ORIGINAL.jpg?quality=80&size=650x&stmp=1465510554872">
+        </div>
+        <div style="margin-top:20px">
+          <b class="csParagraph">{{res.question}}</b>
+        </div>
       </ion-item>
-    </ion-list>
-    <ion-list *ngFor="let d of res.subOptions; let c=index">
-      <ion-card class="csSelectOption" >
-        <ion-item >
-          <ion-label item-left>{{d.name}}</ion-label>
-          <ion-radio item-right *ngIf="res.optionTypeId == 1" value="{{ d.id }}" checked (click)="singleChoice(i,c,d.id,res.id)"></ion-radio>
-          <ion-checkbox item-right *ngIf="res.optionTypeId == 2" [(ngModel)]="choice2[i][c]" (click)="buttonEnable(i,c,d.id,res.id)"></ion-checkbox>
-        </ion-item>
-      </ion-card>
-    </ion-list>
-    <div padding>
-      <button   full ion-button [style.background]="res.optionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'" [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
+      <ion-item *ngFor="let d of res.subOptions; let c=index" class="csPaddingLeft50">
+        <ion-label>{{d.name}}</ion-label>
+        <ion-checkbox *ngIf="res.optionTypeId == 2" color="primary" [(ngModel)]="choice2[i][c]" (click)="buttonEnable(i,c,d.id,res.id)"
+          checked="false"></ion-checkbox>
+        <ion-radio *ngIf="res.optionTypeId == 1" checked="false" value="{{ d.id }}" (click)="singleChoice(i,c,d.id,res.id)"></ion-radio>
+      </ion-item>
+    <div class="csButtonPadding">
+        <button block ion-button [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
     </div>
-    <ion-item [style.background]="res.optionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'">
-      <span class="csPollFooter1 csPollFooter" ><b>Start: </b>21/4/2017</span>
-      <span class="csPollFooter2 csPollFooter" ><b>End: </b>{{res.expiredAt}}</span><br>
-      <span class="csPollFooter3 csPollFooter" ><b>By:</b> {{res.employeeUsername}}</span>
-      <span class="csPollFooter4 csPollFooter" ><b>Audience:</b> {{res.typeName}}</span>      
-    </ion-item>    
-
-  </ion-card>
-</div>
+      <ion-item class="csAppFooter csParagraph">
+        <div item-left><b>Created at:</b> {{res.createdAt | amDateFormat: 'LL'}}</div>
+        <div item-right><b>Closed on:</b> {{res.expiredAt}}</div>
+      </ion-item>
+      <ion-badge class="csCenter" *ngIf="res.typeName!='School'">Class: Year1, Year2 (Static)</ion-badge>
+    </ion-card>
+  </div>
 </ion-content>

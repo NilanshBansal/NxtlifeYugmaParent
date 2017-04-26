@@ -17,6 +17,8 @@ import { ViewEvent } from '../event/view/event';
 import { CircularViewComponent } from '../circular/view/circular-view';
 import { newComplaintModal } from '../complaint/new/newComplaintModal';
 import { NewAppreciationModal } from '../appreciation/new/appreciation';
+import { MessagePage } from '../message/message';
+import { AccountPage } from '../account/account';
 
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
@@ -56,7 +58,9 @@ export class Dashboard {
     poll: PollPage,
     homework: HomeworkTabs,
     circular: CircularComponent,
-    survey: SurveyListPage
+    survey: SurveyListPage,
+    messaging: MessagePage,
+    account: AccountPage
   }
 
   constructor(public menuCtrl: MenuController,

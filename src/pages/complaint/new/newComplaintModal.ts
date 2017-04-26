@@ -23,7 +23,7 @@ export class newComplaintModal implements OnInit {
   public childCategories;
   public category;
   public teachers;
-  public againstEmployeeId;
+  // public againstEmployeeId;
   public childCategory;
   public child;
   public title = [];
@@ -87,7 +87,6 @@ export class newComplaintModal implements OnInit {
       student: ['', Validators.required],
       category: ['', Validators.required],
       childCategory: ['', Validators.required],
-      againstEmployeeId: ['', Validators.required],
       title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(200)]],
       anonymous: [false]
@@ -130,9 +129,9 @@ export class newComplaintModal implements OnInit {
       this.removeEmployeeControl();
     } else {
       if (category && category.depth === 1 && category.childCategory.length === 0) {
-        this.newComplaint.addControl('againstEmployeeId', new FormControl('', [Validators.required]));
+        // this.newComplaint.addControl('againstEmployeeId', new FormControl('', [Validators.required]));
         this.removeChildCategoryControl();
-        this.getTeachers();
+        // this.getTeachers();
       } else if(category) {
         if (!this.newComplaint.contains("childCategory")) {
           this.newComplaint.addControl('childCategory', new FormControl('', [Validators.required]));
@@ -151,10 +150,10 @@ export class newComplaintModal implements OnInit {
   }
 
   removeEmployeeControl() {
-    if (this.newComplaint.contains("againstEmployeeId")) {
-      this.newComplaint.removeControl("againstEmployeeId");
-      delete this.teachers;
-    }
+    // if (this.newComplaint.contains("againstEmployeeId")) {
+    //   this.newComplaint.removeControl("againstEmployeeId");
+    //   delete this.teachers;
+    // }
   }
 
   onSubmit() {

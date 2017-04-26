@@ -46,7 +46,6 @@ export class NewMessagePage implements OnInit {
   public loadForm() {
     this.newMessage = this.formBuilder.group({
       categoryId: ['', Validators.required],
-      againstEmployeeId: ['', Validators.required],
       title: ['', [Validators.required, Validators.maxLength(50)]],
       message: ['', [Validators.required, Validators.maxLength(200)]]
     });

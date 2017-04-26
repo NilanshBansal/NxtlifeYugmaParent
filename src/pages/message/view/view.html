@@ -5,7 +5,6 @@
   <ion-list>
     <div *ngIf="show">
       Create Date: {{conversation.createdAt | amDateFormat: 'DD/MM/YYYY' }}<br/>
-      Name: {{conversation.againstEmployeeName}}<br/>
       Category: {{conversation.categoryName}}<br/>
       Title: {{conversation.title}}<br/>
       <div>Status: {{conversation.isClosed ? "Closed" : "Open"}}</div><br/>

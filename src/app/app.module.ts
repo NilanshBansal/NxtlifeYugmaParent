@@ -21,18 +21,12 @@ import { CustomSelect } from '../custom-component/custom-select';
 import { AppreciationForYou } from '../pages/appreciation/appreciationForYou/appreciation';
 import { YourAppreciation } from '../pages/appreciation/yourAppreciation/appreciation';
 import { ComplaintPage } from '../pages/complaint/complaint';
-import { ReportIssuePage} from '../pages/reportIssue/reportIssue';
-import { SurveyPage} from '../pages/survey/survey';
-import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
-import { SuggestionForYou } from '../pages/suggestion/suggestionForYou/suggestion';
-import { YourSuggestion } from '../pages/suggestion/yourSuggestion/suggestion';
 import { StudentRating } from '../pages/rating/rating';
 import { HomeworkTabs } from '../pages/homework/homeworkTabs';
 import { CurrentHomework } from '../pages/homework/current/homework';
 import { PassedHomework } from '../pages/homework/passed/homework';
 import { CircularComponent } from '../pages/circular/circular.component';
 import { CircularViewComponent } from '../pages/circular/view/circular-view';
-import { SurveyListPage } from '../pages/survey/list/survey-list';
 import { MessagePage } from '../pages/message/message';
 import { EventComponent } from '../pages/event/event';
 import { FoodMenu } from '../pages/foodmenu/foodmenu';
@@ -67,7 +61,6 @@ import { CustomService } from '../service/custom.service';
 import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';
 import { CircularService } from '../service/circular.servce';
-import { SurveyService } from '../service/survey.service';
 import { MessageService } from '../service/message.service';
 import { CommonService } from '../service/common.service';
 import { EventService } from '../service/event.service';
@@ -79,15 +72,10 @@ import { EventService } from '../service/event.service';
     LoginPage,
     PollPage,
     AccountPage,
-    SuggestionTabs,
-    YourSuggestion,
-    SuggestionForYou,
     AppreciationTabs,
     AppreciationForYou,
     YourAppreciation,
     ComplaintPage,
-    ReportIssuePage,
-    SurveyPage,
     newComplaintModal,
     ViewComponent,
     ListView,
@@ -105,7 +93,6 @@ import { EventService } from '../service/event.service';
     PassedHomework,
     CircularComponent,
     CircularViewComponent,
-    SurveyListPage,
     CustomSelect,
     ViewComponent,
     NoInternet,
@@ -130,15 +117,10 @@ import { EventService } from '../service/event.service';
     LoginPage,
     PollPage,
     AccountPage,
-    SuggestionTabs,
-    YourSuggestion,
-    SuggestionForYou,
     AppreciationTabs,
     AppreciationForYou,
     YourAppreciation,
     ComplaintPage,
-    ReportIssuePage,
-    SurveyPage,
     newComplaintModal,
     ViewComponent,
     ListView,
@@ -151,7 +133,6 @@ import { EventService } from '../service/event.service';
     CommentModal,
     NewAppreciationModal,
     StudentRating,
-    SurveyListPage,
     HomeworkTabs,
     CurrentHomework,
     PassedHomework,
@@ -169,7 +150,7 @@ import { EventService } from '../service/event.service';
     FoodMenu
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
-              EventService, PollService, HomeworkService, CircularService, SurveyService,
+              EventService, PollService, HomeworkService, CircularService,
               MessageService, CommonService, Camera, File, Transfer, FileChooser, EventService,
               { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
                 return new CustomHttpService(backend, defaultOptions);

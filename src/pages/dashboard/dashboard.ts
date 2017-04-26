@@ -3,7 +3,6 @@ import { NavController, ModalController, App, Events, FabContainer } from 'ionic
 import { MenuController } from 'ionic-angular';
 
 import { PollPage } from '../poll/poll';
-import { SuggestionTabs } from '../suggestion/suggestionTabs';
 import { AppreciationTabs } from '../appreciation/appreciationTabs';
 import { StudentRating} from '../rating/rating';
 import { SurveyPage} from '../survey/survey';
@@ -12,11 +11,12 @@ import { Configuration } from '../../service/app.constants';
 import { EventComponent } from '../event/event';
 import { HomeworkTabs } from '../homework/homeworkTabs';
 import { CircularComponent } from '../circular/circular.component';
-import { SurveyListPage } from '../survey/list/survey-list';
 import { ViewEvent } from '../event/view/event';
 import { CircularViewComponent } from '../circular/view/circular-view';
 import { newComplaintModal } from '../complaint/new/newComplaintModal';
 import { NewAppreciationModal } from '../appreciation/new/appreciation';
+import { MessagePage } from '../message/message';
+import { AccountPage } from '../account/account';
 
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
@@ -49,14 +49,14 @@ export class Dashboard {
 
   public page = {
     complaint: ComplaintPage,
-    suggestion: SuggestionTabs,
     planner: EventComponent,
     appreciation: AppreciationTabs,
     rating: StudentRating,
     poll: PollPage,
     homework: HomeworkTabs,
     circular: CircularComponent,
-    survey: SurveyListPage
+    messaging: MessagePage,
+    account: AccountPage
   }
 
   constructor(public menuCtrl: MenuController,
@@ -65,7 +65,6 @@ export class Dashboard {
               public nl: CustomService,
               public appCtrl: App,
               public events: Events,
-              private surveyService : SurveyService ,
               public modalCtrl: ModalController,
               public eventService: EventService,
               private navCtrl: NavController) {
@@ -133,28 +132,9 @@ export class Dashboard {
     this.appCtrl.getRootNav().setRoot(PollPage);
   }
 
-  public goToSurvey(surveyId) {
-    this.nl.showLoader();
-    this.configuration.setUrl("survey");
-    this.surveyService.getOneSurvey(surveyId).subscribe((res) => {
-      this.nl.hideLoader();
-      this.navCtrl.push(SurveyPage,{
-        objj : res
-      });
-    }, (err) => {
-      this.nl.hideLoader();
-      this.nl.onError(err);
-    });
-  }
-
   public goToCircular(circularId) {
     this.configuration.setUrl("circular");
     this.navCtrl.push(CircularViewComponent, { id : circularId });
-  }
-
-  public openSuveyList() {
-    this.configuration.setUrl("survey");
-    this.appCtrl.getRootNav().setRoot(SurveyListPage);
   }
 
   public openPollList() {

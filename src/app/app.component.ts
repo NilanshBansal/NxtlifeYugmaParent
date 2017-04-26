@@ -4,9 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 // import component
 import { Dashboard } from '../pages/dashboard/dashboard';
-import { SurveyListPage } from '../pages/survey/list/survey-list';
 import { PollPage } from '../pages/poll/poll';
-import { SuggestionTabs } from '../pages/suggestion/suggestionTabs';
 import { AppreciationTabs } from '../pages/appreciation/appreciationTabs';
 import { ComplaintPage } from '../pages/complaint/complaint';
 import { StudentRating } from '../pages/rating/rating';
@@ -61,17 +59,15 @@ export class MyApp extends UserSessionManage {
     this.configuration.setUrl(page.url);
     this.nav.setRoot(page.component);
   }
-
+ 
   sidebarConfig() {
     this.pages = [
       { title: 'Home', component: Dashboard, icon: 'assets/icon/home.png', url: 'dashboard' },
       { title: 'Complaints', component: ComplaintPage, icon: 'assets/icon/complaint.png', url: 'complaint' },
-      { title: 'Suggestions', component: SuggestionTabs, icon: 'assets/icon/suggestion.png', url: 'suggestion' },
       { title: 'Appreciations', component: AppreciationTabs, icon: 'assets/icon/appreciation.png', url: 'appreciation' },
       { title: 'Messaging', component: MessagePage, icon: 'assets/icon/message.png', url: 'conversation' },
       { title: 'Events',component: EventComponent , icon: 'assets/icon/event.png', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'assets/icon/poll.png', url: 'poll' },
-      { title: 'Survey', component: SurveyListPage, icon: 'assets/icon/survey.png', url: 'survey' },
       { title: 'Homework' , component : HomeworkTabs , icon : 'assets/icon/homework.png' , url : 'homework' },
       { title: 'Circular',component : CircularComponent , icon : 'assets/icon/circular.png' , url : 'circular' },
       { title: 'Student Rating', component: StudentRating, icon: 'assets/icon/rating.png', url: 'student-profile' },

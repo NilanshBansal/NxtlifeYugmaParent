@@ -21,7 +21,6 @@ import { CustomSelect } from '../custom-component/custom-select';
 import { AppreciationForYou } from '../pages/appreciation/appreciationForYou/appreciation';
 import { YourAppreciation } from '../pages/appreciation/yourAppreciation/appreciation';
 import { ComplaintPage } from '../pages/complaint/complaint';
-import { ReportIssuePage} from '../pages/reportIssue/reportIssue';
 import { StudentRating } from '../pages/rating/rating';
 import { HomeworkTabs } from '../pages/homework/homeworkTabs';
 import { CurrentHomework } from '../pages/homework/current/homework';
@@ -77,7 +76,6 @@ import { EventService } from '../service/event.service';
     AppreciationForYou,
     YourAppreciation,
     ComplaintPage,
-    ReportIssuePage,
     newComplaintModal,
     ViewComponent,
     ListView,
@@ -123,7 +121,6 @@ import { EventService } from '../service/event.service';
     AppreciationForYou,
     YourAppreciation,
     ComplaintPage,
-    ReportIssuePage,
     newComplaintModal,
     ViewComponent,
     ListView,

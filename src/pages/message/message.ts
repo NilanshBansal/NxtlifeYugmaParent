@@ -8,7 +8,6 @@ import { ViewMessagePage } from './view/view';
 import { CustomService } from '../../service/custom.service';
 import { MessageService } from '../../service/message.service';
 import { AuthService } from '../../service/auth.service';
-import * as _ from 'underscore';
 
 @Component({
   selector: 'message',
@@ -65,8 +64,7 @@ export class MessagePage {
 
   ionViewWillEnter() {
     this.nl.showLoader();
-    this.messageService.getAllMessages(1)
-    .subscribe((res) => {
+    this.messageService.getAllMessages(1).subscribe((res) => {
       if (res.status === 204) {
         this.emptyMessages = true;
       } else {
@@ -81,11 +79,6 @@ export class MessagePage {
   public buildData(data) {
     this.allData = data;
     this.emptyMessages = false;
-    _.forEach(this.allData, (val, index) => {
-      if (val.againstEmployeeName == null) {
-        val.againstEmployeeName = val.firstMessage.employeeName
-      }
-    });
   }
 
   public onError(err) {
@@ -146,11 +139,6 @@ export class MessagePage {
       }
       let data = [];
       data = response;
-      _.forEach(data, (val, index) => {
-        if (val.againstEmployeeName == null) {
-          val.againstEmployeeName = val.firstMessage.employeeName
-        }
-      });
       this.allData = this.allData.concat(data);
       infiniteScroll.complete();
     }, (err) => {

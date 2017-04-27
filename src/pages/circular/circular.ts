@@ -34,11 +34,14 @@ export class Circular {
   }
 
   public viewCircular(id) {
-    // this.navCtrl.push(ViewCircular, {
-    //   id: id
-    // });
-    let createNew = this.modalCtrl.create(ViewCircular, {id: id});
-    createNew.present();
+    this.nl.showLoader();
+    this.circularService.getParticularCirculars(id).subscribe((res) => {
+      this.nl.hideLoader();
+      let createNew = this.modalCtrl.create(ViewCircular, { circular: res });
+      createNew.present();
+    }, (err) => {
+      this.onError(err);
+    });
   }
 
   public doRefresh(refresher) {

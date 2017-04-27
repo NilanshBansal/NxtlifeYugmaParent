@@ -19,16 +19,7 @@ export class ViewCircular {
   }
 
   ionViewWillEnter() {
-    this.id = this.navParams.get('id');
-    this.circularular();
-  }
-
-  public circularular() {
-    this.circserv.getParticularCirculars(this.id).subscribe((res) => {
-      this.circular = res;
-    }, (err) => {
-
-    });
+    this.circular = this.navParams.get('circular');
   }
 
 }

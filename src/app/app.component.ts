@@ -72,7 +72,7 @@ export class MyApp extends UserSessionManage {
       { title: 'Events',component: EventComponent , icon: 'assets/icon/event.png', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'assets/icon/poll.png', url: 'poll' },
       { title: 'Survey', component: SurveyListPage, icon: 'assets/icon/survey.png', url: 'survey' },
-      { title: 'FoodMenu', component: FoodMenu, icon: 'ios-pizza-outline', url: 'food-menu'},
+      { title: 'FoodMenu', component: FoodMenu, icon: 'assets/icon/food.png', url: 'food-menu'},
       { title: 'Homework' , component : HomeworkTabs , icon : 'assets/icon/homework.png' , url : 'homework' },
       { title: 'Circular',component : Circular, icon : 'assets/icon/circular.png' , url : 'circular' },
       { title: 'Student Rating', component: StudentRating, icon: 'assets/icon/rating.png', url: 'student-profile' },

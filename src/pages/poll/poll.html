@@ -26,9 +26,10 @@
       <div class="csButtonPadding">
         <button block ion-button [disabled]="enabllle[i]" (click)="pollMulVoting(poll.id, i, poll)">Vote!</button>
       </div>
-      <ion-item class="csAppFooter csParagraph">
-        <div item-left><b>Created at:</b> {{poll.createdAt | amDateFormat: 'LL'}}</div>
-        <div item-right><b>Closed on:</b> {{poll.expiredAt | amDateFormat: 'LL'}}</div>
+      <ion-item>
+        <div class="csParagraph" text-center>
+          {{poll.createdAt | amDateFormat: 'LL'}}<span *ngIf="poll.expiredAt"> - {{poll.expiredAt | amDateFormat: 'LL'}}</span>
+        </div>
       </ion-item>
       <ion-badge class="csCenter" *ngIf="poll.typeName!='School'">Class: Year1, Year2 (Static)</ion-badge>
     </ion-card>

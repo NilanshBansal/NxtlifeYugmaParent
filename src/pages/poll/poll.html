@@ -2,38 +2,42 @@
   <nl-navbar [title]="title"></nl-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
-  <ion-refresher (ionRefresh)="doRefresh($poll)">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <div *ngFor="let poll of polls; let i = index">
+    <ion-badge class="csAppBadge csCenter">{{poll.employeeName}}</ion-badge>
+    <ion-card class="csAppCard" radio-group [(ngModel)]="choice1[i][0]">
+      <ion-item class="csAppContent">
+        <div class="csAppImageBlock">
+          <img class="csAppImg" [src]="baseUrl + poll.employeePicUrl">
+        </div>
+        <div style="margin-top:20px">
+          <b class="csParagraph">{{poll.question}}</b>
+        </div>
+      </ion-item>
+      <ion-item *ngFor="let d of poll.subOptions; let c = index" class="csPaddingLeft50">
+        <ion-label>{{d.name}}</ion-label>
+        <ion-checkbox *ngIf="poll.optionTypeId == 2" color="primary" [(ngModel)]="choice2[i][c]" (click)="buttonEnable(i, c, d.id,poll.id)" checked="false">
+        </ion-checkbox>
+        <ion-radio *ngIf="poll.optionTypeId == 1" checked="false" value="{{d.id}}" (click)="singleChoice(i, c, d.id, poll.id)">
+        </ion-radio>
+      </ion-item>
+      <div class="csButtonPadding">
+        <button block ion-button [disabled]="enabllle[i]" (click)="pollMulVoting(poll.id, i, poll)">Vote!</button>
+      </div>
+      <ion-item class="csAppFooter csParagraph">
+        <div item-left><b>Created at:</b> {{poll.createdAt | amDateFormat: 'LL'}}</div>
+        <div item-right><b>Closed on:</b> {{poll.expiredAt}}</div>
+      </ion-item>
+      <ion-badge class="csCenter" *ngIf="poll.typeName!='School'">Class: Year1, Year2 (Static)</ion-badge>
+    </ion-card>
+  </div>
   <ion-list class="no-comment" *ngIf="EmptyPolls">
     <ion-icon name="stats"></ion-icon>
     <br>NO RECORD FOUND
   </ion-list>
-  <div *ngFor="let res of resdata ; let i=index">
-    <ion-badge class="csAppBadge csCenter">{{res.employeeName}}</ion-badge>
-    <ion-card class="csAppCard">
-      <ion-item class="csAppContent">
-        <div class="csAppImageBlock">
-          <img class="csAppImg" src="http://storage.theobserver.ca/v1/dynamic_resize/sws_path/suns-prod-images/1297845044765_ORIGINAL.jpg?quality=80&size=650x&stmp=1465510554872">
-        </div>
-        <div style="margin-top:20px">
-          <b class="csParagraph">{{res.question}}</b>
-        </div>
-      </ion-item>
-      <ion-item *ngFor="let d of res.subOptions; let c=index" class="csPaddingLeft50">
-        <ion-label>{{d.name}}</ion-label>
-        <ion-checkbox *ngIf="res.optionTypeId == 2" color="primary" [(ngModel)]="choice2[i][c]" (click)="buttonEnable(i,c,d.id,res.id)"
-          checked="false"></ion-checkbox>
-        <ion-radio *ngIf="res.optionTypeId == 1" checked="false" value="{{ d.id }}" (click)="singleChoice(i,c,d.id,res.id)"></ion-radio>
-      </ion-item>
-    <div class="csButtonPadding">
-        <button block ion-button [disabled]="enabllle[i]" (click)="PollMulVoting(res.id,i,res)">Vote!</button>
-    </div>
-      <ion-item class="csAppFooter csParagraph">
-        <div item-left><b>Created at:</b> {{res.createdAt | amDateFormat: 'LL'}}</div>
-        <div item-right><b>Closed on:</b> {{res.expiredAt}}</div>
-      </ion-item>
-      <ion-badge class="csCenter" *ngIf="res.typeName!='School'">Class: Year1, Year2 (Static)</ion-badge>
-    </ion-card>
-  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

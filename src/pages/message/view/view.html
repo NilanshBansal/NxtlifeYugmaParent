@@ -2,42 +2,27 @@
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content id="chat" class="csChatBox csGrayBackground">
-  <div class="csShadow" *ngIf="show">    
-    <ion-item no-lines text-center>
-      <b class="csParagraph" >{{conversation.title}}</b>
-    </ion-item>  
-    <ion-item>
-      <ion-icon name="person" class="icon-color2" item-left></ion-icon>
-      <b>Name:</b>
-      <span item-right>{{conversation.againstEmployeeName}}</span>
-    </ion-item>            
-    <ion-item>
-      <ion-icon name="apps" class="icon-color4" item-left></ion-icon>
-      <b>Category:</b>
-      <span item-right>{{conversation.categoryName}}</span>
-    </ion-item>   
-    <ion-item>
-      <ion-icon name="barcode" class="icon-color5" item-left></ion-icon>
-      <b>Status: </b>
-      <span item-right>{{conversation.isClosed ? "Closed" : "Open"}}</span>
-    </ion-item>   
-    <ion-item>
-      <ion-icon name="clock" class="icon-color1" item-left></ion-icon>
-      <b>Created Date:</b>
-      <span item-right>{{conversation.createdAt | amDateFormat: 'DD/MM/YYYY' }}</span>
-    </ion-item>
-    <ion-item *ngIf="conversation.closedOn" no-lines>
-      <ion-icon name="clock" class="icon-color3" item-left></ion-icon>
-      <b>Closed Date:</b>
-      <span item-right>{{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</span>
-    </ion-item>              
+ <ion-item class="csShadow" *ngIf="show" no-lines>
+   <div>
+    <b>{{conversation.againstEmployeeName}}: </b> {{conversation.title}}
+   </div>
+  <br>
+  <div>
+    <b>Category:</b> {{conversation.categoryName}}
+    <span class="csRight"><b>Status: </b>{{conversation.isClosed ? "Closed" : "Open"}}</span>
   </div>
-  <button ion-button clear full (click)="show = !show" icon-left>
-    <ion-icon *ngIf="show" name="eye-off"></ion-icon>
-    <ion-icon *ngIf="!show" name="eye"></ion-icon>
-    <span *ngIf="show">Hide Details</span>
-    <span *ngIf="!show">Show Details</span>
-  </button>
+  <br>
+  <div>
+    <b>Created at: </b>{{conversation.createdAt | amDateFormat: 'DD/MM/YYYY' }} 
+    <span class="csRight" *ngIf="conversation.closedOn"><b>Closed at:</b> {{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</span>
+  </div>
+ </ion-item>
+    <button ion-button clear full (click)="show = !show" icon-left>
+       <ion-icon *ngIf="show" name="eye-off"></ion-icon>
+       <ion-icon *ngIf="!show" name="eye"></ion-icon>
+      <span *ngIf="show">Hide Details</span>
+      <span *ngIf="!show">Show Details</span>
+    </button>
  
   <ion-refresher (ionRefresh)="onPullOldMessages($event)">
     <ion-refresher-content></ion-refresher-content>

@@ -6,14 +6,14 @@ import { NavParams,Events} from 'ionic-angular';
 @Component({
 
     selector : 'circular-view',
-    templateUrl : 'circular-view.html',
+    templateUrl : 'view.html',
     styles: [`
 
     `]
 })
 
 
-export class CircularViewComponent implements OnInit{
+export class ViewCircular implements OnInit{
 
     id;
     onecirc = {};

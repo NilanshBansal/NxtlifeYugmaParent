@@ -14,7 +14,7 @@ import { HomeworkTabs } from '../homework/homeworkTabs';
 import { Circular } from '../circular/circular';
 import { SurveyListPage } from '../survey/list/survey-list';
 import { ViewEvent } from '../event/view/event';
-import { CircularViewComponent } from '../circular/view/circular-view';
+import { ViewCircular } from '../circular/view/view';
 import { newComplaintModal } from '../complaint/new/newComplaintModal';
 import { NewAppreciationModal } from '../appreciation/new/appreciation';
 
@@ -149,7 +149,7 @@ export class Dashboard {
 
   public goToCircular(circularId) {
     this.configuration.setUrl("circular");
-    this.navCtrl.push(CircularViewComponent, { id : circularId });
+    this.navCtrl.push(ViewCircular, { id : circularId });
   }
 
   public openSuveyList() {

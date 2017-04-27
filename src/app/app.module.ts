@@ -31,7 +31,7 @@ import { HomeworkTabs } from '../pages/homework/homeworkTabs';
 import { CurrentHomework } from '../pages/homework/current/homework';
 import { PassedHomework } from '../pages/homework/passed/homework';
 import { Circular } from '../pages/circular/circular';
-import { CircularViewComponent } from '../pages/circular/view/circular-view';
+import { ViewCircular } from '../pages/circular/view/view';
 import { SurveyListPage } from '../pages/survey/list/survey-list';
 import { MessagePage } from '../pages/message/message';
 import { EventComponent } from '../pages/event/event';
@@ -104,7 +104,7 @@ import { EventService } from '../service/event.service';
     CurrentHomework,
     PassedHomework,
     Circular,
-    CircularViewComponent,
+    ViewCircular,
     SurveyListPage,
     CustomSelect,
     ViewComponent,
@@ -156,7 +156,7 @@ import { EventService } from '../service/event.service';
     CurrentHomework,
     PassedHomework,
     Circular,
-    CircularViewComponent,
+    ViewCircular,
     CustomSelect,
     ViewComponent,
     NoInternet,

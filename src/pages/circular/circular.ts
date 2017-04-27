@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CircularService } from './../../service/circular.servce';
-import { CircularViewComponent } from './view/circular-view';
+import { ViewCircular } from './view/view';
 import { NavController } from 'ionic-angular';
 import { CustomService } from './../../service/custom.service';
 
@@ -34,7 +34,7 @@ export class Circular {
   }
 
   public viewCircular(id) {
-    this.navCtrl.push(CircularViewComponent, {
+    this.navCtrl.push(ViewCircular, {
       id: id
     });
   }

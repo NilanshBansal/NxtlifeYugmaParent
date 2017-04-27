@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CircularService } from '../../../service/circular.servce';
-import { NavParams, Events } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'circular-view',
@@ -9,16 +8,15 @@ import { NavParams, Events } from 'ionic-angular';
 
 export class ViewCircular {
 
-  id;
-  circular = {};
+  public circular = {};
+  public baseUrl;
+
   public title: string = "View Circular";
 
-  constructor(private circserv: CircularService,
-              private navParams: NavParams) {
-    
-  }
+  constructor(private navParams: NavParams) { }
 
   ionViewWillEnter() {
+    this.baseUrl = localStorage.getItem("fileUrl") + "/";
     this.circular = this.navParams.get('circular');
   }
 

@@ -2,11 +2,11 @@
   <nl-modal-navbar [title]="title" [complaint]="complaint"></nl-modal-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
-  <img class="csAppImg csOnCardImage csCenter" src="http://assembly-sms.co.nz/files/Teacher%20with%20class.jpg">
+  <img class="csAppImg csOnCardImage csCenter" [src]="baseUrl + circular.employeePicUrl">
   <ion-card class="csCardInImage">
     <div class="csBottomShadow">
     <div text-center>
-      <b>{{  circular.employeeName }}</b>
+      <b>{{circular.employeeName}}</b>
     </div>
     <p text-center>
       {{circular.start | amDateFormat: 'LL'}}
@@ -20,7 +20,7 @@
   <ion-card *ngIf="circular.circularTypeName =='Class' ">
     <ion-item>
       <b>Audience: </b> |<span *ngFor="let a of circular.standards">
-      <span> {{a}} |</span>
+        <span> {{a}} |</span>
       </span>
     </ion-item>
   </ion-card>

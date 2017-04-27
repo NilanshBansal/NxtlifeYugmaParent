@@ -3,11 +3,11 @@
   </nl-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
-  <ion-refresher (ionRefresh)="doRefresh($circular)">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item *ngFor="let b of circulars" (click)="ranFunc(b.id)">
+    <ion-item *ngFor="let b of circulars" (click)="viewCircular(b.id)">
       <div class="csIndicator" [style.border-left-color]="b.circularTypeColor">
         <h2><b>{{b.title}}</b></h2>
         <h3>{{b.description}}</h3>

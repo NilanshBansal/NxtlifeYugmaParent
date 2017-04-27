@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CircularService } from './../../service/circular.servce';
 import { CircularViewComponent } from './view/circular-view';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { CustomService } from './../../service/custom.service';
 
 @Component({
@@ -9,60 +9,59 @@ import { CustomService } from './../../service/custom.service';
   templateUrl: 'circular.html'
 })
 
-export class Circular implements OnInit {
+export class Circular {
 
   public circulars = [];
   public title: string = "Circular";
   public allData = [];
-  public EmptyPolls: boolean = false;
+  public EmptyCirculars: boolean = false;
 
-  constructor(private circserv: CircularService,
+  constructor(private circularService: CircularService,
               private navCtrl: NavController,
-              private navparams: NavParams,
               private nl: CustomService) { }
 
-  ngOnInit(): void {
-    this.AllCirculars();
+  ionViewWillEnter() {
+    this.getCirculars();
   }
 
-  AllCirculars() {
+  public getCirculars() {
     this.nl.showLoader();
-    this.circserv.getAllCirculars()
-        .subscribe(response => { this.nl.hideLoader(); this.circulars = response; },
-        err => { this.nl.hideLoader(); console.error(err); },
-        () => console.log('circular response', this.circulars)
-        )
+    this.circularService.getAllCirculars().subscribe((res) => {
+      this.onSuccess(res);
+    }, (err) => {
+      this.onError(err);
+    });
   }
 
-  ranFunc(id) {
+  public viewCircular(id) {
     this.navCtrl.push(CircularViewComponent, {
       id: id
     });
   }
 
-  doRefresh(refresher) {
+  public doRefresh(refresher) {
     setTimeout(() => {
-      this.circserv.getAllCirculars().subscribe((res) => {
+      this.circularService.getAllCirculars().subscribe((res) => {
         this.onSuccess(res);
         refresher.complete();
       }, (err) => {
         refresher.complete();
         this.onError(err);
       });
-    }, 500);
+    });
   }
 
-  onSuccess(res) {
+  public onSuccess(res) {
     this.nl.hideLoader();
     if (res.status === 204) {
-      this.EmptyPolls = true;
+      this.EmptyCirculars = true;
     } else {
-      this.EmptyPolls = false;
-      this.allData = res;
+      this.EmptyCirculars = false;
+      this.circulars = res;
     }
   }
 
-  onError(err) {
+  public onError(err) {
     this.nl.onError(err);
   }
 

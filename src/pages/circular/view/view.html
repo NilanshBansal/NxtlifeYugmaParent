@@ -1,0 +1,27 @@
+<ion-header>
+  <nl-modal-navbar [title]="title" [complaint]="complaint"></nl-modal-navbar>
+</ion-header>
+<ion-content class="csGrayBackground">
+  <img class="csAppImg csOnCardImage csCenter" [src]="baseUrl + circular.employeePicUrl">
+  <ion-card class="csCardInImage">
+    <div class="csBottomShadow">
+    <div text-center>
+      <b>{{circular.employeeName}}</b>
+    </div>
+    <p text-center>
+      {{circular.start | amDateFormat: 'LL'}}
+    </p>
+    </div>
+    <ion-card-content>
+      <div class="csParagraph"><b>{{circular.title }} </b></div>
+      <p class="csParagraph">{{circular.description}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="circular.circularTypeName =='Class' ">
+    <ion-item>
+      <b>Audience: </b> |<span *ngFor="let a of circular.standards">
+        <span> {{a}} |</span>
+      </span>
+    </ion-item>
+  </ion-card>
+</ion-content>

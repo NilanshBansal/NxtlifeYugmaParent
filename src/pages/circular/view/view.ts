@@ -1,41 +1,34 @@
-import { Component,OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CircularService } from '../../../service/circular.servce';
-import { NavParams,Events} from 'ionic-angular';
-
+import { NavParams, Events } from 'ionic-angular';
 
 @Component({
-
-    selector : 'circular-view',
-    templateUrl : 'view.html',
-    styles: [`
-
-    `]
+  selector: 'circular-view',
+  templateUrl: 'view.html'
 })
 
+export class ViewCircular {
 
-export class ViewCircular implements OnInit{
+  id;
+  circular = {};
+  public title: string = "View Circular";
 
-    id;
-    onecirc = {};
+  constructor(private circserv: CircularService,
+              private navParams: NavParams) {
+    
+  }
 
-    constructor(private circserv : CircularService ,
-                private navparams : NavParams ){
+  ionViewWillEnter() {
+    this.id = this.navParams.get('id');
+    this.circularular();
+  }
 
+  public circularular() {
+    this.circserv.getParticularCirculars(this.id).subscribe((res) => {
+      this.circular = res;
+    }, (err) => {
 
-             this.id = navparams.get('id');       
-
-    }
-
-
-    OneCircular(){
-        this.circserv.getParticularCirculars(this.id)
-        .subscribe( response => { this.onecirc = response; },
-                    () => console.log('onecirc',this.onecirc) )
-    }
-
-
-    ngOnInit(){
-        this.OneCircular();
-    }
+    });
+  }
 
 }

@@ -1,27 +1,26 @@
 <ion-header>
-  <nl-navbar [title]="title">
-  </nl-navbar>
+  <nl-modal-navbar [title]="title" [complaint]="complaint"></nl-modal-navbar>
 </ion-header>
 <ion-content class="csGrayBackground">
   <img class="csAppImg csOnCardImage csCenter" src="http://assembly-sms.co.nz/files/Teacher%20with%20class.jpg">
   <ion-card class="csCardInImage">
     <div class="csBottomShadow">
     <div text-center>
-      <b>{{  onecirc.employeeName }}</b>
+      <b>{{  circular.employeeName }}</b>
     </div>
     <p text-center>
-      {{onecirc.start | date:'mediumDate'}}
+      {{circular.start | amDateFormat: 'LL'}}
     </p>
     </div>
     <ion-card-content>
-      <div class="csParagraph"><b>{{onecirc.title }} </b></div>
-      <p class="csParagraph">{{onecirc.description}}</p>
+      <div class="csParagraph"><b>{{circular.title }} </b></div>
+      <p class="csParagraph">{{circular.description}}</p>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="onecirc.circularTypeName =='Class' ">
+  <ion-card *ngIf="circular.circularTypeName =='Class' ">
     <ion-item>
-      <b>Audience: </b> |<span *ngFor="let a of onecirc.standards">
-      <span> {{ a }} |</span>
+      <b>Audience: </b> |<span *ngFor="let a of circular.standards">
+      <span> {{a}} |</span>
       </span>
     </ion-item>
   </ion-card>

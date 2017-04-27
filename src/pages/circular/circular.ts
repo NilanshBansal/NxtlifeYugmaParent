@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CircularService } from './../../service/circular.servce';
 import { ViewCircular } from './view/view';
-import { NavController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 import { CustomService } from './../../service/custom.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class Circular {
   public EmptyCirculars: boolean = false;
 
   constructor(private circularService: CircularService,
-              private navCtrl: NavController,
+              private modalCtrl: ModalController,
               private nl: CustomService) { }
 
   ionViewWillEnter() {
@@ -34,9 +34,11 @@ export class Circular {
   }
 
   public viewCircular(id) {
-    this.navCtrl.push(ViewCircular, {
-      id: id
-    });
+    // this.navCtrl.push(ViewCircular, {
+    //   id: id
+    // });
+    let createNew = this.modalCtrl.create(ViewCircular, {id: id});
+    createNew.present();
   }
 
   public doRefresh(refresher) {

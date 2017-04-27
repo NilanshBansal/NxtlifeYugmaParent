@@ -2,17 +2,10 @@
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content id="chat" class="csChatBox csGrayBackground">
-<<<<<<< HEAD
- 
     <div class="csShadow" *ngIf="show">    
       <ion-item no-lines text-center>
         <b class="csParagraph" >{{conversation.title}}</b>
-      </ion-item>  
-      <ion-item>
-        <ion-icon name="person" class="icon-color2" item-left></ion-icon>
-        <b>Name:</b>
-        <span item-right>{{conversation.againstEmployeeName}}</span>
-      </ion-item>            
+      </ion-item>             
       <ion-item>
         <ion-icon name="apps" class="icon-color4" item-left></ion-icon>
         <b>Category:</b>
@@ -33,15 +26,6 @@
         <b>Closed Date:</b>
         <span item-right>{{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</span>
       </ion-item>              
-=======
-  <ion-list>
-    <div *ngIf="show">
-      Create Date: {{conversation.createdAt | amDateFormat: 'DD/MM/YYYY' }}<br/>
-      Category: {{conversation.categoryName}}<br/>
-      Title: {{conversation.title}}<br/>
-      <div>Status: {{conversation.isClosed ? "Closed" : "Open"}}</div><br/>
-      <div *ngIf="conversation.closedOn">Closed Date: {{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</div>
->>>>>>> 8841babea141b3651303e106d5b042f2c2a5fba4
     </div>
     <button ion-button clear full (click)="show = !show" icon-left>
        <ion-icon *ngIf="show" name="eye-off"></ion-icon>

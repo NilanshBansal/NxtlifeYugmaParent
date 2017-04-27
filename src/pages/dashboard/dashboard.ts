@@ -11,7 +11,7 @@ import { ComplaintPage} from '../complaint/complaint';
 import { Configuration } from '../../service/app.constants';
 import { EventComponent } from '../event/event';
 import { HomeworkTabs } from '../homework/homeworkTabs';
-import { CircularComponent } from '../circular/circular.component';
+import { Circular } from '../circular/circular';
 import { SurveyListPage } from '../survey/list/survey-list';
 import { ViewEvent } from '../event/view/event';
 import { CircularViewComponent } from '../circular/view/circular-view';
@@ -55,7 +55,7 @@ export class Dashboard {
     rating: StudentRating,
     poll: PollPage,
     homework: HomeworkTabs,
-    circular: CircularComponent,
+    circular: Circular,
     survey: SurveyListPage
   }
 

@@ -25,8 +25,8 @@ import { StudentRating } from '../pages/rating/rating';
 import { HomeworkTabs } from '../pages/homework/homeworkTabs';
 import { CurrentHomework } from '../pages/homework/current/homework';
 import { PassedHomework } from '../pages/homework/passed/homework';
-import { CircularComponent } from '../pages/circular/circular.component';
-import { CircularViewComponent } from '../pages/circular/view/circular-view';
+import { Circular } from '../pages/circular/circular';
+import { ViewCircular } from '../pages/circular/view/view';
 import { MessagePage } from '../pages/message/message';
 import { EventComponent } from '../pages/event/event';
 import { FoodMenu } from '../pages/foodmenu/foodmenu';
@@ -91,8 +91,8 @@ import { EventService } from '../service/event.service';
     HomeworkTabs,
     CurrentHomework,
     PassedHomework,
-    CircularComponent,
-    CircularViewComponent,
+    Circular,
+    ViewCircular,
     CustomSelect,
     ViewComponent,
     NoInternet,
@@ -136,8 +136,8 @@ import { EventService } from '../service/event.service';
     HomeworkTabs,
     CurrentHomework,
     PassedHomework,
-    CircularComponent,
-    CircularViewComponent,
+    Circular,
+    ViewCircular,
     CustomSelect,
     ViewComponent,
     NoInternet,

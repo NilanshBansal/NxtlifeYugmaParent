@@ -10,9 +10,10 @@ import { ComplaintPage} from '../complaint/complaint';
 import { Configuration } from '../../service/app.constants';
 import { EventComponent } from '../event/event';
 import { HomeworkTabs } from '../homework/homeworkTabs';
-import { CircularComponent } from '../circular/circular.component';
+import { Circular } from '../circular/circular';
+import { SurveyListPage } from '../survey/list/survey-list';
 import { ViewEvent } from '../event/view/event';
-import { CircularViewComponent } from '../circular/view/circular-view';
+import { ViewCircular } from '../circular/view/view';
 import { newComplaintModal } from '../complaint/new/newComplaintModal';
 import { NewAppreciationModal } from '../appreciation/new/appreciation';
 import { MessagePage } from '../message/message';
@@ -54,9 +55,9 @@ export class Dashboard {
     rating: StudentRating,
     poll: PollPage,
     homework: HomeworkTabs,
-    circular: CircularComponent,
     messaging: MessagePage,
-    account: AccountPage
+    account: AccountPage,
+    circular: Circular
   }
 
   constructor(public menuCtrl: MenuController,
@@ -134,7 +135,7 @@ export class Dashboard {
 
   public goToCircular(circularId) {
     this.configuration.setUrl("circular");
-    this.navCtrl.push(CircularViewComponent, { id : circularId });
+    this.navCtrl.push(ViewCircular, { id : circularId });
   }
 
   public openPollList() {

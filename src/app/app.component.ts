@@ -10,7 +10,7 @@ import { ComplaintPage } from '../pages/complaint/complaint';
 import { StudentRating } from '../pages/rating/rating';
 import { AccountPage } from '../pages/account/account';
 import { HomeworkTabs } from '../pages/homework/homeworkTabs';
-import { CircularComponent } from '../pages/circular/circular.component';
+import { Circular } from '../pages/circular/circular';
 import { UserSessionManage } from '../custom-component/user.session.manage';
 import { MessagePage } from '../pages/message/message';
 import { EventComponent } from '../pages/event/event';
@@ -69,7 +69,7 @@ export class MyApp extends UserSessionManage {
       { title: 'Events',component: EventComponent , icon: 'assets/icon/event.png', url: 'planner'},
       { title: 'Poll', component: PollPage, icon: 'assets/icon/poll.png', url: 'poll' },
       { title: 'Homework' , component : HomeworkTabs , icon : 'assets/icon/homework.png' , url : 'homework' },
-      { title: 'Circular',component : CircularComponent , icon : 'assets/icon/circular.png' , url : 'circular' },
+      { title: 'Circular',component : Circular, icon : 'assets/icon/circular.png' , url : 'circular' },
       { title: 'Student Rating', component: StudentRating, icon: 'assets/icon/rating.png', url: 'student-profile' },
     ];
     this.account = [

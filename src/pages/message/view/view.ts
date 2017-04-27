@@ -94,11 +94,14 @@ export class ViewMessagePage {
         if (!message) {
           return;
         }
+        if (!that.messages) {
+          that.messages = [];
+        }
         that.messages.push(message);
         that.nl.showToast("New Message Received.");
       });
     });
-  }
+  } 
 
   public postMessage() {
     this.notPost = false;

@@ -77,8 +77,11 @@ export class ComplaintPage {
     createNew.present();
   }
 
-  openViewModal(viewData): void {
+  openViewModal(viewData, index): void {
     let openViewModal = this.modalCtrl.create(ViewComponent, {viewData: viewData});
+    openViewModal.onDidDismiss((res) => {
+      this.allData[index] = res;
+    })
     openViewModal.present();
   }
 

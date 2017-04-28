@@ -10,8 +10,8 @@
     <button ion-fab (click)="createNew()" color="cool"> <ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item-sliding *ngFor="let suggestion of allData" #slidingItem>
-      <a ion-item detail-push detail-none href="#" (click)="openViewModal(suggestion)" [style.border-left-color]="suggestion.statusColor">
+    <ion-item-sliding *ngFor="let suggestion of allData; let i = index" #slidingItem>
+      <a ion-item detail-push detail-none href="#" (click)="openViewModal(suggestion, i)" [style.border-left-color]="suggestion.statusColor">
         <nl-list-view [complaint]="suggestion"></nl-list-view>
       </a>
       <ion-item-options side="right">

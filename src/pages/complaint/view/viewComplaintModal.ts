@@ -50,7 +50,7 @@ export class ViewComponent extends EditComplaintStatusAndComment implements OnIn
         if (!message) {
           return;
         }
-        console.log("SASASASA", message)
+        that.complaint = message;
       });
     });
   }

@@ -9,8 +9,8 @@
     <button ion-fab (click)="createNew()" color="cool"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-list>
-    <ion-item-sliding *ngFor="let data of allData" #slidingItem>
-      <a ion-item detail-push detail-none href="#" (click)="openViewModal(data)" [style.border-left-color]="data.statusColor">
+    <ion-item-sliding *ngFor="let data of allData; let i = index" #slidingItem>
+      <a ion-item detail-push detail-none href="#" (click)="openViewModal(data, i)" [style.border-left-color]="data.statusColor">
         <nl-list-view [complaint]="data"></nl-list-view>
       </a>
       <ion-item-options side="right">

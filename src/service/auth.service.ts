@@ -106,13 +106,11 @@ export class AuthService {
       url = this.actionUrl + "/parent/" + this.id + "/picture";
     }
 
-    return fileTransfer.upload(image, url, options, false)
-                       .then((result: any) => {
-                         // alert(result);
-                         return result;
-                       }).catch((error: any) => {
-                         alert("err" + JSON.stringify(error));
-                       }); 
+    return fileTransfer.upload(image, url, options, false).then((result: any) => {
+            return JSON.parse(result.response);
+          }).catch((error: any) => {
+          //  alert("err" + JSON.stringify(error));
+          }); 
   }
 
   private extractData(res: Response) {

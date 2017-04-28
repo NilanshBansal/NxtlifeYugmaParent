@@ -132,6 +132,8 @@ export class AccountPage {
     this.appService.uploadPic(image, null).then((res) => {
       this.showLoader = false;
       this.events.publish("user:image", image);
+      localStorage.setItem("picTimestamp", res.fileTimestamp);
+      localStorage.setItem("picOriginalName", res.fileOriginalName);
     }, (err) => {
       this.showLoader = false;
       this.nl.errMessage();

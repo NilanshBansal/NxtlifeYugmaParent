@@ -160,9 +160,21 @@ export class ViewMessagePage {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     }).then((imagedata)=> {
       this.base64Image = 'data:image/jpeg;base64,' + imagedata;
-      this.appService.uploadPic(this.base64Image, null).then((res) => {
-      })
+      this.notPost = false;
+      this.messages.push({
+        image: this.base64Image,
+        createdAt: new Date(),
+        employeeId: null,
+        parentName: localStorage.getItem("id")
+      });
+      this.messageService.uploadPic(this.base64Image, this.id).then((res) => {
+        this.notPost = true;
+        this.content.scrollToBottom(300);
+      }, (err) => {
+        // this.notPost = true;
+      });
     },(err) => {
+      
     });
   }
 
@@ -180,11 +192,16 @@ export class ViewMessagePage {
       this.messages.push({
         image: this.base64Image,
         createdAt: new Date(),
-        employeeName: localStorage.getItem("id"),
-        parentName: null
+        employeeId: null,
+        parentName: localStorage.getItem("id")
       });
-      this.appService.uploadPic(this.base64Image, null).then((res) => {
+      this.messageService.uploadPic(this.base64Image, this.id).then((res) => {
         this.notPost = true;
+        this.content.scrollToBottom(300);
+        alert("suc " + JSON.parse(res));
+      }, (err) => {
+        alert("err " + JSON.stringify(err));
+        // this.notPost = true;
       });
     },(err) => {
     });

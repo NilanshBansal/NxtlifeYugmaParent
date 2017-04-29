@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, Renderer, ElementRef, ViewChild } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ViewController, ToastController, NavParams, Content } from 'ionic-angular';
 
@@ -6,7 +6,6 @@ import { ViewController, ToastController, NavParams, Content } from 'ionic-angul
 import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/custom.service';
 import { AuthService } from '../service/auth.service';
-import * as _ from 'underscore';
 
 @Component({
   selector: 'comment',

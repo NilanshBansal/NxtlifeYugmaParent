@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, Events, ActionSheetController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
-import { Transfer , TransferObject } from  '@ionic-native/transfer';
+import { Transfer } from  '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { AuthService } from '../../service/auth.service';
 import { CustomService } from '../../service/custom.service';
 import { CommonService } from '../../service/common.service';
-import * as _ from 'underscore';
 
 @Component({
   selector: 'page-account',

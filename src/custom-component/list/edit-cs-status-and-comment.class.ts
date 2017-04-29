@@ -32,6 +32,11 @@ export class EditComplaintStatusAndComment {
 
   complaintReopen(complaint, data) {
     this.nl.showLoader();
+    if (complaint.anonymous) {
+      data["anonymous"] = true;
+    } else {
+      data["anonymous"] = false;
+    }
     this.c.reopenComplaint(complaint.id, data).subscribe((res) => {
       this.onSuccess(res);
     }, (err) => {
@@ -41,6 +46,11 @@ export class EditComplaintStatusAndComment {
 
   complaintClose(complaint, reason) {
     this.nl.showLoader();
+    if (complaint.anonymous) {
+      reason["anonymous"] = true;
+    } else {
+      reason["anonymous"] = false;
+    }
     this.c.closeComplaint(complaint.id, reason).subscribe((res) => {
       if (res) {
         this.onSuccess(res);

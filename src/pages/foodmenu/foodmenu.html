@@ -11,8 +11,23 @@
       <br>No Content
     </ion-list>   
     <section>
-      <div class="timeline-row">     
-        <div class="cd-timeline-content dark" *ngFor="let a of selectedDate.events; let i = index">
+      <div class="timeline-row">  
+        <div *ngFor="let a of selectedDate.events; let i = index">
+        <ion-item>
+          <ion-avatar item-left>
+            <img [src]="a.breakfastFoodUrl">
+          </ion-avatar>
+          <h2><b>Lunch </b> {{a.title}}</h2>
+        </ion-item>
+        <ion-item>
+          <ion-avatar item-left>
+            <img [src]="a.lunchFoodUrl">
+          </ion-avatar>
+          <h2><b>Break Fast</b> {{a.breakfastFood}}</h2>
+        </ion-item>
+        </div>
+<!--
+        <div class="cd-timeline-content dark" >
           <div>
             <h5 class="timeline-title"><b>LunchFood </b> {{a.title}}</h5>
             <ion-avatar>
@@ -23,11 +38,11 @@
               <img [src]="a.breakfastFoodUrl" width="100" height="100" style="border: 1px solid;border-radius: 50%;">
             </ion-avatar>
           </div>
-        </div>
+        </div>-->
       </div>
     </section>
   </template>
-  <calendar class="csEvent" [eventSource]="eventSource"
+  <calendar class="csEvent foodmenu" [eventSource]="eventSource"
         [calendarMode]="calendar.mode"
         [currentDate]="calendar.currentDate"
         (onCurrentDateChanged)="onCurrentDateChanged($event)"

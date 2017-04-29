@@ -8,6 +8,7 @@ import { EditComplaintStatusAndComment } from '../../../custom-component/list/ed
 // import service
 import { CustomService } from '../../../service/custom.service';
 import { ComplaintSuggestion } from '../../../service/cs.service';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'nl-view',
@@ -26,6 +27,7 @@ export class ViewComponent extends EditComplaintStatusAndComment implements OnIn
               public actionSheetCtrl: ActionSheetController,
               public alertCtrl: AlertController,
               private navParams: NavParams,
+              public appService: AuthService,
               private viewCtrl: ViewController) {
     super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
   }
@@ -34,6 +36,23 @@ export class ViewComponent extends EditComplaintStatusAndComment implements OnIn
     this.baseUrl = localStorage.getItem("fileUrl") + "/";
     this.title = "VIEW " + this.nl.getHeaderText();
     this.complaint = this.navParams.get('viewData');
+    this.sockJsConnection();
+  }
+
+  public sockJsConnection() {
+    let stompClient = this.appService.getSockJs();
+    let tmp = this.nl.getHeaderText();
+    let url = '/parent/'+ tmp + '/' + this.complaint.id + '/close';
+    let that = this;
+    stompClient.connect({}, function (frame) {
+      stompClient.subscribe(url, function (greeting) {
+        let message = JSON.parse(greeting.body);
+        if (!message) {
+          return;
+        }
+        that.complaint = message;
+      });
+    });
   }
 
   dismiss() {

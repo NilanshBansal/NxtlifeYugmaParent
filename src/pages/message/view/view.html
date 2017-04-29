@@ -2,9 +2,10 @@
   <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
 </ion-header>
 <ion-content id="chat" class="csChatBox csGrayBackground">
-    <div class="csShadow" *ngIf="show">    
+  <ion-item class="csShadow" *ngIf="show" no-lines>
+    <div>    
       <ion-item no-lines text-center>
-        <b class="csParagraph" >{{conversation.title}}</b>
+        <b>{{conversation.title}}</b>
       </ion-item>
       <ion-item>
         <ion-icon name="apps" class="icon-color4" item-left></ion-icon>
@@ -27,19 +28,31 @@
         <span item-right>{{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</span>
       </ion-item>              
     </div>
-    <button ion-button clear full (click)="show = !show" icon-left>
-       <ion-icon *ngIf="show" name="eye-off"></ion-icon>
-       <ion-icon *ngIf="!show" name="eye"></ion-icon>
-      <span *ngIf="show">Hide Details</span>
-      <span *ngIf="!show">Show Details</span>
-    </button>
- 
+    <br>
+    <div>
+      <b>Category:</b> {{conversation.categoryName}}
+      <span class="csRight"><b>Status: </b>{{conversation.isClosed ? "Closed" : "Open"}}</span>
+    </div>
+    <br>
+    <div>
+      <b>Created at: </b>{{conversation.createdAt | amDateFormat: 'DD/MM/YYYY' }}
+      <span class="csRight" *ngIf="conversation.closedOn"><b>Closed at:</b> {{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</span>
+    </div>
+  </ion-item>
+  <button ion-button clear full (click)="show = !show" icon-left>
+    <ion-icon *ngIf="show" name="eye-off"></ion-icon>
+    <ion-icon *ngIf="!show" name="eye"></ion-icon>
+    <span *ngIf="show">Hide Details</span>
+    <span *ngIf="!show">Show Details</span>
+  </button>
+
   <ion-refresher (ionRefresh)="onPullOldMessages($event)">
     <ion-refresher-content></ion-refresher-content>
-   </ion-refresher>
+  </ion-refresher>
   <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}" no-margin>
     <div class="csMyComment">
-      <h3>{{ m.message }}</h3>
+      <h3 *ngIf="!m.fileName">{{ m.message }}</h3>
+      <img *ngIf="m.fileName" [src]="baseUrl + m.message">
     </div>
     <!--<img class="csChatImage avt" *ngIf="m.parentName != null" src="http://footage.framepool.com/shotimg/608711393-dibujo-papel-escolar-aula-de-clases.jpg">-->
     <div class="csCommentTime">{{m.employeeName}} {{ m.createdAt | amCalendar }}</div>
@@ -51,11 +64,16 @@
     <ion-grid>
       <ion-row>
         <ion-fab left bottom (click)="openImageActionSheet()">
-          <button style="border:2px solid white" ion-fab color="cool" mini><ion-icon name="attach" ></ion-icon></button>
+          <button style="border:2px solid white" ion-fab color="cool" mini>
+            <ion-icon name="attach" ></ion-icon>
+          </button>
         </ion-fab>
-        <ion-textarea rows="2" class="csCommentInput csMessageText" type="text" formControlName="message" placeholder="Write message..."></ion-textarea>
+        <ion-textarea rows="2" class="csCommentInput csMessageText" type="text" formControlName="message" placeholder="Write message...">
+        </ion-textarea>
         <ion-fab right bottom (click)="postMessage()">
-          <button style="border:2px solid white" ion-fab color="cool" mini [disabled]="commentForm.invalid || !notPost"><ion-icon name="md-send" ></ion-icon></button>
+          <button style="border:2px solid white" ion-fab color="cool" mini [disabled]="commentForm.invalid || !notPost">
+            <ion-icon name="md-send" ></ion-icon>
+          </button>
         </ion-fab>
       </ion-row>
     </ion-grid>

@@ -68,8 +68,8 @@ export class FoodMenu {
     data.forEach((val, index) => {
       tmp.push({
         id: val.id,
-        startTime: moment(val.start).toDate(),
-        endTime: moment(val.start).toDate(),
+        startTime: moment(val.day).toDate(),
+        endTime: moment(val.day).toDate(),
         title: val.lunchFood,
         lunchFoodUrl: val.lunchFoodUrl,
         allDay: false,

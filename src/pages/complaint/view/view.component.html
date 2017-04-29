@@ -9,30 +9,29 @@
       <ion-icon name="at"></ion-icon> {{complaint.statusName}}
     </span>
   </div>
-    <ion-row>
-      <ion-col text-center width-33 class="csPaddingWhite">
-        <span class="csFont24">{{complaint.commentCount}}</span> <br>Comments
+  <ion-row>
+    <ion-col text-center width-33 class="csPaddingWhite">
+      <span class="csFont24">{{complaint.commentCount}}</span> <br>Comments
+    </ion-col>
+    <ion-col>
+      <div (click)="parentInfo()" tappable style="padding-top:5px">
+        <img name="contact" class="csAvatarImage csCenter" [src]="baseUrl + complaint.studentPicUrl">
+      </div>
+    </ion-col>
+    <ion-col  width-33 text-center class="csPaddingWhite">
+      <span class="csRight" *ngIf="complaint.anonymous">
+        <img src="assets/images/mask.png" width="60px">
+        <br>Anonymous
+      </span>
+      <span class="csRight" *ngIf="!complaint.anonymous">
+        <span class="csFont24"><ion-icon name="person"></ion-icon></span>
+        <br>Identical
+      </span>        
       </ion-col>
-      <ion-col>
-        <div (click)="parentInfo()" tappable style="padding-top:5px">
-          <img name="contact" class="csAvatarImage csCenter" [src]="baseUrl + complaint.studentPicUrl">
-        </div>
-      </ion-col>
-      <ion-col  width-33 text-center class="csPaddingWhite">
-        <span class="csRight" *ngIf="complaint.priorityName"><span class="csFont24" >{{complaint.priorityName}}</span> <br>Priority</span>
-        <span class="csRight" *ngIf="complaint.anonymous">
-          <img src="assets/images/mask.png" width="60px">
-          <br>Anonymous
-        </span>
-        <span class="csRight" *ngIf="!complaint.anonymous">
-          <span class="csFont24"><ion-icon name="person"></ion-icon></span>
-          <br>Identical
-        </span>        
-        </ion-col>
     </ion-row>
     <div text-center class="csWhiteText "><b style="font-size:20px">{{complaint.studentName}}</b>
       <br>Against {{complaint.againstCategoryName}}
-      <div>{{complaint.createdAt | amDateFormat: 'DD/MM/YYYY'}}<span *ngIf="complaint.closedOn "> - {{complaint.closedOn | amDateFormat: 'DD/MM/YYYY'}} </span> </div>
+      <div>{{complaint.createdAt | amDateFormat: 'LL'}}<span *ngIf="complaint.closedOn "> - {{complaint.closedOn | amDateFormat: 'LL'}} </span> </div>
     </div>
     <!-- starting buttons-->
     <ion-row>

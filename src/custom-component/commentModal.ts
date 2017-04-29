@@ -5,6 +5,8 @@ import { ViewController, ToastController, NavParams, Content } from 'ionic-angul
 // import service
 import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/custom.service';
+import { AuthService } from '../service/auth.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'comment',
@@ -21,7 +23,7 @@ import { CustomService } from '../service/custom.service';
     <div class="csMyComment">
       <h3>{{ m.comment }}</h3>
     </div>
-    <div class="csCommentTime">{{m.employeeNickName}}{{m.parentName}} {{ m.createdAt | amCalendar }}</div>
+    <div class="csCommentTime">{{m.employeeNickName}} {{ m.createdAt | amCalendar }}</div>
   </div>
   <ion-spinner class="loader" name="dots" *ngIf="!notPost"></ion-spinner>
 </ion-content>
@@ -36,7 +38,6 @@ import { CustomService } from '../service/custom.service';
           <button style="width: 50px !important;" class="csCommentSend" color="primary" ion-button icon-only item-right type="submit" [disabled]="commentForm.invalid || !notPost">
             <ion-icon name="md-send" role="img"></ion-icon>
           </button>
-          
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -70,14 +71,37 @@ export class CommentModal {
               private navParams: NavParams,
               private renderer: Renderer,
               private elementRef: ElementRef,
+              public appService: AuthService,
               private toastCtrl: ToastController) {
     this.initForm();
     this.getData();
+    this.sockJsConnection();
+  }
+
+  public sockJsConnection() {
+    let stompClient = this.appService.getSockJs();
+    let tmp = this.nl.getHeaderText();
+    let url = '/parent/'+ tmp +'/'+ this.data.id +'/comment';
+    let that = this;
+    stompClient.connect({}, function (frame) {
+      stompClient.subscribe(url, function (greeting) {
+        let message = JSON.parse(greeting.body);
+        if (!message) {
+          return;
+        }
+        that.emptyComments = false;
+        if (!that.comments) {
+          that.comments = [];
+        }
+        that.comments.push(message);
+      });
+    });
   }
 
   initForm() {
     this.commentForm = new FormGroup({
-      comment: new FormControl('', [Validators.required])
+      comment: new FormControl('', [Validators.required]),
+      anonymous: new FormControl(false)
     });
   }
 
@@ -87,9 +111,13 @@ export class CommentModal {
     if (data.status === 204) {
       this.emptyComments = true;
     } else {
+      this.emptyComments = false;
       this.comments = data;
     }
     this.data = this.navParams.get("data");
+    if (this.data.anonymous) {
+      this.commentForm.patchValue({"anonymous": true});
+    }
   }
 
   ionViewDidEnter() {

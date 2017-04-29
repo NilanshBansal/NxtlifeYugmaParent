@@ -5,6 +5,7 @@ import { Transfer , TransferObject } from  '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { AuthService } from '../../service/auth.service';
 import { CustomService } from '../../service/custom.service';
+import { CommonService } from '../../service/common.service';
 import * as _ from 'underscore';
 
 @Component({
@@ -38,6 +39,7 @@ export class AccountPage {
               public events: Events,
               public nl: CustomService,
               public appService: AuthService,
+              public commonService: CommonService,
               public actionSheetCtrl: ActionSheetController) {
   }
 
@@ -132,6 +134,8 @@ export class AccountPage {
     this.appService.uploadPic(image, null).then((res) => {
       this.showLoader = false;
       this.events.publish("user:image", image);
+      localStorage.setItem("picTimestamp", res.fileTimestamp);
+      localStorage.setItem("picOriginalName", res.fileOriginalName);
     }, (err) => {
       this.showLoader = false;
       this.nl.errMessage();
@@ -172,6 +176,13 @@ export class AccountPage {
       student.baseUrl = 'data:image/jpeg;base64,';
       student.picTimestamp = imagedata;
       this.appService.uploadPic(image, student.id).then((res) => {
+        this.students.forEach((val, index) => {
+          if (val.id === student.id) {
+            val["picTimestamp"] = res.fileTimestamp;
+            val["picOriginalName"] = res.fileOriginalName;
+          }
+        });
+        this.commonService.storeData("students", this.students);
       }, (err) => {
         this.showLoader = false;
         this.nl.errMessage();

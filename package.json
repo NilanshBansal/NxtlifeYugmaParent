@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "Yugma-Parent",
+  "author": "NxtLife Team",
+  "homepage": "http://www.nxtlifetechnologies.com/",
   "private": true,
   "scripts": {
     "build": "ionic-app-scripts build",
@@ -55,5 +55,5 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "description": "nxtlife: An Ionic project"
+  "description": "Yugma is a school quality management App for schools and provides a better interface between parent and teachers."
 }

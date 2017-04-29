@@ -28,11 +28,9 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div class="message-box csTransparent" *ngFor="let m of messages" [ngClass]="{'mine': m.parentName != null}" no-margin>
-    <div class="csMyComment" *ngIf="m.message">
-      <h3>{{ m.message }}</h3>
-    </div>
-    <div class="csMyComment" *ngIf="m.image">
-      <img [src]="m.image">
+    <div class="csMyComment">
+      <h3 *ngIf="!m.fileName">{{ m.message }}</h3>
+      <img *ngIf="m.fileName" [src]="baseUrl + m.message">
     </div>
     <!--<img class="csChatImage avt" *ngIf="m.parentName != null" src="http://footage.framepool.com/shotimg/608711393-dibujo-papel-escolar-aula-de-clases.jpg">-->
     <div class="csCommentTime">{{m.employeeName}} {{ m.createdAt | amCalendar }}</div>

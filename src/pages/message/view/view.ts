@@ -33,6 +33,7 @@ export class ViewMessagePage {
   userImage;
   isClosed: boolean = false;
   conversation;
+  baseUrl;
   show = true;
 
   @ViewChild(Content) content: Content;
@@ -66,6 +67,7 @@ export class ViewMessagePage {
   public getData() { 
     this.messages = this.navParams.get('messages').reverse();
     this.conversation = this.navParams.get("conversation");
+    this.baseUrl = localStorage.getItem("fileUrl") + "/";
     this.id = this.conversation.id;
     this.isClosed = this.conversation.isClosed;
     this.headerTitle = this.conversation.title;

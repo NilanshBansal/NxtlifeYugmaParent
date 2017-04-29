@@ -19,18 +19,27 @@
       </div>
     </ion-col>
     <ion-col  width-33 text-center class="csPaddingWhite">
-      <span class="csRight" *ngIf="complaint.anonymous">
+      <!--<span class="csRight" *ngIf="complaint.anonymous">
         <img src="assets/images/mask.png" width="60px">
         <br>Anonymous
       </span>
       <span class="csRight" *ngIf="!complaint.anonymous">
         <span class="csFont24"><ion-icon name="person"></ion-icon></span>
         <br>Identical
-      </span>        
+      </span>        -->
+      <!--<span class="csRight" *ngIf="complaint.anonymous">
+        <img src="assets/images/mask.png" width="60px">
+        <br>Anonymous
+      </span>-->
+      <span class="csRight">
+        <span class="csFont24"><ion-icon name="md-male"></ion-icon></span>
+        <br> {{complaint.againstCategoryName}}
+      </span>  
       </ion-col>
     </ion-row>
     <div text-center class="csWhiteText "><b style="font-size:20px">{{complaint.studentName}}</b>
-      <br>Against {{complaint.againstCategoryName}}
+      <br>
+      <!--Against {{complaint.againstCategoryName}}-->
       <div>{{complaint.createdAt | amDateFormat: 'LL'}}<span *ngIf="complaint.closedOn "> - {{complaint.closedOn | amDateFormat: 'LL'}} </span> </div>
     </div>
     <!-- starting buttons-->

@@ -66,7 +66,7 @@ import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/custom.service';
 import { PollService } from '../service/poll.service';
 import { HomeworkService } from '../service/homework.service';
-import { CircularService } from '../service/circular.servce';
+import { CircularService } from '../service/circular.service';
 import { SurveyService } from '../service/survey.service';
 import { MessageService } from '../service/message.service';
 import { CommonService } from '../service/common.service';

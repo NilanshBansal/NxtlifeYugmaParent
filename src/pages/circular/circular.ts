@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CircularService } from './../../service/circular.servce';
+import { CircularService } from './../../service/circular.service';
 import { ViewCircular } from './view/view';
 import { ModalController } from 'ionic-angular';
 import { CustomService } from './../../service/custom.service';

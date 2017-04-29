@@ -4,15 +4,6 @@ import { ModalController} from 'ionic-angular';
 import { CustomService } from '../../../service/custom.service';
 import { ViewEvent } from '../view/event';
 
-const colors: any = {
-  red   : '#F44336',
-  blue  : '#52a9ff',
-  yellow: '#ffa000',
-  orange: '#FF9800',
-  green : '#4CAF50',
-  purple: '#F454e3'
-};
-
 @Component({
 	selector: 'timeline-view',
 	templateUrl : 'timeline.html'

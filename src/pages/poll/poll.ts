@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PollService } from '../../service/poll.service';
 import * as _ from 'underscore';
 import { CustomService } from '../../service/custom.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'page-about',

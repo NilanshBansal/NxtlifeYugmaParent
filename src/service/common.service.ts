@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Response } from '@angular/http';
 import { CustomHttpService } from './default.header.service';
 import { Configuration } from './app.constants';
 

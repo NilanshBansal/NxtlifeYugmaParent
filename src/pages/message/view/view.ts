@@ -1,17 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ViewController, NavParams, Content, ToastController, ActionSheetController } from 'ionic-angular';
+import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { NavParams, Content, ToastController, ActionSheetController } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../../service/custom.service';
 import { MessageService } from '../../../service/message.service';
-import { ParentInfo } from '../../../service/parentInfo';
 import { CommonService } from '../../../service/common.service'; 
 import { AuthService } from '../../../service/auth.service';
 import { Camera } from '@ionic-native/camera';
-import { Transfer , TransferObject } from  '@ionic-native/transfer';
+import { Transfer } from  '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
-import * as _ from 'underscore';
 
 @Component({
   selector: 'view-message',

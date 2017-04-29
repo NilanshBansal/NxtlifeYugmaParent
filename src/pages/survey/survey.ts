@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { SurveyService } from '../../service/survey.service';
 import { NavParams,ToastController ,NavController , Events,  ActionSheetController ,ViewController} from 'ionic-angular';
-import { Validators , FormGroup ,FormControl , FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import * as _ from 'underscore';
 
 @Component({

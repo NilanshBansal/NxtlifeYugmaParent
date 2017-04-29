@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ViewController, ToastController, ActionSheetController } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { ViewController, ActionSheetController } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../../service/custom.service';

@@ -5,13 +5,11 @@ import { MenuController } from 'ionic-angular';
 import { PollPage } from '../poll/poll';
 import { AppreciationTabs } from '../appreciation/appreciationTabs';
 import { StudentRating} from '../rating/rating';
-import { SurveyPage} from '../survey/survey';
 import { ComplaintPage} from '../complaint/complaint';
 import { Configuration } from '../../service/app.constants';
 import { EventComponent } from '../event/event';
 import { HomeworkTabs } from '../homework/homeworkTabs';
 import { Circular } from '../circular/circular';
-import { SurveyListPage } from '../survey/list/survey-list';
 import { ViewEvent } from '../event/view/event';
 import { ViewCircular } from '../circular/view/view';
 import { newComplaintModal } from '../complaint/new/newComplaintModal';
@@ -22,7 +20,6 @@ import { AccountPage } from '../account/account';
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
 import { EventService } from '../../service/event.service';
-import { SurveyService } from '../../service/survey.service';
 
 @Component({
   selector: 'page-dashboard',
@@ -42,9 +39,7 @@ export class Dashboard {
   public dash_data = {
     planner: [],
     openPoll: [],
-    surveys: [],
     circular: [],
-    surveyCount: "",
     pollCount: ""
   }
 
@@ -97,9 +92,7 @@ export class Dashboard {
     this.dash_data = {
       planner: data.planner,
       openPoll: data.poll,
-      surveys: data.survey,
       circular: data.circular,
-      surveyCount: data.surveyCount,
       pollCount : data.pollCount
     }
   }

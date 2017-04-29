@@ -62,29 +62,6 @@
     </ion-list>
   </ion-list>
   <ion-list>
-    <ion-list-header *ngIf="dash_data.surveys.length > 0">
-      Survey
-      <ion-badge>{{dash_data.surveyCount}}</ion-badge>
-    </ion-list-header>
-    <ion-list inset>
-      <ion-item *ngFor="let a of dash_data.surveys" (click)="goToSurvey(a.surveyId)">
-        <h2><b>{{a.title}}</b></h2>
-        <h3>{{a.description}}</h3>
-        <ion-note>
-          <ion-row>
-            <ion-col width-50 class="no-padding-l" style="color:#535353;">
-              <ion-icon name="clock"></ion-icon><span>{{a.createdAt | amDateFormat: 'DD/MM/YYYY'}}</span>
-            </ion-col>
-            <ion-col width-50 class="no-padding-l">
-              <ion-icon name="at"></ion-icon><span>{{a.typeName}}</span>
-            </ion-col>
-          </ion-row>
-        </ion-note>
-      </ion-item>
-      <button class="csRight" ion-button item-right round small *ngIf="dash_data.surveyCount > 2" (click)="openSuveyList()">View All</button>
-    </ion-list>
-  </ion-list>
-  <ion-list>
     <ion-list-header *ngIf="dash_data.circular.length > 0">
       Circular
     </ion-list-header>

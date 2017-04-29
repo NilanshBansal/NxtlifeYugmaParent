@@ -13,32 +13,13 @@
     <section>
       <div class="timeline-row">  
         <div *ngFor="let a of selectedDate.events; let i = index">
-        <ion-item>
-          <ion-avatar item-left>
-            <img [src]="a.breakfastFoodUrl">
-          </ion-avatar>
-          <h2><b>Lunch </b> {{a.title}}</h2>
-        </ion-item>
-        <ion-item>
-          <ion-avatar item-left>
-            <img [src]="a.lunchFoodUrl">
-          </ion-avatar>
-          <h2><b>Break Fast</b> {{a.breakfastFood}}</h2>
-        </ion-item>
+          <ion-item>
+            <ion-avatar item-left>
+              <img [src]="a.foodPicUrl">
+            </ion-avatar>
+            <h2><b>{{a.title}}: </b> {{a.foodName}}</h2>
+          </ion-item>
         </div>
-<!--
-        <div class="cd-timeline-content dark" >
-          <div>
-            <h5 class="timeline-title"><b>LunchFood </b> {{a.title}}</h5>
-            <ion-avatar>
-              <img [src]="a.lunchFoodUrl" width="100" height="100" style="border: 1px solid;border-radius: 50%;">
-            </ion-avatar>
-            <h5 class="timeline-title"><b>BreakFastFood </b> {{a.breakfastFood}}</h5>
-            <ion-avatar>
-              <img [src]="a.breakfastFoodUrl" width="100" height="100" style="border: 1px solid;border-radius: 50%;">
-            </ion-avatar>
-          </div>
-        </div>-->
       </div>
     </section>
   </template>

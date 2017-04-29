@@ -68,16 +68,16 @@ export class FoodMenu {
     data.forEach((val, index) => {
       tmp.push({
         id: val.id,
+        title: val.foodType,
         startTime: moment(val.day).toDate(),
         endTime: moment(val.day).toDate(),
-        title: val.lunchFood,
-        lunchFoodUrl: val.lunchFoodUrl,
         allDay: false,
-        breakfastFoodUrl: val.breakfastFoodUrl,
-        breakfastFood: val.breakfastFood
+        foodPicUrl: val.foodPicUrl,
+        foodName: val.foodName
       });
     });
     this.eventSource = tmp;
+    console.log(this.eventSource)
   }
 
 }

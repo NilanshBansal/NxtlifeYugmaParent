@@ -22,6 +22,7 @@ export class EventComponent {
   public viewTitle;
   public currentDate;
   public hasEvents;
+  public clickDate;
 
   calendar = {
     mode: 'month',
@@ -42,7 +43,8 @@ export class EventComponent {
           (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
     this.hasEvents = ev.events !== undefined && ev.events.length !== 0;
     this.currentDate = ev.selectedTime.getFullYear() + "-" + (ev.selectedTime.getMonth() + 1);
-    console.log("AAAAA", this.currentDate)
+    console.log("AAAAA", this.currentDate);
+    this.clickDate = ev.selectedTime;
   }
 
   onCurrentDateChanged(event:Date) {
@@ -104,7 +106,7 @@ export class EventComponent {
 
   onSuccess(data, eventId) {
     this.nl.hideLoader();
-    let viewModal = this.modalCtrl.create(ViewEvent, {eventId: eventId, event: data});
+    let viewModal = this.modalCtrl.create(ViewEvent, {eventId: eventId, event: data, clickDate: this.clickDate});
     viewModal.present();
   }
 

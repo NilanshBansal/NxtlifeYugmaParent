@@ -24,7 +24,10 @@ export class ViewEvent implements OnInit {
 	public eventId;
 	public userID;
 	public canEdit;
+	public month;
+	public day;
 	public title: string = "View Event";
+	monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
 	constructor(public navParams: NavParams) {
 	}
@@ -32,7 +35,9 @@ export class ViewEvent implements OnInit {
 	ngOnInit() {
 		this.eventId = this.navParams.get('eventId');
 		this.event = this.navParams.get('event');
-    console.log(this.event);
+		let clickDate = this.navParams.get('clickDate');
+		this.month = this.monthNames[(new Date(clickDate)).getMonth()];
+		this.day = ("0" + (new Date(clickDate).getDate())).slice(-2);
 		// this.event["createdAt"] = ("0" + (new Date(this.event.createdAt).getDate())).slice(-2)
 	}
 

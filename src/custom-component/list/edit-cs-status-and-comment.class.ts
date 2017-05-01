@@ -25,9 +25,11 @@ export class EditComplaintStatusAndComment {
   }
 
   updateData(data) {
+    console.log("data", data);
     this.complaint.statusName = data.statusName;
     this.complaint.statusId = data.statusId;
     this.complaint.statusColor = data.statusColor;
+    this.complaint.commentCount = data.commentCount;
   }
 
   complaintReopen(complaint, data) {
@@ -127,10 +129,10 @@ export class EditComplaintStatusAndComment {
         placeholder: 'Write short description'
       }],
       buttons: [{
-        text: 'Cancel',
+        text: 'No',
         handler: data => {}
       }, {
-        text: 'Yes I Want!!',
+        text: 'Yes',
         handler: (data) => {
           if (data.comment === "") {
             this.nl.showToast("write any comment to close");

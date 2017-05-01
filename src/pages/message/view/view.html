@@ -63,11 +63,11 @@
   <form class="comment-box" [formGroup]="commentForm" novalidate>
     <ion-grid>
       <ion-row>
-        <ion-fab left bottom (click)="openImageActionSheet()">
+        <!--<ion-fab left bottom (click)="openImageActionSheet()">
           <button style="border:2px solid white" ion-fab color="cool" mini>
             <ion-icon name="attach" ></ion-icon>
           </button>
-        </ion-fab>
+        </ion-fab>-->
         <ion-textarea rows="2" class="csCommentInput csMessageText" type="text" formControlName="message" placeholder="Write message...">
         </ion-textarea>
         <ion-fab right bottom (click)="postMessage()">

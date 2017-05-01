@@ -32,7 +32,7 @@ export class ViewMessagePage {
   isClosed: boolean = false;
   conversation;
   baseUrl;
-  show = true;
+  show = false;
 
   @ViewChild(Content) content: Content;
 

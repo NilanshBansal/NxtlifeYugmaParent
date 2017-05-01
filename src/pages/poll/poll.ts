@@ -33,6 +33,7 @@ export class PollPage {
     this.pollService.GetPolls().subscribe((data) => {
       if (data.status === 204) {
         this.EmptyPolls = true;
+        this.nl.hideLoader();
       } else {
         this.onSuccess(data);
       }

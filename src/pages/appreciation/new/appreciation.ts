@@ -48,33 +48,12 @@ export class NewAppreciationModal implements OnInit {
     this.con.setUrlForAppreciations();
   }
 
-  selectChild(student) {
-    if (student) {
-      this.studentId = student.id;
-      this.standardId = student.standardId;
-      this.getTeachers();
-    }
-  }
-
-  public getTeachers() {
-    this.nl.showLoader();
-    this.c.getTeachers(this.standardId).subscribe((teachers) => {
-      this.nl.hideLoader();
-      this.nl.hideLoader();
-      this.teachers = teachers; // Get teachers list
-    }, (err) => {
-      this.nl.onError(err);
-      this.dismiss();
-    });
-  }
-
   ngOnInit() {
     this.loadForm();
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
       this.nl.showLoader();
       this.child = this.students[0];  // Auto select for one child
-      this.selectChild(this.child);
       this.newSuggestion.removeControl("studentId");
     }
     this.nl.showToast("All fields are mandatory to send appreciation");
@@ -83,7 +62,6 @@ export class NewAppreciationModal implements OnInit {
   loadForm() {
     this.newSuggestion = this.formBuilder.group({
       studentId: ['', Validators.required],
-      teacherId: ['', Validators.required],
       title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(200)]]
     });
@@ -124,6 +102,7 @@ export class NewAppreciationModal implements OnInit {
   }
 
   onError(err) {
+    this.nl.hideLoader();
     this.nl.onError(err);
     this.dismiss();
   }

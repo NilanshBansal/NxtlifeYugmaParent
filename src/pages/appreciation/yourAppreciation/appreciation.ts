@@ -56,6 +56,7 @@ export class YourAppreciation {
     createNew.onDidDismiss((res) => {
       if (!res) { return; }
       this.showEmptyMsg(false);
+      if (!this.allData) { this.allData = []; }
       this.allData.unshift(res);
     });
     createNew.present();

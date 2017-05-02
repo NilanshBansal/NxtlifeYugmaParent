@@ -14,9 +14,9 @@ export class Configuration {
   // public baseUrl: string = "https://yugma-testing.appspot.com";
   // public Server: string = "https://yugma-testing.appspot.com";
 
-  public url: string = "https://yugma.ind-cloud.everdata.com";
-  public baseUrl: string = "https://yugma.ind-cloud.everdata.com";
-  public Server: string = "https://yugma.ind-cloud.everdata.com";
+  public url: string = "https://cornerstone.njs.jelastic.vps-host.net";
+  public baseUrl: string = "https://cornerstone.njs.jelastic.vps-host.net";
+  public Server: string = "https://cornerstone.njs.jelastic.vps-host.net";
 
   // public url: string = "https://school-yugma.appspot.com";
   // public baseUrl: string = "https://school-yugma.appspot.com";

@@ -1,40 +1,57 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions } from '@angular/http';
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import { Configuration } from './app.constants';
+
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
+import { CustomHttpService } from './default.header.service';
 
 @Injectable()
 export class CircularService {
 
-  public headers;
-  public options;
   serverUrl;
 
-  constructor(private http: Http,
-    private configuration: Configuration) {
-    this.configuration.getHeader();
-    this.headers = this.configuration.header();
-    this.options = new RequestOptions({
-      headers: this.headers
-    });
+  constructor(private http: CustomHttpService,
+              private configuration: Configuration) {
   }
 
 
   getAllCirculars() {
     this.serverUrl = this.configuration.Server;
-    console.log('serverUrl', this.serverUrl);
-    return this.http.get(this.serverUrl, this.options)
-      .map((res: Response) => res.json())
+    return this.http.get(this.serverUrl)
+                    .map(this.extractData)
+                    .catch(this.handleError);
   }
 
 
   getParticularCirculars(id) {
     this.serverUrl = this.configuration.Server;
-    return this.http.get(this.serverUrl + '/' + id, this.options)
-      .map((res: Response) => res.json())
+    return this.http.get(this.serverUrl + "/" + id)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  private extractData(res: Response) {
+    if (res.status === 204) { return res; }
+    let body = res.json();
+    return body || { };
+  }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      if (error.status === 0) {
+        errMsg = `${error.status} - "No Internet"`;
+      }
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    return Observable.throw(errMsg);
   }
 }
-
-// 'https://yugmasrgstesting.appspot.com/parent/864867303/circular/'
-// console.log('circulars',res.json()); }

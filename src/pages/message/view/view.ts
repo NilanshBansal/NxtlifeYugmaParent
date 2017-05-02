@@ -216,6 +216,7 @@ export class ViewMessagePage {
     this.messageService.getMessage(this.id, this.currentPage).subscribe((res) => {
       refresher.complete();
       if (res.status === 204) {
+        this.currentPage -= 1;
         return;
       }
       this.messages = res.reverse().concat(this.messages);

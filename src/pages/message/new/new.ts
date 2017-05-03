@@ -78,8 +78,9 @@ export class NewMessagePage implements OnInit {
     this.teachers = true;
   }
 
-  public presentActionsheet() {let actionSheet = this.actionSheetCtrl.create({
-      title: 'Are you sure you want to submit ?',
+  public presentActionsheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Are you sure you want to submit?',
       buttons: [{
         text: 'YES',
         icon: 'ios-paper-outline',
@@ -95,11 +96,14 @@ export class NewMessagePage implements OnInit {
         }
       }]
     });
-    actionSheet.present();console.log(this.newMessage.value)
+    actionSheet.present();
+    console.log(this.newMessage.value)
   }
 
   saveMessage() {
     this.nl.showLoader();
+    this.newMessage.value["againstStudentId"] = this.studentId;
+    this.newMessage.value["standardId"] = this.standardId;
     this.messageService.saveMessage(this.newMessage.value).subscribe((res) => {
       this.nl.hideLoader();
       this.viewCtrl.dismiss(res);
@@ -107,7 +111,7 @@ export class NewMessagePage implements OnInit {
     },(err) => {
       this.viewCtrl.dismiss();
       this.nl.onError(err);
-    })
+    });
   }
 
 }

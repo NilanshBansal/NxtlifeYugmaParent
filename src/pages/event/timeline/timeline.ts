@@ -68,7 +68,7 @@ export class TimelinePage implements OnInit {
   }
 
   openViewEventModal(data) {
-    let viewModal = this.modalCtrl.create(ViewEvent, { event : data, eventId: data.id });
+    let viewModal = this.modalCtrl.create(ViewEvent, { event : data, eventId: data.id, clickDate: data.start });
     viewModal.present();
   }
 }

@@ -76,7 +76,7 @@ export class EventComponent {
       tmp.push({
         id: val.id,
         startTime: moment(val.start).toDate(),
-        endTime: moment(val.start).toDate(),
+        endTime: moment(val.end).toDate(),
         title: val.title,
         allDay: false,
         location: val.location,
@@ -87,6 +87,7 @@ export class EventComponent {
       });
     });
     this.eventSource = tmp;
+    console.log(this.eventSource)
   }
 
   markDisabled (date:Date) {
@@ -106,7 +107,7 @@ export class EventComponent {
 
   onSuccess(data, eventId) {
     this.nl.hideLoader();
-    let viewModal = this.modalCtrl.create(ViewEvent, {eventId: eventId, event: data, clickDate: this.clickDate});
+    let viewModal = this.modalCtrl.create(ViewEvent, {eventId: eventId, event: data, clickDate: data.start});
     viewModal.present();
   }
 

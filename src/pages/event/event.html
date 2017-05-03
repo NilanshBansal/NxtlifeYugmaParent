@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content class="csGrayBackground has-header" >
-  <ion-spinner *ngIf="eventSource.length===0" class="csCenter" style="margin-top: 55vh;position:absolute;margin-left:45vw"></ion-spinner>
+  <ion-spinner *ngIf="eventSource.length===0" class="csCenter" style="margin-top: 70vh;position:absolute;margin-left:45vw"></ion-spinner>
   <template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
     <ion-list class="no-event" style="margin-top:10px" *ngIf="!hasEvents && eventSource.length!=0">
       <ion-icon name="calendar"></ion-icon>

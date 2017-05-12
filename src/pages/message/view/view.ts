@@ -98,7 +98,6 @@ export class ViewMessagePage {
           that.messages = [];
         }
         that.messages.push(message);
-        that.nl.showToast("New Message Received.");
       });
     });
   } 

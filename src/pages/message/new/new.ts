@@ -79,7 +79,8 @@ export class NewMessagePage implements OnInit {
     this.teachers = true;
   }
 
-  public presentActionsheet() {let actionSheet = this.actionSheetCtrl.create({
+  public presentActionsheet() {
+    let actionSheet = this.actionSheetCtrl.create({
       title: 'Are you sure you want to submit ?',
       buttons: [{
         text: 'YES',
@@ -96,7 +97,7 @@ export class NewMessagePage implements OnInit {
         }
       }]
     });
-    actionSheet.present();console.log(this.newMessage.value)
+    actionSheet.present();
   }
 
   saveMessage() {

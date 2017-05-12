@@ -21,33 +21,34 @@ export class Notification {
       ios: {
         alert: "true",
         badge: "true",
-        sound: "true"
+        sound: "true",
+        gcmSandbox: "false"
       },
       windows: {}
     });
 
     push.on('registration', (data) => {
-      let confirmAlert = this.alertCtrl.create({
-        title: 'Would you like to receive notification ?',
-        message: "",
-        buttons: [{
-          text: 'NO',
-          role: 'cancel'
-        }, {
-          text: 'YES',
-          handler: () => {
-            this.showLoader('Please wait...');
+      // let confirmAlert = this.alertCtrl.create({
+      //   title: 'Would you like to receive notification ?',
+      //   message: "",
+      //   buttons: [{
+      //     text: 'NO',
+      //     role: 'cancel'
+      //   }, {
+      //     text: 'YES',
+      //     handler: () => {
+      //       this.showLoader('Please wait...');
             let tokenId = data.registrationId;
             this.configuration.tokenUpdate(tokenId).subscribe((res) => {
-              this.loading.dismiss();
+              // this.loading.dismiss();
             }, (err) => {
-              this.loading.dismiss();
-              this.notificationError();
+              // this.loading.dismiss();
+              // this.notificationError();
             });
-          }
-        }]
-      });
-      confirmAlert.present();
+      //     }
+      //   }]
+      // });
+      // confirmAlert.present();
     });
 
     push.on('notification', (data) => {

@@ -84,7 +84,12 @@ export class PassedHomework {
       this.currentPage -= 1;
       return;
     }
-    this.homework = this.homework.concat(res);
+    let newHomework = res;
+    _.forEach(newHomework, (data) => {
+      data.dueMonth = this.monthNames[(new Date(data.dueDate)).getMonth()];
+      data.dueDate = ("0" + (new Date(data.dueDate).getDate())).slice(-2);
+    });
+    this.homework = this.homework.concat(newHomework);
   }
 
   loadDataError(err) {

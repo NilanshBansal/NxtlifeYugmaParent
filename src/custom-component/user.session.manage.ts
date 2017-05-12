@@ -40,6 +40,9 @@ export class UserSessionManage {
     this.events.subscribe("online", () => {
       this.online();
     });
+    this.events.subscribe("user:image", (image) => {
+      this.userImage = image;
+    });
   }
 
   public hasLoggedIn() {
@@ -57,10 +60,10 @@ export class UserSessionManage {
     this.loadUser();
     this.menu.close();
     this.appCtrl.getRootNav().setRoot(Dashboard);
-    this.imageUpdate(null);
+    this.imageUpdate();
   }
 
-  public imageUpdate(image) {
+  public imageUpdate() {
     let picTimestamp = localStorage.getItem("picTimestamp");
     let fileUrl = localStorage.getItem("fileUrl");
     this.userImage = fileUrl + "/" + picTimestamp;
@@ -117,6 +120,7 @@ export class UserSessionManage {
   public getUserInfo() {
     this.authService.getParentInfo().subscribe((res) => {
       this.authService.storeParentData(res);
+      this.imageUpdate();
     }, (err) => {
       if (err === 401 || err == 0) { this.sessionExpired(); }
     });

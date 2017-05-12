@@ -52,7 +52,6 @@ export class MyApp extends UserSessionManage {
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
-      this.imageUpdate();
     });
   }
 
@@ -80,18 +79,6 @@ export class MyApp extends UserSessionManage {
     this.account = [
       { title: 'Account', component: AccountPage, icon: 'assets/icon/profile.png' }
     ];
-    let picTimestamp = localStorage.getItem("picTimestamp");
-    let fileUrl = localStorage.getItem("fileUrl");
-    this.userImage = fileUrl + "/" + picTimestamp;
-  }
-
-  public imageUpdate() {
-    let picTimestamp = localStorage.getItem("picTimestamp");
-    let fileUrl = localStorage.getItem("fileUrl");
-    this.userImage = fileUrl + "/" + picTimestamp;
-    this.events.subscribe("user:image", (image) => {
-      this.userImage = image;
-    });
   }
 
 }

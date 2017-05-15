@@ -1,7 +1,7 @@
 import { Component , OnInit } from '@angular/core';
 import { SurveyService } from '../../../service/survey.service';
 import { NavController,ModalController,Events } from 'ionic-angular';
-import { SurveyPage } from '../survey';
+import { ViewSurvey } from '../view/view';
 import { CustomService } from '../../../service/custom.service';
 
 @Component({
@@ -56,7 +56,7 @@ export class SurveyListPage implements OnInit{
     //        objj : objj
     //    });
 
-       let modal4 = this.modalCtrl.create(SurveyPage,{ objj : objj , indexx : indexx});
+       let modal4 = this.modalCtrl.create(ViewSurvey,{ objj : objj , indexx : indexx});
        modal4.present();
    }
 

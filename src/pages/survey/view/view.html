@@ -1,0 +1,13 @@
+<ion-header>
+  <nl-modal-navbar [title]="title">
+    <button clear ion-button>
+      <ion-icon name="information-circle" class="csWhiteText csFont18em" (click)="show = !show"></ion-icon>
+    </button>
+  </nl-modal-navbar>
+</ion-header>
+<ion-content class="csGrayBackground">
+  <ion-item class="csShadow" no-lines *ngIf="!show">
+    <b class="csParagraph"> {{survey.title}} </b>
+    <p class="csParagraph">{{survey.description}}</p>
+  </ion-item>
+</ion-content>

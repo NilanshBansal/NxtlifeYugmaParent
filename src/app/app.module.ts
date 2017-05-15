@@ -45,6 +45,7 @@ import { NewMessagePage } from '../pages/message/new/new';
 import { ViewMessagePage } from '../pages/message/view/view';
 import { ViewEvent } from '../pages/event/view/event';
 import { TimelinePage } from '../pages/event/timeline/timeline';
+import { ViewSurvey } from '../pages/survey/view/view';
 
 // import custom component
 import { ListView } from '../custom-component/list/listview.component';
@@ -115,7 +116,8 @@ import { EventService } from '../service/event.service';
     EventComponent,
     ViewEvent,
     TimelinePage,
-    FoodMenu
+    FoodMenu,
+    ViewSurvey
   ],
   imports: [
     MomentModule,
@@ -166,7 +168,8 @@ import { EventService } from '../service/event.service';
     EventComponent,
     ViewEvent,
     TimelinePage,
-    FoodMenu
+    FoodMenu,
+    ViewSurvey
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, PollService, HomeworkService, CircularService, SurveyService,

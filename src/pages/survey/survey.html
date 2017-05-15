@@ -1,11 +1,15 @@
 <ion-header>
-  <nl-modal-navbar [title]="title"></nl-modal-navbar>
-  <ion-item class="csShadow" no-lines>
+  <nl-modal-navbar [title]="title">
+    <button clear ion-button>
+      <ion-icon name="information-circle" class="csWhiteText csFont18em" (click)="show = !show"></ion-icon>
+    </button>
+  </nl-modal-navbar>
+</ion-header>
+<ion-content class="csGrayBackground">
+  <ion-item class="csShadow" no-lines *ngIf="!show">
     <b class="csParagraph"> {{ onesurveys.title }} </b>
     <p class="csParagraph">{{ onesurveys.description }}</p>
   </ion-item>
-</ion-header>
-<ion-content class="csGrayBackground">
   <ion-card radio-group [(ngModel)]="choice3[i][0]" *ngFor="let a of onesurveys.questions; let i=index" (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
     <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
       <ion-item [style.background]="a.questionTypeName== 'Single Choice' ? '#7babed' : '#f6c2d8'">

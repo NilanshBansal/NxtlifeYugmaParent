@@ -49,31 +49,33 @@ export class ViewSurvey implements OnInit {
   }
 
   ckb_init(queId, optId) {
-    this.checkbox.push({
-      questionId: queId,
-      subOptionsId: [optId]
-    });
+    this.checkbox.push(this.arr_init(queId, optId));
   }
 
   radio_init(queId, optId) {
-    this.radio.push({
+    this.radio.push(this.arr_init(queId, optId));
+  }
+
+  arr_init(queId, optId) {
+    let a = {
       questionId: queId,
-      subOptionsId: [optId]
-    });
+      subOptionIds: [optId] 
+    }
+    return a;
   }
 
   findAndUpdate(index, optId) {
     let flag = 0;
     this.checkbox.forEach((val) => {
-      val.subOptionsId.forEach((val1, i) => {
+      val.subOptionIds.forEach((val1, i) => {
         if (val1 == optId) {
-          val.subOptionsId.splice(i, 1);
+          val.subOptionIds.splice(i, 1);
           flag = 1;
         }
       });
     });
     if (flag == 0) {
-      this.checkbox[index].subOptionsId.push(optId);
+      this.checkbox[index].subOptionIds.push(optId);
     }
   }
 

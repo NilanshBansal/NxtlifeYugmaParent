@@ -10,4 +10,36 @@
     <b class="csParagraph"> {{survey.title}} </b>
     <p class="csParagraph">{{survey.description}}</p>
   </ion-item>
+    <!--<div *ngFor="let sur of survey.questions; let i = index">
+      <div *ngIf="sur.questionTypeId == 1">
+        <ion-list radio-group [(ngModel)]="autoManufacturers">
+          <ion-card>
+            <b>{{sur.questionText}}</b>
+          </ion-card>
+          <ion-card-content>
+            <ion-list *ngFor="let opt of sur.options; let m = index;">
+              <ion-radio [value]="opt.id"></ion-radio>
+              <ion-label>{{opt.name}}</ion-label>
+            </ion-list>
+          </ion-card-content>
+        </ion-list>
+      </div>
+      <div *ngIf="sur.questionTypeId == 2">
+        <ion-list-header>
+          <b>{{sur.questionText}}</b>
+        </ion-list-header>
+      </div>
+    </div>-->
+    <div *ngFor="let sur of survey.questions; let i = index">
+      <ion-list radio-group [(ngModel)]="sur.questionId" *ngIf="sur.questionTypeId == 1">
+        {{sur.questionText}}
+        <ion-item *ngFor="let a of sur.options">
+          <ion-label>{{a.name}}</ion-label>
+          <ion-radio value="{{a.name}}" (click)="aa(a.id)"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <ion-list *ngIf="sur.questionTypeId == 2">
+        {{sur.questionText}}
+      </ion-list>
+    </div>
 </ion-content>

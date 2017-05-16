@@ -41,7 +41,7 @@
       <ion-list *ngIf="sur.questionTypeId == 2">
         <ion-item *ngFor="let a of sur.options; let ii = index">
           <ion-label> {{a.name}}</ion-label>
-          <ion-checkbox [(ngModel)]="a.id[i]" (click)="onSelectionCheckbox(sur.questionId, a.id, ii)" required></ion-checkbox>
+          <ion-checkbox [(ngModel)]="a.id[i]" (click)="onSelectionCheckbox(sur.questionId, a.id)" required></ion-checkbox>
         </ion-item>
       </ion-list>
     </div>

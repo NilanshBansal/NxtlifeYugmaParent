@@ -10,9 +10,8 @@ export class ViewSurvey implements OnInit {
 
   public survey: Object;
   public title: string = "Survey";
-  public selectLocationName;
-  public selectStatus;
-  public selectedStatus;
+  radio = [];
+  checkbox = [];
 
   constructor(private navParams: NavParams) {
 
@@ -20,21 +19,11 @@ export class ViewSurvey implements OnInit {
 
   ngOnInit() {
     this.survey = this.navParams.get('objj');
-    console.log(this.survey)
-  }
-
-  aa(id) {
-    this.selectedStatus = id;
-    console.log(id)
   }
 
   save(data) {
-    console.log(this.sur)
+    console.log(this.radio, this.checkbox)
   }
-
-  selectedEntry;
-  radio = [];
-  sur;
 
   onSelectionRadio(questionId, optionId, index) {
     let flag = 0;
@@ -49,24 +38,19 @@ export class ViewSurvey implements OnInit {
     if(flag = 1) {
       this.radio.push({
         questionId: questionId,
-        subOptionsId: optionId
+        subOptionsId: [optionId]
       });
     }
 
-    console.log(this.radio)
   }
 
-  checkbox = [];
-  ckb_opt = [];
-
-  onSelectionCheckbox(questionId, optionId, index) {
-    let indexxx = this.checkbox.findIndex(a => a.questionId == questionId);
-    if(indexxx > -1) {
-      this.findAndUpdate(indexxx, optionId);
+  onSelectionCheckbox(questionId, optionId) {
+    let index = this.checkbox.findIndex(a => a.questionId == questionId);
+    if(index > -1) {
+      this.findAndUpdate(index, optionId);
     } else {
       this.ckb_init(questionId, optionId);
     }
-    console.log("DSDS", this.checkbox, this.ckb_opt);
   }
 
   ckb_init(queId, optId) {
@@ -76,18 +60,18 @@ export class ViewSurvey implements OnInit {
     });
   }
 
-  findAndUpdate(indexxx, optId) {
+  findAndUpdate(index, optId) {
     let flag = 0;
-    this.checkbox.forEach((val, i) => {
-      val.subOptionsId.forEach((val1, ii) => {
+    this.checkbox.forEach((val) => {
+      val.subOptionsId.forEach((val1, i) => {
         if (val1 == optId) {
-          val.subOptionsId.splice(ii, 1);
+          val.subOptionsId.splice(i, 1);
           flag = 1;
         }
-      })
+      });
     });
     if (flag == 0) {
-      this.checkbox[indexxx].subOptionsId.push(optId);
+      this.checkbox[index].subOptionsId.push(optId);
     }
   }
 

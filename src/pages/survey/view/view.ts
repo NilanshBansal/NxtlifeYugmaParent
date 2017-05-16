@@ -60,42 +60,27 @@ export class ViewSurvey implements OnInit {
   ckb_opt = [];
 
   onSelectionCheckbox(questionId, optionId, index) {
-    // console.log(questionId, optionId, index);
     let indexxx = this.checkbox.findIndex(a => a.questionId == questionId);
     let flag = 0;
     if(indexxx > -1) {
       this.checkbox.forEach((val, i) => {
         val.subOptionsId.forEach((val1, ii) => {
           if (val1 == optionId) {
-            console.log("yess");
             val.subOptionsId.splice(ii, 1);
             flag = 1;
           }
         })
       });
-      let a;
-      // console.log("yesss", indexxx, a)
-      if (a > -1) {
-        this.ckb_opt.splice(a, 1);
-      } else {
-        // this.ckb_opt.push(optionId);
-        console.log(flag, a>-1)
-        if (flag == 0) {
-          this.checkbox[indexxx].subOptionsId.push(optionId);
-        }
+      if (flag == 0) {
+        this.checkbox[indexxx].subOptionsId.push(optionId);
       }
-
-
     } else {
       this.checkbox.push({
         questionId: questionId,
         subOptionsId: [optionId]
       });
     }
-
-    
     console.log("DSDS", this.checkbox, this.ckb_opt);
-
   }
 
 }

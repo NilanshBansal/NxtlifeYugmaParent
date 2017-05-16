@@ -26,22 +26,17 @@ export class ViewSurvey implements OnInit {
   }
 
   onSelectionRadio(questionId, optionId, index) {
-    let flag = 0;
-
-    this.radio.forEach((val, index) => {
-      if (val.questionId === questionId) {
-        this.radio.splice(index, 1);
-        flag = 1;
-      }
-    });
-
-    if(flag = 1) {
-      this.radio.push({
-        questionId: questionId,
-        subOptionsId: [optionId]
+    let indexx = this.radio.findIndex(a => a.questionId == questionId);
+    if (indexx > -1) {
+      this.radio.forEach((val, index) => {
+        if (val.questionId === questionId) {
+          this.radio.splice(index, 1);
+          this.radio_init(questionId, optionId);
+        }
       });
+    } else {
+      this.radio_init(questionId, optionId);
     }
-
   }
 
   onSelectionCheckbox(questionId, optionId) {
@@ -55,6 +50,13 @@ export class ViewSurvey implements OnInit {
 
   ckb_init(queId, optId) {
     this.checkbox.push({
+      questionId: queId,
+      subOptionsId: [optId]
+    });
+  }
+
+  radio_init(queId, optId) {
+    this.radio.push({
       questionId: queId,
       subOptionsId: [optId]
     });

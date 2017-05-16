@@ -29,7 +29,73 @@ export class ViewSurvey implements OnInit {
   }
 
   save(data) {
-    console.log(data)
+    console.log(this.sur)
+  }
+
+  selectedEntry;
+  radio = [];
+  sur;
+
+  onSelectionRadio(questionId, optionId, index) {
+    let flag = 0;
+
+    this.radio.forEach((val, index) => {
+      if (val.questionId === questionId) {
+        this.radio.splice(index, 1);
+        flag = 1;
+      }
+    });
+
+    if(flag = 1) {
+      this.radio.push({
+        questionId: questionId,
+        subOptionsId: optionId
+      });
+    }
+
+    console.log(this.radio)
+  }
+
+  checkbox = [];
+  ckb_opt = [];
+
+  onSelectionCheckbox(questionId, optionId, index) {
+    // console.log(questionId, optionId, index);
+    let indexxx = this.checkbox.findIndex(a => a.questionId == questionId);
+    let flag = 0;
+    if(indexxx > -1) {
+      this.checkbox.forEach((val, i) => {
+        val.subOptionsId.forEach((val1, ii) => {
+          if (val1 == optionId) {
+            console.log("yess");
+            val.subOptionsId.splice(ii, 1);
+            flag = 1;
+          }
+        })
+      });
+      let a;
+      // console.log("yesss", indexxx, a)
+      if (a > -1) {
+        this.ckb_opt.splice(a, 1);
+      } else {
+        // this.ckb_opt.push(optionId);
+        console.log(flag, a>-1)
+        if (flag == 0) {
+          this.checkbox[indexxx].subOptionsId.push(optionId);
+        }
+      }
+
+
+    } else {
+      this.checkbox.push({
+        questionId: questionId,
+        subOptionsId: [optionId]
+      });
+    }
+
+    
+    console.log("DSDS", this.checkbox, this.ckb_opt);
+
   }
 
 }

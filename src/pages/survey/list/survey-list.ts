@@ -2,6 +2,7 @@ import { Component , OnInit } from '@angular/core';
 import { SurveyService } from '../../../service/survey.service';
 import { NavController,ModalController,Events } from 'ionic-angular';
 import { ViewSurvey } from '../view/view';
+import { SurveyPage } from '../survey';
 import { CustomService } from '../../../service/custom.service';
 
 @Component({

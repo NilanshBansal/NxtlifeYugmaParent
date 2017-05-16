@@ -31,15 +31,19 @@
       </div>
     </div>-->
     <div *ngFor="let sur of survey.questions; let i = index">
+      <p>{{sur.questionText}}</p>
       <ion-list radio-group [(ngModel)]="sur.questionId" *ngIf="sur.questionTypeId == 1">
-        {{sur.questionText}}
         <ion-item *ngFor="let a of sur.options">
           <ion-label>{{a.name}}</ion-label>
-          <ion-radio value="{{a.name}}" (click)="aa(a.id)"></ion-radio>
+          <ion-radio value="{{a.name}}" (click)="aa(a.id)" required></ion-radio>
         </ion-item>
       </ion-list>
       <ion-list *ngIf="sur.questionTypeId == 2">
-        {{sur.questionText}}
+        <ion-item *ngFor="let a of sur.options">
+          <ion-label> {{a.name}}</ion-label>
+          <ion-checkbox [(ngModel)]="a.id[i]" required></ion-checkbox>
+        </ion-item>
       </ion-list>
     </div>
+    <button ion-button full (click)="save()" [disabled]="">Submit</button>
 </ion-content>

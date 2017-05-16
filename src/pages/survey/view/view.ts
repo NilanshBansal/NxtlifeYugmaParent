@@ -28,4 +28,8 @@ export class ViewSurvey implements OnInit {
     console.log(id)
   }
 
+  save(data) {
+    console.log(data)
+  }
+
 }

@@ -46,8 +46,9 @@ export class SurveyListPage implements OnInit{
     getParticularSurvey(surveyId,indexx){
         console.log('indexx',indexx);
         this.indexxx = indexx;
+        this.nl.showLoader();
         this._surveyServ.getOneSurvey(surveyId)
-        .subscribe( data => { this.onesurveys = data ; this.clickablesurvey(this.onesurveys,indexx)},
+        .subscribe( data => { this.onesurveys = data ;this.nl.hideLoader(); this.clickablesurvey(this.onesurveys,indexx)},
               () => console.log('onesurveys',this.onesurveys))
     }
 

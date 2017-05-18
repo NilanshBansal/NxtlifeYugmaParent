@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 
 @Component({
@@ -6,12 +6,14 @@ import { NavParams } from 'ionic-angular';
   templateUrl: 'view.html'
 })
 
-export class ViewSurvey implements OnInit {
+export class ViewSurvey implements OnInit, DoCheck {
 
   public survey: Object;
   public title: string = "Survey";
-  radio = [];
-  checkbox = [];
+  public radio = [];
+  public checkbox = [];
+  public sur_data = [];
+  public btnDisable: boolean = true;
 
   constructor(private navParams: NavParams) {
 
@@ -21,8 +23,37 @@ export class ViewSurvey implements OnInit {
     this.survey = this.navParams.get('objj');
   }
 
+  ngDoCheck() {
+    console.log("Ds");
+    if(this.radio || this.checkbox) {
+      this.doSomething();
+    }
+  }
+
+  doSomething() {
+    let sur_data = this.radio.concat(this.checkbox);
+    console.log("a", sur_data);
+    if(this.survey["questions"].length === sur_data.length) {
+      let check;
+      sur_data.forEach((val) => {
+        console.log("sasas", val.subOptionIds)
+        if(val.subOptionIds.length != 0) {
+          check = true;
+        } else {
+          check= false;
+        }
+      });
+      if(check) {
+        this.btnDisable = false;
+      } else {
+        this.btnDisable = true;
+      }
+    }
+  }
+
   save(data) {
-    console.log(this.radio, this.checkbox)
+    let a = this.radio.concat(this.checkbox);
+    console.log(a);
   }
 
   onSelectionRadio(questionId, optionId, index) {

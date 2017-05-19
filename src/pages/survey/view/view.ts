@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { CustomService } from '../../../service/custom.service';
+import { ActionSheetController } from 'ionic-angular';
 
 @Component({
   selector: 'view-survey',
@@ -13,10 +14,9 @@ export class ViewSurvey implements OnInit {
   public title: string = "Survey";
   public radio = [];
   public checkbox = [];
-  public sur_data = [];
-  public btnDisable: boolean = true;
 
   constructor(private navParams: NavParams,
+              private actionSheetCtrl: ActionSheetController,
               private nl: CustomService) {
 
   }
@@ -29,25 +29,22 @@ export class ViewSurvey implements OnInit {
     let a = this.radio.concat(this.checkbox);
     if(this.radio || this.checkbox) {
       if(this.survey["questions"].length === a.length) {
-        this.doSomething();
+        this.doSomething(a);
       } else {
         this.nl.showToast("All fields are required to submit form");
       }
     }
   }
 
-  doSomething() {
-    let a = this.radio.concat(this.checkbox);
+  doSomething(data) {
     let hasCheck = false;
-    a.forEach((val, index) => {
+    data.forEach((val, index) => {
       if (val.subOptionIds.length == 0) {
         hasCheck = true;
       }
     });
     if (hasCheck) {
       this.nl.showToast("All fields are required to submit form");
-    } else {
-      this.btnDisable = false;
     }
   }
 

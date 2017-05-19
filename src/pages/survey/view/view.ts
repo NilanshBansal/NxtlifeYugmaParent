@@ -1,12 +1,13 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavParams } from 'ionic-angular';
+import { CustomService } from '../../../service/custom.service';
 
 @Component({
   selector: 'view-survey',
   templateUrl: 'view.html'
 })
 
-export class ViewSurvey implements OnInit, DoCheck {
+export class ViewSurvey implements OnInit {
 
   public survey: Object;
   public title: string = "Survey";
@@ -15,7 +16,8 @@ export class ViewSurvey implements OnInit, DoCheck {
   public sur_data = [];
   public btnDisable: boolean = true;
 
-  constructor(private navParams: NavParams) {
+  constructor(private navParams: NavParams,
+              private nl: CustomService) {
 
   }
 
@@ -23,37 +25,30 @@ export class ViewSurvey implements OnInit, DoCheck {
     this.survey = this.navParams.get('objj');
   }
 
-  ngDoCheck() {
-    console.log("Ds");
+  save(data) {
+    let a = this.radio.concat(this.checkbox);
     if(this.radio || this.checkbox) {
-      this.doSomething();
-    }
-  }
-
-  doSomething() {
-    let sur_data = this.radio.concat(this.checkbox);
-    console.log("a", sur_data);
-    if(this.survey["questions"].length === sur_data.length) {
-      let check;
-      sur_data.forEach((val) => {
-        console.log("sasas", val.subOptionIds)
-        if(val.subOptionIds.length != 0) {
-          check = true;
-        } else {
-          check= false;
-        }
-      });
-      if(check) {
-        this.btnDisable = false;
+      if(this.survey["questions"].length === a.length) {
+        this.doSomething();
       } else {
-        this.btnDisable = true;
+        this.nl.showToast("All fields are required to submit form");
       }
     }
   }
 
-  save(data) {
+  doSomething() {
     let a = this.radio.concat(this.checkbox);
-    console.log(a);
+    let hasCheck = false;
+    a.forEach((val, index) => {
+      if (val.subOptionIds.length == 0) {
+        hasCheck = true;
+      }
+    });
+    if (hasCheck) {
+      this.nl.showToast("All fields are required to submit form");
+    } else {
+      this.btnDisable = false;
+    }
   }
 
   onSelectionRadio(questionId, optionId, index) {

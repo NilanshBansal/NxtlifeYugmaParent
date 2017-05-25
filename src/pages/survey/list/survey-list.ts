@@ -83,7 +83,7 @@ export class SurveyListPage implements OnInit{
             }
             else{
                 this.EmptySurveys = false;
-                this.allData = res;
+                this.allsurveys = res;
            }
      }
 

@@ -40,6 +40,8 @@ export class CurrentHomework implements OnInit {
 
   getHomework() {
     this.nl.showLoader();
+    this.homework = [];
+    this.currentPage = 1;
     this.hw.getHomeworkByStandard(this.standardId, this.currentPage).subscribe((res) => {
       this.onSuccess(res);
     }, (err) => {

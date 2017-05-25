@@ -41,6 +41,8 @@ export class PassedHomework {
 
   getHomework() {
     this.nl.showLoader();
+    this.homework = [];
+    this.currentPage = 1;
     this.hw.getOldHomeworkByStandard(this.standardId, this.currentPage).subscribe((res) => {
       this.onSuccess(res);
     }, (err) => {

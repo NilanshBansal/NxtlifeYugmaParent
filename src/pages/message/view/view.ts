@@ -20,7 +20,7 @@ import { File } from '@ionic-native/file';
 
 export class ViewMessagePage {
 
-  public headerTitle: string;
+  public headerTitle: string = "Messages";
   public messages = [];
   commentForm: FormGroup;
   notPost = true;
@@ -68,7 +68,6 @@ export class ViewMessagePage {
     this.baseUrl = localStorage.getItem("fileUrl") + "/";
     this.id = this.conversation.id;
     this.isClosed = this.conversation.isClosed;
-    this.headerTitle = this.conversation.title;
     if (this.isClosed) {
       this.showToastMessage();
     }

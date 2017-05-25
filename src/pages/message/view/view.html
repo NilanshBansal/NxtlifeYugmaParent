@@ -1,10 +1,18 @@
 <ion-header>
-  <nl-modal-navbar [title]="headerTitle" [complaint]="null"></nl-modal-navbar>
+  <nl-modal-navbar [title]="headerTitle" [complaint]="null">
+    <button clear ion-button>
+      <ion-icon name="information-circle" (click)="show = !show" class="csWhiteText csFont18em"></ion-icon>
+    </button>
+  </nl-modal-navbar>
 </ion-header>
 <ion-content id="chat" class="csChatBox csGrayBackground">
   <ion-item class="csShadow" *ngIf="show" no-lines>
     <div>
-      <b>{{conversation.againstEmployeeName}}: </b> {{conversation.title}}
+      <b>Title: </b><span class="csParagraph">{{conversation.title}}</span><br>
+    </div>
+    <br>
+    <div>
+      <b>Employee Name: </b> {{conversation.againstEmployeeName}}
     </div>
     <br>
     <div>
@@ -17,12 +25,6 @@
       <span class="csRight" *ngIf="conversation.closedOn"><b>Closed at:</b> {{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</span>
     </div>
   </ion-item>
-  <button ion-button clear full (click)="show = !show" icon-left>
-    <ion-icon *ngIf="show" name="eye-off"></ion-icon>
-    <ion-icon *ngIf="!show" name="eye"></ion-icon>
-    <span *ngIf="show">Hide Details</span>
-    <span *ngIf="!show">Show Details</span>
-  </button>
 
   <ion-refresher (ionRefresh)="onPullOldMessages($event)">
     <ion-refresher-content></ion-refresher-content>

@@ -15,6 +15,7 @@ export class Circular {
   public title: string = "Circular";
   public allData = [];
   public EmptyCirculars: boolean = false;
+  public currentPage = 1;
 
   constructor(private circularService: CircularService,
               private modalCtrl: ModalController,
@@ -26,7 +27,7 @@ export class Circular {
 
   public getCirculars() {
     this.nl.showLoader();
-    this.circularService.getAllCirculars().subscribe((res) => {
+    this.circularService.getAllCirculars(1).subscribe((res) => {
       this.onSuccess(res);
     }, (err) => {
       this.onError(err);
@@ -46,7 +47,7 @@ export class Circular {
 
   public doRefresh(refresher) {
     setTimeout(() => {
-      this.circularService.getAllCirculars().subscribe((res) => {
+      this.circularService.getAllCirculars(1).subscribe((res) => {
         this.onSuccess(res);
         refresher.complete();
       }, (err) => {
@@ -67,6 +68,37 @@ export class Circular {
   }
 
   public onError(err) {
+    this.nl.onError(err);
+  }
+
+  public doInfinite(infiniteScroll) {
+    this.currentPage += 1;
+    setTimeout(() => {
+      this.loadMoreData(infiniteScroll);
+    }, 500);
+  }
+
+  public loadMoreData(infiniteScroll) {
+    this.circularService.getAllCirculars(this.currentPage).subscribe((res) => {
+      infiniteScroll.complete();
+      this.loadDataSuccess(res);
+    }, (err) => {
+      infiniteScroll.complete();
+      this.loadDataError(err);
+    });
+  }
+
+  public loadDataSuccess(res) {
+    if (res.status === 204) {
+      this.currentPage -= 1;
+      return;
+    }
+    this.circulars = this.circulars.concat(res);
+  }
+
+  public loadDataError(err) {
+    this.currentPage -= 1;
+    this.EmptyCirculars = false;
     this.nl.onError(err);
   }
 

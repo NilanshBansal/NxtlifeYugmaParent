@@ -4,8 +4,6 @@
       <ion-icon name="information-circle" (click)="show = !show" class="csWhiteText csFont18em"></ion-icon>
     </button>
   </nl-modal-navbar>
-</ion-header>
-<ion-content id="chat" class="csChatBox csGrayBackground">
   <ion-item class="csShadow" *ngIf="show" no-lines>
     <div>
       <b>Title: </b><span class="csParagraph">{{conversation.title}}</span><br>
@@ -25,7 +23,8 @@
       <span class="csRight" *ngIf="conversation.closedOn"><b>Closed at:</b> {{conversation.closedOn | amDateFormat: 'DD/MM/YYYY' }}</span>
     </div>
   </ion-item>
-
+</ion-header>
+<ion-content id="chat" class="csChatBox csGrayBackground">
   <ion-refresher (ionRefresh)="onPullOldMessages($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>

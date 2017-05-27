@@ -36,6 +36,7 @@ import { SurveyListPage } from '../pages/survey/list/survey-list';
 import { MessagePage } from '../pages/message/message';
 import { EventComponent } from '../pages/event/event';
 import { FoodMenu } from '../pages/foodmenu/foodmenu';
+import { TimetablePage } from '../pages/timetable/timetable';
 
 // import modal
 import { newComplaintModal } from '../pages/complaint/new/newComplaintModal';
@@ -117,7 +118,8 @@ import { EventService } from '../service/event.service';
     ViewEvent,
     TimelinePage,
     FoodMenu,
-    ViewSurvey
+    ViewSurvey,
+    TimetablePage
   ],
   imports: [
     MomentModule,
@@ -169,7 +171,8 @@ import { EventService } from '../service/event.service';
     ViewEvent,
     TimelinePage,
     FoodMenu,
-    ViewSurvey
+    ViewSurvey,
+    TimetablePage
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, PollService, HomeworkService, CircularService, SurveyService,

@@ -16,7 +16,8 @@ import { Circular } from '../pages/circular/circular';
 import { UserSessionManage } from '../custom-component/user.session.manage';
 import { MessagePage } from '../pages/message/message';
 import { EventComponent } from '../pages/event/event';
-import { FoodMenu } from '../pages/foodmenu/foodmenu'; 
+import { FoodMenu } from '../pages/foodmenu/foodmenu';
+import { TimetablePage } from '../pages/timetable/timetable';
 
 // import service
 import { AuthService } from '../service/auth.service';
@@ -73,6 +74,7 @@ export class MyApp extends UserSessionManage {
       { title: 'Survey', component: SurveyListPage, icon: 'assets/icon/survey.png', url: 'survey' },
       { title: 'FoodMenu', component: FoodMenu, icon: 'assets/icon/food.png', url: 'food-menu'},
       { title: 'Homework' , component : HomeworkTabs , icon : 'assets/icon/homework.png' , url : 'homework' },
+      { title: 'Timetable' , component : TimetablePage , icon : 'assets/icon/homework.png' , url : 'time-table' },
       { title: 'Circular',component : Circular, icon : 'assets/icon/circular.png' , url : 'circular' },
       { title: 'Student Rating', component: StudentRating, icon: 'assets/icon/rating.png', url: 'student-profile' },
     ];

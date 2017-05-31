@@ -12,26 +12,24 @@ import { Configuration } from './app.constants';
 @Injectable()
 export class HomeworkService {
 
-
-    public headers;
-    public options;
-    serverUrl;
-
-   
+  public headers;
+  public options;
+  public serverUrl;
 
   constructor(private http: CustomHttpService,
               private configuration: Configuration) {
     this.serverUrl = this.configuration.Server;
   }
 
-    getHomeworks(){
-        this.serverUrl = this.configuration.Server;
-        return this.http.get(this.serverUrl + '/homework',this.options)
-         .map((res:Response) => res.json())
+  public getHomeworks(){
+    this.serverUrl = this.configuration.Server;
+    return this.http.get(this.serverUrl + '/homework',this.options)
+                    .map((res:Response) => res.json())
 
-     }
+  }
 
   public getHomeworkByStandard(standardId, page) {
+    this.serverUrl = this.configuration.Server;
     return this.http.get(this.serverUrl + "/standard/" + standardId + "/page/" + page)
                     .map(this.extractData)
                     .catch(this.handleError);
@@ -39,6 +37,13 @@ export class HomeworkService {
 
   public getOldHomeworkByStandard(standardId, page) {
     return this.http.get(this.serverUrl + "/standard/" + standardId + "/old/page/" + page)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  public getTimetable(standardId) {
+    this.serverUrl = this.configuration.Server;
+    return this.http.get(this.serverUrl + "/" + standardId)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

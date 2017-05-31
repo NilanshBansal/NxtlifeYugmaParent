@@ -30,6 +30,10 @@
       </div>
     </ion-item>
   </ion-list>
+  <ion-list class="no-comment" *ngIf="EmptySurvey">
+    <ion-icon name="list-box"></ion-icon>
+    <br>NO RECORD FOUND
+  </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

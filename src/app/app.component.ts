@@ -74,7 +74,7 @@ export class MyApp extends UserSessionManage {
       { title: 'Survey', component: SurveyListPage, icon: 'assets/icon/survey.png', url: 'survey' },
       { title: 'FoodMenu', component: FoodMenu, icon: 'assets/icon/food.png', url: 'food-menu'},
       { title: 'Homework' , component : HomeworkTabs , icon : 'assets/icon/homework.png' , url : 'homework' },
-      { title: 'Timetable' , component : TimetablePage , icon : 'assets/icon/homework.png' , url : 'time-table' },
+      { title: 'Timetable' , component : TimetablePage , icon : 'assets/icon/timetable.jpg' , url : 'time-table' },
       { title: 'Circular',component : Circular, icon : 'assets/icon/circular.png' , url : 'circular' },
       { title: 'Student Rating', component: StudentRating, icon: 'assets/icon/rating.png', url: 'student-profile' },
     ];

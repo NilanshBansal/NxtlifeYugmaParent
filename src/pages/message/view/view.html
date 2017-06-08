@@ -49,8 +49,8 @@
         </ion-fab>
         <ion-textarea rows="2" class="csCommentInput csMessageText" type="text" formControlName="message" placeholder="Write message...">
         </ion-textarea>
-        <ion-fab right bottom (click)="postMessage()">
-          <button style="border:2px solid white" ion-fab color="cool" mini [disabled]="commentForm.invalid || !notPost">
+        <ion-fab right bottom>
+          <button (click)="postMessage()" style="border:2px solid white" ion-fab color="cool" mini [disabled]="commentForm.invalid || !notPost">
             <ion-icon name="md-send" ></ion-icon>
           </button>
         </ion-fab>

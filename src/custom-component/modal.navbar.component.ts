@@ -37,6 +37,7 @@ export class ModalNavbarComponent {
 
   public dismiss(): void {
     this.viewCtrl.dismiss(this.complaint);
+    
   }
 
 }

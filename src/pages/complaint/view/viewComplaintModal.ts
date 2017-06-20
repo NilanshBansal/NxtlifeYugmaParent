@@ -18,6 +18,7 @@ import { AuthService } from '../../../service/auth.service';
 export class ViewComponent extends EditComplaintStatusAndComment implements OnInit {
 
   complaint;
+  public msgsTotal; //nilansh
   title: string;
   baseUrl: string;
 
@@ -58,5 +59,17 @@ export class ViewComponent extends EditComplaintStatusAndComment implements OnIn
   dismiss() {
     this.viewCtrl.dismiss();
   }
+
+   ionViewWillEnter(){
+    //nilansh
+    this.msgsTotal=this.complaint.commentCount+this.nl.chatIncrement;
+    this.complaint.commentCount=this.msgsTotal;
+
+  }
+
+  ionViewWillLeave(){
+    this.nl.chatIncrement=0;
+  }
+  
 
 }

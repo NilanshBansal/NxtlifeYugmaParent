@@ -56,7 +56,8 @@ export class CommentModal {
   complaintId: number;
   notPost = true;
   data;
-
+  //nilansh
+  public count=0;
   title = "COMMENTS";
 
   userId;
@@ -127,6 +128,11 @@ export class CommentModal {
     }
   }
 
+  //nilansh
+  ionViewWillEnter(){
+    this.count=0;
+  }  
+
   showToastMessage() {
     let toast = this.toastCtrl.create({
       message: "You can't comment on it any more, may be your complaint status is closed or satisfied",
@@ -142,6 +148,8 @@ export class CommentModal {
     this.viewCtrl.dismiss();
   }
 
+ 
+
   postComment() {
     this.content.scrollToBottom();
     if (!this.commentForm.valid) {
@@ -150,6 +158,9 @@ export class CommentModal {
       this.notPost = false;
       this.emptyComments = false;
       this.c.postComment(this.data.id, this.commentForm.value).subscribe((res) => {
+        this.count=this.count +1;
+        //nilansh
+        this.nl.chatIncrement=this.count;
         this.notPost = true;
         if (!this.comments) { this.comments = []; }
         this.comments.push({

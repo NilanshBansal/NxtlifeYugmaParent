@@ -11,6 +11,7 @@ export class CustomService {
 
   public loading;
   public txt;
+  public chatIncrement=0 ; //nilansh
 
   constructor(private l: LoadingController,
               private a: AlertController,

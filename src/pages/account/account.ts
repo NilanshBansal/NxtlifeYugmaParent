@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, Events, ActionSheetController } from 'ionic-angular';
+import { NavController, Events, ActionSheetController,ModalController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { Transfer } from  '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { AuthService } from '../../service/auth.service';
 import { CustomService } from '../../service/custom.service';
 import { CommonService } from '../../service/common.service';
+import { resetPasswordModal } from '../account/resetpassword/resetpassword'
 
 @Component({
   selector: 'page-account',
@@ -39,7 +40,8 @@ export class AccountPage {
               public nl: CustomService,
               public appService: AuthService,
               public commonService: CommonService,
-              public actionSheetCtrl: ActionSheetController) {
+              public actionSheetCtrl: ActionSheetController,
+              public modalCtrl:ModalController) {
   }
 
   ionViewWillEnter() {
@@ -94,6 +96,11 @@ export class AccountPage {
       }]
     });
     actionSheet.present();
+  }
+
+  public openModal() {
+    let viewComplaint = this.modalCtrl.create(resetPasswordModal);
+    viewComplaint.present();
   }
 
   public openGallery() {

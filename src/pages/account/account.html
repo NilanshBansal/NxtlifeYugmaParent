@@ -33,6 +33,9 @@
                 </ion-avatar>
                 <span class="csProfileTitle">Password</span>
                 <h2>*********</h2>
+                <button ion-button clear item-right color="$csGreen" (click)="openModal()">
+                  <ion-icon name="create" class="csFontColor1" class="csEditButton"></ion-icon>
+                </button>
               </ion-item>
             </ion-card>
             <ion-card class="csProfileCardDetails" *ngIf="emailID">

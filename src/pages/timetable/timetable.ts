@@ -5,26 +5,7 @@ import { ParentInfo } from '../../service/parentInfo';
 
 @Component({
   selector: 'timetable-page',
-  template: `
-    <ion-header>
-      <nl-navbar [title]="title"></nl-navbar>
-    </ion-header>
-    <ion-content class="complaint-list csMargin csGrayBackground">
-      <ion-card>
-        <ion-item *ngIf="students.length > 1">
-          <ion-icon name="ios-body-outline" item-left large color="primary"></ion-icon>
-          <ion-label color="primary">Child Name</ion-label>
-          <custom-select item-content [(ngModel)]="child" (ngModelChange)="selectChild($event)">
-            <ion-option *ngFor="let student of students" [value]="student">{{student.name}}</ion-option>
-          </custom-select>
-        </ion-item>
-      </ion-card>
-      <ion-list class="no-comment" *ngIf="noTimetable">
-        <ion-icon name="bookmarks"></ion-icon>
-        <br>NO RECORD FOUND
-      </ion-list>
-    </ion-content>
-  `
+  templateUrl: 'timetable.html'
 })
 
 export class TimetablePage implements OnInit {
@@ -33,6 +14,12 @@ export class TimetablePage implements OnInit {
   public students;
   public noTimetable: boolean = false;
   public child;
+  public timeTable;
+  public timeTableMonday;
+  public date=new Date();
+  public today=this.date.getDay();
+  public dayNumber=this.today-1;
+  public dayArray=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
   constructor(private timetable: HomeworkService,
               private nl: CustomService,
@@ -50,14 +37,19 @@ export class TimetablePage implements OnInit {
     this.getTimetable(student.standardId);
   }
 
+  
   getTimetable(standardId) {
     this.nl.showLoader();
     this.timetable.getTimetable(standardId).subscribe((res) => {
       this.nl.hideLoader();
       if (res.status === 204) {
         this.noTimetable = true;
+        console.log("notimetable");
       } else {
-        console.log("Timetable")
+        console.log("DFDFDF", res);
+        this.timeTable = res;
+       
+        
       }
     }); 
   }

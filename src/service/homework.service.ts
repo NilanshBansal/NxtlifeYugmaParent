@@ -43,7 +43,7 @@ export class HomeworkService {
 
   public getTimetable(standardId) {
     this.serverUrl = this.configuration.Server;
-    return this.http.get(this.serverUrl + "/" + standardId)
+    return this.http.get(this.serverUrl + "/" +  standardId )
                     .map(this.extractData)
                     .catch(this.handleError);
   }

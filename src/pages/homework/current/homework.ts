@@ -3,6 +3,8 @@ import { HomeworkService } from '../../../service/homework.service';
 import { CustomService } from '../../../service/custom.service';
 import { ParentInfo } from '../../../service/parentInfo';
 import * as _ from 'underscore';
+import { FileOpener } from '@ionic-native/file-opener';
+
 
 @Component({
   selector: 'current-homework',
@@ -18,11 +20,13 @@ export class CurrentHomework implements OnInit {
   public currentPage = 1;
   public standardId;
   public NoHomework = false;
+  public baseUrl = localStorage.getItem("fileUrl") + "/";
   monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
   constructor(private hw : HomeworkService,
               public parentInfo: ParentInfo,
-              public nl: CustomService) {
+              public nl: CustomService,
+              private fileOpener: FileOpener) {
 
   }
 
@@ -103,5 +107,18 @@ export class CurrentHomework implements OnInit {
   showEmptyMsg(val) {
     this.NoHomework = val;
   }
+
+
+  viewPdf(path){
+    console.log(this.baseUrl + path);
+    /*this.fileOpener.open(this.baseUrl + path, 'application/pdf')
+  .then(() => alert('File is opened'))
+  .catch(e => alert(e));*/
+ // window.open('https://www.googleapis.com/download/storage/v1/b/srgs-blr/o/homework%2f7985433226911368073Test.pdf?alt=media', '_system');
+  window.open(this.baseUrl + path, '_system');
+  
+}
+
+
 
 }

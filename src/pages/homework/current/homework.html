@@ -20,6 +20,10 @@
       <div>
         <b>{{a.subjectName}}</b>
         <p>{{a.description}}</p>
+        <div *ngIf="a.fileTimestamp">
+          <div *ngIf="a.fileOriginalName.indexOf('jpg')!=-1 || a.fileTimestamp.indexOf('png')!=-1" style="text-decoration: underline;color: blue;" (click)="viewImage(a.fileTimestamp)" tappable>View Image</div>
+          <div *ngIf="a.fileOriginalName.indexOf('pdf')!=-1" style="text-decoration: underline;color: blue;" (click)="viewPdf(a.fileTimestamp)" tappable>Download PDf</div>
+        </div>
       </div>
     </ion-card-content>
     <ion-item>

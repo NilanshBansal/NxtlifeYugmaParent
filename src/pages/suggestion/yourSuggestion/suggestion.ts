@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from 'ionic-angular';
+import { ModalController, Events } from 'ionic-angular';
 
 // import service
 import { CustomService } from '../../../service/custom.service';
@@ -8,6 +8,10 @@ import { Configuration } from '../../../service/app.constants';
 
 // import Component
 import { ComplaintPage } from '../../complaint/complaint';
+
+//pouchdb service
+import { PouchDbService } from '../../../service/pouchdbservice';
+
 
 @Component({
   selector: 'your-suggestion',
@@ -25,9 +29,11 @@ export class YourSuggestion extends ComplaintPage {
   constructor(public nl: CustomService,
               public con: Configuration,
               public modalCtrl: ModalController,
-              public c: ComplaintSuggestion) {
-    super(modalCtrl, nl, c);
-    this.getAllData();
+              public c: ComplaintSuggestion,
+              public pouchdbservice:PouchDbService,
+              public events:Events) {
+    super(modalCtrl, nl, c,pouchdbservice,events);
+    this.getAllData("sgsyour_");
   }
 
   ionViewWillEnter() {

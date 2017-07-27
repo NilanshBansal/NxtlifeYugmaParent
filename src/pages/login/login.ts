@@ -8,6 +8,7 @@ import { AuthService } from '../../service/auth.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CustomService } from '../../service/custom.service';
 import { Notification } from '../../custom-component/notification.component';
+import { PouchDbService } from '../../service/pouchdbservice';
 
 @Component({
   selector: 'page-login',
@@ -42,7 +43,8 @@ export class LoginPage extends Notification implements OnInit {
               public configuration: Configuration,
               public events: Events,
               public nl: CustomService,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public pouchdbservice:PouchDbService) {
     super(navCtrl, nl, loadingCtrl, configuration, alertCtrl);
   }
 
@@ -60,6 +62,8 @@ export class LoginPage extends Notification implements OnInit {
     this.showLoader('Authenticating...');
     this.authService.verifyOtp(data).subscribe((res) => {
       this.otpVerifySuccessfully(res);
+       
+
     }, (err) => {
       this.otpVarifyFailed(err);
     });

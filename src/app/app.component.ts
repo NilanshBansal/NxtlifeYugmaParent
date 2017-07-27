@@ -23,6 +23,7 @@ import { TimetablePage } from '../pages/timetable/timetable';
 import { AuthService } from '../service/auth.service';
 import { NetworkService } from '../service/network.service';
 import { Configuration } from '../service/app.constants';
+import{ PouchDbService } from '../service/pouchdbservice';
 
 @Component({
   templateUrl: 'app.html'
@@ -43,16 +44,24 @@ export class MyApp extends UserSessionManage {
               public appCtrl: App,
               public alertCtrl: AlertController,
               private configuration: Configuration,
-              public networkService: NetworkService) {
-    super(events, menu, appCtrl, authService, alertCtrl, networkService);
+              public networkService: NetworkService,
+              public pouchdbservice:PouchDbService) {
+    super(events, menu, appCtrl, authService, alertCtrl, networkService,pouchdbservice);
     this.initializeApp();
     this.sidebarConfig();
   }
 
   initializeApp() {
+
     this.platform.ready().then(() => {
+      alert("doing");
+      console.log("doing");
+      this.pouchdbservice.initDB();
       StatusBar.styleDefault();
       Splashscreen.hide();
+      
+      
+      
     });
   }
 

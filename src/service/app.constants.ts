@@ -14,14 +14,17 @@ export class Configuration {
   // public baseUrl: string = "https://yugma-testing.appspot.com";
   // public Server: string = "https://yugma-testing.appspot.com";
 
-  public url: string = "https://yugma-demo.ind-cloud.everdata.com";
-  public baseUrl: string = "https://yugma-demo.ind-cloud.everdata.com";
-  public Server: string = "https://yugma-demo.ind-cloud.everdata.com";
+  //  public url: string = "https://yugma-demo.ind-cloud.everdata.com";
+  //  public baseUrl: string = "https://yugma-demo.ind-cloud.everdata.com";
+  //  public Server: string = "https://yugma-demo.ind-cloud.everdata.com";
 
   // public url: string = "https://school-yugma.appspot.com";
   // public baseUrl: string = "https://school-yugma.appspot.com";
   // public Server: string = "https://school-yugma.appspot.com";
 
+  public url: string = "http://nxtlife-testing.ind-cloud.everdata.com";
+  public baseUrl: string = "http://nxtlife-testing.ind-cloud.everdata.com/";
+  public Server: string = "http://nxtlife-testing.ind-cloud.everdata.com/";
 
   constructor(public http: CustomHttpService,
               public cs: CustomService) {

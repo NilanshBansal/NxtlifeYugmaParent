@@ -5,6 +5,8 @@ import { CustomService } from '../../service/custom.service';
 import { ViewEvent } from './view/event';
 import { TimelinePage } from './timeline/timeline';
 import * as moment from 'moment';
+import { PouchDbService } from "../../service/pouchdbservice";
+
 
 @Component({
   selector: 'events',
@@ -31,7 +33,8 @@ export class EventComponent {
 
   constructor(private nl: CustomService,
               public modalCtrl: ModalController,
-              private eventService: EventService) {
+              private eventService: EventService,
+              private pouchdbservice:PouchDbService) {
   }
 
   onViewTitleChanged(title) {
@@ -63,10 +66,19 @@ export class EventComponent {
       if (res.status == 204) {
         this.eventSource.length = 1;
       } else {
-        this.buildArray(res);
+        
+        this.eventSource=this.buildArray(res);
+        this.pouchdbservice.add(this.eventSource,"eve_");
+        alert("see console");
+        console.log("see",this.eventSource);
       }
     }, (err) => {
       this.onError(err);
+      let that =this;
+      this.pouchdbservice.getAllComplaints("eve_").then(function(res){
+        that.eventSource=that.buildArray(res);
+        //console.log(that.eventSource);
+      });
     });
   }
 
@@ -86,8 +98,9 @@ export class EventComponent {
         durationDays: val.durationDays
       });
     });
-    this.eventSource = tmp;
-    console.log(this.eventSource)
+
+    return tmp;
+    
   }
 
   markDisabled (date:Date) {
@@ -95,7 +108,7 @@ export class EventComponent {
     current.setHours(0, 0, 0);
     return date < current;
   }
-
+//nilansh TODO
   openViewEventModal(eventId, index) {
     this.nl.showLoader();
     this.eventService.getEvent(eventId).subscribe((res) => {

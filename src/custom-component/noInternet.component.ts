@@ -27,7 +27,7 @@ export class NoInternet {
 
   constructor(public menuCtrl: MenuController,
               private navCtrl: NavController) {
-      this.menuCtrl.enable(false);
+      //this.menuCtrl.enable(false);
   }
 
 }

@@ -73,6 +73,11 @@ import { SurveyService } from '../service/survey.service';
 import { MessageService } from '../service/message.service';
 import { CommonService } from '../service/common.service';
 import { EventService } from '../service/event.service';
+import { FileOpener } from '@ionic-native/file-opener';
+import { Network } from '@ionic-native/network';
+
+//pouchdb service
+import { PouchDbService } from '../service/pouchdbservice';
 
 @NgModule({
   declarations: [
@@ -176,7 +181,8 @@ import { EventService } from '../service/event.service';
   ],
   providers: [AuthService, Configuration, ParentInfo, ComplaintSuggestion, NetworkService, CustomService,
               EventService, PollService, HomeworkService, CircularService, SurveyService,
-              MessageService, CommonService, Camera, File, Transfer, FileChooser, EventService,
+              MessageService, CommonService, Camera, File, Transfer, FileChooser, EventService,FileOpener,PouchDbService,
+              Network,
               { provide: CustomHttpService, useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) => {
                 return new CustomHttpService(backend, defaultOptions);
               }, deps: [XHRBackend, RequestOptions]}]

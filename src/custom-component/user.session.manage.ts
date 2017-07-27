@@ -5,6 +5,7 @@ import { Dashboard } from '../pages/dashboard/dashboard';
 import { AuthService } from '../service/auth.service';
 import { NetworkService } from '../service/network.service';
 import { AccountPage } from '../pages/account/account';
+import { PouchDbService } from "../service/pouchdbservice";
 
 export class UserSessionManage {
 
@@ -18,7 +19,9 @@ export class UserSessionManage {
               public appCtrl: App,
               public authService: AuthService,
               public alertCtrl: AlertController,
-              public networkService: NetworkService) {
+              public networkService: NetworkService,
+              public pouchdbservice:PouchDbService) {
+
     this.handleEvents();
     this.networkService.checkNetworkStatus();
     this.hasLoggedIn();
@@ -71,12 +74,15 @@ export class UserSessionManage {
 
   public logout() {
     localStorage.clear();
+    alert("deleting pouchdb");
+    this.pouchdbservice.delete();
     this.enableMenu(false);
     this.selectedPage = "";
     this.appCtrl.getRootNav().setRoot(LoginPage);
   }
 
   public offline() {
+    alert("you are offline");
     this.menu.close();
     this.appCtrl.getRootNav().setRoot(NoInternet);
   }

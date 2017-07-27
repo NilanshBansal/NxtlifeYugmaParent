@@ -13,6 +13,7 @@
   </ion-card>
   <ion-card class="csDateCard" *ngFor="let a of homework">
     <ion-card-content>
+
       <div class="csDate">
         <div class="csDateNumber">{{a.dueDate}}</div>
         <div class="csDateMonth" [style.background-color]="a.subjectColor">{{a.dueMonth}}</div>

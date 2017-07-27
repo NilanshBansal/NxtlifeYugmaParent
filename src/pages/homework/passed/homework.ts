@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HomeworkService } from '../../../service/homework.service';
 import { CustomService } from '../../../service/custom.service';
 import { ParentInfo } from '../../../service/parentInfo';
-
+//import { PouchDbService } from '../../../service/pouchdbservice';
 import * as _ from 'underscore';
 
 @Component({
@@ -23,10 +23,14 @@ export class PassedHomework {
 
   constructor(private hw : HomeworkService,
               public parentInfo: ParentInfo,
-              public nl: CustomService) {
+              public nl: CustomService,
+              /*private pouchdbservice:PouchDbService*/) {
 
   }
-
+  
+// deleteDB(){
+//   this.pouchdbservice.delete();
+// }
   ngOnInit() {
     this.students = this.parentInfo.getStudents();
     this.standardId = this.parentInfo.getStudents()[0].standardId;

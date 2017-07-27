@@ -8,6 +8,24 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
+
+/*[
+  {
+    "id": 57,
+    "startTime": "2017-07-26T06:51:01.000Z",
+    "endTime": "2017-07-26T06:51:59.000Z",
+    "title": "dsdsd",
+    "allDay": false,
+    "location": "",
+    "time1": "12:21 PM",
+    "time2": "12:21 PM",
+    "color": "#F44336",
+    "durationDays": 0,
+    "_id": "eve_57",
+    "_rev": "1-9d8f57ef7c2742c585b78e27fdbf3323"
+  }
+]
+*/
 @Injectable()
 export class EventService {
 

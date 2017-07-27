@@ -7,6 +7,8 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { ComplaintSuggestion } from '../../../service/cs.service';
 import { CustomService } from '../../../service/custom.service';
 import * as _ from 'underscore';
+import { PouchDbService } from "../../../service/pouchdbservice";
+
 
 @Component({
   selector: 'new-complaint-modal',
@@ -40,7 +42,8 @@ export class newComplaintModal implements OnInit {
               public formBuilder: FormBuilder,
               public nl: CustomService,
               public c: ComplaintSuggestion,
-              public actionSheetCtrl: ActionSheetController) {
+              public actionSheetCtrl: ActionSheetController,
+              public pouchdbservice:PouchDbService) {
 
   }
 
@@ -209,11 +212,12 @@ export class newComplaintModal implements OnInit {
     });
     actionSheet.present();
   }
-
+//nilansh
   saveComplaint(data) {
     this.nl.showLoader();
     this.c.saveComplaint(data).subscribe((complaint) => {
       this.nl.hideLoader();
+      this.pouchdbservice.addSingle(complaint,"cmp_");
       this.viewCtrl.dismiss(complaint);
       this.nl.showToast(this.nl.getHeaderText() + " created successfully");
     }, (err) => {

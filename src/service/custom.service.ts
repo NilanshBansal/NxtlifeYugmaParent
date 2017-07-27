@@ -48,9 +48,9 @@ export class CustomService {
   }
 
   public onError(err) {
-    this.hideLoader();
+    //this.hideLoader();
     let a = err.split("-")[0];
-    if (a == 401 || a == 0) {
+    if (a == 401 ) {
       this.events.publish("session:expired");
     }
     this.showToast(err);

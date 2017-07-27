@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from 'ionic-angular';
+import { ModalController,Events } from 'ionic-angular';
 
 // import modal
 import { newComplaintModal } from './new/newComplaintModal';
@@ -8,6 +8,11 @@ import { ViewComponent } from './view/viewComplaintModal';
 // import service
 import { CustomService } from '../../service/custom.service';
 import { ComplaintSuggestion } from '../../service/cs.service';
+//import { Network } from '@ionic-native/network';
+//pouchdb service
+import { PouchDbService } from '../../service/pouchdbservice';
+
+
 
 @Component({
   selector: 'complaint-page',
@@ -19,6 +24,8 @@ export class ComplaintPage {
   allData = [];
   EmptyComplaints = false;
   currentPage: number = 1;
+  // url = 'http://nxtlife-testing.ind-cloud.everdata.com//parent/36926627705/complaint/page/1';
+  // opts = { live: true, retry: true };
 
   // set header title
   title: string = "COMPLAINTS";
@@ -28,20 +35,73 @@ export class ComplaintPage {
 
   constructor(public modalCtrl: ModalController,
               public nl: CustomService,
-              public c: ComplaintSuggestion) { }
+              public c: ComplaintSuggestion,
+              public pouchdbservice:PouchDbService,
+              public events: Events
+              ) { }
+ /*syncData(){
+
+          
+db.replicate.from(url).on('complete', function(info) {
+  // then two-way, continuous, retriable sync
+  db.sync(url, opts)
+    .on('change', onSyncChange)
+    .on('paused', onSyncPaused)
+    .on('error', onSyncError);
+}).on('error', onSyncError);;
+
+ }*/
 
   ionViewWillEnter() {
-    this.getAllData();
+    
+    this.getAllData("cmp_");
     this.getCategories();
+//nilansh
+
+
+  //   alert("syncing...");
+  //   this.pouchdbservice.syncData();
+  //   alert("called");
+    
   }
 
-  getAllData() {
+  /*addDb(){
     this.nl.showLoader();
     this.c.getComplaints(this.currentPage).subscribe((res) => {
       this.onSuccess(res);
+      console.log(res);
+      this.pouchdbservice.add(res);
     }, (err) => {
+      console.log("error");
+      alert("error");
       this.nl.onError(err);
     });
+  }*/
+  
+  destroyDb(){
+    this.pouchdbservice.delete();
+  }
+
+  getAllData(stringvar) {
+
+    this.nl.showLoader();
+    this.c.getComplaints(this.currentPage).subscribe((res) => {
+      this.onSuccess(res);
+      console.log(res);
+      this.pouchdbservice.add(res,stringvar);
+      /*alert("finding doc");
+      this.pouchdbservice.findDoc(res,stringvar);*/
+    }, (err) => {
+      alert("error aagya");
+      this.nl.onError(err);
+      let that =this;
+      this.pouchdbservice.getAllComplaints(stringvar).then(function(res){
+        console.log("see res from db");
+        that.allData=res;
+        console.log(that.allData);
+      });
+    });
+    
   }
 
   // its used in new complaint

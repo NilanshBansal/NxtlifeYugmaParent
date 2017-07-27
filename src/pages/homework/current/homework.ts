@@ -116,6 +116,12 @@ export class CurrentHomework implements OnInit {
   .catch(e => alert(e));*/
  // window.open('https://www.googleapis.com/download/storage/v1/b/srgs-blr/o/homework%2f7985433226911368073Test.pdf?alt=media', '_system');
   window.open(this.baseUrl + path, '_system');
+
+  //window.open('https://www.google.com', '_self');   
+  //window.location.assign('https://www.google.com');
+  //window.open('https://www.googleapis.com/download/storage/v1/b/srgs-blr/o/homework%2f7985433226911368073Test.pdf?alt=media', 'Download');   
+  
+  //window.location.href = 'https://www.googleapis.com/download/storage/v1/b/srgs-blr/o/homework%2f7985433226911368073Test.pdf?alt=media';
   
 }
 

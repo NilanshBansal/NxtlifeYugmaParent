@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, App, Events, FabContainer } from 'ionic-angular';
+import { NavController, ModalController, App, Events, FabContainer,Platform } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 
 import { PollPage } from '../poll/poll';
@@ -22,6 +22,9 @@ import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
 import { EventService } from '../../service/event.service';
 import { SurveyService } from '../../service/survey.service';
+//import { Network } from '@ionic-native/network';
+//pouch db service
+import { PouchDbService } from '../../service/pouchdbservice';
 
 @Component({
   selector: 'page-dashboard',
@@ -57,7 +60,15 @@ export class Dashboard {
     homework: HomeworkTabs,
     circular: Circular,
     survey: SurveyListPage
+    
   }
+
+  //pouch db 
+
+
+
+
+  
 
   constructor(public menuCtrl: MenuController,
               public configuration: Configuration,
@@ -68,7 +79,9 @@ export class Dashboard {
               private surveyService : SurveyService ,
               public modalCtrl: ModalController,
               public eventService: EventService,
-              private navCtrl: NavController) {
+              private navCtrl: NavController,
+              private pouchdbservice:PouchDbService,
+              private platform: Platform) {
     this.menuCtrl.enable(true);
     this.configuration.setUrl("dashboard");
   }
@@ -79,8 +92,13 @@ export class Dashboard {
   }
 
   public ionViewWillEnter() {
+    //this.pouchdbservice.initDB();
     this.getDashboardData();
+    
   }
+
+
+
 
   public getDashboardData() {
     this.configuration.setUrl("dashboard");

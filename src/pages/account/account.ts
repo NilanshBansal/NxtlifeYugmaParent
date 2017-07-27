@@ -6,7 +6,8 @@ import { File } from '@ionic-native/file';
 import { AuthService } from '../../service/auth.service';
 import { CustomService } from '../../service/custom.service';
 import { CommonService } from '../../service/common.service';
-import { resetPasswordModal } from '../account/resetpassword/resetpassword'
+import { resetPasswordModal } from '../account/resetpassword/resetpassword';
+import { PouchDbService } from '../../service/pouchdbservice';
 
 @Component({
   selector: 'page-account',
@@ -41,7 +42,8 @@ export class AccountPage {
               public appService: AuthService,
               public commonService: CommonService,
               public actionSheetCtrl: ActionSheetController,
-              public modalCtrl:ModalController) {
+              public modalCtrl:ModalController,
+              public pouchdbservice:PouchDbService) {
   }
 
   ionViewWillEnter() {
@@ -58,6 +60,7 @@ export class AccountPage {
   }
 
   logout() {
+    
     this.events.publish('user:logout');
   }
 

@@ -49,11 +49,11 @@ export class resetPasswordModal implements OnInit {
     } else {
         console.log("DSDs", data)
         this.nl.showLoader();
-        this.appService.resetPassword(data).subscribe((res) => {
-          this.onSuccess();
-        }, (err) => {
-        this.onError(err);
-      });
+      //   this.appService.resetPassword(data).subscribe((res) => {
+      //     this.onSuccess();
+      //   }, (err) => {
+      //   this.onError(err);
+      // });
     }
   }
 

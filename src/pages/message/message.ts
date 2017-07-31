@@ -9,6 +9,8 @@ import { CustomService } from '../../service/custom.service';
 import { MessageService } from '../../service/message.service';
 import { AuthService } from '../../service/auth.service';
 import * as _ from 'underscore';
+import { PouchDbService } from "../../service/pouchdbservice";
+
 
 @Component({
   selector: 'message',
@@ -28,7 +30,8 @@ export class MessagePage {
               public alertCtrl: AlertController,
               public toastCtrl: ToastController,
               public commonService: AuthService,
-              public nl: CustomService) {
+              public nl: CustomService,
+              public pouchdbservice:PouchDbService) {
     this.sockJsConnection();
   }
 
@@ -72,10 +75,15 @@ export class MessagePage {
       } else {
         this.buildData(res);
       }
+      this.pouchdbservice.add(this.allData,"msg_");
       this.nl.hideLoader();
     }, (err) => {
       this.onError(err);
-    })
+      let that=this;
+      this.pouchdbservice.getAllComplaints("msg_").then(function(result){
+        that.buildData(result);
+      });
+    });
   }
 
   public buildData(data) {
@@ -105,14 +113,41 @@ export class MessagePage {
 
   public openViewModal(message) {
     this.nl.showLoader();
+    let that=this;
     this.messageService.getMessage(message.id, 1).subscribe((res) => {
+      console.log("see res : ",res);
+      this.pouchdbservice.addArrayOfObjectsToDoc(res,message.id,"msgchats_");
       this.nl.hideLoader();
       let viewModal = this.modalCtrl.create(ViewMessagePage, {id: message.id, messages: res, conversation: message});
       viewModal.present();
     }, (err) => {
       this.nl.onError(err);
+      this.pouchdbservice.findDoc(message.id,"msgchats_").then(function(result){
+        console.log("see result from db: ",result);
+        console.log("id: ",message.id);
+        console.log("messages: ",result);
+        console.log("conversation: ",message);
+        var outputArray = that.convertObjToArray(result);
+        console.log("data from db: ", outputArray);
+        let viewModal = that.modalCtrl.create(ViewMessagePage, {id: message.id, messages: outputArray, conversation: message});
+      viewModal.present();
+      });
     });
   }
+
+  convertObjToArray(res) {
+    var resArray = [];
+    var len = res["length"];
+    for (var i = 0; i < len; i++) {
+      resArray[i] = res[i];
+    }
+    if (len == 0) {
+      alert("len 0");
+      resArray = [];
+    }
+    return resArray;
+  }
+
 
   public doRefresh(refresher) {
     setTimeout(() => {
@@ -152,6 +187,7 @@ export class MessagePage {
         }
       });
       this.allData = this.allData.concat(data);
+      this.pouchdbservice.addWithoutDelete(data,"msg_");
       infiniteScroll.complete();
     }, (err) => {
       infiniteScroll.complete();
@@ -180,12 +216,25 @@ export class MessagePage {
   }
 
   public closeConversation(conversation) {
+    let that=this;
+    var foundConversation;
     this.nl.showLoader();
     this.messageService.closeConversation(conversation.id).subscribe((res) => {
       console.log("res", res);
       this.nl.hideLoader();
       this.nl.showToast("Conversation successfully closed");
       conversation.isClosed = true;
+      this.pouchdbservice.findDoc(conversation.id,"msg_").then(function(doc){
+        foundConversation=doc;
+        return that.pouchdbservice.deleteDoc(doc);
+      }).then(function(arg){
+        console.log("see found",foundConversation);
+        foundConversation.isClosed="true";
+        delete foundConversation["_rev"];
+        delete foundConversation["_id"];
+        
+        that.pouchdbservice.addSingle(foundConversation,"msg_",conversation.id);
+      });
     }, (err) => {
       this.nl.onError(err);
     })

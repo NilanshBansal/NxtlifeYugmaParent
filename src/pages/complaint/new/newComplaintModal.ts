@@ -76,6 +76,8 @@ export class newComplaintModal implements OnInit {
   ngOnInit() {
     this.loadForm();
     this.headerTitle = "New " + this.nl.getHeaderText();
+    alert("please see console");
+    console.log("see : ",this.headerTitle);
     this.students = this.parentInfo.getStudents();
     if (this.students.length === 1) {
       this.child = this.students[0];  // Auto select for one child
@@ -214,10 +216,21 @@ export class newComplaintModal implements OnInit {
   }
 //nilansh
   saveComplaint(data) {
+    var stringvar;
     this.nl.showLoader();
     this.c.saveComplaint(data).subscribe((complaint) => {
       this.nl.hideLoader();
-      this.pouchdbservice.addSingle(complaint,"cmp_");
+      if(this.headerTitle=="New complaint")
+      {
+        stringvar="cmp_";
+      }
+      if(this.headerTitle=="New suggestion")
+      {
+        stringvar="sgsyour_";
+      }
+      
+      alert("adding new :"+ stringvar);
+      this.pouchdbservice.addSingle(complaint,stringvar,complaint["id"]);
       this.viewCtrl.dismiss(complaint);
       this.nl.showToast(this.nl.getHeaderText() + " created successfully");
     }, (err) => {

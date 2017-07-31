@@ -4,16 +4,19 @@ import { CommentModal } from '../commentModal';
 // import service
 import { CustomService } from '../../service/custom.service';
 import { ComplaintSuggestion } from '../../service/cs.service';
+import { PouchDbService } from "../../service/pouchdbservice";
 
 export class EditComplaintStatusAndComment {
 
   complaint;
+  stringvar;
 
   constructor(public modalCtrl: ModalController,
-              public nl: CustomService,
-              public c: ComplaintSuggestion,
-              public actionSheetCtrl: ActionSheetController,
-              public alertCtrl: AlertController) { }
+    public nl: CustomService,
+    public c: ComplaintSuggestion,
+    public actionSheetCtrl: ActionSheetController,
+    public alertCtrl: AlertController,
+    public pouchdbservice: PouchDbService) { }
 
   onSuccess(res) {
     this.nl.hideLoader();
@@ -24,6 +27,7 @@ export class EditComplaintStatusAndComment {
     this.nl.onError(err);
   }
 
+
   updateData(data) {
     console.log("data", data);
     this.complaint.statusName = data.statusName;
@@ -33,29 +37,65 @@ export class EditComplaintStatusAndComment {
   }
 
   complaintReopen(complaint, data) {
+    if(this.nl.getHeaderText()=="complaint")
+    {
+      this.stringvar="cmp_";
+    }
+    if(this.nl.getHeaderText()=="suggestion")
+    {
+      this.stringvar="sgsyour_";
+    }
     this.nl.showLoader();
     if (complaint.anonymous) {
       data["anonymous"] = true;
     } else {
       data["anonymous"] = false;
     }
+    let that=this;
     this.c.reopenComplaint(complaint.id, data).subscribe((res) => {
-      this.onSuccess(res);
+      console.log("see res: ",res);
+      if (res) {
+        this.onSuccess(res);
+        this.pouchdbservice.findDoc(res["id"],this.stringvar).then(function(doc){
+          console.log("found ",doc);
+          return that.pouchdbservice.deleteDoc(doc);
+        }).then(function(arg){
+          console.log("deleted",arg);
+          that.pouchdbservice.addSingle(res,that.stringvar,res["id"]);
+        },(error)=>{console.log("error is: ",error);});
+      }
     }, (err) => {
       this.onError(err);
     });
   }
 
   complaintClose(complaint, reason) {
+    if(this.nl.getHeaderText()=="complaint")
+    {
+      this.stringvar="cmp_";
+    }
+    if(this.nl.getHeaderText()=="suggestion")
+    {
+      this.stringvar="sgsyour_";
+    }
     this.nl.showLoader();
+    let that=this;
     if (complaint.anonymous) {
       reason["anonymous"] = true;
     } else {
       reason["anonymous"] = false;
     }
     this.c.closeComplaint(complaint.id, reason).subscribe((res) => {
+      console.log("see res: ",res);
       if (res) {
         this.onSuccess(res);
+        this.pouchdbservice.findDoc(res["id"],this.stringvar).then(function(doc){
+          console.log("found ",doc);
+          return that.pouchdbservice.deleteDoc(doc);
+        }).then(function(arg){
+          console.log("deleted",arg);
+          that.pouchdbservice.addSingle(res,that.stringvar,res["id"]);
+        },(error)=>{console.log("error is: ",error);});
       }
     }, (err) => {
       this.onError(err);
@@ -63,10 +103,28 @@ export class EditComplaintStatusAndComment {
   }
 
   complaintSatisfy(complaint) {
+    if(this.nl.getHeaderText()=="complaint")
+    {
+      this.stringvar="cmp_";
+    }
+    if(this.nl.getHeaderText()=="suggestion")
+    {
+      this.stringvar="sgsyour_";
+    }
+    //nilansh 
     this.nl.showLoader();
+    let that=this;
     this.c.satisfiedComplaint(complaint.id).subscribe((res) => {
+     console.log("see res: ",res);
       if (res) {
         this.onSuccess(res);
+        this.pouchdbservice.findDoc(res["id"],this.stringvar).then(function(doc){
+          console.log("found ",doc);
+          return that.pouchdbservice.deleteDoc(doc);
+        }).then(function(arg){
+          console.log("deleted",arg);
+          that.pouchdbservice.addSingle(res,that.stringvar,res["id"]);
+        },(error)=>{console.log("error is: ",error);});
       }
     }, (err) => {
       this.onError(err);
@@ -84,7 +142,7 @@ export class EditComplaintStatusAndComment {
       }],
       buttons: [{
         text: 'Cancel',
-        handler: (data) => {}
+        handler: (data) => { }
       }, {
         text: 'Reopen It!!',
         handler: (data) => {
@@ -130,7 +188,7 @@ export class EditComplaintStatusAndComment {
       }],
       buttons: [{
         text: 'No',
-        handler: data => {}
+        handler: data => { }
       }, {
         text: 'Yes',
         handler: (data) => {
@@ -158,7 +216,7 @@ export class EditComplaintStatusAndComment {
         text: 'Cancel',
         icon: 'md-close',
         role: 'cancel',
-        handler: () => {}
+        handler: () => { }
       }]
     });
     actionSheet.present();
@@ -177,7 +235,7 @@ export class EditComplaintStatusAndComment {
         text: 'CANCEL',
         icon: 'md-close',
         role: 'cancel',
-        handler: () => {}
+        handler: () => { }
       }]
     });
     actionSheet.present();
@@ -196,21 +254,79 @@ export class EditComplaintStatusAndComment {
         text: 'Cancel',
         icon: 'md-close',
         role: 'cancel',
-        handler: () => {}
+        handler: () => { }
       }]
     });
     actionSheet.present();
   }
 
   openCommentModal(complaint) {
+    if (this.nl.getHeaderText() == "complaint") {
+      this.stringvar = "cmp";
+    }
+    if (this.nl.getHeaderText() == "suggestion") {
+      this.stringvar = "sgsyour";
+    }
     this.nl.showLoader();
     this.c.getComments(complaint.id).subscribe((response) => {
       this.nl.hideLoader();
-      let Comment = this.modalCtrl.create(CommentModal, {comments: response, data: complaint});
+
+      if (response.status == 204) {
+        response = [];
+      }
+
+
+      this.pouchdbservice.addArrayOfObjectsToDoc(response, complaint.id, this.stringvar + "cmt_");
+      // console.log("see res", response);
+      // console.log("see complaint", complaint);
+      // console.log("seee header text: ", this.nl.getHeaderText());
+      let Comment = this.modalCtrl.create(CommentModal, { comments: response, data: complaint });
       Comment.present();
     }, (err) => {
       this.nl.onError(err);
+      let that = this;
+      this.pouchdbservice.findDoc(complaint.id, this.stringvar + "cmt_").then(function (res) {
+
+        var outputArray = that.convertObjToArray(res);
+        console.log("data from db: ", outputArray);
+        let Comment = that.modalCtrl.create(CommentModal, { comments: outputArray, data: complaint });
+        Comment.present();
+      });
     });
+    /*//nilansh 
+        this.nl.showLoader();
+        this.c.getCommentsObjectWithHeader(complaint.id).subscribe((response)=>{
+          this.nl.hideLoader();
+          alert("see console response on success");
+          console.log(response);
+          console.log(response.json());
+          var temp=response.json();
+          console.log(temp.status);
+          this.pouchdbservice.addSingle(response,"cmpcmt_",complaint.id);
+          let Comment = this.modalCtrl.create(CommentModal, {comments: response.json(), data: complaint});
+          Comment.present();
+        },(err)=>{
+          this.nl.onError(err);
+          let that =this;
+          this.pouchdbservice.findDoc(complaint.id,"cmpcmt_").then(function(res){
+            alert("see after fetching:");
+            console.log("qty going in comments: i.e. res: ",res);
+          });
+        });*/
+
+  }
+
+  convertObjToArray(res) {
+    var resArray = [];
+    var len = res["length"];
+    for (var i = 0; i < len; i++) {
+      resArray[i] = res[i];
+    }
+    if (len == 0) {
+      alert("len 0");
+      resArray = [];
+    }
+    return resArray;
   }
 
 }

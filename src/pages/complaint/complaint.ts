@@ -23,6 +23,7 @@ export class ComplaintPage {
 
   allData = [];
   EmptyComplaints = false;
+  stringvar;
   currentPage: number = 1;
   // url = 'http://nxtlife-testing.ind-cloud.everdata.com//parent/36926627705/complaint/page/1';
   // opts = { live: true, retry: true };
@@ -39,47 +40,17 @@ export class ComplaintPage {
               public pouchdbservice:PouchDbService,
               public events: Events
               ) { }
- /*syncData(){
 
-          
-db.replicate.from(url).on('complete', function(info) {
-  // then two-way, continuous, retriable sync
-  db.sync(url, opts)
-    .on('change', onSyncChange)
-    .on('paused', onSyncPaused)
-    .on('error', onSyncError);
-}).on('error', onSyncError);;
-
- }*/
 
   ionViewWillEnter() {
     
     this.getAllData("cmp_");
     this.getCategories();
-//nilansh
-
-
-  //   alert("syncing...");
-  //   this.pouchdbservice.syncData();
-  //   alert("called");
-    
+   
   }
 
-  /*addDb(){
-    this.nl.showLoader();
-    this.c.getComplaints(this.currentPage).subscribe((res) => {
-      this.onSuccess(res);
-      console.log(res);
-      this.pouchdbservice.add(res);
-    }, (err) => {
-      console.log("error");
-      alert("error");
-      this.nl.onError(err);
-    });
-  }*/
-  
   destroyDb(){
-    this.pouchdbservice.delete();
+    this.pouchdbservice.destroyDb();
   }
 
   getAllData(stringvar) {
@@ -87,24 +58,19 @@ db.replicate.from(url).on('complete', function(info) {
     this.nl.showLoader();
     this.c.getComplaints(this.currentPage).subscribe((res) => {
       this.onSuccess(res);
-      console.log(res);
+      console.log("see complaints res: ",res);
       this.pouchdbservice.add(res,stringvar);
-      /*alert("finding doc");
-      this.pouchdbservice.findDoc(res,stringvar);*/
+      
     }, (err) => {
-      alert("error aagya");
       this.nl.onError(err);
       let that =this;
       this.pouchdbservice.getAllComplaints(stringvar).then(function(res){
-        console.log("see res from db");
         that.allData=res;
-        console.log(that.allData);
       });
     });
     
   }
 
-  // its used in new complaint
   getCategories() {
     this.c.getCategories().subscribe((categories) => {
       this.c.storeCategories(categories);
@@ -140,6 +106,7 @@ db.replicate.from(url).on('complete', function(info) {
   openViewModal(viewData, index): void {
     let openViewModal = this.modalCtrl.create(ViewComponent, {viewData: viewData});
     openViewModal.onDidDismiss((res) => {
+      console.log(res);
       this.allData[index] = res;
     })
     openViewModal.present();
@@ -167,6 +134,7 @@ db.replicate.from(url).on('complete', function(info) {
   loadMoreData(infiniteScroll) {
     this.c.getComplaints(this.currentPage).subscribe((res) => {
       infiniteScroll.complete();
+      console.log("see res after load more 11111: ",res);
       this.loadDataSuccess(res);
     }, (err) => {
       infiniteScroll.complete();
@@ -179,7 +147,23 @@ db.replicate.from(url).on('complete', function(info) {
       this.currentPage -= 1;
       return;
     }
+    if(this.nl.getHeaderText()=="complaint")
+    {
+      this.stringvar="cmp_";
+    }
+    if(this.nl.getHeaderText()=="suggestion")
+    {
+      this.stringvar="sgsyour_";
+    }
+    if(this.nl.getHeaderText()=="appreciation")
+    {
+      this.stringvar="apreyour_";
+    }
+
+    
     this.allData = this.allData.concat(res);
+    this.pouchdbservice.addWithoutDelete(res,this.stringvar);
+  
   }
 
   loadDataError(err) {

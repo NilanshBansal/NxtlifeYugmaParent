@@ -75,7 +75,7 @@ export class UserSessionManage {
   public logout() {
     localStorage.clear();
     alert("deleting pouchdb");
-    this.pouchdbservice.delete();
+    this.pouchdbservice.destroyDb();
     this.enableMenu(false);
     this.selectedPage = "";
     this.appCtrl.getRootNav().setRoot(LoginPage);

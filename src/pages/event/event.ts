@@ -32,9 +32,9 @@ export class EventComponent {
   }
 
   constructor(private nl: CustomService,
-              public modalCtrl: ModalController,
-              private eventService: EventService,
-              private pouchdbservice:PouchDbService) {
+    public modalCtrl: ModalController,
+    private eventService: EventService,
+    private pouchdbservice: PouchDbService) {
   }
 
   onViewTitleChanged(title) {
@@ -43,14 +43,14 @@ export class EventComponent {
 
   onTimeSelected(ev) {
     console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
-          (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
+      (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
     this.hasEvents = ev.events !== undefined && ev.events.length !== 0;
     this.currentDate = ev.selectedTime.getFullYear() + "-" + (ev.selectedTime.getMonth() + 1);
     console.log("AAAAA", this.currentDate);
     this.clickDate = ev.selectedTime;
   }
 
-  onCurrentDateChanged(event:Date) {
+  onCurrentDateChanged(event: Date) {
     this.currentDate = event.getFullYear() + "-" + (event.getMonth() + 1);
   }
 
@@ -64,19 +64,21 @@ export class EventComponent {
   getAllEvents(eventMonth) {
     this.eventService.GetEvents(eventMonth).subscribe((res) => {
       if (res.status == 204) {
+        //TODO nilansh
+       // this.eventSource=[];
         this.eventSource.length = 1;
       } else {
-        
-        this.eventSource=this.buildArray(res);
-        this.pouchdbservice.add(this.eventSource,"eve_");
+
+        this.eventSource = this.buildArray(res);
+        this.pouchdbservice.add(this.eventSource, "eve_");
         alert("see console");
-        console.log("see",this.eventSource);
+        console.log("see", this.eventSource);
       }
     }, (err) => {
       this.onError(err);
-      let that =this;
-      this.pouchdbservice.getAllComplaints("eve_").then(function(res){
-        that.eventSource=that.buildArray(res);
+      let that = this;
+      this.pouchdbservice.getAllComplaints("eve_").then(function (res) {
+        that.eventSource = that.buildArray(res);
         //console.log(that.eventSource);
       });
     });
@@ -100,27 +102,32 @@ export class EventComponent {
     });
 
     return tmp;
-    
+
   }
 
-  markDisabled (date:Date) {
+  markDisabled(date: Date) {
     var current = new Date();
     current.setHours(0, 0, 0);
     return date < current;
   }
-//nilansh TODO
+
   openViewEventModal(eventId, index) {
     this.nl.showLoader();
     this.eventService.getEvent(eventId).subscribe((res) => {
+      this.pouchdbservice.addSingleWithDelete(res, "eveview_",res["id"]);
       this.onSuccess(res, eventId);
     }, (err) => {
+      let that = this;
       this.onError(err);
+      this.pouchdbservice.findDoc(eventId, "eveview_").then(function (res) {
+        that.onSuccess(res, res.id);
+      });
     });
   }
 
   onSuccess(data, eventId) {
     this.nl.hideLoader();
-    let viewModal = this.modalCtrl.create(ViewEvent, {eventId: eventId, event: data, clickDate: data.start});
+    let viewModal = this.modalCtrl.create(ViewEvent, { eventId: eventId, event: data, clickDate: data.start });
     viewModal.present();
   }
 

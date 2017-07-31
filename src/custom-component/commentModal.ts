@@ -6,6 +6,7 @@ import { ViewController, ToastController, NavParams, Content } from 'ionic-angul
 import { ComplaintSuggestion } from '../service/cs.service';
 import { CustomService } from '../service/custom.service';
 import { AuthService } from '../service/auth.service';
+import { PouchDbService } from "../service/pouchdbservice";
 
 @Component({
   selector: 'comment',
@@ -56,6 +57,7 @@ export class CommentModal {
   complaintId: number;
   notPost = true;
   data;
+  stringvar;
   //nilansh
   public count=0;
   title = "COMMENTS";
@@ -72,7 +74,8 @@ export class CommentModal {
               private renderer: Renderer,
               private elementRef: ElementRef,
               public appService: AuthService,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController,
+              private pouchdbservice:PouchDbService) {
     this.initForm();
     this.getData();
     this.sockJsConnection();
@@ -106,9 +109,10 @@ export class CommentModal {
   }
 
   getData() {
+    alert("inside get data func");
     this.userId = localStorage.getItem("id");
     let data = this.navParams.get("comments");
-    if (data.status === 204) {
+    if (data.status === 204 ) {
       this.emptyComments = true;
     } else {
       this.emptyComments = false;
@@ -148,9 +152,16 @@ export class CommentModal {
     this.viewCtrl.dismiss();
   }
 
- 
-
   postComment() {
+    if(this.nl.getHeaderText()=="complaint")
+    {
+      this.stringvar="cmp";
+    }
+    if(this.nl.getHeaderText()=="suggestion")
+    {
+      this.stringvar="sgsyour";
+    }
+    
     this.content.scrollToBottom();
     if (!this.commentForm.valid) {
       console.log("not valid form");
@@ -163,12 +174,14 @@ export class CommentModal {
         this.nl.chatIncrement=this.count;
         this.notPost = true;
         if (!this.comments) { this.comments = []; }
+        
         this.comments.push({
           createdAt: new Date(),
           employeeName: null,
           comment: this.commentForm.value.comment,
           parentId: localStorage.getItem("id")
         });
+        
         this.commentForm.reset();
         if (this.data.anonymous) {
           this.commentForm.patchValue({"anonymous": true});
@@ -176,6 +189,33 @@ export class CommentModal {
           this.commentForm.patchValue({"anonymous": false});
         }
         this.content.scrollToBottom();
+        var obj;
+        var len;
+        //POUCH DB
+        let that=this;
+        this.pouchdbservice.findDoc(this.data.id,this.stringvar+"cmt_").then(function(result){
+          console.log("found",result);
+          len=result["length"];
+          obj=result;
+          
+          return that.pouchdbservice.deleteDoc(result);
+      
+        }).then(function(argument){
+          obj[len]={};
+          obj[len]["createdAt"]=that.comments[that.comments.length-1].createdAt.toString();
+          obj[len]["comment"]=that.comments[that.comments.length-1].comment;
+          obj[len]["parentId"]=parseInt(that.comments[that.comments.length-1].parentId);
+          obj[len]["employeeName"]=that.comments[that.comments.length-1].employeeName;
+          obj[len]["parentName"]="";
+          obj[len]["employeeId"]="";
+          obj[len]["employeeNickName"]="";
+          obj[len]["parentPicUrl"]="";
+          
+          obj["length"]=len+1;
+          delete obj["_rev"];
+          that.pouchdbservice.addSingle(obj,that.stringvar+"cmt_",that.data.id);
+        },(error)=>{console.log("error is: ",error)});
+
       }, (err) => {
         this.nl.errMessage();
         this.notPost = true;

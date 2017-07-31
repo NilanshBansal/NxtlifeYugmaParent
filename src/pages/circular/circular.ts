@@ -3,6 +3,7 @@ import { CircularService } from './../../service/circular.service';
 import { ViewCircular } from './view/view';
 import { ModalController } from 'ionic-angular';
 import { CustomService } from './../../service/custom.service';
+import { PouchDbService } from "../../service/pouchdbservice";
 
 @Component({
   selector: 'circular-parent',
@@ -19,7 +20,8 @@ export class Circular {
 
   constructor(private circularService: CircularService,
               private modalCtrl: ModalController,
-              private nl: CustomService) { }
+              private nl: CustomService,
+              public pouchdbservice:PouchDbService) { }
 
   ionViewWillEnter() {
     this.getCirculars();
@@ -29,19 +31,32 @@ export class Circular {
     this.nl.showLoader();
     this.circularService.getAllCirculars(1).subscribe((res) => {
       this.onSuccess(res);
+      this.pouchdbservice.add(res,"cir_");      
     }, (err) => {
       this.onError(err);
+      let that =this;
+      this.pouchdbservice.getAllComplaints("cir_").then(function(result){
+        that.circulars=result;
+      });
     });
   }
 
   public viewCircular(id) {
+    let that=this;
     this.nl.showLoader();
     this.circularService.getParticularCirculars(id).subscribe((res) => {
       this.nl.hideLoader();
+      this.pouchdbservice.addSingleWithDelete(res, "cirview_",res["id"]);
+      console.log("see : ",res);
       let createNew = this.modalCtrl.create(ViewCircular, { circular: res });
       createNew.present();
     }, (err) => {
       this.onError(err);
+      this.pouchdbservice.findDoc(id, "cirview_").then(function (result) {
+        console.log("see :",result);
+        let createNew = that.modalCtrl.create(ViewCircular, { circular: result });
+      createNew.present();
+      });
     });
   }
 
@@ -94,6 +109,7 @@ export class Circular {
       return;
     }
     this.circulars = this.circulars.concat(res);
+    this.pouchdbservice.addWithoutDelete(res,"cir_");
   }
 
   public loadDataError(err) {

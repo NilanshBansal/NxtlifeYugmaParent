@@ -13,8 +13,7 @@ export class PouchDbService {
     private _db;
     private allComplaints: any[] = [];
     private getComplaints: any[] = [];
-    // url = 'http://nxtlife-testing.ind-cloud.everdata.com//parent/36926627705/complaint/page/1';
-    //opts = { live: true, retry: true };
+
 
     initDB() {
         PouchDB.plugin(cordovaSqlitePlugin);
@@ -22,11 +21,9 @@ export class PouchDbService {
     }
 
     add(res, stringvar) {
-        alert("deleting before addding " + stringvar);
-        //this.delete_all(stringvar);
         //code for deleting
-
-        let that=this;
+        console.log("inside add",res);
+        let that = this;
         this._db.allDocs({
             include_docs: true,
             startkey: stringvar,
@@ -36,70 +33,76 @@ export class PouchDbService {
                 return that._db.remove(row.doc);
             }));
         }).then(function (arrayOfResults) {
-            console.log("All docs have really been removed() now");
 
             that.allComplaints = res;
+            console.log("see res",that.allComplaints);
+            var len = that.allComplaints.length;
+            for (var i = 0; i < len; i++) {
+                that.allComplaints[i]["_id"] = (stringvar + that.allComplaints[i]["id"].toString());
+                that._db.put(that.allComplaints[i]);
+            }
 
-        var len = that.allComplaints.length;
+        });
+    }
+
+    addWithoutDelete(res, stringvar) {
+        var moreComplaintsArray=[];
+        moreComplaintsArray=res;
+        var len = res.length;
+        alert("length is: "+ len);
         for (var i = 0; i < len; i++) {
-            that.allComplaints[i]["_id"] = (stringvar + that.allComplaints[i]["id"].toString());
-            that._db.put(that.allComplaints[i]);
+            moreComplaintsArray[i]["_id"] = (stringvar + res[i]["id"].toString());
+            this._db.put(moreComplaintsArray[i]);
         }
 
+    }
 
-
-            //done
+    addSingle(obj, stringvar, id) {
+        obj["_id"] = stringvar + id.toString();
+        console.log("onject in adding is: ", obj);
+        this._db.put(obj).then(function (func) {
+            console.log("success adding", func);
+        }, (err) => {
+            console.log("add single error", err);
         });
+    }
 
+    addSingleWithDelete(obj, stringvar, id) {
+        let that = this;
+        this._db.get(stringvar + id).then(function (doc) {
+            that._db.remove(doc);
+        }).then(function (result) {
+            that.addSingle(obj, stringvar, id);
 
-        /*this.allComplaints = res;
+        }, (err) => {
+            console.log("in error");
+            this.addSingle(obj, stringvar, id);
 
-        var len = this.allComplaints.length;
+        });
+    }
+
+    addArrayOfObjectsToDoc(response, id, stringvar) {
+        //deleting earlier one
+        //let that = this;
+        var obj = {};
+        var len = response.length;
+        obj["length"] = len;
+
         for (var i = 0; i < len; i++) {
-            this.allComplaints[i]["_id"] = (stringvar + this.allComplaints[i]["id"].toString());
-            this._db.put(this.allComplaints[i]);
-            alert("added");
-        }*/
+            obj[i] = response[i];
+        }
+        this.addSingleWithDelete(obj, stringvar, id);
+        /*this._db.get(stringvar + id).then(function (doc) {
+            that._db.remove(doc);
+        }).then(function (result) {
+            that.addSingle(obj, stringvar, id);
 
+        }, (err) => {
+            console.log("in error");
+            this.addSingle(obj, stringvar, id);
+
+        });*/
     }
-
-    addSingle(obj,stringvar)
-    {
-        obj["_id"]=stringvar+obj["id"].toString();
-        console.log("see object after adding " , obj);
-        this._db.put(obj);
-        alert("added");
-    }
-
-    /*syncData() {
-        // var remote = new PouchDB(this.url, {
-        //     ajax: {
-        //         headers: new Headers({
-        //             'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-        //         })
-        //     }
-        // });
-        var remote = new PouchDB(this.url, {
-            ajax: { headers: new Headers({
-                    'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-                }) }
-        });
-
-        var options = new RequestOptions({
-            'headers': new Headers({
-                'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-            })
-        })
-        this._db.replicate.from(remote).on('complete', function (info) {
-            // then two-way, continuous, retriable sync
-            this._db.sync(this.url, this.opts)
-                .on('change', alert("onSyncChange"))
-                .on('paused', alert("onSyncPaused"))
-                .on('error', alert("onSyncError"));
-        }).on('error', alert("onSyncError"));
-    
-    }
-*/
 
     getAllComplaints(stringvar) {
         alert("getting all " + stringvar);
@@ -119,33 +122,7 @@ export class PouchDbService {
 
     delete_all(stringvar) {
 
-        //working code
-        //  let that =this;
-        // return this._db.allDocs({ 
-        //   include_docs: true,  
-        //   startkey: stringvar, 
-        //   endkey:  stringvar + '\uffff'  
-        // }).then(function(obj){ 
-
-        //   var docs = obj.rows.map(function(row){ 
-        //     //console.log("dekhle bhai",row);
-        //    /* return { 
-        //       _id: row.id, 
-        //       _rev: row.rev, 
-        //       _deleted: true 
-        //     };*/ 
-        //     that._db.remove(row.doc);
-        //   }); 
-        //   /*console.log("see returned value ",that._db.bulkDocs(docs));
-        //   return that._db.bulkDocs(docs); 
-        // }).then(function(responses){ 
-        //     console.log("hello hi");
-        //   return responses.every(function(response){ 
-        //     response.ok; 
-        //   }); */
-        // });
-        //working till here
-        let that=this;
+        let that = this;
         this._db.allDocs({
             include_docs: true,
             startkey: stringvar,
@@ -159,27 +136,63 @@ export class PouchDbService {
         });
 
     }
-    findDoc(res,stringvar)
-    {
-        let that =this;
-        var ans=this._db.get(stringvar + res[0].id);
-        console.log(ans);
+    findDoc(id, stringvar) {
+        var ans = this._db.get(stringvar + id);
+        return ans;
+    }
+    deleteDoc(doc) {
+        console.log("inside delete func", doc);
+        return this._db.remove(doc);
     }
 
 
-    delete() {
+    destroyDb() {
         this._db.destroy();
     }
 
-    public putInArray(response) {
+    putInArray(response) {
         var len = response.length;
-
+        alert("length is" + len);
         for (var i = 0; i < len; i++) {
             this.getComplaints[i] = response[i].doc;
+        }
+        if (len == 0) {
+            this.getComplaints = [];
         }
         return this.getComplaints;
     }
 
-
+    /*
+        commentCountChange(stringvar,id){
+            let that=this;
+            var obj;
+    
+            this._db.get(stringvar + id).then(function (result) {
+              obj=result;
+              var len=result["length"];
+              obj[len]={};
+              obj[len]["createdAt"]="that.comments[that.comments.length-1].createdAt.toString()";
+              obj[len]["comment"]="that.comments[that.comments.length-1].comment";
+              obj[len]["parentId"]="that.comments[that.comments.length-1].parentId";
+              obj[len]["employeeName"]="that.comments[that.comments.length-1].employeeName";
+              obj[len]["parentName"]="";
+              obj[len]["employeeId"]="";
+              obj[len]["employeeNickName"]="";
+              obj[len]["parentPicUrl"]="";
+              
+              obj["length"]=len+1;
+              console.log("see res: ",obj);
+                that._db.remove(result);
+            }).then(function (res) {
+                console.log("after removing");
+                that.addSingle(obj, stringvar, id);
+    
+            }, (err) => {
+                console.log("in error",err);
+               // this.addSingle(obj, stringvar, id);
+    
+            });
+        }
+    */
 
 }

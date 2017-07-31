@@ -10,6 +10,7 @@ import { AuthService } from '../../../service/auth.service';
 import { Camera } from '@ionic-native/camera';
 import { Transfer } from  '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+import { PouchDbService } from "../../../service/pouchdbservice";
 
 @Component({
   selector: 'view-message',
@@ -45,7 +46,8 @@ export class ViewMessagePage {
               private nl: CustomService,
               public toastCtrl: ToastController,
               public commonService: CommonService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              public pouchdbservice:PouchDbService) {
     this.initForm();
     this.getData();
     this.sockJsConnection();
@@ -100,7 +102,6 @@ export class ViewMessagePage {
       });
     });
   } 
-
   public postMessage() {
     this.notPost = false;
     this.messageService.postMessage(this.id, this.commentForm.value).subscribe((res) => {
@@ -113,12 +114,40 @@ export class ViewMessagePage {
       });
       this.commentForm.reset();
       this.content.scrollToBottom(300);
+      var obj;
+      var len;
+      let that=this;
+      this.pouchdbservice.findDoc(this.id,"msgchats_").then(function(result){
+        console.log("see found doc: ",result);
+        len=result["length"];
+          obj=result;
+          
+          return that.pouchdbservice.deleteDoc(result);
+      
+      }).then(function(argument){
+          obj[len]={};
+          obj[len]["createdAt"]=that.messages[that.messages.length-1].createdAt.toString();
+          obj[len]["message"]=that.messages[that.messages.length-1].message;
+          obj[len]["employeeName"]="";
+          obj[len]["parentName"]=that.messages[that.messages.length-1].parentName;
+          obj[len]["employeeId"]=that.messages[that.messages.length-1].employeeId;
+          obj[len]["employeeNickName"]="";
+          obj[len]["parentPicTimestamp"]="";
+          obj[len]["parentPicOriginalName"]="";
+          
+          obj["length"]=len+1;
+          delete obj["_rev"];
+          that.pouchdbservice.addSingle(obj,"msgchats_",that.id);
+        },(error)=>{console.log("error is: ",error)});
+
     }, (err) => {
       this.nl.errMessage();
       this.notPost = true;
       this.commentForm.reset();
     });
   }
+
+
 
   public openImageActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -209,6 +238,7 @@ export class ViewMessagePage {
     
   }
 
+//TODO nilansh
   public onPullOldMessages(refresher) {
     this.currentPage += 1;
     this.messageService.getMessage(this.id, this.currentPage).subscribe((res) => {

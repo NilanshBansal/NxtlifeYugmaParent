@@ -5,6 +5,7 @@ import { EditComplaintStatusAndComment } from './edit-cs-status-and-comment.clas
 // import service
 import { CustomService } from '../../service/custom.service';
 import { ComplaintSuggestion } from '../../service/cs.service';
+import { PouchDbService } from "../../service/pouchdbservice";
 
 @Component({
   selector: 'nl-close-button',
@@ -26,8 +27,9 @@ export class ListViewCloseButton extends EditComplaintStatusAndComment {
               public nl: CustomService,
               public c: ComplaintSuggestion,
               public actionSheetCtrl: ActionSheetController,
-              public alertCtrl: AlertController) {
-    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
+              public alertCtrl: AlertController,
+              public pouchdbservice:PouchDbService) {
+    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl,pouchdbservice);
   }
 
 }
@@ -52,8 +54,9 @@ export class ListViewReopenButton extends EditComplaintStatusAndComment  {
               public nl: CustomService,
               public c: ComplaintSuggestion,
               public actionSheetCtrl: ActionSheetController,
-              public alertCtrl: AlertController) {
-    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
+              public alertCtrl: AlertController,
+              public pouchdbservice:PouchDbService) {
+    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl,pouchdbservice);
   }
 
 }
@@ -78,8 +81,9 @@ export class ListViewSatisfiedButton extends EditComplaintStatusAndComment {
               public nl: CustomService,
               public c: ComplaintSuggestion,
               public actionSheetCtrl: ActionSheetController,
-              public alertCtrl: AlertController) {
-    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
+              public alertCtrl: AlertController,
+              public pouchdbservice:PouchDbService) {
+    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl,pouchdbservice);
   }
 
 }
@@ -104,8 +108,9 @@ export class ListViewCommentButton extends EditComplaintStatusAndComment {
               public nl: CustomService,
               public c: ComplaintSuggestion,
               public actionSheetCtrl: ActionSheetController,
-              public alertCtrl: AlertController) {
-    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
+              public alertCtrl: AlertController,
+              public pouchdbservice:PouchDbService) {
+    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl,pouchdbservice);
   }
 
 }

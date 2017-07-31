@@ -26,7 +26,8 @@ export class CustomService {
   }
 
   public hideLoader() {
-    this.loading.dismiss();
+    if(this.loading)
+      this.loading.dismiss();
   }
 
   public showToast(msg) {
@@ -48,7 +49,7 @@ export class CustomService {
   }
 
   public onError(err) {
-    //this.hideLoader();
+    this.hideLoader();
     let a = err.split("-")[0];
     if (a == 401 ) {
       this.events.publish("session:expired");

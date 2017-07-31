@@ -9,6 +9,7 @@ import { EditComplaintStatusAndComment } from '../../../custom-component/list/ed
 import { CustomService } from '../../../service/custom.service';
 import { ComplaintSuggestion } from '../../../service/cs.service';
 import { AuthService } from '../../../service/auth.service';
+import { PouchDbService } from "../../../service/pouchdbservice";
 
 @Component({
   selector: 'nl-view',
@@ -29,8 +30,9 @@ export class ViewComponent extends EditComplaintStatusAndComment implements OnIn
               public alertCtrl: AlertController,
               private navParams: NavParams,
               public appService: AuthService,
-              private viewCtrl: ViewController) {
-    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl);
+              private viewCtrl: ViewController,
+              public pouchdbservice:PouchDbService) {
+    super(modalCtrl, nl, c, actionSheetCtrl, alertCtrl,pouchdbservice);
   }
 
   ngOnInit() {

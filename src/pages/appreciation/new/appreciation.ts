@@ -6,6 +6,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ComplaintSuggestion } from '../../../service/cs.service';
 import { CustomService } from '../../../service/custom.service';
 import { Configuration } from '../../../service/app.constants';
+import { PouchDbService } from "../../../service/pouchdbservice";
 
 @Component({
   selector: 'new-appreciation-modal',
@@ -40,7 +41,8 @@ export class NewAppreciationModal implements OnInit {
               public nl: CustomService,
               public c: ComplaintSuggestion,
               public con: Configuration,
-              public actionSheetCtrl: ActionSheetController) {
+              public actionSheetCtrl: ActionSheetController,
+              public pouchdbservice:PouchDbService) {
     this.con.setUrlForAppreciations();
   }
 
@@ -111,6 +113,8 @@ export class NewAppreciationModal implements OnInit {
   onSubmit(newSuggestion) {
     this.nl.showLoader();
     this.c.saveComplaint(newSuggestion).subscribe((res) => {
+      alert("adding new complaint cmp_")
+      this.pouchdbservice.addSingle(res,"apreyour_",res["id"]);
       this.onSuccess(res);
     }, (err) => {
       this.onError(err);

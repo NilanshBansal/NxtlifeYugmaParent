@@ -6,6 +6,7 @@ import { ViewController, ActionSheetController } from 'ionic-angular';
 import { CustomService } from '../../../service/custom.service';
 import { MessageService } from '../../../service/message.service';
 import { ParentInfo } from '../../../service/parentInfo';
+import { PouchDbService } from "../../../service/pouchdbservice";
 
 @Component({
   selector: 'new-message',
@@ -31,7 +32,8 @@ export class NewMessagePage implements OnInit {
               public nl: CustomService,
               public viewCtrl: ViewController,
               public parentInfo: ParentInfo,
-              public actionSheetCtrl: ActionSheetController) {
+              public actionSheetCtrl: ActionSheetController,
+              public pouchdbservice:PouchDbService) {
     this.loadForm();
   }
 
@@ -103,6 +105,7 @@ export class NewMessagePage implements OnInit {
   saveMessage() {
     this.nl.showLoader();
     this.messageService.saveMessage(this.newMessage.value).subscribe((res) => {
+      this.pouchdbservice.addSingle(res,"msg_",res["id"]);
       this.nl.hideLoader();
       this.viewCtrl.dismiss(res);
       this.nl.showToast("Message sent successfully");

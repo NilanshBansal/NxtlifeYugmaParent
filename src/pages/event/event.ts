@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { PouchDbService } from "../../service/pouchdbservice";
 
 
+
 @Component({
   selector: 'events',
   templateUrl: 'event.html',
@@ -45,7 +46,7 @@ export class EventComponent {
     console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
       (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
     this.hasEvents = ev.events !== undefined && ev.events.length !== 0;
-    this.currentDate = ev.selectedTime.getFullYear() + "-" + (ev.selectedTime.getMonth() + 1);
+    this.currentDate = ev.selectedTime.getFullYear() + "-"  + (ev.selectedTime.getMonth() + 1);
     console.log("AAAAA", this.currentDate);
     this.clickDate = ev.selectedTime;
   }
@@ -64,22 +65,18 @@ export class EventComponent {
   getAllEvents(eventMonth) {
     this.eventService.GetEvents(eventMonth).subscribe((res) => {
       if (res.status == 204) {
-        //TODO nilansh
-       // this.eventSource=[];
         this.eventSource.length = 1;
+        
       } else {
-
         this.eventSource = this.buildArray(res);
-        this.pouchdbservice.add(this.eventSource, "eve_");
-        alert("see console");
-        console.log("see", this.eventSource);
+        this.pouchdbservice.add(res, "eve" + eventMonth + "_");
       }
     }, (err) => {
       this.onError(err);
       let that = this;
-      this.pouchdbservice.getAllComplaints("eve_").then(function (res) {
-        that.eventSource = that.buildArray(res);
-        //console.log(that.eventSource);
+      this.pouchdbservice.getAllComplaints("eve" + eventMonth + "_").then(function (res) {
+        console.log("see: ",res);   
+        that.eventSource=that.buildArray(res);
       });
     });
   }
@@ -89,18 +86,15 @@ export class EventComponent {
     data.forEach((val, index) => {
       tmp.push({
         id: val.id,
-        startTime: moment(val.start).toDate(),
+        startTime:moment(val.start).toDate(),
         endTime: moment(val.end).toDate(),
         title: val.title,
         allDay: false,
         location: val.location,
-        time1: val.startTime,
-        time2: val.endTime,
         color: val.color,
         durationDays: val.durationDays
       });
     });
-
     return tmp;
 
   }
@@ -114,7 +108,7 @@ export class EventComponent {
   openViewEventModal(eventId, index) {
     this.nl.showLoader();
     this.eventService.getEvent(eventId).subscribe((res) => {
-      this.pouchdbservice.addSingleWithDelete(res, "eveview_",res["id"]);
+      this.pouchdbservice.addSingleWithDelete(res, "eveview_", res["id"]);
       this.onSuccess(res, eventId);
     }, (err) => {
       let that = this;
@@ -136,7 +130,7 @@ export class EventComponent {
   }
 
   openTimelineModal() {
-    let timelineModal = this.modalCtrl.create(TimelinePage);
+    let timelineModal = this.modalCtrl.create("TimelinePage");
     timelineModal.present();
   }
 

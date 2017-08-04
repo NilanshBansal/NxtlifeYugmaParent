@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HomeworkService } from '../../../service/homework.service';
 import { CustomService } from '../../../service/custom.service';
 import { ParentInfo } from '../../../service/parentInfo';
-//import { PouchDbService } from '../../../service/pouchdbservice';
+import { PouchDbService } from '../../../service/pouchdbservice';
 import * as _ from 'underscore';
 
 @Component({
@@ -24,13 +24,11 @@ export class PassedHomework {
   constructor(private hw : HomeworkService,
               public parentInfo: ParentInfo,
               public nl: CustomService,
-              /*private pouchdbservice:PouchDbService*/) {
+              public pouchdbservice:PouchDbService) {
 
   }
   
-// deleteDB(){
-//   this.pouchdbservice.delete();
-// }
+
   ngOnInit() {
     this.students = this.parentInfo.getStudents();
     this.standardId = this.parentInfo.getStudents()[0].standardId;
@@ -44,13 +42,18 @@ export class PassedHomework {
   }
 
   getHomework() {
+    let that=this;
     this.nl.showLoader();
     this.homework = [];
     this.currentPage = 1;
     this.hw.getOldHomeworkByStandard(this.standardId, this.currentPage).subscribe((res) => {
       this.onSuccess(res);
+      this.pouchdbservice.add(res,"hwold_");
     }, (err) => {
       this.nl.onError(err);
+      this.pouchdbservice.getAllComplaints("hwold_").then(function(result){
+        that.onSuccess(result);
+      });
     });
   }
 
@@ -95,6 +98,7 @@ export class PassedHomework {
       data.dueMonth = this.monthNames[(new Date(data.dueDate)).getMonth()];
       data.dueDate = ("0" + (new Date(data.dueDate).getDate())).slice(-2);
     });
+    this.pouchdbservice.addWithoutDelete(newHomework,"hwold_");
     this.homework = this.homework.concat(newHomework);
   }
 

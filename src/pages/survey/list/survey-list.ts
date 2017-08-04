@@ -1,9 +1,12 @@
+
 import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../../../service/survey.service';
 import { NavController, ModalController, Events } from 'ionic-angular';
 import { ViewSurvey } from '../view/view';
 import { SurveyPage } from '../survey';
 import { CustomService } from '../../../service/custom.service';
+import { PouchDbService } from "../../../service/pouchdbservice";
+
 
 @Component({
     selector: 'survey-list',
@@ -24,28 +27,33 @@ export class SurveyListPage implements OnInit {
         private navCtrl: NavController,
         private nl: CustomService,
         private _event: Events,
-        private modalCtrl: ModalController) {
+        private modalCtrl: ModalController,
+        public pouchdbservice: PouchDbService) {
+
         this.getSurveys();
-        this._event.subscribe('survey:done',
-            (data) => { console.log("DSFFDF", data); this.surveyDoneSplice(data); })
 
 
-    }
-
-    surveyDoneSplice(data) {
-        this.allsurveys.splice(data, 1);
     }
 
     getSurveys() {
+        let that = this;
         this.nl.showLoader();
         this._surveyServ.getallsurveys(1)
             .subscribe(data => {
                 this.nl.hideLoader();
-                 if (data.status == 204) {
+                if (data.status == 204) {
                     this.EmptySurvey = true;
                 } else {
-                    this.allsurveys = data;  console.log('surveys', this.allsurveys); }},
-            () => console.log('allsurveys', this.allsurveys))
+                    this.allsurveys = data; console.log('surveys', this.allsurveys);
+                    this.pouchdbservice.add(data, "sur_");
+                }
+            },
+            (err) => {
+                console.log('allsurveys', this.allsurveys);
+                this.pouchdbservice.getAllComplaints("sur_").then(function (result) {
+                    that.allsurveys = result;
+                });
+            })
     }
 
     EmptySurvey: boolean = false;
@@ -56,9 +64,17 @@ export class SurveyListPage implements OnInit {
         this.nl.showLoader();
         this._surveyServ.getOneSurvey(surveyId)
             .subscribe(data => {
-                this.onesurveys = data; this.nl.hideLoader(); this.clickablesurvey(this.onesurveys, indexx)
-            },
-            () => console.log('onesurveys', this.onesurveys));
+                console.log(data);
+                this.onesurveys = data; this.nl.hideLoader(); this.clickablesurvey(this.onesurveys, indexx);
+                this.pouchdbservice.addSingleWithDelete(data,"surview_",data["surveyId"]);
+            },(error) => {
+                this.nl.onError(error);
+                console.log('onesurveys', this.onesurveys);
+                this.pouchdbservice.findDoc(surveyId,"surview_").then(function(doc){
+                    this.onesurveys = doc;
+                    this.clickablesurvey(this.onesurveys, indexx);
+                });
+            });
     }
 
     clickablesurvey(objj, indexx) {
@@ -68,6 +84,11 @@ export class SurveyListPage implements OnInit {
         //    });
 
         let modal4 = this.modalCtrl.create(ViewSurvey, { objj: objj, indexx: indexx });
+        modal4.onDidDismiss((data) => {
+            console.log(data)
+            if (!data) { return; }
+            //this.allsurveys.splice(indexx, 1);
+        })
         modal4.present();
     }
 
@@ -77,6 +98,7 @@ export class SurveyListPage implements OnInit {
         setTimeout(() => {
             this._surveyServ.getallsurveys(1).subscribe((res) => {
                 this.onSuccess(res);
+                this.pouchdbservice.add(res, "sur_");
                 refresher.complete();
             }, (err) => {
                 refresher.complete();
@@ -111,6 +133,7 @@ export class SurveyListPage implements OnInit {
                     return;
                 }
                 console.log('response', response);
+                this.pouchdbservice.addWithoutDelete(response,"sur_");
                 this.allsurveys = this.allsurveys.concat(response);
                 // this.pop();
                 infiniteScroll.complete();

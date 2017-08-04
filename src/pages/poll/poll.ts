@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PollService } from '../../service/poll.service';
 import * as _ from 'underscore';
 import { CustomService } from '../../service/custom.service';
+import { PouchDbService } from "../../service/pouchdbservice";
 
 @Component({
   selector: 'page-about',
@@ -20,7 +21,8 @@ export class PollPage {
   public title: string = "poll";
 
   constructor(private nl: CustomService,
-              private pollService: PollService) {
+              private pollService: PollService,
+              public pouchdbservice:PouchDbService) {
   }
 
   ionViewWillEnter() {
@@ -29,6 +31,7 @@ export class PollPage {
   }
 
   public getPolls() {
+    let that=this;
     this.nl.showLoader();
     this.pollService.GetPolls().subscribe((data) => {
       if (data.status === 204) {
@@ -36,9 +39,24 @@ export class PollPage {
         this.nl.hideLoader();
       } else {
         this.onSuccess(data);
+        console.log("see",data);
       }
     },(err) => {
       this.onError(err);
+      this.pouchdbservice.getAllComplaints("poll_").then(function(res){
+        console.log("see found docs: ",res);
+        that.polls=res;
+        if(that.polls.length==0)
+        {
+          that.EmptyPolls=true;
+        }
+        else{
+          that.EmptyPolls=false;
+        }
+      }).then(function(arg){
+          that.buildData();
+      });
+      
     });
   }
 
@@ -49,11 +67,14 @@ export class PollPage {
     } else {
       this.EmptyPolls = false;
       this.polls = data;
+      console.log("see data: ",this.polls);
+      this.pouchdbservice.add(data,"poll_");
       this.buildData();
     }
   }
 
   public buildData() {
+    console.log("see polls :build data: ",this.polls);
     let pollLength = this.polls.length;
     for (let i = 0; i < pollLength; i++) {
       this.choice1[i] = [];
@@ -83,12 +104,20 @@ export class PollPage {
   }
 
   public pollMulVoting(resid, i, res) {
+    let that=this;
+    alert("multivoting called:" + resid + " : " + res );
+    console.log("see resid: ",resid);
+    console.log("see res: ",res);
     let PollResult = {
       "pollId": resid,
       "optionIds": _.without(this.choice1[i], undefined)
     };
     this.pollService.PollVote(PollResult).subscribe((data) => {
       this.removeItem(i);
+      this.pouchdbservice.findDoc(resid,"poll_").then(function (doc){
+        console.log("see found doc:",doc);
+        that.pouchdbservice.deleteDoc(doc);
+      });
     }, (err) => {
       this.onError(err);
     })

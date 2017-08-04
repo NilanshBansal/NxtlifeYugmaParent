@@ -238,8 +238,10 @@ export class ViewMessagePage {
     
   }
 
-//TODO nilansh
+//TODO nilansh 
+
   public onPullOldMessages(refresher) {
+    let that=this;
     this.currentPage += 1;
     this.messageService.getMessage(this.id, this.currentPage).subscribe((res) => {
       refresher.complete();
@@ -247,7 +249,9 @@ export class ViewMessagePage {
         this.currentPage -= 1;
         return;
       }
-      this.messages = res.reverse().concat(this.messages);
+      res.reverse();  
+      this.messages = res.concat(this.messages);
+      this.pouchdbservice.addArrayOfObjectsToDoc(this.messages,this.id,"msgchats_");
     }, (err) => {
       refresher.complete();
       this.currentPage -= 1;

@@ -3,6 +3,7 @@ import { ModalController } from 'ionic-angular';
 import { EventService } from '../../service/event.service';
 import { CustomService } from '../../service/custom.service';
 import * as moment from 'moment';
+import { PouchDbService } from "../../service/pouchdbservice";
 
 @Component({
   selector: 'foodmenu',
@@ -28,7 +29,8 @@ export class FoodMenu {
 
   constructor(private nl: CustomService,
               public modalCtrl: ModalController,
-              private foodmenu: EventService) {
+              private foodmenu: EventService,
+              public pouchdbservice:PouchDbService) {
   }
 
   onViewTitleChanged(title) {
@@ -55,11 +57,17 @@ export class FoodMenu {
       if (res.status == 204) {
         this.eventSource.length = 1;
       } else {
-        this.buildArray(res);
+        this.eventSource = this.buildArray(res);
+        this.pouchdbservice.add(res, "food" + eventMonth + "_");
       }
     }, (err) => {
       this.eventSource.length = 1;
       this.nl.errMessage();
+      let that = this;
+      this.pouchdbservice.getAllComplaints("food" + eventMonth + "_").then(function (res) {
+        console.log("see: ",res);   
+        that.eventSource=that.buildArray(res);
+      });
     });
   }
 
@@ -76,8 +84,7 @@ export class FoodMenu {
         foodName: val.foodName
       });
     });
-    this.eventSource = tmp;
-    console.log(this.eventSource)
+     return tmp;
   }
 
 }

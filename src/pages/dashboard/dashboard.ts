@@ -63,11 +63,6 @@ export class Dashboard {
     
   }
 
-  //pouch db 
-
-
-
-
   
 
   constructor(public menuCtrl: MenuController,
@@ -92,7 +87,6 @@ export class Dashboard {
   }
 
   public ionViewWillEnter() {
-    //this.pouchdbservice.initDB();
     this.getDashboardData();
     
   }
@@ -101,16 +95,23 @@ export class Dashboard {
 
 
   public getDashboardData() {
+    let that=this;
     this.configuration.setUrl("dashboard");
     this.cs.getDashboardData().subscribe((res) => {
       this.onSuccess(res);
+      this.pouchdbservice.addSingleWithDelete(res,"dash_",1);
     }, (err) => {
       this.onError(err);
+      this.pouchdbservice.findDoc(1,"dash_").then(function(doc){
+        console.log("see doc: ",doc);
+        that.onSuccess(doc);
+      },(error)=>{console.log(error);});
       this.hasData = true;
     });
   }
 
   public onSuccess(data) {
+    console.log("see data: ",data);
     this.hasData = true;
     this.dash_data = {
       planner: data.planner,
@@ -135,6 +136,7 @@ export class Dashboard {
     this.eventService.GetParticularEvent(eventId).subscribe((res) => {
       this.nl.hideLoader();
       this.openModal(res);
+      //this.pouchdbservice.addSingleWithDelete(res,,eventId);
     }, (err) => {
       this.nl.hideLoader();
       this.nl.onError(err);
@@ -166,6 +168,7 @@ export class Dashboard {
   }
 
   public goToCircular(circularId) {
+    alert("circular called: " + circularId);
     this.configuration.setUrl("circular");
     this.navCtrl.push(ViewCircular, { id : circularId });
   }

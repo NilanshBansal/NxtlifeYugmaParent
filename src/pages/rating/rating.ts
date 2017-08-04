@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ComplaintSuggestion } from '../../service/cs.service';
 import { CustomService } from '../../service/custom.service';
 import { ParentInfo } from '../../service/parentInfo';
+import { PouchDbService } from "../../service/pouchdbservice";
 
 @Component({
   selector: 'student-rating',
@@ -38,7 +39,8 @@ export class StudentRating implements OnInit  {
 
   constructor(private r: ComplaintSuggestion,
               public parentInfo: ParentInfo,
-              private nl: CustomService) { }
+              private nl: CustomService,
+              public pouchdbservice:PouchDbService) { }
 
   ngOnInit() {
     this.students = this.parentInfo.getStudents();
@@ -52,11 +54,18 @@ export class StudentRating implements OnInit  {
   }
 
   public getRatingInfo(stu_id) {
+    let that=this;
     this.nl.showLoader();
     this.r.getRatingInfo(stu_id).subscribe((res) => {
-      this.onSuccess(res)
+      this.onSuccess(res);
+      console.log("see res: ",res);
+      this.pouchdbservice.addSingleWithDelete(res,"rate_",stu_id)
     }, (err) => {
       this.onError(err);
+      this.pouchdbservice.findDoc(stu_id,"rate_").then(function(doc){
+        console.log("see found doc: ",doc);
+          that.onSuccess(doc);
+      });
     });
   }
 

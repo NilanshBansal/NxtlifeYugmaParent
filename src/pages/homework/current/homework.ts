@@ -4,6 +4,7 @@ import { CustomService } from '../../../service/custom.service';
 import { ParentInfo } from '../../../service/parentInfo';
 import * as _ from 'underscore';
 import { FileOpener } from '@ionic-native/file-opener';
+import { PouchDbService } from "../../../service/pouchdbservice";
 
 
 @Component({
@@ -26,7 +27,8 @@ export class CurrentHomework implements OnInit {
   constructor(private hw : HomeworkService,
               public parentInfo: ParentInfo,
               public nl: CustomService,
-              private fileOpener: FileOpener) {
+              private fileOpener: FileOpener,
+              public pouchdbservice:PouchDbService) {
 
   }
 
@@ -43,13 +45,19 @@ export class CurrentHomework implements OnInit {
   }
 
   getHomework() {
+    let that=this;
     this.nl.showLoader();
     this.homework = [];
     this.currentPage = 1;
     this.hw.getHomeworkByStandard(this.standardId, this.currentPage).subscribe((res) => {
       this.onSuccess(res);
+      this.pouchdbservice.add(res,"hwcur_");
     }, (err) => {
       this.nl.onError(err);
+      this.pouchdbservice.getAllComplaints("hwcur_").then(function(result){
+        console.log("see result of find:",result);
+        that.onSuccess(result);
+      });
     });
   }
 
@@ -95,6 +103,7 @@ export class CurrentHomework implements OnInit {
       data.dueMonth = this.monthNames[(new Date(data.dueDate)).getMonth()];
       data.dueDate = ("0" + (new Date(data.dueDate).getDate())).slice(-2);
     });
+    this.pouchdbservice.addWithoutDelete(newHomework,"hwcur_");
     this.homework = this.homework.concat(newHomework);
   }
 

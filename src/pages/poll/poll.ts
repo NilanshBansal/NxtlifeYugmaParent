@@ -45,7 +45,8 @@ export class PollPage {
       this.onError(err);
       this.pouchdbservice.getAllComplaints("poll_").then(function(res){
         console.log("see found docs: ",res);
-        that.polls=res;
+       // that.polls=res;
+       that.polls=that.pouchdbservice.sortArray(res,"createdAt");
         if(that.polls.length==0)
         {
           that.EmptyPolls=true;

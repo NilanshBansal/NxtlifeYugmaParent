@@ -51,8 +51,10 @@ export class SurveyListPage implements OnInit {
             (err) => {
                 console.log('allsurveys', this.allsurveys);
                 this.pouchdbservice.getAllComplaints("sur_").then(function (result) {
-                    that.allsurveys = result;
+                    //that.allsurveys = result;
+                    that.allsurveys=that.pouchdbservice.sortArray(result,"createdAt");
                 });
+
             })
     }
 
@@ -85,7 +87,7 @@ export class SurveyListPage implements OnInit {
 
         let modal4 = this.modalCtrl.create(ViewSurvey, { objj: objj, indexx: indexx });
         modal4.onDidDismiss((data) => {
-            console.log(data)
+            console.log(data);
             if (!data) { return; }
             //this.allsurveys.splice(indexx, 1);
         })

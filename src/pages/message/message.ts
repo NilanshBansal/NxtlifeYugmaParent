@@ -87,7 +87,10 @@ export class MessagePage {
   }
 
   public buildData(data) {
-    this.allData = data;
+    
+    this.allData =this.pouchdbservice.sortArray(data,"createdAt");
+    //console.log("see data : ",this.allData);
+    //this.allData = data;
     this.emptyMessages = false;
     _.forEach(this.allData, (val, index) => {
       if (val.againstEmployeeName == null) {
@@ -156,6 +159,7 @@ export class MessagePage {
           this.emptyMessages = true;
         } else {
           this.buildData(res);
+          this.pouchdbservice.add(res,"msg_");
         }
         refresher.complete();
       }, (err) => {

@@ -36,7 +36,8 @@ export class Circular {
       this.onError(err);
       let that =this;
       this.pouchdbservice.getAllComplaints("cir_").then(function(result){
-        that.circulars=result;
+        //that.circulars=result;
+        that.circulars=that.pouchdbservice.sortArray(result,"createdAt");
       });
     });
   }

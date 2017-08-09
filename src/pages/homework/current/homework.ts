@@ -50,13 +50,16 @@ export class CurrentHomework implements OnInit {
     this.homework = [];
     this.currentPage = 1;
     this.hw.getHomeworkByStandard(this.standardId, this.currentPage).subscribe((res) => {
+      console.log("see res: 11",res);
       this.onSuccess(res);
       this.pouchdbservice.add(res,"hwcur_");
     }, (err) => {
       this.nl.onError(err);
       this.pouchdbservice.getAllComplaints("hwcur_").then(function(result){
         console.log("see result of find:",result);
-        that.onSuccess(result);
+        var sortedResult=that.pouchdbservice.sortArray(result,"createdAt");
+        //that.onSuccess(result);
+        that.onSuccess(sortedResult);
       });
     });
   }
@@ -67,10 +70,11 @@ export class CurrentHomework implements OnInit {
     } else {
       this.showEmptyMsg(false);
       this.homework = res;
-      _.forEach(this.homework, (data) => {
+      
+     /* _.forEach(this.homework, (data) => {
         data.dueMonth = this.monthNames[(new Date(data.dueDate)).getMonth()];
         data.dueDate = ("0" + (new Date(data.dueDate).getDate())).slice(-2);
-      });
+      });*/
     }
     console.log(this.homework)
     this.nl.hideLoader();

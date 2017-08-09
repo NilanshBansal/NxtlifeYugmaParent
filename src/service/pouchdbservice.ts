@@ -17,10 +17,16 @@ export class PouchDbService {
 
     initDB() {
         PouchDB.plugin(cordovaSqlitePlugin);
-        this._db = new PouchDB('parent');
+        this._db = new PouchDB('parent'/*,{auto_compaction:true}*/);
+        /*var db = window.cordova ?
+        new PouchDB('mydb.db', {adapter: 'cordova-sqlite'}) :
+        new PouchDB('mydb'); // uses idb, falls back to websql*/
     }
 
     add(res, stringvar) {
+        alert("see"); 
+        //for seeing db info
+        //this._db.info().then(console.log.bind(console))
         //code for deleting
         console.log("inside add",res);
         let that = this;
@@ -37,10 +43,13 @@ export class PouchDbService {
             that.allComplaints = res;
             console.log("see res",that.allComplaints);
             var len = that.allComplaints.length;
+            let id;
             for (var i = 0; i < len; i++) {
-                that.allComplaints[i]["_id"] = (stringvar + that.allComplaints[i]["id"].toString());
+                id=that.allComplaints[i]["id"] || that.allComplaints[i]["surveyId"];
+                that.allComplaints[i]["_id"] = (stringvar + id.toString());
                 that._db.put(that.allComplaints[i]);
             }
+            
 
         });
     }
@@ -50,8 +59,10 @@ export class PouchDbService {
         moreComplaintsArray=res;
         var len = res.length;
         alert("length is: "+ len);
+        let id;
         for (var i = 0; i < len; i++) {
-            moreComplaintsArray[i]["_id"] = (stringvar + res[i]["id"].toString());
+            id=res[i]["id"] || res[i]["surveyId"];
+            moreComplaintsArray[i]["_id"] = (stringvar +id.toString());
             this._db.put(moreComplaintsArray[i]);
         }
 
@@ -110,7 +121,8 @@ export class PouchDbService {
         return this._db.allDocs({
             include_docs: true,
             startkey: stringvar,
-            endkey: stringvar + '\uffff'
+            endkey: stringvar + '\uffff',
+            // descending:true
         }).then(function (result) {
             return that.putInArray(result.rows);
         }).catch(function (err) {
@@ -145,12 +157,21 @@ export class PouchDbService {
         return this._db.remove(doc);
     }
 
+    sortArray(array,key){
+        console.log("see array inside sort func: ",array);
+        return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        });
+    }
+
 
     destroyDb() {
         this._db.destroy();
     }
 
     putInArray(response) {
+        this.getComplaints=[];
         var len = response.length;
         alert("length is" + len);
         for (var i = 0; i < len; i++) {

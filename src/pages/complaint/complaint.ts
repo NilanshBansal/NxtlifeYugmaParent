@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController,Events } from 'ionic-angular';
+import { ModalController, Events } from 'ionic-angular';
 
 // import modal
 import { newComplaintModal } from './new/newComplaintModal';
@@ -11,8 +11,10 @@ import { ComplaintSuggestion } from '../../service/cs.service';
 //import { Network } from '@ionic-native/network';
 //pouchdb service
 import { PouchDbService } from '../../service/pouchdbservice';
+import { Data } from '../../providers/data';
 
-
+import { FormControl } from '@angular/forms';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'complaint-page',
@@ -35,40 +37,79 @@ export class ComplaintPage {
   public master: string = "complaint";
 
   constructor(public modalCtrl: ModalController,
-              public nl: CustomService,
-              public c: ComplaintSuggestion,
-              public pouchdbservice:PouchDbService,
-              public events: Events
-              ) { }
+    public nl: CustomService,
+    public c: ComplaintSuggestion,
+    public pouchdbservice: PouchDbService,
+    public events: Events,
+    public dataService: Data,
 
+  ) { /*this.searchControl = new FormControl();*/ }
+
+  /*searchTerm: string = '';
+  searchControl: FormControl;
+  items: any;
+  searching: any = false;
+
+  // ionViewDidLoad(){
+  //           this.setFilteredItems();
+ 
+  //       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+ 
+  //           this.setFilteredItems();
+ 
+  //       });
+  //       console.log("see: ",this.allData);
+ 
+  // }
+  onSearchInput() {
+    this.searching = true;
+  }
+  searchingFunc() {
+    this.setFilteredItems();
+
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.setFilteredItems();
+
+    });
+  }
+
+  setFilteredItems() {
+
+    this.items = this.dataService.filterItems(this.searchTerm);
+
+  }*/
 
   ionViewWillEnter() {
-    
+
     this.getAllData("cmp_");
     this.getCategories();
-   
+
   }
 
-  destroyDb(){
+  destroyDb() {
     this.pouchdbservice.destroyDb();
   }
-
+//TODO nilansh
   getAllData(stringvar) {
 
     this.nl.showLoader();
     this.c.getComplaints(this.currentPage).subscribe((res) => {
       this.onSuccess(res);
-      console.log("see complaints res: ",res);
-      this.pouchdbservice.add(res,stringvar);
-      
+      console.log("see complaints res: ", res);
+      this.pouchdbservice.add(res, stringvar);
+      this.dataService.getData(res);
+      //this.searchingFunc();
     }, (err) => {
       this.nl.onError(err);
-      let that =this;
-      this.pouchdbservice.getAllComplaints(stringvar).then(function(res){
-        that.allData=res;
+      let that = this;
+      this.pouchdbservice.getAllComplaints(stringvar).then(function (res) {
+        that.allData=that.pouchdbservice.sortArray(res,"createdAt");
+       // that.allData = res;
+        
       });
     });
-    
+
   }
 
   getCategories() {
@@ -104,7 +145,7 @@ export class ComplaintPage {
   }
 
   openViewModal(viewData, index): void {
-    let openViewModal = this.modalCtrl.create(ViewComponent, {viewData: viewData});
+    let openViewModal = this.modalCtrl.create(ViewComponent, { viewData: viewData });
     openViewModal.onDidDismiss((res) => {
       console.log(res);
       this.allData[index] = res;
@@ -134,7 +175,7 @@ export class ComplaintPage {
   loadMoreData(infiniteScroll) {
     this.c.getComplaints(this.currentPage).subscribe((res) => {
       infiniteScroll.complete();
-      console.log("see res after load more 11111: ",res);
+      console.log("see res after load more 11111: ", res);
       this.loadDataSuccess(res);
     }, (err) => {
       infiniteScroll.complete();
@@ -147,23 +188,20 @@ export class ComplaintPage {
       this.currentPage -= 1;
       return;
     }
-    if(this.nl.getHeaderText()=="complaint")
-    {
-      this.stringvar="cmp_";
+    if (this.nl.getHeaderText() == "complaint") {
+      this.stringvar = "cmp_";
     }
-    if(this.nl.getHeaderText()=="suggestion")
-    {
-      this.stringvar="sgsyour_";
+    if (this.nl.getHeaderText() == "suggestion") {
+      this.stringvar = "sgsyour_";
     }
-    if(this.nl.getHeaderText()=="appreciation")
-    {
-      this.stringvar="apreyour_";
+    if (this.nl.getHeaderText() == "appreciation") {
+      this.stringvar = "apreyour_";
     }
 
-    
+
     this.allData = this.allData.concat(res);
-    this.pouchdbservice.addWithoutDelete(res,this.stringvar);
-  
+    this.pouchdbservice.addWithoutDelete(res, this.stringvar);
+
   }
 
   loadDataError(err) {

@@ -88,8 +88,18 @@ export class SurveyListPage implements OnInit {
         let modal4 = this.modalCtrl.create(ViewSurvey, { objj: objj, indexx: indexx });
         modal4.onDidDismiss((data) => {
             console.log(data);
+            console.log("see obj: " ,objj);
             if (!data) { return; }
-            //this.allsurveys.splice(indexx, 1);
+            this.allsurveys.splice(indexx, 1);
+            let that=this;
+            this.pouchdbservice.findDoc(objj["surveyId"],"sur_").then(function(doc){
+                console.log("see doc: sur_ ",doc);
+                that.pouchdbservice.deleteDoc(doc);
+            });
+            this.pouchdbservice.findDoc(objj["surveyId"],"surview_").then(function(doc){
+                console.log("see doc: surview",doc);
+                that.pouchdbservice.deleteDoc(doc);
+            });
         })
         modal4.present();
     }

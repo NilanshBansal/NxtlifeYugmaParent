@@ -130,7 +130,7 @@ export class EventComponent {
   }
 
   openTimelineModal() {
-    let timelineModal = this.modalCtrl.create("TimelinePage");
+    let timelineModal = this.modalCtrl.create(TimelinePage);
     timelineModal.present();
   }
 

@@ -12,7 +12,7 @@ import { PouchDbService } from "../service/pouchdbservice";
   selector: 'comment',
   template: `
     <ion-header>
-      <nl-modal-navbar [title]="title" [complaint]="complaint"></nl-modal-navbar>
+      <nl-modal-navbar [title]="title" [complaint]="data"></nl-modal-navbar>
     </ion-header>
     <ion-content id="chat" class="csChatBox">
       <ion-list class="no-comment" *ngIf="emptyComments">
@@ -59,7 +59,7 @@ export class CommentModal {
   data;
   stringvar;
   //nilansh
-  public count=0;
+  //public count=0;
   title = "COMMENTS";
 
   userId;
@@ -133,10 +133,10 @@ export class CommentModal {
   }
 
   //nilansh
-  ionViewWillEnter(){
+  /*ionViewWillEnter(){
     this.count=0;
   }  
-
+*/
   showToastMessage() {
     let toast = this.toastCtrl.create({
       message: "You can't comment on it any more, may be your complaint status is closed or satisfied",
@@ -148,9 +148,9 @@ export class CommentModal {
     toast.present();
   }
 
-  dismiss() {
+  /*dismiss() {
     this.viewCtrl.dismiss();
-  }
+  }*/
 
   postComment() {
     if(this.nl.getHeaderText()=="complaint")
@@ -169,9 +169,10 @@ export class CommentModal {
       this.notPost = false;
       this.emptyComments = false;
       this.c.postComment(this.data.id, this.commentForm.value).subscribe((res) => {
-        this.count=this.count +1;
+        //this.count=this.count +1;
         //nilansh
-        this.nl.chatIncrement=this.count;
+        //this.nl.chatIncrement=this.count;
+        this.data.commentCount++;
         this.notPost = true;
         if (!this.comments) { this.comments = []; }
         

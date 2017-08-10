@@ -27,23 +27,25 @@ export class EditComplaintStatusAndComment {
     this.nl.onError(err);
   }
 
-
+  //todo slider nilansh
   updateData(data) {
-    console.log("data", data);
+    console.log("dekh bhai data slider:", data);
     this.complaint.statusName = data.statusName;
     this.complaint.statusId = data.statusId;
     this.complaint.statusColor = data.statusColor;
     this.complaint.commentCount = data.commentCount;
+
+
+
+
   }
 
   complaintReopen(complaint, data) {
-    if(this.nl.getHeaderText()=="complaint")
-    {
-      this.stringvar="cmp_";
+    if (this.nl.getHeaderText() == "complaint") {
+      this.stringvar = "cmp_";
     }
-    if(this.nl.getHeaderText()=="suggestion")
-    {
-      this.stringvar="sgsyour_";
+    if (this.nl.getHeaderText() == "suggestion") {
+      this.stringvar = "sgsyour_";
     }
     this.nl.showLoader();
     if (complaint.anonymous) {
@@ -51,18 +53,18 @@ export class EditComplaintStatusAndComment {
     } else {
       data["anonymous"] = false;
     }
-    let that=this;
+    let that = this;
     this.c.reopenComplaint(complaint.id, data).subscribe((res) => {
-      console.log("see res: ",res);
+      console.log("see res: ", res);
       if (res) {
         this.onSuccess(res);
-        this.pouchdbservice.findDoc(res["id"],this.stringvar).then(function(doc){
-          console.log("found ",doc);
+        this.pouchdbservice.findDoc(res["id"], this.stringvar).then(function (doc) {
+          console.log("found ", doc);
           return that.pouchdbservice.deleteDoc(doc);
-        }).then(function(arg){
-          console.log("deleted",arg);
-          that.pouchdbservice.addSingle(res,that.stringvar,res["id"]);
-        },(error)=>{console.log("error is: ",error);});
+        }).then(function (arg) {
+          console.log("deleted", arg);
+          that.pouchdbservice.addSingle(res, that.stringvar, res["id"]);
+        }, (error) => { console.log("error is: ", error); });
       }
     }, (err) => {
       this.onError(err);
@@ -70,32 +72,30 @@ export class EditComplaintStatusAndComment {
   }
 
   complaintClose(complaint, reason) {
-    if(this.nl.getHeaderText()=="complaint")
-    {
-      this.stringvar="cmp_";
+    if (this.nl.getHeaderText() == "complaint") {
+      this.stringvar = "cmp_";
     }
-    if(this.nl.getHeaderText()=="suggestion")
-    {
-      this.stringvar="sgsyour_";
+    if (this.nl.getHeaderText() == "suggestion") {
+      this.stringvar = "sgsyour_";
     }
     this.nl.showLoader();
-    let that=this;
+    let that = this;
     if (complaint.anonymous) {
       reason["anonymous"] = true;
     } else {
       reason["anonymous"] = false;
     }
     this.c.closeComplaint(complaint.id, reason).subscribe((res) => {
-      console.log("see res: ",res);
+      console.log("see res: ", res);
       if (res) {
         this.onSuccess(res);
-        this.pouchdbservice.findDoc(res["id"],this.stringvar).then(function(doc){
-          console.log("found ",doc);
+        this.pouchdbservice.findDoc(res["id"], this.stringvar).then(function (doc) {
+          console.log("found ", doc);
           return that.pouchdbservice.deleteDoc(doc);
-        }).then(function(arg){
-          console.log("deleted",arg);
-          that.pouchdbservice.addSingle(res,that.stringvar,res["id"]);
-        },(error)=>{console.log("error is: ",error);});
+        }).then(function (arg) {
+          console.log("deleted", arg);
+          that.pouchdbservice.addSingle(res, that.stringvar, res["id"]);
+        }, (error) => { console.log("error is: ", error); });
       }
     }, (err) => {
       this.onError(err);
@@ -103,28 +103,26 @@ export class EditComplaintStatusAndComment {
   }
 
   complaintSatisfy(complaint) {
-    if(this.nl.getHeaderText()=="complaint")
-    {
-      this.stringvar="cmp_";
+    if (this.nl.getHeaderText() == "complaint") {
+      this.stringvar = "cmp_";
     }
-    if(this.nl.getHeaderText()=="suggestion")
-    {
-      this.stringvar="sgsyour_";
+    if (this.nl.getHeaderText() == "suggestion") {
+      this.stringvar = "sgsyour_";
     }
-    //nilansh 
+
     this.nl.showLoader();
-    let that=this;
+    let that = this;
     this.c.satisfiedComplaint(complaint.id).subscribe((res) => {
-     console.log("see res: ",res);
+      console.log("see res: ", res);
       if (res) {
         this.onSuccess(res);
-        this.pouchdbservice.findDoc(res["id"],this.stringvar).then(function(doc){
-          console.log("found ",doc);
+        this.pouchdbservice.findDoc(res["id"], this.stringvar).then(function (doc) {
+          console.log("found ", doc);
           return that.pouchdbservice.deleteDoc(doc);
-        }).then(function(arg){
-          console.log("deleted",arg);
-          that.pouchdbservice.addSingle(res,that.stringvar,res["id"]);
-        },(error)=>{console.log("error is: ",error);});
+        }).then(function (arg) {
+          console.log("deleted", arg);
+          that.pouchdbservice.addSingle(res, that.stringvar, res["id"]);
+        }, (error) => { console.log("error is: ", error); });
       }
     }, (err) => {
       this.onError(err);
@@ -275,13 +273,40 @@ export class EditComplaintStatusAndComment {
         response = [];
       }
 
+      //todo nilansh 
 
       this.pouchdbservice.addArrayOfObjectsToDoc(response, complaint.id, this.stringvar + "cmt_");
       // console.log("see res", response);
       // console.log("see complaint", complaint);
       // console.log("seee header text: ", this.nl.getHeaderText());
       let Comment = this.modalCtrl.create(CommentModal, { comments: response, data: complaint });
+      Comment.onDidDismiss((data) => {
+        let that=this;
+        if (this.nl.getHeaderText() == "complaint") {
+          this.stringvar = "cmp_";
+        }
+        if (this.nl.getHeaderText() == "suggestion") {
+          this.stringvar = "sgsyour_";
+        }
+        alert("dismissing");
+        if (!data) { return; }
+
+        console.log("dataaaaaaaaaaaaaa from view modal: ", data);
+        this.pouchdbservice.findDoc(data["id"], this.stringvar ).then(function(doc){
+          console.log("see doc: ",doc);
+          let obj=doc;
+          that.pouchdbservice.deleteDoc(doc).then(function(){
+            console.log("deleted: ");
+            obj["commentCount"]=data["commentCount"];
+            delete obj["_rev"];
+            delete obj["_id"];
+            console.log("see final obj before adding: ",obj);
+            that.pouchdbservice.addSingle(obj,that.stringvar ,data["id"]);
+          });
+        });
+      })
       Comment.present();
+
     }, (err) => {
       this.nl.onError(err);
       let that = this;

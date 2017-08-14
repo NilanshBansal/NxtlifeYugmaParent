@@ -51,6 +51,8 @@ export class TimetablePage implements OnInit {
        
         
       }
+    },(err)=>{
+      console.log(err);
     }); 
   }
 
